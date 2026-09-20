@@ -297,6 +297,15 @@ main { min-height: calc(100dvh - 66px); }
 .contact-submit { border: 0; background: var(--red); color: #fff; }
 .copy-inquiry { border: 1px solid var(--line); background: #fff; }
 .contact-note { margin: 12px 4px 0; color: var(--muted); font-size: .67rem; }
+.email-contact { display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 10px; margin-top: 15px; padding: 12px; border: 1px solid #d8d1f0; border-radius: 15px; background: #f8f5ff; box-shadow: 0 7px 18px rgba(84,62,145,.07); }
+.email-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: #7c68b8; color: #fff; font-size: 1.05rem; font-weight: 950; }
+.email-contact > span:nth-child(2) { min-width: 0; display: grid; gap: 2px; }
+.email-contact strong { font-size: .76rem; }
+.email-contact small { overflow-wrap: anywhere; color: #625b79; font-family: "PingFang SC", sans-serif; font-size: .62rem; }
+.email-actions { display: grid; gap: 5px; }
+.email-actions a, .email-actions button { min-width: 62px; padding: 6px 8px; border-radius: 9px; font-size: .62rem; font-weight: 850; text-align: center; text-decoration: none; cursor: pointer; }
+.email-actions a { background: #7c68b8; color: #fff; }
+.email-actions button { border: 1px solid #cfc5ea; background: #fff; color: #5b4b8c; }
 
 .bottom-nav { position: fixed; z-index: 60; left: 50%; bottom: 0; width: min(100%, 560px); min-height: calc(66px + var(--safe-bottom)); transform: translateX(-50%); display: grid; grid-template-columns: repeat(3, 1fr); padding: 8px 14px var(--safe-bottom); border-top: 1px solid rgba(82,68,53,.13); background: rgba(255,253,248,.94); backdrop-filter: blur(16px); }
 .bottom-nav button { position: relative; display: grid; justify-items: center; gap: 2px; border: 0; background: transparent; color: #79736b; font-size: .67rem; cursor: pointer; }
@@ -362,6 +371,21 @@ main { min-height: calc(100dvh - 66px); }
 .city-button strong { max-width: 180px; overflow: hidden; color: #54504b; font-size: .72rem; font-weight: 720; text-overflow: ellipsis; white-space: nowrap; }
 .city-button strong i { color: var(--ink); font-style: normal; }
 .city-button b { color: #8b8580; font-size: .95rem; }
+.header-controls { position: relative; z-index: 2; display: flex; align-items: center; gap: 7px; justify-self: start; }
+.language-picker { min-height: 36px; display: flex; align-items: center; gap: 5px; padding: 0 9px; border: 1px solid #ded8d0; border-radius: 999px; background: rgba(255,255,255,.88); box-shadow: 0 5px 14px rgba(48,38,26,.06); }
+.language-picker > span { color: var(--red); font-size: .66rem; font-weight: 900; white-space: nowrap; }
+.language-picker select { max-width: 64px; appearance: none; border: 0; outline: 0; background: transparent; color: #54504b; font-family: "PingFang SC", sans-serif; font-size: .7rem; font-weight: 760; cursor: pointer; }
+html[lang="en"] .brand strong { font-size: clamp(.98rem, 4vw, 1.2rem); letter-spacing: -.035em; }
+html[lang="en"] .brand small { font-size: clamp(.58rem, 2.25vw, .69rem); }
+html[lang="en"] .travel-hero-copy strong { font-size: clamp(.82rem, 3.5vw, 1rem); line-height: 1.25; }
+html[lang="en"] .travel-hero-copy small { font-size: .55rem; }
+html[lang="en"] .quick-section .section-heading h1 { font-size: clamp(1.55rem, 6.8vw, 2rem); letter-spacing: -.07em; }
+html[lang="en"] .tool-card strong { font-size: clamp(1.06rem, 4.7vw, 1.38rem); letter-spacing: -.045em; }
+html[lang="en"] .tool-card small { max-width: 108px; font-size: clamp(.62rem, 2.45vw, .73rem); line-height: 1.38; }
+html[lang="en"] .tattoo-feature-card small { max-width: 220px; }
+html[lang="en"] .tattoo-callout { font-size: .68rem; }
+html[lang="en"] .bottom-nav button { font-size: .62rem; }
+html[lang="en"] .language-picker > span { font-size: .62rem; }
 
 .view[data-view="home"] { padding-top: 8px; }
 .quick-section { margin-top: 2px; }

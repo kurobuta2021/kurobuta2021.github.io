@@ -752,6 +752,7 @@
   });
   document.querySelector("#copyInquiry").addEventListener("click", () => copyText(buildInquiry(), "咨询内容已复制，可粘贴到微信"));
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
+  document.querySelectorAll("[data-copy-email]").forEach(button => button.addEventListener("click", () => copyText("kurobuta2021@gmail.com", "邮箱已复制：kurobuta2021@gmail.com")));
   document.querySelector("#relocateToilets").addEventListener("click", startToiletLocator);
   document.querySelector("#searchMapArea").addEventListener("click", () => {
     ensureToiletMap();
