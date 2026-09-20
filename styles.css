@@ -329,6 +329,10 @@ main { min-height: calc(100dvh - 66px); }
 .map-choice.apple > span { background: #333; font-size: 1.15rem; }
 .map-choice.community { border-color: #bce7d0; background: #f1fff6; }
 .map-choice.community > span { background: #35a968; font-size: 1.1rem; }
+.map-choice-extra-list { display: contents; }
+.map-choice-extra-list[hidden] { display: none; }
+.map-choice.private-bath { border-color: #ead7b4; background: #fffaf0; }
+.map-choice.private-bath > span { background: #c58a3a; }
 .map-choice-note { margin: 12px 2px 0; color: #817a72; font-family: "PingFang SC", sans-serif; font-size: .62rem; line-height: 1.45; }
 .toast { position: fixed; z-index: 100; left: 50%; bottom: calc(82px + var(--safe-bottom)); max-width: calc(100% - 36px); transform: translate(-50%, 16px); padding: 11px 15px; border-radius: 999px; background: var(--ink); color: #fff; box-shadow: var(--shadow); font-size: .76rem; text-align: center; opacity: 0; pointer-events: none; transition: .2s ease; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -398,6 +402,11 @@ main { min-height: calc(100dvh - 66px); }
 .anime-card > b { color: #317fbe; }
 .anime-card small { max-width: 108px; line-height: 1.38; }
 .anime-card .tool-illustration { right: -3px; bottom: 6px; width: 58%; max-width: 128px; }
+.tattoo-feature-card { grid-column: 1 / -1; min-height: 138px; background: radial-gradient(circle at 90% 8%, rgba(255,255,255,.5), transparent 70px), linear-gradient(135deg, #fde8ef, #eec4d5); }
+.tattoo-feature-card > b { color: #9c4f73; }
+.tattoo-feature-card small { max-width: 225px; padding-right: 45px; }
+.tattoo-feature-card .tool-illustration { right: 5px; bottom: 0; width: 48%; max-width: 180px; }
+.tattoo-callout { z-index: 3; width: max-content; margin: 7px 0 3px; padding: 6px 10px; border-radius: 999px; background: #a94f78; color: #fff; box-shadow: 0 5px 12px rgba(133,56,91,.18); font-family: "PingFang SC", sans-serif; font-size: .78rem; font-style: normal; font-weight: 900; letter-spacing: 0; }
 
 .home-shortcuts { display: grid; gap: 10px; margin-top: 19px; }
 .home-shortcut { width: 100%; min-height: 87px; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 13px; padding: 14px 16px; border: 1px solid rgba(66,54,43,.07); border-radius: 20px; color: var(--ink); text-align: left; cursor: pointer; box-shadow: 0 7px 20px rgba(55,43,31,.06); }
@@ -426,6 +435,8 @@ main { min-height: calc(100dvh - 66px); }
 .community-toilet { background: #e7f7f4; } .community-toilet .community-icon { background: linear-gradient(145deg,#62d2cb,#35aaa4); }
 .community-onsen { background: #fff0df; } .community-onsen .community-icon { background: linear-gradient(145deg,#efb362,#dd8138); }
 .community-fishing { background: #e4f4fb; } .community-fishing .community-icon { background: linear-gradient(145deg,#55bfe0,#278caf); }
+.community-trash { background: #eaf6e8; }
+.community-trash .community-icon { background: linear-gradient(145deg,#75bd71,#438f4b); }
 .community-maps > p { margin: 9px 4px 0; color: #7a736c; font-family: "PingFang SC", sans-serif; font-size: .59rem; line-height: 1.45; }
 
 .ask-card { min-height: 174px; margin-top: 18px; padding: 22px 18px; background: radial-gradient(circle at 78% 19%, rgba(255,255,255,.45), transparent 74px), linear-gradient(135deg, #fff0d5, #f7d6a7); color: var(--ink); box-shadow: 0 9px 25px rgba(74,48,23,.09); }

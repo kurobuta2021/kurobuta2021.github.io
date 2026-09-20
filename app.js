@@ -25,6 +25,28 @@
           url: "https://share-map.net/smoking-area/"
         }
       ]
+    },
+    anime: {
+      title: "附近动漫原景地",
+      emoji: "🎬",
+      intro: "先用中文圣地地图看当前位置附近；想看更多场景和登场话数，再打开 OTABiS",
+      phrase: "map",
+      items: [
+        {
+          name: "圣地地图 Screen Pilgrimage",
+          trust: "第一推荐",
+          description: "打开直接显示地图，支持简体中文、当前位置、作品搜索和路线整理。需要当地网络才能打开哦！",
+          badges: ["简体中文", "可定位", "约8970个地点"],
+          url: "https://screenpilgrimage.com/"
+        },
+        {
+          name: "OTABiS 动漫圣地巡礼地图",
+          trust: "第二推荐",
+          description: "点位更多，可查看场景、登场话数、路线与打卡；网页功能较多，以日文为主。需要当地网络才能打开哦！",
+          badges: ["约14000个地点", "登场话数", "附近自动推荐"],
+          url: "https://app.otabis.jp/"
+        }
+      ]
     }
   };
 
@@ -167,14 +189,14 @@
 
   function showMapChoice(query, label, options = {}) {
     const community = options.community === true ? {
-      url: "https://share-map.net/toilet/",
+      url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
-      name: "日本网友厕所信息共享地图",
-      description: "店内与公共厕所 · 第一推荐 · 需要当地网络才能打开哦！"
+      name: "トイレマップ｜日本全国厕所地图",
+      description: "覆盖日本全国 · 可定位当前位置 · 第一推荐 · 需要当地网络才能打开哦！"
     } : options.community;
     document.querySelector("#mapChoiceTitle").textContent = community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
     document.querySelector("#mapChoiceIntro").textContent = options.intro || (community
-      ? "先用日本网友共享地图查看详细点位，也可以直接用常用地图搜索。"
+      ? "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。"
       : "已经选好服务了，现在选择你手机里方便使用的地图。");
     document.querySelector("#mapChoiceNote").textContent = options.note || (community
       ? "建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。"
@@ -187,6 +209,14 @@
       communityLink.querySelector("strong").textContent = community.name;
       communityLink.querySelector("small").textContent = community.description;
     }
+    const extraList = document.querySelector("#mapChoiceExtraList");
+    const extraChoices = Array.isArray(options.extraChoices) ? options.extraChoices : [];
+    extraList.hidden = extraChoices.length === 0;
+    extraList.innerHTML = extraChoices.map(item => `
+      <a class="map-choice ${escapeHtml(item.className || "community")}" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
+        <span>${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.description)}</small>
+      </a>
+    `).join("");
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
     document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
@@ -554,7 +584,7 @@
 
   function updateContactServiceMode(scroll = false) {
     const service = new FormData(els.contactForm).get("service");
-    const direct = service === "找人帮忙" || service === "其他需求";
+    const direct = service === "餐厅预约" || service === "其他需求";
     const prompt = document.querySelector("#directWechatPrompt");
     prompt.hidden = !direct;
     document.querySelector("#tripDetails").hidden = direct;
@@ -576,24 +606,27 @@
         community: true,
         googleDescription: "日本地点较完整 · 第二推荐 · 需要当地网络才能打开哦！",
         amapDescription: "中国手机更方便 · 日本厕所数据相对较少",
-        note: "厕所建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。"
+        note: "厕所建议先看日本全国厕所地图，再试 Google 地图；搜不到时可换其他地图。"
       });
       return;
     }
 
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
-      showMapChoice("温泉", "附近温泉", {
-        community: {
-          url: "https://share-map.net/sento/",
-          icon: "♨",
-          name: "日本网友温泉信息共享地图",
-          description: "温泉·钱汤·桑拿 · 日本网友总结较全 · 需要当地网络才能打开哦！"
-        },
-        intro: "先看日本网友整理的温泉地图，也可以用常用地图直接搜索日文“温泉”。",
-        googleDescription: "日文搜索“温泉” · 最方便 · 需要当地网络才能打开哦！",
+      showMapChoice("日帰り温泉", "泡个汤", {
+        intro: "先用 Google 地图找附近的日归温泉；需要私汤时，使用下面的专门入口。",
+        extraChoices: [
+          {
+            url: "https://www.spa.or.jp/search_f/",
+            icon: "私",
+            name: "找私汤／家庭浴池",
+            description: "私汤（貸切浴場）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
+            className: "private-bath"
+          }
+        ],
+        googleDescription: "日文搜索“日帰り温泉” · 不用住宿，泡完温泉就走 · 定位找附近最方便 · 需要当地网络才能打开哦！",
         amapDescription: "搜索“温泉” · 日本地点相对较少",
-        note: "泡汤建议先看网友共享地图或 Google 地图；营业时间和入浴规则请以现场为准。"
+        note: "有私汤不代表整家设施一定允许纹身；温泉规则可能变化，出发前请查看详情或向店家确认。"
       });
       return;
     }
