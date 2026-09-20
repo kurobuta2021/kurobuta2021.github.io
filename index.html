@@ -7,7 +7,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260920-16" />
+    <link rel="stylesheet" href="./styles.css?v=20260920-21" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
   </head>
   <body>
@@ -16,17 +16,17 @@
         <svg class="header-scene" viewBox="0 0 240 120" aria-hidden="true"><circle cx="205" cy="21" r="18" fill="#f7c8c0" opacity=".4"/><path d="m86 91 55-72 56 72H86Z" fill="#dcecf5"/><path d="m141 19 20 27-10-5-8 8-9-10-11 8 18-28Z" fill="#fff"/><path d="M79 93h140" stroke="#d9e5d7" stroke-width="17" stroke-linecap="round"/><path d="M181 51h42M186 58h32M190 59v37M214 59v37" stroke="#dc6046" stroke-width="7" stroke-linecap="round"/><path d="M184 44h36l5 7h-46l5-7Z" fill="#473c36"/><g fill="#efaaa2"><circle cx="211" cy="12" r="5"/><circle cx="225" cy="25" r="4"/><circle cx="196" cy="34" r="4"/></g></svg>
         <button class="brand" type="button" data-go="home" aria-label="回到首页">
           <span class="brand-mascot"><img src="./heitu-jun.png" alt="" /></span>
-          <span><strong>黑豚的日本旅行工具箱</strong><small>不会日语，也能轻松找到、问到、走到</small></span>
+          <span><strong>黑豚的日本旅行工具箱</strong><small>离你最近的厕所、合法吸烟点、便利店，一个都别藏。</small></span>
         </button>
-        <div class="city-button" aria-label="覆盖日本全国">
-          <span>●</span><strong><i>日本</i> · 附近好用的都在这里</strong><b>›</b>
-        </div>
+        <button id="currentAreaButton" class="city-button" type="button" aria-label="定位当前地区">
+          <span>●</span><strong id="currentAreaText">定位当前区</strong><b>›</b>
+        </button>
       </header>
 
       <main id="mainContent">
         <section class="view active" data-view="home" aria-labelledby="homeTitle">
           <section class="travel-hero" aria-label="黑豚日本旅行">
-            <div class="travel-hero-copy"><strong>当地干货地图，<br />中文直达</strong><small>日本吃喝拉撒</small></div>
+            <div class="travel-hero-copy"><strong>当地人总结共享的干货地图，<br />中文直达</strong><small>日本吃喝拉撒</small></div>
           </section>
           <section class="quick-section" aria-labelledby="quickTitle">
             <div class="section-heading">
@@ -35,7 +35,7 @@
             </div>
             <div class="primary-grid">
               <button class="tool-card toilet-card" type="button" data-toilet-choice>
-                <span><strong>随便O</strong><small>人有三急，黑豚朋友，<br />随便屙！</small></span>
+                <span><strong>随便O</strong><small>人有三急，附近厕所，<br />随便屙！</small></span>
                 <span class="tool-illustration toilet-art" aria-hidden="true">
                   <svg viewBox="0 0 150 118" role="img"><ellipse cx="82" cy="101" rx="57" ry="11" fill="#69c98d" opacity=".18"/><path d="M100 13c-13 0-23 10-23 23 0 18 23 38 23 38s23-20 23-38c0-13-10-23-23-23Z" fill="#35a968"/><circle cx="100" cy="36" r="8" fill="#d9f7e4"/><path d="M39 51c2-13 13-22 27-21l35 4c12 1 21 12 19 25l-7 42-59-7-20-12 5-31Z" fill="#fffdfa"/><path d="M54 94 34 82l3-24 20 11-3 25Z" fill="#f3efe8"/><ellipse cx="96" cy="63" rx="24" ry="31" transform="rotate(7 96 63)" fill="#e9e5df"/><ellipse cx="97" cy="62" rx="15" ry="20" transform="rotate(7 97 62)" fill="#d5d0c9"/><ellipse cx="98" cy="62" rx="7" ry="10" transform="rotate(7 98 62)" fill="#9d958b"/><path d="m54 94 10 6 9-4 9 7 9-5 9 7 13-4-59-7Z" fill="#fffdfa"/></svg>
                 </span><b>›</b>
@@ -53,7 +53,7 @@
                 </span><b>›</b>
               </button>
               <button class="tool-card anime-card" type="button" data-external="https://anime-tourism.jp/r/all/">
-                <span><strong>动漫原景地</strong><small>走进动画里的真实地点</small></span>
+                <span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span>
                 <span class="tool-illustration anime-art" aria-hidden="true">
                   <svg viewBox="0 0 150 118" role="img"><ellipse cx="78" cy="103" rx="57" ry="9" fill="#3889ca" opacity=".15"/><g transform="rotate(8 79 68)"><rect x="23" y="30" width="108" height="72" rx="8" fill="#355b73"/><rect x="40" y="40" width="74" height="52" rx="4" fill="#bde6ff"/><circle cx="100" cy="51" r="8" fill="#ffd66f"/><path d="m44 82 24-24 13 12 12-17 18 29H44Z" fill="#fff"/><path d="m44 82 24-19 14 13 12-12 17 18H44Z" fill="#66ad7f"/><path d="M28 39h7M28 50h7M28 61h7M28 72h7M28 83h7M119 39h7M119 50h7M119 61h7M119 72h7M119 83h7" stroke="#edf7fc" stroke-width="5" stroke-linecap="round"/></g><path d="M122 18c-12 0-21 9-21 21 0 16 21 34 21 34s21-18 21-34c0-12-9-21-21-21Z" fill="#2484cf"/><circle cx="122" cy="39" r="7" fill="#d8efff"/></svg>
                 </span><b>›</b>
@@ -69,8 +69,8 @@
           <section class="community-maps" aria-labelledby="communityMapsTitle">
             <div class="community-heading"><div><small>COMMUNITY MAPS</small><h2 id="communityMapsTitle">更多实用地图</h2></div><span>网友共享情报</span></div>
             <div class="community-grid">
-              <button class="community-card community-onsen" type="button" data-external="https://share-map.net/sento/"><span class="community-icon">♨</span><span><strong>泡个汤</strong><small>温泉·钱汤·桑拿</small></span><b>›</b></button>
-              <button class="community-card community-fishing" type="button" data-map-query="釣具店" data-map-label="附近渔具店"><span class="community-icon">竿</span><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
+              <button class="community-card community-onsen" type="button" data-onsen-choice><span class="community-icon">♨</span><span><strong>泡个汤</strong><small>温泉·钱汤·桑拿</small></span><b>›</b></button>
+              <button class="community-card community-fishing" type="button" data-fishing-choice><span class="community-icon">竿</span><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
             </div>
             <p>地点由第三方用户共享，请以现场为准。</p>
           </section>
@@ -159,7 +159,8 @@
               <label><input type="radio" name="service" value="其他需求" /><span>💬 其他需求</span></label>
             </div></fieldset>
             <div id="directWechatPrompt" class="direct-wechat-prompt" hidden>
-              <span>🐽</span><p><strong>这类需求，直接微信聊更快</strong><small>微信号：zhangpeng816 · 复制后到微信搜索</small></p><button class="direct-wechat-copy" type="button" data-copy-wechat>复制微信号</button>
+              <div class="direct-wechat-top"><span>🐽</span><p><strong>这类需求，直接微信聊更快</strong><small>微信号：zhangpeng816 · 复制后到微信搜索</small></p><button class="direct-wechat-copy" type="button" data-copy-wechat>复制微信号</button></div>
+              <div class="group-qr-card"><img src="./wechat-group-qr.jpg" alt="黑豚微信群二维码" /><p><strong>进群说一声</strong><small>微信扫码加入；二维码失效时请复制微信号联系。</small></p></div>
             </div>
             <div id="tripDetails" class="trip-details">
               <label><span>准备什么时候来？</span><input name="date" type="date" /></label>
@@ -197,15 +198,18 @@
         <p id="mapChoiceIntro" class="map-choice-intro">已经选好服务了，现在选择你手机里方便使用的地图。</p>
         <div class="map-choice-grid">
           <a id="mapChoiceCommunity" class="map-choice community" href="https://share-map.net/toilet/" target="_blank" rel="noopener" hidden><span>🚻</span><strong>日本网友厕所信息共享地图</strong><small>店内与公共厕所 · 推荐</small></a>
-          <a id="mapChoiceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图</strong><small>中国手机更方便</small></a>
-          <a id="mapChoiceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>日本地点较完整</small></a>
+          <a id="mapChoiceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>日本地点较完整 · 第二推荐</small></a>
+          <a id="mapChoiceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图</strong><small>中国手机更方便 · 日本厕所数据相对较少</small></a>
           <a id="mapChoiceApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>适合 iPhone</small></a>
         </div>
-        <p class="map-choice-note">不同地图的日本地点数量可能不同；搜不到时可换另一个地图。</p>
+        <p id="mapChoiceNote" class="map-choice-note">在日本建议优先使用 Google 地图；搜不到时可换其他地图。</p>
       </form>
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./app.js?v=20260920-21"></script>
+    <script src="./app.js?v=20260920-28"></script>
+    <!-- Cloudflare Web Analytics -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"a0769e29268642d39d16b180d6912d89"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </body>
 </html>

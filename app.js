@@ -7,22 +7,22 @@
     smoking: {
       title: "附近合法吸烟点",
       emoji: "⌖",
-      intro: "两个入口都直达地图；优先放你常用的共享地图",
+      intro: "两个入口都直达地图；先看 CLUB JT，再用网友共享地图补充",
       phrase: "smoking",
       items: [
         {
-          name: "吸烟区信息共享地图君",
-          trust: "常用推荐",
-          description: "覆盖咖啡店、商场和公共吸烟区等详细信息，直接进入网页版地图。",
-          badges: ["排在第一", "无需登录", "网友共享"],
-          url: "https://share-map.net/smoking-area/"
+          name: "CLUB JT 吸烟点地图",
+          trust: "第一推荐",
+          description: "JT 调查、用户投稿及餐厅资料结合；首次使用可能需要确认已满20岁并允许定位。需要当地网络才能打开哦！",
+          badges: ["排在第一", "直达地图", "日本全国"],
+          url: "https://www.clubjt.jp/map"
         },
         {
-          name: "CLUB JT 吸烟点地图",
-          trust: "官方备选",
-          description: "JT 调查、用户投稿及餐厅资料结合；首次使用可能需要确认已满20岁并允许定位。",
-          badges: ["直达地图", "餐厅咖啡", "日本全国"],
-          url: "https://www.clubjt.jp/map"
+          name: "吸烟区信息共享地图君",
+          trust: "第二推荐",
+          description: "覆盖咖啡店、商场和公共吸烟区等详细信息，直接进入网页版地图。需要当地网络才能打开哦！",
+          badges: ["详细补充", "无需登录", "网友共享"],
+          url: "https://share-map.net/smoking-area/"
         }
       ]
     }
@@ -134,12 +134,61 @@
     return `https://www.google.com/maps/search/?api=1&query=${encoded}`;
   }
 
+  function locateCurrentArea() {
+    const button = document.querySelector("#currentAreaButton");
+    const label = document.querySelector("#currentAreaText");
+    if (!navigator.geolocation) {
+      label.textContent = "浏览器不支持定位";
+      return;
+    }
+    button.disabled = true;
+    label.textContent = "正在定位…";
+    navigator.geolocation.getCurrentPosition(async position => {
+      try {
+        const { latitude, longitude } = position.coords;
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&accept-language=zh-CN`;
+        const response = await fetch(url, { headers: { Accept: "application/json" } });
+        if (!response.ok) throw new Error("reverse geocoding failed");
+        const address = (await response.json()).address || {};
+        const city = address.state || address.province || address.city || address.municipality;
+        const district = address.city_district || address.city || address.town || address.suburb || address.county;
+        const parts = [city, district].filter((part, index, list) => part && list.indexOf(part) === index);
+        label.textContent = parts.slice(0, 2).join(" · ") || "当前位置";
+      } catch (error) {
+        label.textContent = "已定位 · 地区未知";
+      } finally {
+        button.disabled = false;
+      }
+    }, () => {
+      label.textContent = "定位失败 · 点此重试";
+      button.disabled = false;
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  }
+
   function showMapChoice(query, label, options = {}) {
-    document.querySelector("#mapChoiceTitle").textContent = options.community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
-    document.querySelector("#mapChoiceIntro").textContent = options.community
+    const community = options.community === true ? {
+      url: "https://share-map.net/toilet/",
+      icon: "🚻",
+      name: "日本网友厕所信息共享地图",
+      description: "店内与公共厕所 · 第一推荐 · 需要当地网络才能打开哦！"
+    } : options.community;
+    document.querySelector("#mapChoiceTitle").textContent = community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
+    document.querySelector("#mapChoiceIntro").textContent = options.intro || (community
       ? "先用日本网友共享地图查看详细点位，也可以直接用常用地图搜索。"
-      : "已经选好服务了，现在选择你手机里方便使用的地图。";
-    document.querySelector("#mapChoiceCommunity").hidden = !options.community;
+      : "已经选好服务了，现在选择你手机里方便使用的地图。");
+    document.querySelector("#mapChoiceNote").textContent = options.note || (community
+      ? "建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。"
+      : "在日本建议优先使用 Google 地图；搜不到时可换其他地图。");
+    const communityLink = document.querySelector("#mapChoiceCommunity");
+    communityLink.hidden = !community;
+    if (community) {
+      communityLink.href = community.url;
+      communityLink.querySelector("span").textContent = community.icon;
+      communityLink.querySelector("strong").textContent = community.name;
+      communityLink.querySelector("small").textContent = community.description;
+    }
+    document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
+    document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
     document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
     document.querySelector("#mapChoiceAmap").href = mapSearchUrl("amap", query);
     document.querySelector("#mapChoiceApple").href = mapSearchUrl("apple", query);
@@ -515,9 +564,48 @@
   }
 
   document.addEventListener("click", event => {
+    const currentAreaButton = event.target.closest("#currentAreaButton");
+    if (currentAreaButton) {
+      locateCurrentArea();
+      return;
+    }
+
     const toiletButton = event.target.closest("[data-toilet-choice]");
     if (toiletButton) {
-      showMapChoice("公衆トイレ", "附近厕所", { community: true });
+      showMapChoice("公衆トイレ", "附近厕所", {
+        community: true,
+        googleDescription: "日本地点较完整 · 第二推荐 · 需要当地网络才能打开哦！",
+        amapDescription: "中国手机更方便 · 日本厕所数据相对较少",
+        note: "厕所建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。"
+      });
+      return;
+    }
+
+    const onsenButton = event.target.closest("[data-onsen-choice]");
+    if (onsenButton) {
+      showMapChoice("温泉", "附近温泉", {
+        community: {
+          url: "https://share-map.net/sento/",
+          icon: "♨",
+          name: "日本网友温泉信息共享地图",
+          description: "温泉·钱汤·桑拿 · 日本网友总结较全 · 需要当地网络才能打开哦！"
+        },
+        intro: "先看日本网友整理的温泉地图，也可以用常用地图直接搜索日文“温泉”。",
+        googleDescription: "日文搜索“温泉” · 最方便 · 需要当地网络才能打开哦！",
+        amapDescription: "搜索“温泉” · 日本地点相对较少",
+        note: "泡汤建议先看网友共享地图或 Google 地图；营业时间和入浴规则请以现场为准。"
+      });
+      return;
+    }
+
+    const fishingButton = event.target.closest("[data-fishing-choice]");
+    if (fishingButton) {
+      showMapChoice("釣具店", "附近渔具店", {
+        intro: "选择常用地图，直接用日文“釣具店”搜索附近的渔具店。",
+        googleDescription: "日文搜索“釣具店” · 最方便 · 需要当地网络才能打开哦！",
+        amapDescription: "搜索“渔具店” · 日本地点相对较少",
+        note: "在日本找渔具店建议优先使用 Google 地图；搜不到时可换其他地图。"
+      });
       return;
     }
 
