@@ -188,7 +188,7 @@
     const elements = root.nodeType === Node.ELEMENT_NODE ? [root, ...root.querySelectorAll("*")] : [...document.querySelectorAll("*")];
     elements.forEach(element => {
       if (shouldSkip(element)) return;
-      ["placeholder", "aria-label", "title", "content"].forEach(name => {
+      ["placeholder", "aria-label", "title", "content", "alt"].forEach(name => {
         if (!element.hasAttribute(name)) return;
         const source = rememberAttribute(element, name);
         element.setAttribute(name, translate(source));
