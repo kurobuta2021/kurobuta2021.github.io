@@ -149,11 +149,72 @@
     toast.timer = setTimeout(() => els.toast.classList.remove("show"), 2200);
   }
 
-  function mapSearchUrl(provider, query) {
+  function mapSearchUrl(provider, query, position) {
     const encoded = encodeURIComponent(query);
-    if (provider === "amap") return `https://uri.amap.com/search?keyword=${encoded}&src=heitu&callnative=1`;
+    if (provider === "amap") {
+      const center = position ? `&center=${position.lng.toFixed(6)},${position.lat.toFixed(6)}&coordinate=wgs84&view=map` : "";
+      return `https://uri.amap.com/search?keyword=${encoded}${center}&src=heitu&callnative=1`;
+    }
     if (provider === "apple") return `https://maps.apple.com/?q=${encoded}`;
     return `https://www.google.com/maps/search/?api=1&query=${encoded}`;
+  }
+
+  function isValidPosition(position) {
+    return position
+      && Number.isFinite(position.lat)
+      && Number.isFinite(position.lng)
+      && position.lat >= -90
+      && position.lat <= 90
+      && position.lng >= -180
+      && position.lng <= 180;
+  }
+
+  function openAmapAtCurrentPosition(link) {
+    if (link.dataset.locating === "true") {
+      toast("正在获取当前位置，请稍等");
+      return;
+    }
+    if (!navigator.geolocation) {
+      toast("浏览器不支持定位，无法用高德搜索附近厕所");
+      return;
+    }
+    const description = link.querySelector("small");
+    const originalDescription = description.textContent;
+    link.dataset.locating = "true";
+    link.setAttribute("aria-busy", "true");
+    description.textContent = "正在获取当前位置…";
+
+    const finish = () => {
+      delete link.dataset.locating;
+      link.removeAttribute("aria-busy");
+      description.textContent = originalDescription;
+    };
+
+    navigator.geolocation.getCurrentPosition(position => {
+      const current = {
+        lat: Number(position.coords.latitude),
+        lng: Number(position.coords.longitude)
+      };
+      if (!isValidPosition(current)) {
+        finish();
+        toast("定位坐标无效，无法打开高德地图");
+        return;
+      }
+      const url = mapSearchUrl("amap", link.dataset.locationQuery || "トイレ", current);
+      link.href = url;
+      link.dataset.lastCenter = `${current.lng.toFixed(6)},${current.lat.toFixed(6)}`;
+      finish();
+      const opened = window.open(url, "_blank");
+      if (opened) opened.opener = null;
+      else window.location.assign(url);
+    }, error => {
+      finish();
+      if (error && error.code === error.PERMISSION_DENIED) {
+        toast("你没有允许定位，无法用高德搜索附近厕所");
+      } else {
+        toast("定位失败，无法用高德搜索附近厕所，请重试");
+      }
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 });
   }
 
   function locateCurrentArea() {
@@ -220,7 +281,11 @@
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
     document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
-    document.querySelector("#mapChoiceAmap").href = mapSearchUrl("amap", query);
+    const amapLink = document.querySelector("#mapChoiceAmap");
+    const amapQuery = options.amapQuery || query;
+    amapLink.dataset.requireCurrentLocation = options.amapCurrentLocation === true ? "true" : "false";
+    amapLink.dataset.locationQuery = amapQuery;
+    amapLink.href = options.amapCurrentLocation === true ? "#" : mapSearchUrl("amap", amapQuery);
     document.querySelector("#mapChoiceApple").href = mapSearchUrl("apple", query);
     els.mapChoiceDialog.showModal();
   }
@@ -594,6 +659,13 @@
   }
 
   document.addEventListener("click", event => {
+    const locatedAmapLink = event.target.closest('#mapChoiceAmap[data-require-current-location="true"]');
+    if (locatedAmapLink) {
+      event.preventDefault();
+      openAmapAtCurrentPosition(locatedAmapLink);
+      return;
+    }
+
     const currentAreaButton = event.target.closest("#currentAreaButton");
     if (currentAreaButton) {
       locateCurrentArea();
@@ -604,6 +676,8 @@
     if (toiletButton) {
       showMapChoice("公衆トイレ", "附近厕所", {
         community: true,
+        amapCurrentLocation: true,
+        amapQuery: "トイレ",
         googleDescription: "日本地点较完整 · 第二推荐 · 需要当地网络才能打开哦！",
         amapDescription: "中国手机更方便 · 日本厕所数据相对较少",
         note: "厕所建议先看日本全国厕所地图，再试 Google 地图；搜不到时可换其他地图。"
