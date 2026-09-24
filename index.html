@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f7f2e8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="随便O" />
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260920-27" />
+    <link rel="stylesheet" href="./styles.css?v=20260924-ui1" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
   </head>
   <body>
@@ -16,7 +21,7 @@
         <svg class="header-scene" viewBox="0 0 240 120" aria-hidden="true"><circle cx="205" cy="21" r="18" fill="#f7c8c0" opacity=".4"/><path d="m86 91 55-72 56 72H86Z" fill="#dcecf5"/><path d="m141 19 20 27-10-5-8 8-9-10-11 8 18-28Z" fill="#fff"/><path d="M79 93h140" stroke="#d9e5d7" stroke-width="17" stroke-linecap="round"/><path d="M181 51h42M186 58h32M190 59v37M214 59v37" stroke="#dc6046" stroke-width="7" stroke-linecap="round"/><path d="M184 44h36l5 7h-46l5-7Z" fill="#473c36"/><g fill="#efaaa2"><circle cx="211" cy="12" r="5"/><circle cx="225" cy="25" r="4"/><circle cx="196" cy="34" r="4"/></g></svg>
         <button class="brand" type="button" data-go="home" aria-label="回到首页">
           <span class="brand-mascot"><img src="./heitu-jun.png" alt="" /></span>
-          <span><strong>黑豚的日本旅行工具箱</strong><small>离你最近的厕所、合法吸烟点、便利店，一个都别藏。</small></span>
+          <span><strong>黑豚的日本旅行工具箱</strong><small>定位离你最近的厕所，吸烟区，便利店等，一个都别藏。</small></span>
         </button>
         <div class="header-controls">
           <button id="currentAreaButton" class="city-button" type="button" aria-label="定位当前地区">
@@ -45,59 +50,55 @@
             </div>
             <div class="primary-grid">
               <button class="tool-card toilet-card" type="button" data-toilet-choice>
-                <span><strong>随便O</strong><small>人有三急，附近厕所，<br />随便屙！</small></span>
-                <span class="tool-illustration toilet-art" aria-hidden="true">
-                  <svg viewBox="0 0 150 118" role="img"><ellipse cx="82" cy="101" rx="57" ry="11" fill="#69c98d" opacity=".18"/><path d="M100 13c-13 0-23 10-23 23 0 18 23 38 23 38s23-20 23-38c0-13-10-23-23-23Z" fill="#35a968"/><circle cx="100" cy="36" r="8" fill="#d9f7e4"/><path d="M39 51c2-13 13-22 27-21l35 4c12 1 21 12 19 25l-7 42-59-7-20-12 5-31Z" fill="#fffdfa"/><path d="M54 94 34 82l3-24 20 11-3 25Z" fill="#f3efe8"/><ellipse cx="96" cy="63" rx="24" ry="31" transform="rotate(7 96 63)" fill="#e9e5df"/><ellipse cx="97" cy="62" rx="15" ry="20" transform="rotate(7 97 62)" fill="#d5d0c9"/><ellipse cx="98" cy="62" rx="7" ry="10" transform="rotate(7 98 62)" fill="#9d958b"/><path d="m54 94 10 6 9-4 9 7 9-5 9 7 13-4-59-7Z" fill="#fffdfa"/></svg>
-                </span><b>›</b>
+                <span class="tool-copy"><strong>随便O</strong><small>人有三急，附近厕所，<br />随便屙！</small></span>
+                <img class="tool-illustration" src="./assets/card-toilet.png" alt="" decoding="async" />
+                <b>›</b>
               </button>
               <button class="tool-card smoking-card" type="button" data-category="smoking">
-                <span><strong>来一根</strong><small>找合法吸烟点<br />吸烟有害健康。</small></span>
-                <span class="tool-illustration smoke-art" aria-hidden="true">
-                  <svg viewBox="0 0 150 118" role="img"><ellipse cx="84" cy="101" rx="55" ry="10" fill="#d99019" opacity=".16"/><path d="M96 12c-10 8 6 15-4 24-9 8-2 14 3 18" fill="none" stroke="#8f8170" stroke-width="7" stroke-linecap="round" opacity=".35"/><path d="M119 24c-8 7 4 12-3 19" fill="none" stroke="#8f8170" stroke-width="6" stroke-linecap="round" opacity=".28"/><g transform="rotate(18 79 78)"><rect x="24" y="63" width="103" height="27" rx="13.5" fill="#fffdfa"/><path d="M24 63h35v27H37c-7 0-13-6-13-13.5S30 63 37 63Z" fill="#df8f2b"/><path d="M57 63h8v27h-8z" fill="#efbb61"/><path d="M121 64h8v25h-8z" fill="#403934"/><path d="M124 66h5v21h-5z" fill="#f06a42"/><path d="M72 69h42" stroke="#e8e2d8" stroke-width="3" stroke-linecap="round"/></g><circle cx="133" cy="44" r="5" fill="#e59519"/><path d="m133 30 4-8M141 36l8-4" stroke="#e59519" stroke-width="4" stroke-linecap="round"/></svg>
-                </span><b>›</b>
+                <span class="tool-copy"><strong>来一根</strong><small>定位最近的吸烟点<br />吸烟有害健康。</small></span>
+                <img class="tool-illustration" src="./assets/card-smoking.png" alt="" decoding="async" />
+                <b>›</b>
               </button>
-              <button class="tool-card convenience-card" type="button" data-map-query="コンビニ" data-map-label="附近便利店">
-                <span><strong>便利一下</strong><small>找附近便利店</small></span>
-                <span class="tool-illustration shop-art" aria-hidden="true">
-                  <svg viewBox="0 0 150 118" role="img"><ellipse cx="82" cy="104" rx="54" ry="9" fill="#de6761" opacity=".17"/><path d="M46 34h69l9 69H35l11-69Z" fill="#fffdfa"/><path d="M61 40V27c0-10 8-17 17-17h7c10 0 18 7 18 17v13" fill="none" stroke="#f4efe9" stroke-width="10" stroke-linecap="round"/><path d="M42 59h77l2 15H40l2-15Z" fill="#f0a037"/><path d="M39 76h83l2 14H37l2-14Z" fill="#54aa78"/><path d="M37 92h87l1 11H35l2-11Z" fill="#ed6560"/><path d="M46 34h69l2 13H44l2-13Z" fill="#fff" opacity=".75"/><circle cx="131" cy="39" r="5" fill="#e95850"/><path d="m131 25 3-9M140 32l8-5" stroke="#e95850" stroke-width="4" stroke-linecap="round"/></svg>
-                </span><b>›</b>
-              </button>
-              <button class="tool-card anime-card" type="button" data-category="anime">
-                <span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span>
-                <span class="tool-illustration anime-art" aria-hidden="true">
-                  <svg viewBox="0 0 150 118" role="img"><ellipse cx="78" cy="103" rx="57" ry="9" fill="#3889ca" opacity=".15"/><g transform="rotate(8 79 68)"><rect x="23" y="30" width="108" height="72" rx="8" fill="#355b73"/><rect x="40" y="40" width="74" height="52" rx="4" fill="#bde6ff"/><circle cx="100" cy="51" r="8" fill="#ffd66f"/><path d="m44 82 24-24 13 12 12-17 18 29H44Z" fill="#fff"/><path d="m44 82 24-19 14 13 12-12 17 18H44Z" fill="#66ad7f"/><path d="M28 39h7M28 50h7M28 61h7M28 72h7M28 83h7M119 39h7M119 50h7M119 61h7M119 72h7M119 83h7" stroke="#edf7fc" stroke-width="5" stroke-linecap="round"/></g><path d="M122 18c-12 0-21 9-21 21 0 16 21 34 21 34s21-18 21-34c0-12-9-21-21-21Z" fill="#2484cf"/><circle cx="122" cy="39" r="7" fill="#d8efff"/></svg>
-                </span><b>›</b>
+              <button class="tool-card wayback-feature-card" type="button" data-go="wayback">
+                <span class="tool-copy"><strong>路痴救星</strong><small>不迷路，<br />一键定位出发位置，<br />一键导航返回。</small></span>
+                <img class="tool-illustration" src="./assets/card-lost.png" alt="" decoding="async" />
+                <b>›</b>
               </button>
               <button class="tool-card tattoo-feature-card" type="button" data-onsen-choice>
-                <span><strong>泡个汤</strong><em class="tattoo-callout">有纹身？优先找私汤</em><small>附近日归温泉・私汤</small></span>
-                <span class="tool-illustration tattoo-art" aria-hidden="true">
-                  <svg viewBox="0 0 190 118" role="img">
-                    <ellipse cx="119" cy="102" rx="60" ry="10" fill="#9d5277" opacity=".14"/>
-                    <path d="M101 58c-12-10 8-17-3-29M143 57c-10-9 7-16-2-25" fill="none" stroke="#9a7e87" stroke-width="5" stroke-linecap="round" opacity=".42"/>
-                    <circle cx="124" cy="48" r="15" fill="#f3bfaa"/>
-                    <path d="M110 48c0-12 7-18 16-18 8 0 14 5 15 14-8-5-19-6-31 4Z" fill="#463940"/>
-                    <circle cx="118" cy="49" r="1.5" fill="#49383a"/><circle cx="130" cy="49" r="1.5" fill="#49383a"/>
-                    <path d="M120 56c3 2 6 2 9 0" fill="none" stroke="#b46d6c" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M101 88c2-18 10-27 23-27 14 0 24 10 27 27Z" fill="#765269"/>
-                    <path d="M104 70c7 1 9 6 5 10-4 3-7-2-3-5 3-2 7 1 8 5" fill="none" stroke="#533848" stroke-width="2.4" stroke-linecap="round"/>
-                    <path d="M74 68h92l-8 36H82L74 68Z" fill="#fff9f7"/>
-                    <path d="M79 75h82l-5 23H84l-5-23Z" fill="#efb6cb"/>
-                    <path d="M87 84c11-12 23 13 35 0s24 12 35 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/>
-                    <path d="M54 12c-14 0-25 11-25 25 0 20 25 41 25 41s25-21 25-41c0-14-11-25-25-25Z" fill="#ad5c83"/>
-                    <circle cx="54" cy="37" r="13" fill="#fff4f7"/>
-                    <path d="m47 37 5 5 10-12" fill="none" stroke="#ad5c83" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="160" cy="22" r="14" fill="#fff"/>
-                    <text x="160" y="27" text-anchor="middle" fill="#8e4669" font-size="14" font-weight="900">OK</text>
-                  </svg>
-                </span><b>›</b>
+                <span class="tool-copy"><strong>泡个温泉</strong><em class="tattoo-callout">有纹身？优先找私汤</em><small>附近日归温泉・私汤</small></span>
+                <img class="tool-illustration" src="./assets/card-onsen.png" alt="" decoding="async" />
+                <b>›</b>
+              </button>
+              <button class="tool-card convenience-card" type="button" data-map-query="コンビニ" data-map-label="附近便利店">
+                <span class="tool-copy"><strong>便利一下</strong><small>找附近便利店，<br />补给不发愁。</small></span>
+                <img class="tool-illustration" src="./assets/card-convenience.png" alt="" decoding="async" />
+                <b>›</b>
+              </button>
+              <button class="tool-card luggage-card" type="button" data-luggage-choice>
+                <span class="tool-copy"><strong>行李寄存</strong><small>按定位找离你最近的<br />行李寄存点。</small></span>
+                <img class="tool-illustration" src="./assets/card-luggage.png" alt="" decoding="async" />
+                <b>›</b>
               </button>
             </div>
           </section>
 
-          <div class="home-shortcuts">
-            <button class="home-shortcut favorite-shortcut" type="button" data-go="favorites"><span class="shortcut-icon">♥</span><span><strong>豚一下，以后用</strong><small>收藏想去的地点 · 已收藏 <i id="homeFavoriteCount">0</i></small></span><b>›</b></button>
-            <button class="home-shortcut japanese-home-shortcut" type="button" data-go="japanese"><span class="shortcut-icon">あ</span><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
+          <section class="more-tools" aria-labelledby="moreToolsTitle">
+            <div class="more-tools-heading"><h2 id="moreToolsTitle">更多功能</h2><span>还有更多实用工具，助你轻松玩转日本！</span></div>
+            <div class="more-tools-grid">
+              <button class="mini-tool anime-mini" type="button" data-category="anime"><img src="./assets/card-anime.png" alt="" loading="lazy" decoding="async" /><span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span><b>›</b></button>
+              <button class="mini-tool japanese-mini" type="button" data-go="japanese"><img src="./assets/card-japanese-help.png" alt="" loading="lazy" decoding="async" /><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
+              <button class="mini-tool laundry-mini" type="button" data-map-query="コインランドリー" data-map-label="附近洗衣房"><img src="./assets/card-laundry.png" alt="" loading="lazy" decoding="async" /><span><strong>洗衣房</strong><small>找附近的自助洗衣房</small></span><b>›</b></button>
+            </div>
+          </section>
+          <div class="spread-actions" aria-label="保存和分享随便O">
+            <button class="spread-action share-site" type="button" data-share-site><span>↗</span><strong>分享给朋友</strong><small>发给要来日本的朋友</small><b>›</b></button>
+            <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>保存到桌面</strong><small>下次一按就打开</small><b>›</b></button>
           </div>
+
+          <button class="ask-card ask-card-home" type="button" data-go="contact">
+            <img src="./heitu-contact.png" alt="" />
+            <span class="ask-copy"><strong>在日本遇到问题？<em>问黑豚</em></strong><small>旅行问题・行程建议・当地情报<br />有需要再问我！</small><b>›</b></span>
+          </button>
 
           <section class="community-maps" aria-labelledby="communityMapsTitle">
             <div class="community-heading"><div><small>COMMUNITY MAPS</small><h2 id="communityMapsTitle">更多实用地图</h2></div><span>网友共享情报</span></div>
@@ -108,10 +109,6 @@
             <p>地点由第三方用户共享，请以现场为准。</p>
           </section>
 
-          <button class="ask-card" type="button" data-go="contact">
-            <span class="ask-copy"><small>NEED A HAND?</small><strong>找黑豚</strong><em>在日本遇到事，有需要再问我</em><b>给黑豚留言 →</b></span>
-            <img src="./heitu-contact.png" alt="" />
-          </button>
           <p class="coverage-note">本站负责中文整理和操作辅助；地点信息与实际服务由跳转后的第三方网站提供。</p>
         </section>
 
@@ -174,6 +171,41 @@
           <p id="smokingSafety" class="safety-note" hidden>20岁以下不得进入吸烟区域，请以现场标识为准。</p>
         </section>
 
+        <section class="view wayback-view" data-view="wayback" aria-labelledby="waybackTitle">
+          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
+          <div class="wayback-heading">
+            <div><p class="eyebrow">DON'T GET LOST</p><h1 id="waybackTitle">路痴救星</h1><p>先记住这个地方，想回来时直接导航。</p></div>
+            <span class="wayback-heading-icon" aria-hidden="true">🧭</span>
+          </div>
+          <p class="wayback-privacy">🔒 位置只保存在这台手机，不会上传</p>
+
+          <div class="wayback-actions" aria-label="路痴救星主要功能">
+            <button id="rememberHere" class="wayback-action remember" type="button"><span>📍</span><strong>记住这儿</strong><small>获取现在的位置</small></button>
+            <button id="returnHere" class="wayback-action return" type="button"><span>↩️</span><strong>原路回</strong><small>选择已保存地点</small></button>
+          </div>
+
+          <section id="waybackCapture" class="wayback-capture" hidden aria-labelledby="waybackCaptureTitle">
+            <div class="wayback-capture-head"><div><small>刚刚定位到</small><strong id="waybackCaptureTitle">确认这个地点</strong></div><span id="waybackAccuracy"></span></div>
+            <p id="waybackAddress" class="wayback-address" lang="ja">正在获取日文地址…</p>
+            <p id="waybackCoordinates" class="wayback-coordinates" data-no-i18n></p>
+            <fieldset class="wayback-labels"><legend>这是哪里？</legend><div>
+              <label><input type="radio" name="waybackLabel" value="当前地点" checked /><span>📍 当前地点</span></label>
+              <label><input type="radio" name="waybackLabel" value="下车点" /><span>🚕 下车点</span></label>
+              <label><input type="radio" name="waybackLabel" value="酒店" /><span>🏨 酒店</span></label>
+              <label><input type="radio" name="waybackLabel" value="车站出口" /><span>🚉 车站出口</span></label>
+              <label><input type="radio" name="waybackLabel" value="商场门口" /><span>🏬 商场门口</span></label>
+            </div></fieldset>
+            <label class="wayback-note"><span>加一句提醒（可不填）</span><input id="waybackNote" maxlength="80" placeholder="例：东口便利店旁、红色招牌下面" /></label>
+            <button id="saveWaybackPlace" class="wayback-save" type="button">记住这个地方</button>
+          </section>
+
+          <section id="waybackSaved" class="wayback-saved" aria-labelledby="waybackSavedTitle">
+            <div class="wayback-saved-head"><div><small>↩️ 原路回</small><h2 id="waybackSavedTitle">我记住的地方</h2></div><span id="waybackCount">0 / 10</span></div>
+            <div id="waybackList" class="wayback-list"></div>
+          </section>
+          <p class="storage-note">不用登录。清除浏览器数据或更换手机后，这些地点不会自动同步。</p>
+        </section>
+
         <section class="view" data-view="favorites" aria-labelledby="favoritesTitle">
           <div class="page-heading small favorite-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">SAVED ON THIS PHONE</p><h1 id="favoritesTitle">我的收藏</h1><p>黑豚君帮你记在这台手机里。</p></div></div>
           <div id="favoriteList" class="favorite-list"></div>
@@ -183,13 +215,13 @@
 
         <section class="view" data-view="contact" aria-labelledby="contactTitle">
           <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
-          <div class="contact-heading"><div><p class="eyebrow">ASK HEITUN</p><h1 id="contactTitle">在日本遇到事，<br />跟我说说</h1><p>先聊需求，不下单、不付款。</p></div><img src="./heitu-contact.png" alt="正在记录需求的黑豚君" /></div>
+          <div class="contact-heading"><div><p class="eyebrow">ASK HEITUN</p><h1 id="contactTitle">在日本遇到事，<br />跟我说说</h1><p>问一下，也可能我就帮你搞定了。</p></div><img src="./heitu-contact.png" alt="正在记录需求的黑豚君" /></div>
           <form id="contactForm" class="contact-form">
-            <fieldset><legend>你需要什么？</legend><div class="choice-grid">
-              <label><input type="radio" name="service" value="包车／接送机" checked /><span>🚗 包车／接送机</span></label>
-              <label><input type="radio" name="service" value="定制行程" /><span>🗺 定制行程</span></label>
-              <label><input type="radio" name="service" value="餐厅预约" /><span>🍽 餐厅预约</span></label>
-              <label><input type="radio" name="service" value="其他需求" /><span>💬 其他需求</span></label>
+            <fieldset><legend>这次想让我帮什么？</legend><div class="choice-grid">
+              <label><input type="radio" name="service" value="接送机／包车一日游" checked /><span>🚐 接送机／包车一日游</span></label>
+              <label><input type="radio" name="service" value="多日路线帮你规划" /><span>🗺 多日路线帮你规划</span></label>
+              <label><input type="radio" name="service" value="想吃的店，帮你预约" /><span>🍽 想吃的店，帮你预约</span></label>
+              <label><input type="radio" name="service" value="其他当地事，也可以问我" /><span>💬 其他当地事，也可以问我</span></label>
             </div></fieldset>
             <div id="directWechatPrompt" class="direct-wechat-prompt" hidden>
               <div class="direct-wechat-top"><span>🐽</span><p><strong>这类需求，直接微信聊更快</strong><small>微信号：zhangpeng816 · 复制后到微信搜索</small></p><button class="direct-wechat-copy" type="button" data-copy-wechat>复制微信号</button></div>
@@ -205,7 +237,7 @@
           </form>
           <section class="email-contact" aria-label="邮箱联系方式">
             <span class="email-icon">@</span>
-            <span><strong>也可以发邮件联系</strong><small>kurobuta2021@gmail.com</small></span>
+            <span><strong>邮件联系，回复也很快</strong><small>kurobuta2021@gmail.com</small></span>
             <span class="email-actions"><a href="mailto:kurobuta2021@gmail.com">写邮件</a><button type="button" data-copy-email>复制邮箱</button></span>
           </section>
           <section id="wechatContact" class="wechat-contact" aria-labelledby="wechatTitle">
@@ -244,10 +276,49 @@
         <p id="mapChoiceNote" class="map-choice-note">在日本建议优先使用 Google 地图；搜不到时可换其他地图。</p>
       </form>
     </dialog>
+    <dialog id="waybackNavDialog" class="app-dialog wayback-nav-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">WALK BACK</p><h2>走回这个地方</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="wayback-nav-place"><strong id="waybackNavLabel"></strong><p id="waybackNavAddress" lang="ja"></p><small id="waybackNavNote"></small></div>
+        <div class="map-choice-grid">
+          <a id="waybackGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>步行导航 · 日本优先推荐</small></a>
+          <a id="waybackAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图</strong><small>步行导航 · 日本路线可能较少</small></a>
+          <a id="waybackApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>步行导航 · 适合 iPhone</small></a>
+        </div>
+        <button id="copyWaybackPlace" class="copy-wayback-place" type="button">复制完整位置</button>
+      </form>
+    </dialog>
+    <dialog id="saveSiteDialog" class="app-dialog save-site-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">SAVE FOR LATER</p><h2 id="saveSiteTitle">保存随便O</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div id="saveSiteGuide" class="save-site-guide"></div>
+        <button id="installSiteButton" class="dialog-primary" type="button" hidden>添加到主屏幕</button>
+        <button id="copySiteLink" class="copy-site-link" type="button">复制网址</button>
+      </form>
+    </dialog>
+    <dialog id="sharedPlaceDialog" class="app-dialog shared-place-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">SHARED LOCATION</p><h2>朋友分享了一个位置</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <article class="shared-place-card">
+          <strong id="sharedPlaceLabel" data-no-i18n></strong>
+          <p id="sharedPlaceAddress" lang="ja"></p>
+          <p id="sharedPlaceNote" class="shared-place-note" data-no-i18n hidden></p>
+          <small id="sharedPlaceCoords" data-no-i18n></small>
+        </article>
+        <div class="map-choice-grid shared-place-nav">
+          <a id="sharedPlaceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>步行导航 · 日本优先推荐</small></a>
+          <a id="sharedPlaceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图</strong><small>步行导航 · 日本路线可能较少</small></a>
+          <a id="sharedPlaceApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>步行导航 · 适合 iPhone</small></a>
+        </div>
+        <p class="shared-place-privacy">只显示这个分享位置，不会读取或分享对方保存的其他地点。</p>
+        <button class="dialog-primary" value="default">继续使用其他工具</button>
+      </form>
+    </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260920-2"></script>
-    <script src="./app.js?v=20260923-39"></script>
+    <script src="./i18n.js?v=20260924-ui1"></script>
+    <script src="./share-utils.js?v=20260924-ui1"></script>
+    <script src="./app.js?v=20260924-ui1"></script>
     <!-- Cloudflare Web Analytics -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"a0769e29268642d39d16b180d6912d89"}'></script>
     <!-- End Cloudflare Web Analytics -->

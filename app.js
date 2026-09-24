@@ -3,6 +3,10 @@
 
   const FAVORITES_KEY = "heitu-favorites-v1";
   const CITY_KEY = "heitu-city-v1";
+  const WAYBACK_KEY = "heitu-wayback-places-v1";
+  const WAYBACK_LIMIT = 10;
+  const shareUtils = window.HeituShareUtils;
+  let deferredInstallPrompt = null;
   const SOURCES = {
     smoking: {
       title: "附近合法吸烟点",
@@ -100,6 +104,10 @@
     phrase: "toilet",
     destination: null,
     favorites: readFavorites(),
+    waybackPlaces: readWaybackPlaces(),
+    waybackDraft: null,
+    activeWaybackPlace: null,
+    sharedPlace: shareUtils?.sharedPlaceFromUrl(location.href) || null,
     city: localStorage.getItem(CITY_KEY) || "东京",
     toiletMap: null,
     toiletUserMarker: null,
@@ -114,6 +122,9 @@
     cityDialog: document.querySelector("#cityDialog"),
     comingDialog: document.querySelector("#comingDialog"),
     mapChoiceDialog: document.querySelector("#mapChoiceDialog"),
+    waybackNavDialog: document.querySelector("#waybackNavDialog"),
+    saveSiteDialog: document.querySelector("#saveSiteDialog"),
+    sharedPlaceDialog: document.querySelector("#sharedPlaceDialog"),
     sourceList: document.querySelector("#sourceList"),
     sourceTitle: document.querySelector("#sourceTitle"),
     sourceIntro: document.querySelector("#sourceIntro"),
@@ -126,13 +137,35 @@
     phraseDestination: document.querySelector("#phraseDestination"),
     smokingSafety: document.querySelector("#smokingSafety"),
     favoriteList: document.querySelector("#favoriteList"),
+    waybackCapture: document.querySelector("#waybackCapture"),
+    waybackList: document.querySelector("#waybackList"),
+    waybackCount: document.querySelector("#waybackCount"),
     contactForm: document.querySelector("#contactForm")
   };
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    toast("已添加到主屏幕");
+  });
 
   function readFavorites() {
     try {
       const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
       return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function readWaybackPlaces() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(WAYBACK_KEY) || "[]");
+      return Array.isArray(parsed) ? parsed.slice(0, WAYBACK_LIMIT) : [];
     } catch (_) {
       return [];
     }
@@ -296,11 +329,12 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
     if (view === "japanese") renderPhrase();
+    if (view === "wayback") renderWaybackPlaces();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -558,7 +592,8 @@
 
   function updateFavoriteCount() {
     const count = state.favorites.length;
-    document.querySelector("#homeFavoriteCount").textContent = count;
+    const homeFavoriteCount = document.querySelector("#homeFavoriteCount");
+    if (homeFavoriteCount) homeFavoriteCount.textContent = count;
     const navCount = document.querySelector("#navFavoriteCount");
     navCount.textContent = count;
     navCount.hidden = count === 0;
@@ -620,6 +655,248 @@
     }
   }
 
+  function publicSiteUrl() {
+    return shareUtils ? shareUtils.publicSiteUrl(location.href) : location.href.split("#")[0];
+  }
+
+  async function shareSite() {
+    const url = publicSiteUrl();
+    const data = {
+      title: "随便O｜日本旅行工具箱",
+      text: "来日本把这个存一下｜厕所、吸烟点、行李寄存、路痴救星等旅行小工具",
+      url
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(data);
+        toast("已打开分享菜单");
+        return;
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+      }
+    }
+    await copyText(url, "分享链接已复制");
+  }
+
+  function saveEnvironment() {
+    if (!shareUtils) return "desktop";
+    return shareUtils.detectSaveEnvironment(navigator.userAgent, {
+      platform: navigator.platform,
+      maxTouchPoints: navigator.maxTouchPoints,
+      standalone: window.matchMedia?.("(display-mode: standalone)")?.matches || navigator.standalone === true,
+      installAvailable: Boolean(deferredInstallPrompt)
+    });
+  }
+
+  function openSaveSiteGuide() {
+    const environment = saveEnvironment();
+    const title = document.querySelector("#saveSiteTitle");
+    const guide = document.querySelector("#saveSiteGuide");
+    const installButton = document.querySelector("#installSiteButton");
+    const content = shareUtils.saveGuide(environment);
+    installButton.hidden = !content.showInstall;
+    title.textContent = content.title;
+    guide.innerHTML = `<strong>${content.heading}</strong><p>${content.html}</p>`;
+    els.saveSiteDialog.showModal();
+  }
+
+  async function promptInstallSite() {
+    if (!deferredInstallPrompt) {
+      openSaveSiteGuide();
+      return;
+    }
+    const prompt = deferredInstallPrompt;
+    deferredInstallPrompt = null;
+    await prompt.prompt();
+    const result = await prompt.userChoice;
+    if (result?.outcome === "accepted") {
+      els.saveSiteDialog.close();
+      toast("已添加到主屏幕");
+    } else {
+      openSaveSiteGuide();
+    }
+  }
+
+  function waybackIcon(label) {
+    return ({ "当前地点": "📍", "下车点": "🚕", "酒店": "🏨", "车站出口": "🚉", "商场门口": "🏬" })[label] || "📍";
+  }
+
+  function formatWaybackTime(timestamp) {
+    const language = window.HeituI18n?.getLanguage?.() || "zh-Hans";
+    const locale = language === "en" ? "en-US" : language === "zh-Hant" ? "zh-TW" : "zh-CN";
+    return new Intl.DateTimeFormat(locale, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }).format(new Date(timestamp));
+  }
+
+  function persistWaybackPlaces() {
+    localStorage.setItem(WAYBACK_KEY, JSON.stringify(state.waybackPlaces));
+  }
+
+  function waybackCopyText(place) {
+    return [
+      `${waybackIcon(place.label)} ${place.label}`,
+      place.address,
+      place.note ? `提醒：${place.note}` : "",
+      `坐标：${Number(place.lat).toFixed(6)}, ${Number(place.lng).toFixed(6)}`
+    ].filter(Boolean).join("\n");
+  }
+
+  function renderWaybackPlaces() {
+    if (!els.waybackList) return;
+    els.waybackCount.textContent = `${state.waybackPlaces.length} / ${WAYBACK_LIMIT}`;
+    if (!state.waybackPlaces.length) {
+      els.waybackList.innerHTML = `<div class="wayback-empty"><span>🧭</span><strong>还没记住任何地方</strong><p>下车、出站或离开酒店前，点一次“记住这儿”。</p></div>`;
+      return;
+    }
+    els.waybackList.innerHTML = state.waybackPlaces.map(place => `
+      <article class="wayback-place">
+        <div class="wayback-place-top">
+          <div class="wayback-place-title"><span class="wayback-place-icon">${waybackIcon(place.label)}</span><span><strong>${escapeHtml(place.label)}</strong><small>${escapeHtml(formatWaybackTime(place.savedAt))}</small></span></div>
+          <button class="wayback-delete" type="button" data-wayback-delete="${escapeHtml(place.id)}">删除</button>
+        </div>
+        <p class="wayback-place-address" lang="ja">${escapeHtml(place.address)}</p>
+        ${place.note ? `<p class="wayback-place-note">💬 ${escapeHtml(place.note)}</p>` : ""}
+        <p class="wayback-place-coords" data-no-i18n>${Number(place.lat).toFixed(6)}, ${Number(place.lng).toFixed(6)}</p>
+        <div class="wayback-place-actions"><button class="wayback-navigate" type="button" data-wayback-navigate="${escapeHtml(place.id)}">↩️ 原路回</button><button class="wayback-share" type="button" data-wayback-share="${escapeHtml(place.id)}">↗ 分享位置</button><button class="wayback-copy" type="button" data-wayback-copy="${escapeHtml(place.id)}">复制位置</button></div>
+      </article>
+    `).join("");
+  }
+
+  async function reverseGeocodeWayback(position) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${position.lat.toFixed(7)}&lon=${position.lng.toFixed(7)}&zoom=18&addressdetails=1&accept-language=ja`;
+    const response = await fetch(url, { headers: { Accept: "application/json" } });
+    if (!response.ok) throw new Error("reverse geocoding failed");
+    const data = await response.json();
+    return data.display_name || "日文地址暂时获取不到，请按坐标导航";
+  }
+
+  function locateWayback() {
+    const button = document.querySelector("#rememberHere");
+    if (!navigator.geolocation) {
+      toast("这台设备不支持定位，暂时不能记住位置");
+      return;
+    }
+    if (button.dataset.locating === "true") return;
+    button.dataset.locating = "true";
+    button.querySelector("strong").textContent = "正在定位…";
+    navigator.geolocation.getCurrentPosition(async result => {
+      const position = { lat: result.coords.latitude, lng: result.coords.longitude };
+      button.dataset.locating = "false";
+      button.querySelector("strong").textContent = "记住这儿";
+      if (!isValidPosition(position)) {
+        toast("取得的位置格式不正确，请重新定位");
+        return;
+      }
+      state.waybackDraft = {
+        lat: position.lat,
+        lng: position.lng,
+        accuracy: Math.round(result.coords.accuracy || 0),
+        address: "正在获取日文地址…"
+      };
+      document.querySelector("#waybackAddress").textContent = state.waybackDraft.address;
+      document.querySelector("#waybackCoordinates").textContent = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+      document.querySelector("#waybackAccuracy").textContent = state.waybackDraft.accuracy ? `约 ${state.waybackDraft.accuracy} 米` : "已定位";
+      els.waybackCapture.hidden = false;
+      els.waybackCapture.scrollIntoView({ behavior: "smooth", block: "center" });
+      try {
+        state.waybackDraft.address = await reverseGeocodeWayback(position);
+      } catch (_) {
+        state.waybackDraft.address = "日文地址暂时获取不到，请按坐标导航";
+      }
+      document.querySelector("#waybackAddress").textContent = state.waybackDraft.address;
+    }, error => {
+      button.dataset.locating = "false";
+      button.querySelector("strong").textContent = "记住这儿";
+      const message = error && error.code === 1
+        ? "你没有允许定位，打开浏览器位置权限后再试"
+        : "定位失败，请到室外或网络稳定后再试";
+      toast(message);
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
+  }
+
+  function saveWaybackPlace() {
+    if (!state.waybackDraft || !isValidPosition(state.waybackDraft)) {
+      toast("请先点“记住这儿”取得当前位置");
+      return;
+    }
+    if (state.waybackPlaces.length >= WAYBACK_LIMIT) {
+      toast("最多保存 10 个，请先删除一个旧地点");
+      return;
+    }
+    const selected = document.querySelector('input[name="waybackLabel"]:checked');
+    const place = {
+      id: `${Date.now()}`,
+      label: selected?.value || "当前地点",
+      address: state.waybackDraft.address,
+      lat: state.waybackDraft.lat,
+      lng: state.waybackDraft.lng,
+      note: document.querySelector("#waybackNote").value.trim(),
+      savedAt: Date.now()
+    };
+    state.waybackPlaces.unshift(place);
+    persistWaybackPlaces();
+    renderWaybackPlaces();
+    state.waybackDraft = null;
+    els.waybackCapture.hidden = true;
+    document.querySelector("#waybackNote").value = "";
+    document.querySelector('input[name="waybackLabel"][value="当前地点"]').checked = true;
+    toast("黑豚帮你记住啦");
+    document.querySelector("#waybackSaved").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function openWaybackNavigation(place) {
+    if (!place || !isValidPosition(place)) return;
+    state.activeWaybackPlace = place;
+    const destination = `${Number(place.lat).toFixed(6)},${Number(place.lng).toFixed(6)}`;
+    document.querySelector("#waybackNavLabel").textContent = `${waybackIcon(place.label)} ${place.label}`;
+    document.querySelector("#waybackNavAddress").textContent = place.address;
+    const note = document.querySelector("#waybackNavNote");
+    note.textContent = place.note ? `提醒：${place.note}` : "";
+    note.hidden = !place.note;
+    document.querySelector("#waybackGoogle").href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+    document.querySelector("#waybackApple").href = `https://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=w`;
+    document.querySelector("#waybackAmap").href = `https://uri.amap.com/navigation?to=${Number(place.lng).toFixed(6)},${Number(place.lat).toFixed(6)},${encodeURIComponent(place.label)}&mode=walk&coordinate=wgs84&callnative=1&src=heitu`;
+    els.waybackNavDialog.showModal();
+  }
+
+  async function shareWaybackPlace(place) {
+    if (!place || !isValidPosition(place) || !shareUtils) return;
+    const url = shareUtils.sharedPlaceUrl(location.href, place);
+    if (!url) {
+      toast("这个位置暂时无法分享");
+      return;
+    }
+    const data = {
+      title: `${place.label}｜随便O位置分享`,
+      text: waybackCopyText(place),
+      url
+    };
+    if (navigator.share) {
+      try {
+        await navigator.share(data);
+        toast("已打开位置分享菜单");
+        return;
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+      }
+    }
+    await copyText(url, "位置分享链接已复制");
+  }
+
+  function showSharedPlace(place) {
+    if (!place || !isValidPosition(place)) return;
+    const destination = `${Number(place.lat).toFixed(6)},${Number(place.lng).toFixed(6)}`;
+    document.querySelector("#sharedPlaceLabel").textContent = `${waybackIcon(place.label)} ${place.label}`;
+    document.querySelector("#sharedPlaceAddress").textContent = place.address;
+    const note = document.querySelector("#sharedPlaceNote");
+    note.textContent = place.note ? `提醒：${place.note}` : "";
+    note.hidden = !place.note;
+    document.querySelector("#sharedPlaceCoords").textContent = destination;
+    document.querySelector("#sharedPlaceGoogle").href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=walking`;
+    document.querySelector("#sharedPlaceApple").href = `https://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=w`;
+    document.querySelector("#sharedPlaceAmap").href = `https://uri.amap.com/navigation?to=${Number(place.lng).toFixed(6)},${Number(place.lat).toFixed(6)},${encodeURIComponent(place.label)}&mode=walk&coordinate=wgs84&callnative=1&src=heitu`;
+    els.sharedPlaceDialog.showModal();
+  }
+
   function buildInquiry() {
     const data = new FormData(els.contactForm);
     return [
@@ -649,7 +926,7 @@
 
   function updateContactServiceMode(scroll = false) {
     const service = new FormData(els.contactForm).get("service");
-    const direct = service === "餐厅预约" || service === "其他需求";
+    const direct = service === "想吃的店，帮你预约" || service === "其他当地事，也可以问我";
     const prompt = document.querySelector("#directWechatPrompt");
     prompt.hidden = !direct;
     document.querySelector("#tripDetails").hidden = direct;
@@ -659,6 +936,43 @@
   }
 
   document.addEventListener("click", event => {
+    const saveSiteButton = event.target.closest("[data-save-site]");
+    if (saveSiteButton) {
+      openSaveSiteGuide();
+      return;
+    }
+    const shareSiteButton = event.target.closest("[data-share-site]");
+    if (shareSiteButton) {
+      shareSite();
+      return;
+    }
+    const waybackShare = event.target.closest("[data-wayback-share]");
+    if (waybackShare) {
+      const place = state.waybackPlaces.find(item => item.id === waybackShare.dataset.waybackShare);
+      if (place) shareWaybackPlace(place);
+      return;
+    }
+    const waybackNavigate = event.target.closest("[data-wayback-navigate]");
+    if (waybackNavigate) {
+      openWaybackNavigation(state.waybackPlaces.find(place => place.id === waybackNavigate.dataset.waybackNavigate));
+      return;
+    }
+    const waybackCopy = event.target.closest("[data-wayback-copy]");
+    if (waybackCopy) {
+      const place = state.waybackPlaces.find(item => item.id === waybackCopy.dataset.waybackCopy);
+      if (place) copyText(waybackCopyText(place), "完整位置已复制");
+      return;
+    }
+    const waybackDelete = event.target.closest("[data-wayback-delete]");
+    if (waybackDelete) {
+      if (!window.confirm("确定删除这个记住的地点吗？")) return;
+      state.waybackPlaces = state.waybackPlaces.filter(place => place.id !== waybackDelete.dataset.waybackDelete);
+      persistWaybackPlaces();
+      renderWaybackPlaces();
+      toast("已删除这个地点");
+      return;
+    }
+
     const locatedAmapLink = event.target.closest('#mapChoiceAmap[data-require-current-location="true"]');
     if (locatedAmapLink) {
       event.preventDefault();
@@ -687,7 +1001,7 @@
 
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
-      showMapChoice("日帰り温泉", "泡个汤", {
+      showMapChoice("日帰り温泉", "泡个温泉", {
         intro: "先用 Google 地图找附近的日归温泉；需要私汤时，使用下面的专门入口。",
         extraChoices: [
           {
@@ -701,6 +1015,33 @@
         googleDescription: "日文搜索“日帰り温泉” · 不用住宿，泡完温泉就走 · 定位找附近最方便 · 需要当地网络才能打开哦！",
         amapDescription: "搜索“温泉” · 日本地点相对较少",
         note: "有私汤不代表整家设施一定允许纹身；温泉规则可能变化，出发前请查看详情或向店家确认。"
+      });
+      return;
+    }
+
+    const luggageButton = event.target.closest("[data-luggage-choice]");
+    if (luggageButton) {
+      showMapChoice("コインロッカー", "附近行李寄存", {
+        community: {
+          url: "https://www.coinlocker-navi.com/search/gps/",
+          icon: "🧳",
+          name: "コインロッカーなび",
+          description: "按当前位置查投币柜和人工寄存 · 日本各地 · 第一推荐"
+        },
+        intro: "先按定位查附近投币柜和人工寄存；需要提前预约时，可以使用 ecbo cloak。",
+        extraChoices: [
+          {
+            url: "https://cloak.ecbo.io/en/locations",
+            icon: "予",
+            name: "ecbo cloak 预约寄存",
+            description: "咖啡店、便利店等寄存点 · 可查看空位并预约",
+            className: "reservation"
+          }
+        ],
+        googleDescription: "日文搜索“コインロッカー” · 定位找附近最方便 · 需要当地网络才能打开哦！",
+        amapQuery: "行李寄存",
+        amapDescription: "搜索“行李寄存” · 日本地点相对较少",
+        note: "寄存点营业时间、尺寸和空位可能变化；大件行李或想确保有位置时，建议提前预约。"
       });
       return;
     }
@@ -807,6 +1148,20 @@
     els.destinationInput.focus();
   });
   document.querySelector("#saveDestination").addEventListener("click", saveDestination);
+  document.querySelector("#rememberHere").addEventListener("click", locateWayback);
+  document.querySelector("#returnHere").addEventListener("click", () => {
+    renderWaybackPlaces();
+    document.querySelector("#waybackSaved").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.querySelector("#saveWaybackPlace").addEventListener("click", saveWaybackPlace);
+  document.querySelector("#copyWaybackPlace").addEventListener("click", () => {
+    if (state.activeWaybackPlace) copyText(waybackCopyText(state.activeWaybackPlace), "完整位置已复制");
+  });
+  document.querySelector("#copySiteLink").addEventListener("click", async () => {
+    const copied = await copyText(publicSiteUrl(), "网址已复制");
+    if (copied) els.saveSiteDialog.close();
+  });
+  document.querySelector("#installSiteButton").addEventListener("click", promptInstallSite);
   document.querySelector("#copyJapanese").addEventListener("click", () => copyText(els.japanesePhrase.textContent, "日文已复制"));
   document.querySelector("#speakJapanese").addEventListener("click", () => {
     if (!("speechSynthesis" in window)) {
@@ -840,6 +1195,11 @@
   els.contactForm.elements.city.value = state.city;
   updateContactServiceMode();
   updateFavoriteCount();
+  renderWaybackPlaces();
   renderSources();
   renderPhrase();
+  if (state.sharedPlace) window.setTimeout(() => showSharedPlace(state.sharedPlace), 80);
+  if ("serviceWorker" in navigator && location.protocol !== "file:") {
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
+  }
 })();
