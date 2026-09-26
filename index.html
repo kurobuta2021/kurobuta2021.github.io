@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260924-ui1" />
+    <link rel="stylesheet" href="./styles.css?v=20260926-contact-flow" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -213,39 +213,82 @@
           <p class="storage-note">不用登录。清除浏览器数据或更换手机后，收藏不会自动同步。</p>
         </section>
 
-        <section class="view" data-view="contact" aria-labelledby="contactTitle">
-          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
-          <div class="contact-heading"><div><p class="eyebrow">ASK HEITUN</p><h1 id="contactTitle">在日本遇到事，<br />跟我说说</h1><p>问一下，也可能我就帮你搞定了。</p></div><img src="./heitu-contact.png" alt="正在记录需求的黑豚君" /></div>
-          <form id="contactForm" class="contact-form">
-            <fieldset><legend>这次想让我帮什么？</legend><div class="choice-grid">
-              <label><input type="radio" name="service" value="接送机／包车一日游" checked /><span>🚐 接送机／包车一日游</span></label>
-              <label><input type="radio" name="service" value="多日路线帮你规划" /><span>🗺 多日路线帮你规划</span></label>
-              <label><input type="radio" name="service" value="想吃的店，帮你预约" /><span>🍽 想吃的店，帮你预约</span></label>
-              <label><input type="radio" name="service" value="其他当地事，也可以问我" /><span>💬 其他当地事，也可以问我</span></label>
-            </div></fieldset>
-            <div id="directWechatPrompt" class="direct-wechat-prompt" hidden>
-              <div class="direct-wechat-top"><span>🐽</span><p><strong>这类需求，直接微信聊更快</strong><small>微信号：zhangpeng816 · 复制后到微信搜索</small></p><button class="direct-wechat-copy" type="button" data-copy-wechat>复制微信号</button></div>
-              <div class="group-qr-card"><img src="./wechat-group-qr.jpg" alt="黑豚微信群二维码" /><p><strong>进群说一声</strong><small>微信扫码加入；二维码失效时请复制微信号联系。</small></p></div>
+        <section class="view contact-flow" data-view="contact" aria-labelledby="contactTitle">
+          <div class="contact-flow-bar">
+            <button id="contactBack" class="back-button" type="button" data-contact-back>‹ 返回</button>
+            <ol class="contact-progress" aria-label="找黑豚进度">
+              <li class="active" data-contact-progress="1">1</li><li data-contact-progress="2">2</li><li data-contact-progress="3">3</li>
+            </ol>
+          </div>
+
+          <section class="contact-step active" data-contact-step="choose" aria-labelledby="contactTitle">
+            <div class="contact-heading contact-choice-heading">
+              <div><p class="eyebrow">ASK HEITUN</p><h1 id="contactTitle">有些事情，<br />工具解决不了。</h1><p>日本旅行、生活，或者其他日本相关的问题，都可以来找我聊聊。</p></div>
+              <img src="./heitu-contact.png" alt="正在记录需求的黑豚君" />
             </div>
-            <div id="tripDetails" class="trip-details">
-              <label><span>准备什么时候来？</span><input name="date" type="date" /></label>
-              <label><span>准备去哪座城市？</span><input name="city" value="东京" placeholder="例：东京、京都、大阪" /></label>
-              <label><span>大概几个人？</span><input name="people" inputmode="numeric" placeholder="例：3人，2个大行李箱" /></label>
-              <label><span>想让我帮你做什么？</span><textarea name="details" rows="4" placeholder="简单说说时间、路线和特别需求"></textarea></label>
-              <button class="contact-submit" type="submit">留言给黑豚</button><button id="copyInquiry" class="copy-inquiry" type="button">复制咨询内容，去微信粘贴</button>
+            <div class="contact-paths">
+              <button class="contact-path travel-path" type="button" data-contact-path="travel">
+                <span class="path-icon">✈</span><span><strong>来日本玩，有事找黑豚</strong><small>一日游／包车、机场接送、多日行程规划</small></span><b>›</b>
+              </button>
+              <button class="contact-path other-path" type="button" data-contact-path="other">
+                <span class="path-icon">💬</span><span><strong>还有别的事？也可以找黑豚</strong><small>日本相关的其他事情，可以来聊聊</small></span><b>›</b>
+              </button>
             </div>
-          </form>
-          <section class="email-contact" aria-label="邮箱联系方式">
-            <span class="email-icon">@</span>
-            <span><strong>邮件联系，回复也很快</strong><small>kurobuta2021@gmail.com</small></span>
-            <span class="email-actions"><a href="mailto:kurobuta2021@gmail.com">写邮件</a><button type="button" data-copy-email>复制邮箱</button></span>
           </section>
-          <section id="wechatContact" class="wechat-contact" aria-labelledby="wechatTitle">
-            <div class="wechat-divider"><span></span><strong id="wechatTitle">也可以直接联系</strong><span></span></div>
-            <button class="wechat-copy" type="button" data-copy-wechat><span>微</span><span><strong>复制微信号</strong><small>zhangpeng816</small></span><b>复制</b></button>
-            <p>群二维码以后加入；目前可直接复制微信号添加。</p>
+
+          <section class="contact-step" data-contact-step="travel" aria-labelledby="travelInquiryTitle" hidden>
+            <div class="travel-inquiry-heading">
+              <p class="eyebrow">JAPAN TRIP</p>
+              <h2 id="travelInquiryTitle">准备来日本玩？</h2>
+              <p>你大概想怎么安排，我先看看～</p>
+            </div>
+            <form id="contactForm" class="travel-inquiry-form">
+              <fieldset>
+                <legend><i>1</i><span>你主要想找我做什么？<small>可多选</small></span></legend>
+                <div class="travel-choice-grid service-choices">
+                  <label><input type="checkbox" name="service" value="一日游／包车" /><span><b>🚗</b><strong>一日游／包车</strong></span></label>
+                  <label><input type="checkbox" name="service" value="机场接送" /><span><b>✈️</b><strong>机场接送</strong></span></label>
+                  <label><input type="checkbox" name="service" value="多日行程规划" /><span><b>🗺</b><strong>多日行程规划</strong></span></label>
+                  <label><input type="checkbox" name="service" value="还没想好，先聊聊" /><span><b>💬</b><strong>还没想好<br />先聊聊</strong></span></label>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend><i>2</i><span>大概什么时候来？</span></legend>
+                <div class="travel-choice-grid timing-choices">
+                  <label><input type="radio" name="timing" value="已经在日本" /><span><b>📅</b><strong>已经在日本</strong></span></label>
+                  <label><input type="radio" name="timing" value="1个月内" /><span><b>👥</b><strong>1个月内</strong></span></label>
+                  <label><input type="radio" name="timing" value="1–3个月" /><span><b>✈️</b><strong>1–3个月</strong></span></label>
+                  <label><input type="radio" name="timing" value="还没确定" /><span><b>?</b><strong>还没确定</strong></span></label>
+                </div>
+              </fieldset>
+              <div class="travel-form-note"><span>简单选一下就好～</span><small>更详细的情况，加我后再聊！</small></div>
+              <button class="contact-submit" type="submit">找黑豚聊聊 <span>→</span></button>
+            </form>
           </section>
-          <p id="contactNote" class="contact-note">提交后会打开手机分享菜单；不支持分享时，会自动复制咨询内容。</p>
+
+          <section class="contact-step" data-contact-step="channels" aria-labelledby="channelsTitle" hidden>
+            <div class="channels-hero">
+              <img src="./heitu-jun.png" alt="黑豚君" />
+              <div><span>收到啦！</span><strong id="channelsTitle">找个方便的方式聊聊</strong><small data-channel-intro-travel>加我的时候，把刚才选的需求告诉我就行。</small><small data-channel-intro-other hidden>日本相关的其他事情，直接来聊聊就好。</small></div>
+            </div>
+            <div id="inquirySummary" class="inquiry-summary" hidden>
+              <span>刚才选择</span><strong id="inquirySummaryText"></strong>
+              <button id="copyInquiry" type="button">复制需求</button>
+            </div>
+            <section class="recommended-contact" aria-label="微信联系方式">
+              <div class="recommended-label">推荐</div>
+              <div class="wechat-main-row"><span class="channel-icon wechat-icon">微</span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><button type="button" data-copy-wechat>复制微信号</button></div>
+              <div class="wechat-qr-row"><img src="./wechat-group-qr.jpg" alt="黑豚微信群二维码" /><span><strong>微信群二维码</strong><small>扫码进群；二维码失效时，可复制上方微信号联系。</small></span></div>
+            </section>
+            <div class="contact-channel email-channel email-contact-standalone"><span class="channel-icon email-icon">✉</span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com">写邮件</a><button type="button" data-copy-email>复制</button></span></div>
+            <div class="contact-channel-list" aria-label="其他联系方式">
+              <a class="contact-channel" href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener"><span class="channel-icon xhs-icon">RED</span><span><strong>小红书</strong><small>打开我的小红书主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener"><span class="channel-icon douyin-icon">♪</span><span><strong>抖音</strong><small>打开我的抖音主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener"><span class="channel-icon bili-icon">B</span><span><strong>B站</strong><small>打开我的B站主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener"><span class="channel-icon youtube-icon">▶</span><span><strong>YouTube</strong><small>打开我的YouTube频道</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener"><span class="channel-icon tiktok-icon">♪</span><span><strong>TikTok</strong><small>打开我的TikTok主页</small></span><b>›</b></a>
+            </div>
+          </section>
         </section>
       </main>
 
@@ -316,9 +359,9 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260924-ui1"></script>
+    <script src="./i18n.js?v=20260926-contact-flow"></script>
     <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260924-ui1"></script>
+    <script src="./app.js?v=20260926-contact-flow"></script>
     <!-- Cloudflare Web Analytics -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"a0769e29268642d39d16b180d6912d89"}'></script>
     <!-- End Cloudflare Web Analytics -->

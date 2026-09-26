@@ -114,7 +114,9 @@
     toiletMarkers: [],
     toiletPosition: null,
     toiletPlaces: [],
-    toiletLoading: false
+    toiletLoading: false,
+    contactStep: "choose",
+    contactPath: "travel"
   };
 
   const els = {
@@ -335,6 +337,7 @@
     if (view === "favorites") renderFavorites();
     if (view === "japanese") renderPhrase();
     if (view === "wayback") renderWaybackPlaces();
+    if (view === "contact") showContactStep("choose", "travel");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -899,40 +902,52 @@
 
   function buildInquiry() {
     const data = new FormData(els.contactForm);
+    const services = data.getAll("service");
     return [
       "你好，黑豚君，我想咨询日本旅行服务：",
-      `需求：${data.get("service") || "未填写"}`,
-      `日期：${data.get("date") || "待定"}`,
-      `城市：${data.get("city") || "待定"}`,
-      `人数／行李：${data.get("people") || "待定"}`,
-      `具体需求：${data.get("details") || "稍后补充"}`
+      `需求：${services.length ? services.join("、") : "还没想好"}`,
+      `时间：${data.get("timing") || "还没确定"}`
     ].join("\n");
   }
 
-  async function shareInquiry(event) {
-    event.preventDefault();
-    const text = buildInquiry();
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: "找黑豚旅行咨询", text });
-        toast("已打开分享菜单");
-        return;
-      } catch (error) {
-        if (error && error.name === "AbortError") return;
-      }
-    }
-    await copyText(text, "咨询内容已复制，可粘贴到微信");
+  function showContactStep(step, path = state.contactPath) {
+    state.contactStep = step;
+    state.contactPath = path;
+    const stepNumber = step === "choose" ? 1 : step === "travel" ? 2 : 3;
+    document.querySelectorAll("[data-contact-step]").forEach(section => {
+      const active = section.dataset.contactStep === step;
+      section.hidden = !active;
+      section.classList.toggle("active", active);
+    });
+    document.querySelectorAll("[data-contact-progress]").forEach(item => {
+      const itemStep = Number(item.dataset.contactProgress);
+      item.classList.toggle("active", itemStep === stepNumber);
+      item.classList.toggle("done", itemStep < stepNumber);
+    });
+    const travelIntro = document.querySelector("[data-channel-intro-travel]");
+    const otherIntro = document.querySelector("[data-channel-intro-other]");
+    travelIntro.hidden = !(step === "channels" && path === "travel");
+    otherIntro.hidden = !(step === "channels" && path === "other");
+    if (step === "choose") els.contactForm.reset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function updateContactServiceMode(scroll = false) {
-    const service = new FormData(els.contactForm).get("service");
-    const direct = service === "想吃的店，帮你预约" || service === "其他当地事，也可以问我";
-    const prompt = document.querySelector("#directWechatPrompt");
-    prompt.hidden = !direct;
-    document.querySelector("#tripDetails").hidden = direct;
-    document.querySelector("#wechatContact").hidden = direct;
-    document.querySelector("#contactNote").hidden = direct;
-    if (direct && scroll) prompt.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  function submitTravelInquiry(event) {
+    event.preventDefault();
+    const data = new FormData(els.contactForm);
+    if (!data.getAll("service").length) {
+      toast("先选一个想聊的方向");
+      els.contactForm.querySelector('input[name="service"]').focus();
+      return;
+    }
+    if (!data.get("timing")) {
+      toast("再选一下大概什么时候来");
+      els.contactForm.querySelector('input[name="timing"]').focus();
+      return;
+    }
+    document.querySelector("#inquirySummaryText").textContent = `${data.getAll("service").join("、")} · ${data.get("timing")}`;
+    document.querySelector("#inquirySummary").hidden = false;
+    showContactStep("channels", "travel");
   }
 
   document.addEventListener("click", event => {
@@ -1126,7 +1141,7 @@
   document.querySelectorAll("[data-city]").forEach(button => button.addEventListener("click", () => {
     state.city = button.dataset.city;
     localStorage.setItem(CITY_KEY, state.city);
-    els.contactForm.elements.city.value = state.city;
+    if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
     els.cityDialog.close();
     toast(`已切换到${state.city}`);
   }));
@@ -1175,9 +1190,24 @@
     speechSynthesis.speak(utterance);
     toast("正在播放日语");
   });
-  els.contactForm.addEventListener("submit", shareInquiry);
-  els.contactForm.addEventListener("change", event => {
-    if (event.target.matches('input[name="service"]')) updateContactServiceMode(true);
+  els.contactForm.addEventListener("submit", submitTravelInquiry);
+  document.querySelectorAll("[data-contact-path]").forEach(button => button.addEventListener("click", () => {
+    const path = button.dataset.contactPath;
+    if (path === "travel") {
+      showContactStep("travel", path);
+      return;
+    }
+    document.querySelector("#inquirySummary").hidden = true;
+    showContactStep("channels", path);
+  }));
+  document.querySelector("[data-contact-back]").addEventListener("click", () => {
+    if (state.contactStep === "choose") {
+      go("home");
+    } else if (state.contactStep === "channels" && state.contactPath === "travel") {
+      showContactStep("travel", "travel");
+    } else {
+      showContactStep("choose", state.contactPath);
+    }
   });
   document.querySelector("#copyInquiry").addEventListener("click", () => copyText(buildInquiry(), "咨询内容已复制，可粘贴到微信"));
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
@@ -1192,8 +1222,8 @@
     queryNearbyToilets(position);
   });
 
-  els.contactForm.elements.city.value = state.city;
-  updateContactServiceMode();
+  if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
+  showContactStep("choose");
   updateFavoriteCount();
   renderWaybackPlaces();
   renderSources();
