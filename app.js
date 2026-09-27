@@ -971,8 +971,10 @@
     });
     const travelIntro = document.querySelector("[data-channel-intro-travel]");
     const otherIntro = document.querySelector("[data-channel-intro-other]");
+    const profileIntro = document.querySelector("[data-channel-intro-profile]");
     travelIntro.hidden = !(step === "channels" && path === "travel");
     otherIntro.hidden = !(step === "channels" && path === "other");
+    profileIntro.hidden = !(step === "channels" && path === "profile");
     if (step === "choose") els.contactForm.reset();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -1001,6 +1003,12 @@
     if (trackedTool) recordOncePerSession("tool_click", trackedTool.dataset.toolId);
     const contactChannel = event.target.closest("[data-contact-channel]");
     if (contactChannel) recordMetric("contact_channel_click", contactChannel.dataset.contactChannel);
+    const contactIntro = event.target.closest("[data-contact-intro]");
+    if (contactIntro) {
+      document.querySelector("#inquirySummary").hidden = true;
+      showContactStep("channels", "profile");
+      return;
+    }
     const saveSiteButton = event.target.closest("[data-save-site]");
     if (saveSiteButton) {
       openSaveSiteGuide();

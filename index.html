@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260927-restrained-contact" />
+    <link rel="stylesheet" href="./styles.css?v=20260927-profile-link" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -41,7 +41,7 @@
       <main id="mainContent">
         <section class="view active" data-view="home" aria-labelledby="homeTitle">
           <section class="travel-hero" aria-label="黑豚日本旅行">
-            <div class="travel-hero-copy"><strong>纯干货！！<br />当地人共享的宝藏工具，<br />中文直达！</strong><small>日本吃喝拉撒</small></div>
+            <div class="travel-hero-copy"><strong>纯干货！！<br />当地人共享的宝藏工具，<br />中文直达！</strong><small>立刻定位离你最近的需求</small></div>
           </section>
           <section class="quick-section" aria-labelledby="quickTitle">
             <div class="section-heading">
@@ -83,31 +83,25 @@
           </section>
 
           <section class="more-tools" aria-labelledby="moreToolsTitle">
-            <div class="more-tools-heading"><h2 id="moreToolsTitle">更多功能</h2><span>还有更多实用工具，助你轻松玩转日本！</span></div>
+            <div class="more-tools-heading"><h2 id="moreToolsTitle">更多实用地图探索</h2><span>还有更多实用工具，助你轻松玩转日本！</span></div>
             <div class="more-tools-grid">
               <button class="mini-tool anime-mini" type="button" data-category="anime" data-tool-id="anime"><img src="./assets/card-anime.png" alt="" loading="lazy" decoding="async" /><span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span><b>›</b></button>
               <button class="mini-tool japanese-mini" type="button" data-go="japanese" data-tool-id="japanese-help"><img src="./assets/card-japanese-help.png" alt="" loading="lazy" decoding="async" /><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
               <button class="mini-tool laundry-mini" type="button" data-map-query="コインランドリー" data-map-label="附近洗衣房" data-tool-id="laundry"><img src="./assets/card-laundry.png" alt="" loading="lazy" decoding="async" /><span><strong>洗衣房</strong><small>找附近的自助洗衣房</small></span><b>›</b></button>
+              <button class="mini-tool map-mini fishing-mini" type="button" data-fishing-choice data-tool-id="fishing"><i class="mini-tool-icon">竿</i><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
+              <button class="mini-tool map-mini trash-mini" type="button" data-external="https://japantrashmap.com/ja/" data-tool-id="trash"><i class="mini-tool-icon">♻</i><span><strong>扔一下</strong><small>找附近公共垃圾桶 · 可定位</small></span><b>›</b></button>
             </div>
+            <p class="more-tools-note">地图地点来自第三方服务，请以现场为准。</p>
           </section>
           <div class="spread-actions" aria-label="保存和分享随便O">
             <button class="spread-action share-site" type="button" data-share-site><span>↗</span><strong>分享给朋友</strong><small>发给要来日本的朋友</small><b>›</b></button>
-            <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>保存到桌面</strong><small>下次一按就打开</small><b>›</b></button>
+            <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>保存到桌面</strong><small>收藏好！下次一按就打开。</small><b>›</b></button>
           </div>
 
           <button class="ask-card ask-card-home" type="button" data-go="contact" data-tool-id="contact">
             <img src="./heitu-contact.png" alt="" />
             <span class="ask-copy"><strong>在日本遇到问题？<em>问黑豚</em></strong><small>旅行问题・行程建议・当地情报<br />有需要再问我！</small><b>›</b></span>
           </button>
-
-          <section class="community-maps" aria-labelledby="communityMapsTitle">
-            <div class="community-heading"><div><small>COMMUNITY MAPS</small><h2 id="communityMapsTitle">更多实用地图</h2></div><span>网友共享情报</span></div>
-            <div class="community-grid">
-              <button class="community-card community-fishing" type="button" data-fishing-choice data-tool-id="fishing"><span class="community-icon">竿</span><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
-              <button class="community-card community-trash" type="button" data-external="https://japantrashmap.com/ja/" data-tool-id="trash"><span class="community-icon">♻</span><span><strong>扔一下</strong><small>找附近公共垃圾桶 · 可定位</small></span><b>›</b></button>
-            </div>
-            <p>地点由第三方用户共享，请以现场为准。</p>
-          </section>
 
           <p class="coverage-note">本站负责中文整理和操作辅助；地点信息与实际服务由跳转后的第三方网站提供。</p>
         </section>
@@ -234,7 +228,7 @@
                 <span class="path-icon">🏠</span><span><strong>其他日本相关事情</strong><small>生活、合作或其他问题</small></span><b>›</b>
               </button>
             </div>
-            <a class="contact-trust-link" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili-intro">第一次认识黑豚？先了解一下 <span>›</span></a>
+            <button class="contact-trust-link" type="button" data-contact-intro data-contact-channel="profile-intro">第一次认识黑豚？看他视频先了解一下 <span>›</span></button>
           </section>
 
           <section class="contact-step" data-contact-step="travel" aria-labelledby="travelInquiryTitle" hidden>
@@ -270,7 +264,7 @@
           <section class="contact-step" data-contact-step="channels" aria-labelledby="channelsTitle" hidden>
             <div class="channels-hero">
               <img src="./heitu-jun.png" alt="黑豚君" />
-              <div><span>收到啦！</span><strong id="channelsTitle">找个方便的方式聊聊</strong><small data-channel-intro-travel>加我的时候，把刚才选的需求告诉我就行。</small><small data-channel-intro-other hidden>日本相关的其他事情，直接来聊聊就好。</small></div>
+              <div><span>收到啦！</span><strong id="channelsTitle">找个方便的方式聊聊</strong><small data-channel-intro-travel>加我的时候，把刚才选的需求告诉我就行。</small><small data-channel-intro-other hidden>日本相关的其他事情，直接来聊聊就好。</small><small data-channel-intro-profile hidden>微信和我的自媒体主页都在这里。</small></div>
             </div>
             <div id="inquirySummary" class="inquiry-summary" hidden>
               <span>刚才选择</span><strong id="inquirySummaryText"></strong>
@@ -360,8 +354,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260927-restrained-contact"></script>
+    <script src="./i18n.js?v=20260927-profile-link"></script>
     <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260927-tool-analytics"></script>
+    <script src="./app.js?v=20260927-profile-link"></script>
   </body>
 </html>
