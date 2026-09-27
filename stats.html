@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>黑豚网站数据</title>
+  <style>
+    :root{color-scheme:light;--ink:#17283a;--muted:#6c7885;--line:#e8e2da;--accent:#e95d56;--paper:#fffdf9}
+    *{box-sizing:border-box}body{margin:0;background:#f4f1ec;color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+    main{width:min(960px,calc(100% - 28px));margin:28px auto}.head,.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px #51493e0d}
+    .head{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:14px}.head h1{margin:0;font-size:24px}.head p{margin:3px 0 0;color:var(--muted)}
+    select,input,button{font:inherit;border-radius:10px;border:1px solid var(--line);padding:9px 12px;background:white}button{background:var(--ink);color:white;border-color:var(--ink);cursor:pointer}
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.metric{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px}.metric small{color:var(--muted)}.metric strong{display:block;font-size:26px;margin-top:5px}
+    table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}th{font-size:12px;color:var(--muted)}.bar{height:7px;background:#eee;border-radius:9px;overflow:hidden;min-width:80px}.bar i{display:block;height:100%;background:var(--accent)}
+    .login{max-width:420px;margin:15vh auto}.error{color:#a52e2e}.muted{color:var(--muted)}a{color:var(--accent)}
+    @media(max-width:680px){.head{align-items:flex-start;flex-direction:column}.summary{grid-template-columns:1fr 1fr}.panel{overflow:auto}}
+  </style>
+</head>
+<body><main>
+  <section id="login" class="panel login">
+    <h1>黑豚网站数据</h1><p class="muted">第一次请输入统计访问码，浏览器会记住。</p>
+    <input id="key" type="password" autocomplete="current-password" placeholder="统计访问码" /><button id="loginButton">查看数据</button><p id="loginError" class="error"></p>
+  </section>
+  <div id="dashboard" hidden>
+    <header class="head"><div><h1>黑豚网站数据</h1><p>主页实用工具的曝光、点击和联系意向</p></div><div><select id="days"><option value="7">近 7 天</option><option value="30" selected>近 30 天</option><option value="90">近 90 天</option></select> <button id="refresh">刷新</button></div></header>
+    <section class="summary"><div class="metric"><small>访问会话</small><strong id="sessions">—</strong></div><div class="metric"><small>页面打开</small><strong id="views">—</strong></div><div class="metric"><small>工具点击</small><strong id="clicks">—</strong></div><div class="metric"><small>综合点击率</small><strong id="ctr">—</strong></div></section>
+    <section class="panel"><h2>工具点击率</h2><table><thead><tr><th>工具</th><th>曝光</th><th>点击</th><th>点击率</th><th></th></tr></thead><tbody id="tools"></tbody></table><p class="muted">点击率＝本次浏览会话中点击人次 ÷ 看到卡片人次。数据不包含姓名、微信号或留言内容。</p></section>
+    <p class="muted">更完整的来源、国家和设备数据可在 <a href="https://dash.cloudflare.com/4adf8a79fc3df76bee97f9279aec0cb8/web-analytics/overview?siteTag~in=6b851b44c9f34c1998eeebea27bb830a" target="_blank" rel="noopener">Cloudflare Web Analytics</a> 查看。</p>
+  </div>
+</main><script>
+const labels={toilet:"随便O（附近厕所）",smoking:"来一根",wayback:"路痴救星",onsen:"泡个温泉",convenience:"便利一下",luggage:"行李寄存",anime:"动漫原景地","japanese-help":"给日本人看",laundry:"洗衣房",contact:"问黑豚",fishing:"渔具店",trash:"扔一下"};
+const login=document.querySelector("#login"),dashboard=document.querySelector("#dashboard"),error=document.querySelector("#loginError");
+let accessKey=localStorage.getItem("heitu-stats-key")||"";document.querySelector("#key").value=accessKey;
+const sum=(rows,event,tool)=>rows.filter(r=>r.event===event&&(!tool||r.tool===tool)).reduce((n,r)=>n+Number(r.count),0);
+async function load(){error.textContent="";const days=document.querySelector("#days").value;const res=await fetch(`/api/stats?days=${days}`,{headers:{"x-stats-key":accessKey}});if(!res.ok){login.hidden=false;dashboard.hidden=true;error.textContent="访问码不正确，请重试。";return}localStorage.setItem("heitu-stats-key",accessKey);login.hidden=true;dashboard.hidden=false;const data=await res.json(),rows=data.rows;const impressions=sum(rows,"tool_impression"),clicks=sum(rows,"tool_click");document.querySelector("#sessions").textContent=sum(rows,"session_start").toLocaleString();document.querySelector("#views").textContent=sum(rows,"page_view").toLocaleString();document.querySelector("#clicks").textContent=clicks.toLocaleString();document.querySelector("#ctr").textContent=impressions?`${(clicks/impressions*100).toFixed(1)}%`:"—";const items=Object.keys(labels).map(tool=>{const seen=sum(rows,"tool_impression",tool),hit=sum(rows,"tool_click",tool);return{tool,seen,hit,rate:seen?hit/seen:0}}).sort((a,b)=>b.rate-a.rate||b.hit-a.hit);document.querySelector("#tools").innerHTML=items.map(x=>`<tr><td>${labels[x.tool]}</td><td>${x.seen}</td><td>${x.hit}</td><td>${x.seen?(x.rate*100).toFixed(1)+"%":"—"}</td><td><div class="bar"><i style="width:${Math.min(100,x.rate*100)}%"></i></div></td></tr>`).join("")}
+document.querySelector("#loginButton").onclick=()=>{accessKey=document.querySelector("#key").value.trim();load()};document.querySelector("#refresh").onclick=load;document.querySelector("#days").onchange=load;if(accessKey)load();
+</script></body></html>

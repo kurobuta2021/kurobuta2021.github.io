@@ -5,6 +5,7 @@
   const CITY_KEY = "heitu-city-v1";
   const WAYBACK_KEY = "heitu-wayback-places-v1";
   const WAYBACK_LIMIT = 10;
+  const ANALYTICS_HOST = "heitun.pages.dev";
   const shareUtils = window.HeituShareUtils;
   let deferredInstallPrompt = null;
   const SOURCES = {
@@ -144,6 +145,50 @@
     waybackCount: document.querySelector("#waybackCount"),
     contactForm: document.querySelector("#contactForm")
   };
+
+  function recordMetric(event, tool = "site") {
+    if (location.hostname !== ANALYTICS_HOST) return;
+    const payload = JSON.stringify({ event, tool });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/event", new Blob([payload], { type: "application/json" }));
+      return;
+    }
+    fetch("/api/event", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: payload,
+      keepalive: true
+    }).catch(() => {});
+  }
+
+  function recordOncePerSession(event, tool = "site") {
+    const key = `heitu-metric:${event}:${tool}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch (_) {}
+    recordMetric(event, tool);
+  }
+
+  function startToolAnalytics() {
+    recordMetric("page_view");
+    recordOncePerSession("session_start");
+
+    const tools = document.querySelectorAll("[data-tool-id]");
+    if (!("IntersectionObserver" in window)) {
+      tools.forEach(tool => recordOncePerSession("tool_impression", tool.dataset.toolId));
+      return;
+    }
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || entry.intersectionRatio < .5) return;
+        const tool = entry.target.dataset.toolId;
+        recordOncePerSession("tool_impression", tool);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: [.5] });
+    tools.forEach(tool => observer.observe(tool));
+  }
 
   window.addEventListener("beforeinstallprompt", event => {
     event.preventDefault();
@@ -947,10 +992,15 @@
     }
     document.querySelector("#inquirySummaryText").textContent = `${data.getAll("service").join("、")} · ${data.get("timing")}`;
     document.querySelector("#inquirySummary").hidden = false;
+    recordOncePerSession("contact_form_complete", "travel");
     showContactStep("channels", "travel");
   }
 
   document.addEventListener("click", event => {
+    const trackedTool = event.target.closest("[data-tool-id]");
+    if (trackedTool) recordOncePerSession("tool_click", trackedTool.dataset.toolId);
+    const contactChannel = event.target.closest("[data-contact-channel]");
+    if (contactChannel) recordMetric("contact_channel_click", contactChannel.dataset.contactChannel);
     const saveSiteButton = event.target.closest("[data-save-site]");
     if (saveSiteButton) {
       openSaveSiteGuide();
@@ -1193,10 +1243,12 @@
   els.contactForm.addEventListener("submit", submitTravelInquiry);
   document.querySelectorAll("[data-contact-path]").forEach(button => button.addEventListener("click", () => {
     const path = button.dataset.contactPath;
+    recordMetric("contact_path", path);
     if (path === "travel") {
       showContactStep("travel", path);
       return;
     }
+    recordOncePerSession("contact_form_complete", path);
     document.querySelector("#inquirySummary").hidden = true;
     showContactStep("channels", path);
   }));
@@ -1229,6 +1281,7 @@
   renderSources();
   renderPhrase();
   if (state.sharedPlace) window.setTimeout(() => showSharedPlace(state.sharedPlace), 80);
+  startToolAnalytics();
   if ("serviceWorker" in navigator && location.protocol !== "file:") {
     navigator.serviceWorker.register("./sw.js").catch(() => {});
   }
