@@ -1,6 +1,7 @@
 const EVENTS = new Set([
   "page_view",
   "session_start",
+  "country_session",
   "tool_impression",
   "tool_click",
   "contact_path",
@@ -48,6 +49,17 @@ export async function onRequestPost({ request, env }) {
     ON CONFLICT(day, event, tool)
     DO UPDATE SET count = count + 1
   `).bind(tokyoDay(), event, tool).run();
+
+  if (event === "session_start") {
+    const country = String(request.cf?.country || "xx").toLowerCase();
+    const countryCode = /^[a-z]{2}$/.test(country) ? country : "xx";
+    await env.ANALYTICS_DB.prepare(`
+      INSERT INTO daily_metrics (day, event, tool, count)
+      VALUES (?, 'country_session', ?, 1)
+      ON CONFLICT(day, event, tool)
+      DO UPDATE SET count = count + 1
+    `).bind(tokyoDay(), countryCode).run();
+  }
 
   return new Response(null, { status: 204 });
 }
