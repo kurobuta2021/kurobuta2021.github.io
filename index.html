@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260926-contact-flow" />
+    <link rel="stylesheet" href="./styles.css?v=20260927-restrained-contact" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -228,12 +228,13 @@
             </div>
             <div class="contact-paths">
               <button class="contact-path travel-path" type="button" data-contact-path="travel">
-                <span class="path-icon">✈</span><span><strong>来日本玩，有事找黑豚</strong><small>一日游／包车、机场接送、多日行程规划</small></span><b>›</b>
+                <span class="path-icon">⛩️</span><span><strong>来日本玩，需要服务</strong><small>包车接送・行程规划・预约协助</small></span><b>›</b>
               </button>
               <button class="contact-path other-path" type="button" data-contact-path="other">
-                <span class="path-icon">💬</span><span><strong>还有别的事？也可以找黑豚</strong><small>日本相关的其他事情，可以来聊聊</small></span><b>›</b>
+                <span class="path-icon">🏠</span><span><strong>其他日本相关事情</strong><small>生活、合作或其他问题</small></span><b>›</b>
               </button>
             </div>
+            <a class="contact-trust-link" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener">第一次认识黑豚？先了解一下 <span>›</span></a>
           </section>
 
           <section class="contact-step" data-contact-step="travel" aria-labelledby="travelInquiryTitle" hidden>
@@ -244,25 +245,25 @@
             </div>
             <form id="contactForm" class="travel-inquiry-form">
               <fieldset>
-                <legend><i>1</i><span>你主要想找我做什么？<small>可多选</small></span></legend>
+                <legend><i>1</i><span>主要需要什么？<small>可多选</small></span></legend>
                 <div class="travel-choice-grid service-choices">
                   <label><input type="checkbox" name="service" value="一日游／包车" /><span><b>🚗</b><strong>一日游／包车</strong></span></label>
                   <label><input type="checkbox" name="service" value="机场接送" /><span><b>✈️</b><strong>机场接送</strong></span></label>
-                  <label><input type="checkbox" name="service" value="多日行程规划" /><span><b>🗺</b><strong>多日行程规划</strong></span></label>
-                  <label><input type="checkbox" name="service" value="还没想好，先聊聊" /><span><b>💬</b><strong>还没想好<br />先聊聊</strong></span></label>
+                  <label><input type="checkbox" name="service" value="行程规划" /><span><b>⌖</b><strong>行程规划</strong></span></label>
+                  <label><input type="checkbox" name="service" value="预约协助" /><span><b>▣</b><strong>预约协助</strong></span></label>
+                  <label><input type="checkbox" name="service" value="还没想好" /><span><b>💬</b><strong>还没想好</strong></span></label>
                 </div>
               </fieldset>
               <fieldset>
                 <legend><i>2</i><span>大概什么时候来？</span></legend>
                 <div class="travel-choice-grid timing-choices">
                   <label><input type="radio" name="timing" value="已经在日本" /><span><b>📅</b><strong>已经在日本</strong></span></label>
-                  <label><input type="radio" name="timing" value="1个月内" /><span><b>👥</b><strong>1个月内</strong></span></label>
-                  <label><input type="radio" name="timing" value="1–3个月" /><span><b>✈️</b><strong>1–3个月</strong></span></label>
+                  <label><input type="radio" name="timing" value="1个月内" /><span><b>◷</b><strong>1个月内</strong></span></label>
+                  <label><input type="radio" name="timing" value="1–3个月" /><span><b>▣</b><strong>1–3个月</strong></span></label>
                   <label><input type="radio" name="timing" value="还没确定" /><span><b>?</b><strong>还没确定</strong></span></label>
                 </div>
               </fieldset>
-              <div class="travel-form-note"><span>简单选一下就好～</span><small>更详细的情况，加我后再聊！</small></div>
-              <button class="contact-submit" type="submit">找黑豚聊聊 <span>→</span></button>
+              <button class="contact-submit" type="submit">下一步，联系黑豚 <span>→</span></button>
             </form>
           </section>
 
@@ -359,9 +360,9 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260926-contact-flow"></script>
+    <script src="./i18n.js?v=20260927-restrained-contact"></script>
     <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260926-contact-flow"></script>
+    <script src="./app.js?v=20260927-restrained-contact"></script>
     <!-- Cloudflare Web Analytics -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"a0769e29268642d39d16b180d6912d89"}'></script>
     <!-- End Cloudflare Web Analytics -->
