@@ -8,6 +8,26 @@
   const ANALYTICS_HOST = "heitun.pages.dev";
   const shareUtils = window.HeituShareUtils;
   let deferredInstallPrompt = null;
+  const CONTACT_QR = {
+    wechat: {
+      title: "微信群二维码",
+      src: "./wechat-group-qr.jpg",
+      alt: "微信群二维码",
+      hint: "使用微信扫码进群；二维码失效时，请复制微信号联系。"
+    },
+    line: {
+      title: "LINE 联系二维码",
+      src: "./line-contact-qr.jpg",
+      alt: "LINE 联系二维码",
+      hint: "使用 LINE 扫码添加，LINE ID：648627464。"
+    },
+    whatsapp: {
+      title: "WhatsApp 联系二维码",
+      src: "./whatsapp-contact-qr.jpg",
+      alt: "WhatsApp 联系二维码",
+      hint: "使用 WhatsApp 扫码添加；用户名：@kurobutajapan。"
+    }
+  };
   const SOURCES = {
     smoking: {
       title: "附近合法吸烟点",
@@ -124,6 +144,7 @@
     toast: document.querySelector("#toast"),
     cityDialog: document.querySelector("#cityDialog"),
     comingDialog: document.querySelector("#comingDialog"),
+    contactQrDialog: document.querySelector("#contactQrDialog"),
     mapChoiceDialog: document.querySelector("#mapChoiceDialog"),
     waybackNavDialog: document.querySelector("#waybackNavDialog"),
     saveSiteDialog: document.querySelector("#saveSiteDialog"),
@@ -145,6 +166,19 @@
     waybackCount: document.querySelector("#waybackCount"),
     contactForm: document.querySelector("#contactForm")
   };
+
+  function openContactQr(kind) {
+    const qr = CONTACT_QR[kind];
+    if (!qr || !els.contactQrDialog) return;
+    const title = document.querySelector("#contactQrTitle");
+    const image = document.querySelector("#contactQrImage");
+    const hint = document.querySelector("#contactQrHint");
+    title.textContent = qr.title;
+    image.src = qr.src;
+    image.alt = qr.alt;
+    hint.textContent = qr.hint;
+    els.contactQrDialog.showModal();
+  }
 
   function recordMetric(event, tool = "site") {
     if (location.hostname !== ANALYTICS_HOST) return;
@@ -1271,6 +1305,8 @@
   });
   document.querySelector("#copyInquiry").addEventListener("click", () => copyText(buildInquiry(), "咨询内容已复制，可粘贴到微信"));
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
+  document.querySelectorAll("[data-copy-whatsapp]").forEach(button => button.addEventListener("click", () => copyText("@kurobutajapan", "WhatsApp 用户名已复制：@kurobutajapan")));
+  document.querySelectorAll("[data-contact-qr]").forEach(button => button.addEventListener("click", () => openContactQr(button.dataset.contactQr)));
   document.querySelectorAll("[data-copy-email]").forEach(button => button.addEventListener("click", () => copyText("kurobuta2021@gmail.com", "邮箱已复制：kurobuta2021@gmail.com")));
   document.querySelector("#relocateToilets").addEventListener("click", startToiletLocator);
   document.querySelector("#searchMapArea").addEventListener("click", () => {

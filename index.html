@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260927-profile-link" />
+    <link rel="stylesheet" href="./styles.css?v=20260929-contact-channels" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -272,16 +272,17 @@
             </div>
             <section class="recommended-contact" aria-label="微信联系方式">
               <div class="recommended-label">推荐</div>
-              <div class="wechat-main-row"><span class="channel-icon wechat-icon">微</span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><button type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button></div>
-              <div class="wechat-qr-row"><img src="./wechat-group-qr.jpg" alt="黑豚微信群二维码" /><span><strong>微信群二维码</strong><small>扫码进群；二维码失效时，可复制上方微信号联系。</small></span></div>
+              <div class="wechat-main-row"><span class="channel-icon wechat-icon">微</span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">查看二维码</button></span></div>
             </section>
+            <div class="contact-channel messaging-channel line-channel"><span class="channel-icon line-icon">LINE</span><span><strong>LINE 咨询</strong><small>LINE ID：648627464</small><em>台湾、日本用户推荐</em></span><span class="channel-actions"><a href="https://line.me/ti/p/~648627464" target="_blank" rel="noopener" data-contact-channel="line-open">打开 LINE</a><button type="button" data-contact-qr="line" data-contact-channel="line-qr">查看二维码</button></span></div>
+            <div class="contact-channel messaging-channel whatsapp-channel"><span class="channel-icon whatsapp-icon">WA</span><span><strong>WhatsApp 咨询</strong><small>用户名：@kurobutajapan</small><em>马来西亚、新加坡用户推荐</em></span><span class="channel-actions"><button class="primary-action" type="button" data-copy-whatsapp data-contact-channel="whatsapp-copy">复制用户名</button><button type="button" data-contact-qr="whatsapp" data-contact-channel="whatsapp-qr">查看二维码</button></span></div>
             <div class="contact-channel email-channel email-contact-standalone"><span class="channel-icon email-icon">✉</span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
             <div class="contact-channel-list" aria-label="其他联系方式">
-              <a class="contact-channel" href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu"><span class="channel-icon xhs-icon">RED</span><span><strong>小红书</strong><small>打开我的小红书主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin"><span class="channel-icon douyin-icon">♪</span><span><strong>抖音</strong><small>打开我的抖音主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili"><span class="channel-icon bili-icon">B</span><span><strong>B站</strong><small>打开我的B站主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube"><span class="channel-icon youtube-icon">▶</span><span><strong>YouTube</strong><small>打开我的YouTube频道</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok"><span class="channel-icon tiktok-icon">♪</span><span><strong>TikTok</strong><small>打开我的TikTok主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu"><span class="channel-icon xhs-icon">RED</span><span><strong>黑豚的小红书</strong><small>打开我的小红书主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin"><span class="channel-icon douyin-icon">♪</span><span><strong>黑豚的抖音</strong><small>打开我的抖音主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili"><span class="channel-icon bili-icon">B</span><span><strong>黑豚的B站</strong><small>打开我的B站主页</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube"><span class="channel-icon youtube-icon">▶</span><span><strong>黑豚的YouTube</strong><small>打开我的YouTube频道</small></span><b>›</b></a>
+              <a class="contact-channel" href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok"><span class="channel-icon tiktok-icon">♪</span><span><strong>黑豚的TikTok</strong><small>打开我的TikTok主页</small></span><b>›</b></a>
             </div>
           </section>
         </section>
@@ -300,6 +301,14 @@
       </div></form>
     </dialog>
     <dialog id="comingDialog" class="app-dialog compact-dialog"><form method="dialog"><div class="coming-icon">🐽</div><h2 id="comingTitle">正在整理</h2><p>这个工具还在筛选可靠来源。先不放不确定的链接，整理好再上线。</p><button class="dialog-primary" value="default">知道了</button></form></dialog>
+    <dialog id="contactQrDialog" class="app-dialog contact-qr-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">SCAN TO CONNECT</p><h2 id="contactQrTitle">联系方式二维码</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="contact-qr-frame"><img id="contactQrImage" src="./wechat-group-qr.jpg" alt="联系方式二维码" /></div>
+        <p id="contactQrHint" class="contact-qr-hint">请使用对应应用扫码。</p>
+        <button class="dialog-primary" value="default">知道了</button>
+      </form>
+    </dialog>
     <dialog id="mapChoiceDialog" class="app-dialog map-choice-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">CHOOSE YOUR MAP</p><h2 id="mapChoiceTitle">用哪个地图打开？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
@@ -354,8 +363,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260927-profile-link"></script>
+    <script src="./i18n.js?v=20260929-contact-channels"></script>
     <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260927-profile-link"></script>
+    <script src="./app.js?v=20260929-contact-channels"></script>
   </body>
 </html>
