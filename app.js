@@ -72,6 +72,64 @@
           url: "https://app.otabis.jp/"
         }
       ]
+    },
+    freebus: {
+      title: "东京站免费巡回巴士",
+      emoji: "🚌",
+      intro: "不是全东京免费：只跑东京站丸之内、日本桥一带，按你想去的区域选线路",
+      phrase: "directions",
+      summary: ["免费乘坐", "不用车票・Suica", "官网可看车辆位置"],
+      note: "运营时间与到站时间可能因日期、活动和路况变化，出发前请以线路官网的实时信息为准。",
+      items: [
+        {
+          id: "marunouchi",
+          name: "去丸之内・大手町・日比谷",
+          trust: "东京站西侧",
+          description: "选「丸之内 Shuttle」。平日通常 10:00–19:00，周末及节假日 11:00–18:00，约 15–25 分钟一班。",
+          schedule: "平日 10:00–19:00｜周末及节假日 11:00–18:00｜15–25分钟一班",
+          badges: ["丸之内 Shuttle", "一圈约35–40分钟", "无需预约"],
+          action: "看官方路线与实时车辆 ↗",
+          url: "https://www.hinomaru-bus.co.jp/free-shuttle/marunouchi/",
+          stops: [
+            ["新丸大厦", "新丸ビル", 35.6825, 139.7647222], ["大手町塔", "大手町タワー", 35.6853056, 139.7657778], ["东京产经大楼", "東京サンケイビル", 35.6868611, 139.7661111], ["镰仓桥・大手町Gate大楼", "鎌倉河岸・大手町ゲートビル", 35.689349, 139.766748],
+            ["三井物产", "三井物産", 35.6882778, 139.7625278], ["日经大楼", "日経ビル", 35.6886944, 139.7621111], ["经团联会馆・JA大楼", "経団連会館・JAビル", 35.6883889, 139.7627778], ["读卖新闻", "読売新聞", 35.688389, 139.7601971],
+            ["三井住友银行", "三井住友銀行", 35.687313, 139.7613721], ["邮船大楼", "郵船ビル", 35.6816389, 139.76225], ["明治安田Village・静嘉堂", "明治安田ヴィレッジ・静嘉堂", 35.681625, 139.7596631], ["东京会馆", "東京會舘", 35.6775833, 139.7608056],
+            ["第一生命", "第一生命", 35.6757778, 139.7601667], ["日比谷", "日比谷", 35.6743889, 139.7605556], ["新国际大楼", "新国際ビル", 35.6744, 139.7579691], ["三菱大楼", "三菱ビル", 35.67975, 139.7638889]
+          ]
+        },
+        {
+          id: "nihonbashi",
+          name: "去日本桥・京桥・八重洲",
+          trust: "东京站东侧",
+          description: "选「Metro Link 日本桥」。每天通常 11:00–19:00，约 15–25 分钟一班。",
+          schedule: "每天 11:00–19:00｜15–25分钟一班",
+          badges: ["日本桥线", "一圈约40分钟", "无需预约"],
+          action: "看官方路线与实时车辆 ↗",
+          url: "https://www.hinomaru-bus.co.jp/free-shuttle/nihonbashi/",
+          stops: [
+            ["东京站八重洲口", "東京駅八重洲口", 35.6830278, 139.7705], ["吴服桥", "呉服橋", 35.6833056, 139.7719167], ["地铁日本桥站", "地下鉄日本橋駅", 35.6831389, 139.7738611], ["地铁三越前站", "地下鉄三越前駅", 35.6850556, 139.77425],
+            ["三井纪念美术馆", "三井記念美術館", 35.6869444, 139.7733333], ["新日本桥站", "新日本橋駅", 35.6883333, 139.7733333], ["日本桥室町1丁目", "日本橋室町１丁目", 35.6865, 139.7740556], ["日本桥南端", "日本橋南詰", 35.6832222, 139.7742778],
+            ["日本桥高岛屋", "日本橋高島屋", 35.6808333, 139.7727778], ["日本桥3丁目", "日本橋３丁目", 35.68, 139.7722222], ["地铁宝町站", "地下鉄宝町駅", 35.68, 139.7696473], ["京桥2丁目", "京橋２丁目", 35.6769444, 139.77],
+            ["京桥1丁目", "京橋１丁目", 35.6786111, 139.7711111], ["八重洲地下街", "ヤエチカ", 35.6794722, 139.7707222]
+          ]
+        },
+        {
+          id: "nihonbashi-eline",
+          name: "去人形町・滨町・兜町",
+          trust: "范围更远",
+          description: "选「Metro Link 日本桥 E线」。每天通常 11:00–18:00，约 25–28 分钟一班。",
+          schedule: "每天 11:00–18:00｜25–28分钟一班",
+          badges: ["日本桥 E线", "人形町・滨町", "无需预约"],
+          action: "看官方路线与实时车辆 ↗",
+          url: "https://www.hinomaru-bus.co.jp/free-shuttle/nihonbashi_eline/",
+          stops: [
+            ["东京站八重洲口", "東京駅八重洲口", 35.6830278, 139.7705], ["地铁三越前站", "地下鉄三越前駅", 35.6850556, 139.77425], ["日本桥室町1丁目", "日本橋室町１丁目", 35.6865, 139.7740556], ["堀留町", "堀留町", 35.6880556, 139.7798056],
+            ["富泽町", "富沢町", 35.6896667, 139.7825278], ["滨町2丁目・明治座前", "浜町２丁目明治座前", 35.6879167, 139.7866389], ["滨町3丁目・Tornare前", "浜町３丁目トルナーレ前", 35.6851667, 139.7875833], ["地铁水天宫前站", "地下鉄水天宮前駅", 35.6821111, 139.78625],
+            ["东京城市航空总站", "東京シティエアターミナル", 35.6816111, 139.7872778], ["人形町1丁目", "人形町１丁目", 35.6844722, 139.7823889], ["茅场町・兜町东证前", "茅場町・兜町東証前", 35.6818333, 139.77925], ["日本桥高岛屋", "日本橋高島屋", 35.6808333, 139.7727778],
+            ["八重洲地下街", "ヤエチカ", 35.6794722, 139.7707222]
+          ]
+        }
+      ]
     }
   };
 
@@ -130,6 +188,7 @@
     activeWaybackPlace: null,
     sharedPlace: shareUtils?.sharedPlaceFromUrl(location.href) || null,
     city: localStorage.getItem(CITY_KEY) || "东京",
+    activeBusRoute: "marunouchi",
     toiletMap: null,
     toiletUserMarker: null,
     toiletMarkers: [],
@@ -153,6 +212,11 @@
     sourceTitle: document.querySelector("#sourceTitle"),
     sourceIntro: document.querySelector("#sourceIntro"),
     sourceEmoji: document.querySelector("#sourceEmoji"),
+    sourceSummary: document.querySelector("#sourceSummary"),
+    sourceNote: document.querySelector("#sourceNote"),
+    sourceHow: document.querySelector("#sourceHow"),
+    sourceAssistant: document.querySelector("#sourceAssistant"),
+    sourceJapanese: document.querySelector("#sourceJapanese"),
     destinationInput: document.querySelector("#destinationInput"),
     detectedCard: document.querySelector("#detectedCard"),
     detectedText: document.querySelector("#detectedText"),
@@ -578,15 +642,81 @@
     els.sourceTitle.textContent = group.title;
     els.sourceIntro.textContent = group.intro;
     els.sourceEmoji.textContent = group.emoji;
-    els.sourceEmoji.style.background = state.category === "smoking" ? "#f5dfbc" : "#dceaf7";
-    els.sourceList.innerHTML = group.items.map(item => `
+    els.sourceEmoji.style.background = state.category === "smoking" ? "#f5dfbc" : state.category === "freebus" ? "#ffe6c7" : "#dceaf7";
+    els.sourceSummary.hidden = !group.summary;
+    els.sourceSummary.innerHTML = group.summary ? group.summary.map(item => `<span>✓ ${escapeHtml(item)}</span>`).join("") : "";
+    els.sourceNote.hidden = !group.note;
+    els.sourceNote.textContent = group.note || "";
+    const showHelper = state.category !== "freebus";
+    els.sourceHow.hidden = !showHelper;
+    els.sourceAssistant.hidden = !showHelper;
+    els.sourceJapanese.hidden = !showHelper;
+    els.sourceList.innerHTML = state.category === "freebus" ? renderBusRoutes(group.items) : group.items.map(item => `
       <article class="source-card">
         <div class="source-top"><h2>${escapeHtml(item.name)}</h2><span>${escapeHtml(item.trust)}</span></div>
         <p>${escapeHtml(item.description)}</p>
         <div class="badge-row">${item.badges.map(badge => `<span>${escapeHtml(badge)}</span>`).join("")}</div>
-        <a class="source-open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">直接打开地图 ↗</a>
+        <a class="source-open" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.action || "直接打开地图 ↗")}</a>
       </article>
     `).join("");
+  }
+
+  function renderBusRoutes(routes) {
+    return routes.map(route => {
+      const open = route.id === state.activeBusRoute;
+      const split = Math.ceil(route.stops.length / 2);
+      const left = route.stops.slice(0, split);
+      const right = route.stops.slice(split).reverse();
+      const stopHtml = (stop, index, side) => {
+        const number = side === "left" ? index + 1 : route.stops.length - index;
+        return `<div class="bus-stop ${number === 1 || number === route.stops.length ? "featured" : ""}"><i></i><span><strong>${String(number).padStart(2, "0")} ${escapeHtml(stop[0])}</strong><small lang="ja">${escapeHtml(stop[1])}</small></span></div>`;
+      };
+      return `
+        <article class="bus-route-card ${open ? "open" : ""}">
+          <button class="bus-route-heading" type="button" data-route-toggle="${escapeHtml(route.id)}" aria-expanded="${open}">
+            <span><strong>${escapeHtml(route.name)}</strong><small>${escapeHtml(route.badges[0])} · ${escapeHtml(route.badges[1])}</small></span>
+            <em>${escapeHtml(route.trust)}</em><b>${open ? "⌃" : "⌄"}</b>
+          </button>
+          <div class="bus-route-detail" ${open ? "" : "hidden"}>
+            <p class="bus-schedule">🕒 ${escapeHtml(route.schedule)}</p>
+            <button class="bus-map-toggle" type="button" data-route-toggle="${escapeHtml(route.id)}">线路图已展开　⌃</button>
+            <section class="bus-loop-map" aria-label="${escapeHtml(route.name)}站点线路图">
+              <div class="bus-map-head"><strong>全线 ${route.stops.length} 站</strong><span>保留官方日文站名，方便搜索</span></div>
+              <div class="bus-loop"><div class="bus-stops">${left.map((stop, index) => stopHtml(stop, index, "left")).join("")}</div><div class="bus-stops right">${right.map((stop, index) => stopHtml(stop, index, "right")).join("")}</div></div>
+              <div class="bus-direction"><span>↓ 行驶方向</span><span>行驶方向 ↑</span></div>
+            </section>
+            <section class="bus-boarding"><strong>不知道去哪个站上车？</strong><p>定位后显示离你最近的3个站，再用手机地图步行过去。</p><button class="bus-nearest" type="button" data-bus-nearest="${escapeHtml(route.id)}">⌖ 定位离我最近的上车点</button><div class="bus-nearest-results" data-bus-results="${escapeHtml(route.id)}" hidden></div></section>
+            <p class="bus-official-note">线路、站点和实时位置可能临时调整，请优先查看官网。</p>
+            <div class="bus-route-actions"><a class="bus-live-link" href="${escapeHtml(route.url)}#realtime" target="_blank" rel="noopener">🚌 查询车辆实时位置</a><a class="bus-official-link" href="${escapeHtml(route.url)}" target="_blank" rel="noopener">官方完整路线与运行信息</a></div>
+          </div>
+        </article>`;
+    }).join("");
+  }
+
+  function locateNearestBusStops(routeId, button) {
+    const route = SOURCES.freebus.items.find(item => item.id === routeId);
+    const results = document.querySelector(`[data-bus-results="${routeId}"]`);
+    if (!route || !results) return;
+    if (!navigator.geolocation) {
+      results.hidden = false;
+      results.innerHTML = "<p>这台设备不支持定位，请直接打开官方路线查看上车点。</p>";
+      return;
+    }
+    button.disabled = true;
+    button.textContent = "正在定位…";
+    navigator.geolocation.getCurrentPosition(position => {
+      const current = { lat: position.coords.latitude, lng: position.coords.longitude };
+      const nearest = route.stops.map((stop, index) => ({ stop, index, distance: distanceMeters(current, { lat: stop[2], lng: stop[3] }) })).sort((a, b) => a.distance - b.distance).slice(0, 3);
+      results.hidden = false;
+      results.innerHTML = `<strong>离你最近的上车点</strong>${nearest.map(({ stop, index, distance }) => `<button type="button" data-bus-stop-nav="${routeId}" data-bus-stop-index="${index}"><span><b>${escapeHtml(stop[0])}</b><small lang="ja">${escapeHtml(stop[1])}</small></span><em>${distance < 1000 ? `${Math.round(distance)}米` : `${(distance / 1000).toFixed(1)}公里`}　去这里 ›</em></button>`).join("")}<p>距离为直线估算；实际步行路线请以地图软件为准。</p>`;
+      button.disabled = false;
+      button.textContent = "⌖ 重新定位附近上车点";
+    }, () => {
+      results.hidden = false;
+      results.innerHTML = "<p>没有取得位置。请开启浏览器定位权限后重试。</p>";
+      button.disabled = false;
+      button.textContent = "⌖ 再试一次";
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
   }
 
   function extractCoordinates(text) {
@@ -1169,6 +1299,24 @@
       const query = mapSearchButton.dataset.mapQuery;
       const label = mapSearchButton.dataset.mapLabel || query;
       showMapChoice(query, label);
+      return;
+    }
+    const busRouteToggle = event.target.closest("[data-route-toggle]");
+    if (busRouteToggle) {
+      state.activeBusRoute = state.activeBusRoute === busRouteToggle.dataset.routeToggle ? "" : busRouteToggle.dataset.routeToggle;
+      renderSources();
+      return;
+    }
+    const busNearest = event.target.closest("[data-bus-nearest]");
+    if (busNearest) {
+      locateNearestBusStops(busNearest.dataset.busNearest, busNearest);
+      return;
+    }
+    const busStopNav = event.target.closest("[data-bus-stop-nav]");
+    if (busStopNav) {
+      const route = SOURCES.freebus.items.find(item => item.id === busStopNav.dataset.busStopNav);
+      const stop = route?.stops[Number(busStopNav.dataset.busStopIndex)];
+      if (stop) showMapChoice(`${stop[1]} 無料巡回バス バス停`, `${stop[0]}上车点`, { intro: "选择手机里方便使用的地图，确认步行路线后再出发。", note: "站点可能临时调整，到达后请核对现场站牌和官网信息。" });
       return;
     }
     const externalButton = event.target.closest("[data-external]");
