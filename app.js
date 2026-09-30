@@ -204,6 +204,7 @@
     cityDialog: document.querySelector("#cityDialog"),
     comingDialog: document.querySelector("#comingDialog"),
     contactQrDialog: document.querySelector("#contactQrDialog"),
+    supplyChoiceDialog: document.querySelector("#supplyChoiceDialog"),
     mapChoiceDialog: document.querySelector("#mapChoiceDialog"),
     waybackNavDialog: document.querySelector("#waybackNavDialog"),
     saveSiteDialog: document.querySelector("#saveSiteDialog"),
@@ -1290,6 +1291,25 @@
         googleDescription: "日文搜索“釣具店” · 最方便 · 需要当地网络才能打开哦！",
         amapDescription: "搜索“渔具店” · 日本地点相对较少",
         note: "在日本找渔具店建议优先使用 Google 地图；搜不到时可换其他地图。"
+      });
+      return;
+    }
+
+    const supplyButton = event.target.closest("[data-supply-choice]");
+    if (supplyButton) {
+      els.supplyChoiceDialog.showModal();
+      return;
+    }
+    const supplyOption = event.target.closest("[data-supply-kind]");
+    if (supplyOption) {
+      const supermarket = supplyOption.dataset.supplyKind === "supermarket";
+      els.supplyChoiceDialog.close();
+      showMapChoice(supermarket ? "スーパーマーケット" : "コンビニ", supermarket ? "附近超市" : "附近便利店", {
+        intro: supermarket ? "用日文“スーパーマーケット”搜索附近超市，适合买熟食、便当和日常用品。" : "用日文“コンビニ”搜索附近便利店，适合临时补给、ATM和营业时间较晚时使用。",
+        googleDescription: supermarket ? "日文搜索“スーパーマーケット” · 地点更完整 · 需要当地网络才能打开哦！" : "日文搜索“コンビニ” · 地点更完整 · 需要当地网络才能打开哦！",
+        amapQuery: supermarket ? "超市" : "便利店",
+        amapDescription: supermarket ? "搜索“超市” · 日本地点可能较少" : "搜索“便利店” · 日本地点可能较少",
+        note: supermarket ? "营业时间和休息日可能变化；傍晚以后部分熟食会有折扣。" : "营业时间以地图和店铺现场为准；部分门店并非24小时营业。"
       });
       return;
     }

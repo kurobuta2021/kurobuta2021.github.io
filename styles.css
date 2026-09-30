@@ -374,6 +374,18 @@ main { min-height: calc(100dvh - 66px); }
 .compact-dialog p { color: var(--muted); font-size: .78rem; }
 .coming-icon { font-size: 2.5rem; }
 .dialog-primary { width: 100%; padding: 12px; border: 0; border-radius: 11px; background: var(--ink); color: #fff; font-weight: 850; cursor: pointer; }
+.supply-choice-dialog { padding: 21px; }
+.supply-choice-intro { margin: 10px 0 15px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .76rem; line-height: 1.55; }
+.supply-choice-grid { display: grid; gap: 10px; }
+.supply-choice { position: relative; min-height: 96px; display: grid; grid-template-columns: 52px minmax(0,1fr) auto; grid-template-rows: auto auto; align-items: center; column-gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 18px; color: var(--ink); text-align: left; box-shadow: 0 6px 16px rgba(51,41,31,.06); cursor: pointer; }
+.supply-choice > span { grid-row: 1 / 3; width: 50px; height: 50px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,255,255,.76); font-size: 1.6rem; }
+.supply-choice strong { align-self: end; font-size: .98rem; }
+.supply-choice small { align-self: start; color: #6f675f; font-family: "PingFang SC", sans-serif; font-size: .67rem; line-height: 1.45; }
+.supply-choice b { grid-column: 3; grid-row: 1 / 3; padding: 6px 9px; border-radius: 999px; background: rgba(255,255,255,.82); font-size: .63rem; white-space: nowrap; }
+.supply-choice.convenience { border-color: #efc2bd; background: linear-gradient(135deg,#fff5f3,#ffe0dc); }
+.supply-choice.convenience b { color: #bd554e; }
+.supply-choice.supermarket { border-color: #badbca; background: linear-gradient(135deg,#f3fff8,#daf2e4); }
+.supply-choice.supermarket b { color: #367c55; }
 .map-choice-dialog { padding: 21px; }
 .map-choice-intro { margin: 10px 0 15px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .76rem; }
 .map-choice-grid { display: grid; gap: 9px; }

@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260929-free-bus-routes-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260930-supply-choice" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -69,8 +69,8 @@
                 <img class="tool-illustration" src="./assets/card-onsen.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
-              <button class="tool-card convenience-card" type="button" data-map-query="コンビニ" data-map-label="附近便利店" data-tool-id="convenience">
-                <span class="tool-copy"><strong>便利一下</strong><small>找附近便利店，<br />补给不发愁。</small></span>
+              <button class="tool-card convenience-card" type="button" data-supply-choice data-tool-id="convenience">
+                <span class="tool-copy"><strong>便利一下</strong><small>便利店・超市，<br />马上找附近。</small></span>
                 <img class="tool-illustration" src="./assets/card-convenience.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
@@ -312,6 +312,16 @@
         <button class="dialog-primary" value="default">知道了</button>
       </form>
     </dialog>
+    <dialog id="supplyChoiceDialog" class="app-dialog supply-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">NEARBY SHOPPING</p><h2>现在想买什么？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="supply-choice-intro">便利店适合临时补给，超市更适合买熟食和日常用品。</p>
+        <div class="supply-choice-grid">
+          <button class="supply-choice convenience" type="button" data-supply-kind="convenience" data-tool-id="convenience-store"><span>🏪</span><strong>附近便利店</strong><small>饮料・饭团・ATM<br />营业时间通常更长</small><b>马上找</b></button>
+          <button class="supply-choice supermarket" type="button" data-supply-kind="supermarket" data-tool-id="supermarket"><span>🛒</span><strong>附近超市</strong><small>熟食・便当・日常采购<br />选择更多，通常更划算</small><b>马上找</b></button>
+        </div>
+      </form>
+    </dialog>
     <dialog id="mapChoiceDialog" class="app-dialog map-choice-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">CHOOSE YOUR MAP</p><h2 id="mapChoiceTitle">用哪个地图打开？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
@@ -366,8 +376,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260929-free-bus-routes-2"></script>
+    <script src="./i18n.js?v=20260930-supply-choice"></script>
     <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260929-free-bus-routes-2"></script>
+    <script src="./app.js?v=20260930-supply-choice"></script>
   </body>
 </html>
