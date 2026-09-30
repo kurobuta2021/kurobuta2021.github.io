@@ -313,6 +313,42 @@ main { min-height: calc(100dvh - 66px); }
 .empty-state p { margin: 0; color: var(--muted); font-size: .72rem; }
 .storage-note { color: var(--muted); font-size: .67rem; text-align: center; }
 
+.tun-preview-view { padding-bottom: 26px; }
+.tun-preview-heading { position: relative; min-height: 152px; overflow: hidden; margin-bottom: 15px; padding: 20px 18px; border: 1px solid #eadbc8; border-radius: 25px; background: radial-gradient(circle at 88% 6%,rgba(255,255,255,.9),transparent 88px),linear-gradient(145deg,#fff7e8,#f2e1cc); box-shadow: 0 9px 24px rgba(72,49,29,.07); }
+.tun-preview-heading > div { position: relative; z-index: 2; max-width: 68%; }
+.tun-preview-heading h1 { margin: 3px 0 6px; font-family: "Hannotate SC", "STKaiti", "KaiTi", serif; font-size: 2.35rem; line-height: 1.06; }
+.tun-preview-heading p:last-child { line-height: 1.55; }
+.tun-preview-heading .heading-mascot { position: absolute; width: 126px; height: 126px; right: 2px; bottom: -9px; filter: drop-shadow(0 8px 11px rgba(65,43,25,.12)); }
+.tun-coming { padding: 17px; border: 1px solid var(--line); border-radius: 23px; background: rgba(255,255,255,.7); box-shadow: 0 8px 23px rgba(55,43,30,.055); }
+.tun-coming-copy > span { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #2e463a; color: #fff; font-size: .62rem; font-weight: 900; }
+.tun-coming-copy h2 { margin: 10px 0 4px; font-size: 1.18rem; }
+.tun-coming-copy p { margin: 0 0 14px; color: var(--muted); font-size: .73rem; line-height: 1.55; }
+.tun-coming-grid { display: grid; gap: 12px; }
+.tun-coming-card { position: relative; overflow: hidden; padding: 16px; border: 1px solid transparent; border-radius: 20px; }
+.food-coming-card { border-color: #efd2aa; background: radial-gradient(circle at 102% -4%,rgba(255,255,255,.85),transparent 100px),linear-gradient(145deg,#fff6df,#f8e2bc); }
+.route-coming-card { border-color: #cbdedb; background: radial-gradient(circle at 102% -4%,rgba(255,255,255,.82),transparent 100px),linear-gradient(145deg,#eef8f5,#dcece7); }
+.tun-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tun-card-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,255,255,.8); font-size: 1.55rem; box-shadow: 0 5px 13px rgba(74,53,30,.07); }
+.tun-card-top em { padding: 5px 8px; border-radius: 999px; background: rgba(255,255,255,.76); color: #695a4c; font-size: .59rem; font-style: normal; font-weight: 900; }
+.tun-coming-card h3 { margin: 13px 0 5px; font-size: 1.04rem; }
+.tun-coming-card > p { min-height: 39px; margin: 0; color: #625e57; font-size: .72rem; line-height: 1.55; }
+.tun-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tun-tags span { padding: 5px 7px; border-radius: 8px; background: rgba(255,255,255,.7); color: #625950; font-size: .61rem; font-weight: 800; }
+.tun-coming-card > button { width: 100%; min-height: 46px; margin-top: 14px; border: 0; border-radius: 13px; color: #fff; font-size: .78rem; font-weight: 900; cursor: pointer; }
+.food-coming-card > button { background: #cc6643; box-shadow: 0 7px 15px rgba(169,79,49,.16); }
+.route-coming-card > button { background: #287567; box-shadow: 0 7px 15px rgba(34,101,89,.16); }
+.tun-coming-note { margin: 13px 3px 0; color: #766d64; font-size: .64rem; line-height: 1.55; text-align: center; }
+.saved-places-block { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.saved-places-block[hidden] { display: none !important; }
+.saved-places-heading { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin-bottom: 11px; }
+.saved-places-heading small { color: var(--muted); font-size: .56rem; font-weight: 850; letter-spacing: .08em; }
+.saved-places-heading h2 { margin: 2px 0 0; font-size: 1rem; }
+.saved-places-heading button { padding: 7px 9px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); font-size: .63rem; font-weight: 850; }
+
+@media (min-width: 720px) {
+  .tun-coming-grid { grid-template-columns: 1fr 1fr; }
+}
+
 .contact-heading { min-height: 150px; overflow: hidden; position: relative; display: flex; align-items: center; padding: 19px; border-radius: 23px; background: linear-gradient(135deg, #f0dec7, #dfe9dc); }
 .contact-heading > div { position: relative; z-index: 2; width: 72%; }
 .contact-heading h1 { font-size: 1.75rem; }

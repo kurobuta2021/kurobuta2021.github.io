@@ -813,10 +813,13 @@
   }
 
   function renderFavorites() {
+    const savedPlacesBlock = document.querySelector("#savedPlacesBlock");
     if (!state.favorites.length) {
-      els.favoriteList.innerHTML = `<div class="empty-state"><span>🐽</span><h2>还没有豚任何地点</h2><p>在导航助手里粘贴地点，再点“豚一下”。</p></div>`;
+      if (savedPlacesBlock) savedPlacesBlock.hidden = true;
+      els.favoriteList.innerHTML = "";
       return;
     }
+    if (savedPlacesBlock) savedPlacesBlock.hidden = false;
     els.favoriteList.innerHTML = state.favorites.map(item => {
       const destination = { raw: item.raw, label: item.label, coords: item.coords || null };
       const links = navLinks(destination);
@@ -1170,6 +1173,13 @@
     if (contactChannel) recordMetric("contact_channel_click", contactChannel.dataset.contactChannel);
     const contactIntro = event.target.closest("[data-contact-intro]");
     if (contactIntro) {
+      document.querySelector("#inquirySummary").hidden = true;
+      showContactStep("channels", "profile");
+      return;
+    }
+    const directContact = event.target.closest("[data-direct-contact]");
+    if (directContact) {
+      go("contact");
       document.querySelector("#inquirySummary").hidden = true;
       showContactStep("channels", "profile");
       return;
