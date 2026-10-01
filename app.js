@@ -1256,7 +1256,7 @@
             url: "https://www.spa.or.jp/search_f/",
             icon: "私",
             name: "找私汤／家庭浴池",
-            description: "私汤（貸切浴場）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
+            description: "私汤（貸切風呂／貸切温泉）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
             className: "private-bath"
           }
         ],

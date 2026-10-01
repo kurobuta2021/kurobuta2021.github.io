@@ -104,7 +104,7 @@
 
   const SAVE_GUIDES = {
     installed: { title: "随便O已经保存", heading: "已经保存到主屏幕", html: "以后直接点桌面上的随便O图标就能打开。", showInstall: false },
-    wechat: { title: "保存随便O", heading: "在微信里这样保存", html: "<ol><li>点右上角“…”菜单，选择收藏。</li><li>想放到手机桌面：选择“在浏览器打开”，再按系统浏览器的“添加到主屏幕”。</li></ol>", showInstall: false },
+    wechat: { title: "保存随便O", heading: "在微信里这样保存", html: "<ol><li>点微信右上角的“…”菜单，选择“收藏”。</li><li><strong>桌面图标更方便：</strong>想放到手机桌面随时查看，请选择“在默认浏览器打开”；如果没有这个选项，可以先复制网址，再用默认浏览器打开。进入浏览器后，点击“共享”，或打开浏览器菜单，再选择“添加到主屏幕”。以后就能像 App 一样随时点开。</li></ol>", showInstall: false },
     "ios-safari": { title: "保存随便O", heading: "添加到 iPhone 主屏幕", html: "<ol><li>点 Safari 底部的分享按钮。</li><li>向下找到“添加到主屏幕”。</li><li>点右上角“添加”。</li></ol>", showInstall: false },
     "ios-other": { title: "保存随便O", heading: "请先用 Safari 打开", html: "复制网址后用 Safari 打开，再点“分享 → 添加到主屏幕”。", showInstall: false },
     install: { title: "保存随便O", heading: "可以直接安装到手机", html: "点击下面的“添加到主屏幕”，以后像 App 一样从桌面打开。", showInstall: true },

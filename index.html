@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20260930-tun-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261001-help-stats-2" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -21,7 +21,7 @@
         <svg class="header-scene" viewBox="0 0 240 120" aria-hidden="true"><circle cx="205" cy="21" r="18" fill="#f7c8c0" opacity=".4"/><path d="m86 91 55-72 56 72H86Z" fill="#dcecf5"/><path d="m141 19 20 27-10-5-8 8-9-10-11 8 18-28Z" fill="#fff"/><path d="M79 93h140" stroke="#d9e5d7" stroke-width="17" stroke-linecap="round"/><path d="M181 51h42M186 58h32M190 59v37M214 59v37" stroke="#dc6046" stroke-width="7" stroke-linecap="round"/><path d="M184 44h36l5 7h-46l5-7Z" fill="#473c36"/><g fill="#efaaa2"><circle cx="211" cy="12" r="5"/><circle cx="225" cy="25" r="4"/><circle cx="196" cy="34" r="4"/></g></svg>
         <button class="brand" type="button" data-go="home" aria-label="回到首页">
           <span class="brand-mascot"><img src="./heitu-jun.png" alt="" /></span>
-          <span><strong>黑豚的日本旅行工具箱</strong><small>定位离你最近的厕所，吸烟区，便利店等，一个都别藏。</small></span>
+          <span><strong>黑豚的日本旅行工具箱</strong><small>定位离你最近的厕所、吸烟区、商超便利店等。</small></span>
         </button>
         <div class="header-controls">
           <button id="currentAreaButton" class="city-button" type="button" aria-label="定位当前地区">
@@ -208,6 +208,15 @@
 
           <section class="tun-coming" aria-labelledby="tunComingTitle">
             <div class="tun-coming-copy"><span>先透露一点</span><h2 id="tunComingTitle">黑豚正在准备这些</h2><p>内容还在踩点和整理，但现在已经可以先来问我。</p></div>
+            <article class="tun-help-card">
+              <div class="tun-help-main">
+                <div class="tun-help-top"><span class="tun-help-icon">🤝</span><em>现在可以联系</em></div>
+                <h3>找人帮忙</h3>
+                <p>在日本遇到事情搞不定？可以先问问。</p>
+                <div class="tun-help-tags"><span>陪同</span><span>跑腿儿</span><span>帮打电话</span><span>餐厅预约 / 改期</span></div>
+              </div>
+              <button type="button" data-direct-contact data-tool-id="help-request">联系黑豚 <span>›</span></button>
+            </article>
             <div class="tun-coming-grid">
               <article class="tun-coming-card food-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🍜</span><em>首批内容整理中</em></div>
@@ -220,11 +229,11 @@
               <article class="tun-coming-card route-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
                 <h3>个性化小众线路</h3>
-                <p>不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
+                <p>日本各地红叶路线、雪景、樱花线路。不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
                 <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询路线</button>
               </article>
             </div>
-            <p class="tun-coming-note">页面内容正在整理，美食建议和个性化用车路线现在也可以找黑豚咨询。</p>
+            <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
           </section>
 
           <section id="savedPlacesBlock" class="saved-places-block" aria-labelledby="savedPlacesTitle" hidden>
@@ -400,8 +409,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20260930-tun-release"></script>
-    <script src="./share-utils.js?v=20260924-ui1"></script>
-    <script src="./app.js?v=20260930-tun-release"></script>
+    <script src="./i18n.js?v=20261001-help-stats-2"></script>
+    <script src="./share-utils.js?v=20261001-help-stats-2"></script>
+    <script src="./app.js?v=20261001-help-stats-2"></script>
   </body>
 </html>

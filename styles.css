@@ -323,6 +323,18 @@ main { min-height: calc(100dvh - 66px); }
 .tun-coming-copy > span { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #2e463a; color: #fff; font-size: .62rem; font-weight: 900; }
 .tun-coming-copy h2 { margin: 10px 0 4px; font-size: 1.18rem; }
 .tun-coming-copy p { margin: 0 0 14px; color: var(--muted); font-size: .73rem; line-height: 1.55; }
+.tun-help-card { position: relative; overflow: hidden; margin-bottom: 12px; padding: 18px; border-radius: 21px; color: #fff; background: radial-gradient(circle at 94% 3%,rgba(255,255,255,.2),transparent 105px),linear-gradient(135deg,#263e38,#3f705f); box-shadow: 0 10px 22px rgba(35,70,57,.18); }
+.tun-help-card::after { content: "帮"; position: absolute; right: 13px; top: 1px; color: rgba(255,255,255,.065); font-family: "Hannotate SC", "STKaiti", "KaiTi", serif; font-size: 6.3rem; font-weight: 900; line-height: 1; transform: rotate(-7deg); pointer-events: none; }
+.tun-help-main { position: relative; z-index: 1; }
+.tun-help-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tun-help-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,255,255,.15); font-size: 1.55rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.tun-help-top em { padding: 5px 9px; border-radius: 999px; background: #f5d68d; color: #36443f; font-size: .6rem; font-style: normal; font-weight: 950; }
+.tun-help-card h3 { margin: 13px 0 5px; font-size: 1.16rem; }
+.tun-help-card p { margin: 0; color: rgba(255,255,255,.8); font-size: .74rem; line-height: 1.55; }
+.tun-help-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tun-help-tags span { padding: 5px 8px; border-radius: 8px; background: rgba(255,255,255,.11); color: rgba(255,255,255,.9); font-size: .61rem; font-weight: 800; }
+.tun-help-card > button { position: relative; z-index: 1; width: 100%; min-height: 47px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; border: 0; border-radius: 13px; background: #fff; color: #29483e; font-size: .8rem; font-weight: 950; cursor: pointer; box-shadow: 0 7px 16px rgba(19,44,35,.18); }
+.tun-help-card > button span { font-size: 1.18rem; line-height: 1; }
 .tun-coming-grid { display: grid; gap: 12px; }
 .tun-coming-card { position: relative; overflow: hidden; padding: 16px; border: 1px solid transparent; border-radius: 20px; }
 .food-coming-card { border-color: #efd2aa; background: radial-gradient(circle at 102% -4%,rgba(255,255,255,.85),transparent 100px),linear-gradient(145deg,#fff6df,#f8e2bc); }
