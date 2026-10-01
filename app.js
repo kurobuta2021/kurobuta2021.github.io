@@ -432,7 +432,7 @@
       url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
       name: "トイレマップ｜日本全国厕所地图",
-      description: "覆盖日本全国 · 可定位当前位置 · 第一推荐 · 需要当地网络才能打开哦！"
+      description: "还能忍一忍，我选个环境。覆盖日本全国 · 可定位当前位置 · 需要当地网络才能打开哦！"
     } : options.community;
     document.querySelector("#mapChoiceTitle").textContent = community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
     document.querySelector("#mapChoiceIntro").textContent = options.intro || (community
@@ -459,6 +459,7 @@
     `).join("");
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
+    document.querySelector("#mapChoiceApple small").textContent = options.appleDescription || "适合 iPhone";
     document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
     const amapLink = document.querySelector("#mapChoiceAmap");
     const amapQuery = options.amapQuery || query;
@@ -1238,11 +1239,13 @@
     if (toiletButton) {
       showMapChoice("公衆トイレ", "附近厕所", {
         community: true,
+        intro: "完全憋不住就直接用 Google 或 Apple 地图；还能忍一忍，再用全国厕所地图慢慢选环境。",
         amapCurrentLocation: true,
         amapQuery: "トイレ",
-        googleDescription: "日本地点较完整 · 第二推荐 · 需要当地网络才能打开哦！",
-        amapDescription: "中国手机更方便 · 日本厕所数据相对较少",
-        note: "厕所建议先看日本全国厕所地图，再试 Google 地图；搜不到时可换其他地图。"
+        googleDescription: "完全憋不住啦！日本地点较完整 · 需要当地网络才能打开哦！",
+        appleDescription: "完全憋不住啦！适合 iPhone",
+        amapDescription: "随缘，我控制得住，慢慢逛过去。中国手机更方便 · 日本厕所数据相对较少",
+        note: "地图点位和开放情况可能变化，请结合距离和现场标识选择。"
       });
       return;
     }

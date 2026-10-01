@@ -150,6 +150,8 @@
     "适合 iPhone": "Best for iPhone", "在日本建议优先使用 Google 地图；搜不到时可换其他地图。": "Google Maps is recommended in Japan. Try another map if no result appears.",
     "浏览器不支持定位": "Location is not supported", "正在定位…": "Locating…", "当前位置": "Current location", "已定位 · 地区未知": "Located · Area unknown", "定位失败 · 点此重试": "Location failed · Tap to retry",
     "覆盖日本全国 · 可定位当前位置 · 第一推荐 · 需要当地网络才能打开哦！": "Nationwide Japan · Location enabled · Top pick · Requires local internet access",
+    "完全憋不住啦！日本地点较完整 · 需要当地网络才能打开哦！": "Can't hold it any longer! Good Japan coverage · Requires local internet access", "完全憋不住啦！适合 iPhone": "Can't hold it any longer! Best for iPhone", "还能忍一忍，我选个环境。覆盖日本全国 · 可定位当前位置 · 需要当地网络才能打开哦！": "I can still wait and choose a better option. Nationwide Japan · Location enabled · Requires local internet access", "随缘，我控制得住，慢慢逛过去。中国手机更方便 · 日本厕所数据相对较少": "No rush—I can take my time. Convenient on Chinese phones · Fewer toilet listings in Japan",
+    "完全憋不住就直接用 Google 或 Apple 地图；还能忍一忍，再用全国厕所地图慢慢选环境。": "If you can't hold it, use Google or Apple Maps right away. If you can wait, use the nationwide toilet map to choose a better option.", "地图点位和开放情况可能变化，请结合距离和现场标识选择。": "Map locations and availability may change. Check the distance and on-site signs.",
     "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。": "Start with the nationwide toilet map, or search directly in your preferred map app.",
     "建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。": "Try the community map first, then Google Maps. Switch maps if needed.",
     "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！": "Good Japan coverage · Recommended · Requires local internet access", "中国手机更方便 · 日本地点可能较少": "Convenient on Chinese phones · Fewer Japan listings",
