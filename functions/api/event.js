@@ -59,6 +59,17 @@ export async function onRequestPost({ request, env }) {
       ON CONFLICT(day, event, tool)
       DO UPDATE SET count = count + 1
     `).bind(tokyoDay(), countryCode).run();
+
+    if (countryCode === "cn") {
+      const region = String(request.cf?.regionCode || "unknown").toLowerCase();
+      const regionCode = /^[a-z0-9-]{1,12}$/.test(region) ? region : "unknown";
+      await env.ANALYTICS_DB.prepare(`
+        INSERT INTO daily_metrics (day, event, tool, count)
+        VALUES (?, 'china_region_session', ?, 1)
+        ON CONFLICT(day, event, tool)
+        DO UPDATE SET count = count + 1
+      `).bind(tokyoDay(), regionCode).run();
+    }
   }
 
   return new Response(null, { status: 204 });
