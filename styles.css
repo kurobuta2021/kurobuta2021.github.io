@@ -1051,12 +1051,12 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .accent-spark { font-size: 1.15rem; }
   .primary-grid { gap: 7px; }
   .tool-card { height: 108px; min-height: 108px; padding: 10px 11px; border-radius: 18px; }
-  .tool-copy { width: 65%; gap: 2px; }
+  .tool-copy { width: 68%; gap: 2px; }
   .tool-card strong { font-size: clamp(.98rem, 4.3vw, 1.16rem); }
-  .tool-card small { font-size: clamp(.52rem, 2.15vw, .62rem); line-height: 1.28; }
-  .tool-illustration { right: -7%; bottom: -11%; width: 69%; height: 78%; }
+  .tool-card small { color: #38322d; font-size: clamp(.54rem, 2.25vw, .64rem); line-height: 1.27; font-weight: 700; text-shadow: 0 1px rgba(255,255,255,.72); }
+  .tool-illustration { right: -8%; bottom: -14%; width: 68%; height: 70%; }
   .wayback-feature-card .tool-illustration,
-  .tattoo-feature-card .tool-illustration { right: -10%; bottom: -10%; width: 76%; height: 81%; }
+  .tattoo-feature-card .tool-illustration { right: -11%; bottom: -13%; width: 73%; height: 72%; }
   .tool-card > b { left: 10px; bottom: 8px; width: 27px; height: 27px; font-size: 1.05rem; }
   .tattoo-callout { max-width: 105px; margin-top: 1px; padding: 3px 5px; font-size: clamp(.43rem, 1.75vw, .5rem); }
 }
