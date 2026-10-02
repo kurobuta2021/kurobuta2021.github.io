@@ -1025,3 +1025,36 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .mini-tool { min-height: 92px; grid-template-columns: 41px minmax(0,1fr); padding-left: 5px; }
   .mini-tool img { width: 43px; height: 50px; }
 }
+
+/* 首页首屏双列紧凑版：保留说明和插画，让六个主要功能进入手机首屏。 */
+@media screen {
+  .topbar { padding: 7px 10px 6px; }
+  .brand { min-height: 44px; gap: 7px; }
+  .brand-mascot { flex-basis: 43px; width: 43px; height: 43px; border-radius: 15px; }
+  .brand-mascot img { width: 59px; left: -8px; top: -4px; }
+  .brand strong { font-size: clamp(.8rem, 3.45vw, .96rem); }
+  .brand small { font-size: clamp(.44rem, 1.85vw, .54rem); }
+  .city-button, .language-picker { min-height: 32px; padding-inline: 7px; }
+  .city-button strong { max-width: 66px; font-size: .57rem; }
+  .language-picker > span { font-size: .48rem; }
+  .language-picker select { font-size: .54rem; }
+  .view[data-view="home"] { padding-top: 5px; }
+  .travel-hero { min-height: 88px; margin-bottom: 5px; border-radius: 18px; background-position: center -24px; }
+  .travel-hero-copy { top: 10%; }
+  .travel-hero-copy strong { font-size: clamp(.68rem, 2.85vw, .82rem); line-height: 1.2; }
+  .travel-hero-copy small { margin-top: 1px; padding: 2px 6px 3px; font-size: clamp(.61rem, 2.5vw, .71rem); }
+  .travel-hero-copy small::before { content: none; }
+  .quick-section .section-heading { margin: 0 3px 5px; }
+  .quick-section .section-heading h1 { font-size: clamp(1.14rem, 5.6vw, 1.52rem); line-height: 1.1; white-space: nowrap; }
+  .accent-spark { font-size: 1.15rem; }
+  .primary-grid { gap: 7px; }
+  .tool-card { height: 108px; min-height: 108px; padding: 10px 11px; border-radius: 18px; }
+  .tool-copy { width: 65%; gap: 2px; }
+  .tool-card strong { font-size: clamp(.98rem, 4.3vw, 1.16rem); }
+  .tool-card small { font-size: clamp(.52rem, 2.15vw, .62rem); line-height: 1.28; }
+  .tool-illustration { right: -7%; bottom: -11%; width: 69%; height: 78%; }
+  .wayback-feature-card .tool-illustration,
+  .tattoo-feature-card .tool-illustration { right: -10%; bottom: -10%; width: 76%; height: 81%; }
+  .tool-card > b { left: 10px; bottom: 8px; width: 27px; height: 27px; font-size: 1.05rem; }
+  .tattoo-callout { max-width: 105px; margin-top: 1px; padding: 3px 5px; font-size: clamp(.43rem, 1.75vw, .5rem); }
+}
