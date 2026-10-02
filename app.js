@@ -1315,15 +1315,33 @@
     }
     const supplyOption = event.target.closest("[data-supply-kind]");
     if (supplyOption) {
-      const supermarket = supplyOption.dataset.supplyKind === "supermarket";
+      const supplyChoices = {
+        convenience: {
+          query: "コンビニ", label: "附近便利店",
+          intro: "用日文“コンビニ”搜索附近便利店，适合临时补给、ATM和营业时间较晚时使用。",
+          googleDescription: "日文搜索“コンビニ” · 地点更完整 · 需要当地网络才能打开哦！",
+          amapQuery: "便利店", amapDescription: "搜索“便利店” · 日本地点可能较少",
+          note: "营业时间以地图和店铺现场为准；部分门店并非24小时营业。"
+        },
+        supermarket: {
+          query: "スーパーマーケット", label: "附近超市",
+          intro: "用日文“スーパーマーケット”搜索附近超市，适合买熟食、便当和日常用品。",
+          googleDescription: "日文搜索“スーパーマーケット” · 地点更完整 · 需要当地网络才能打开哦！",
+          amapQuery: "超市", amapDescription: "搜索“超市” · 日本地点可能较少",
+          note: "营业时间和休息日可能变化；傍晚以后部分熟食会有折扣。"
+        },
+        drugstore: {
+          query: "ドラッグストア", label: "附近药妆店",
+          intro: "用日文“ドラッグストア”搜索附近药妆店，可找药妆、护肤品和日用品。",
+          googleDescription: "日文搜索“ドラッグストア” · 查看附近收录的店铺 · 需要当地网络才能打开哦！",
+          amapQuery: "药妆店", amapDescription: "搜索“药妆店” · 日本地点可能较少",
+          note: "地图收录不一定完整；营业时间、库存和免税条件请以店铺现场为准。"
+        }
+      };
+      const choice = supplyChoices[supplyOption.dataset.supplyKind];
+      if (!choice) return;
       els.supplyChoiceDialog.close();
-      showMapChoice(supermarket ? "スーパーマーケット" : "コンビニ", supermarket ? "附近超市" : "附近便利店", {
-        intro: supermarket ? "用日文“スーパーマーケット”搜索附近超市，适合买熟食、便当和日常用品。" : "用日文“コンビニ”搜索附近便利店，适合临时补给、ATM和营业时间较晚时使用。",
-        googleDescription: supermarket ? "日文搜索“スーパーマーケット” · 地点更完整 · 需要当地网络才能打开哦！" : "日文搜索“コンビニ” · 地点更完整 · 需要当地网络才能打开哦！",
-        amapQuery: supermarket ? "超市" : "便利店",
-        amapDescription: supermarket ? "搜索“超市” · 日本地点可能较少" : "搜索“便利店” · 日本地点可能较少",
-        note: supermarket ? "营业时间和休息日可能变化；傍晚以后部分熟食会有折扣。" : "营业时间以地图和店铺现场为准；部分门店并非24小时营业。"
-      });
+      showMapChoice(choice.query, choice.label, choice);
       return;
     }
 
