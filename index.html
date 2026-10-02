@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261002-drugstore" />
+    <link rel="stylesheet" href="./styles.css?v=20261002-card-copy" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -50,33 +50,33 @@
             </div>
             <div class="primary-grid">
               <button class="tool-card toilet-card" type="button" data-toilet-choice data-tool-id="toilet">
-                <span class="tool-copy"><strong>随便O</strong><small>人有三急，附近厕所，<br />随便屙！</small></span>
+                <span class="tool-copy"><strong>随便O</strong><small>附近厕所<br />随便屙！</small></span>
                 <img class="tool-illustration" src="./assets/card-toilet.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
               <button class="tool-card smoking-card" type="button" data-category="smoking" data-tool-id="smoking">
-                <span class="tool-copy"><strong>来一根</strong><small>定位最近的吸烟点<br />吸烟有害健康。</small></span>
+                <span class="tool-copy"><strong>来一根</strong><small>合规吸烟区<br />吸烟有害健康。</small></span>
                 <img class="tool-illustration" src="./assets/card-smoking.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
-              <button class="tool-card wayback-feature-card" type="button" data-go="wayback" data-tool-id="wayback">
-                <span class="tool-copy"><strong>路痴救星</strong><small>不迷路，<br />一键定位出发位置，<br />一键导航返回。</small></span>
-                <img class="tool-illustration" src="./assets/card-lost.png" alt="" decoding="async" />
-                <b>›</b>
-              </button>
-              <button class="tool-card tattoo-feature-card" type="button" data-onsen-choice data-tool-id="onsen">
-                <span class="tool-copy"><strong>泡个温泉</strong><em class="tattoo-callout">有纹身？优先找私汤</em><small>附近日归温泉・私汤</small></span>
-                <img class="tool-illustration" src="./assets/card-onsen.png" alt="" decoding="async" />
-                <b>›</b>
-              </button>
               <button class="tool-card convenience-card" type="button" data-supply-choice data-tool-id="convenience">
-                <span class="tool-copy"><strong>便利一下</strong><small>便利店・超市<br />药妆店也能找</small></span>
+                <span class="tool-copy"><strong>便利一下</strong><small>药妆店・便利店<br />附近超市</small></span>
                 <img class="tool-illustration" src="./assets/card-convenience.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
+              <button class="tool-card tattoo-feature-card" type="button" data-onsen-choice data-tool-id="onsen">
+                <span class="tool-copy"><strong>泡个温泉</strong><em class="tattoo-callout">有纹身？先找私汤</em><small>附近日归温泉</small></span>
+                <img class="tool-illustration" src="./assets/card-onsen.png" alt="" decoding="async" />
+                <b>›</b>
+              </button>
               <button class="tool-card luggage-card" type="button" data-luggage-choice data-tool-id="luggage">
-                <span class="tool-copy"><strong>行李寄存</strong><small>按定位找离你最近的<br />行李寄存点。</small></span>
+                <span class="tool-copy"><strong>行李寄存</strong><small>附近寄存行李<br />轻松逛街</small></span>
                 <img class="tool-illustration" src="./assets/card-luggage.png" alt="" decoding="async" />
+                <b>›</b>
+              </button>
+              <button class="tool-card wayback-feature-card" type="button" data-go="wayback" data-tool-id="wayback">
+                <span class="tool-copy"><strong>路痴救星</strong><small>不迷路<br />定个位<br />导航返回</small></span>
+                <img class="tool-illustration" src="./assets/card-lost.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
             </div>
@@ -410,7 +410,7 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261002-drugstore"></script>
+    <script src="./i18n.js?v=20261002-card-copy"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
     <script src="./app.js?v=20261002-drugstore"></script>
   </body>
