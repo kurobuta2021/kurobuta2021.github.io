@@ -434,6 +434,8 @@ main { min-height: calc(100dvh - 66px); }
 .supply-choice.convenience b { color: #bd554e; }
 .supply-choice.supermarket { border-color: #badbca; background: linear-gradient(135deg,#f3fff8,#daf2e4); }
 .supply-choice.supermarket b { color: #367c55; }
+.supply-choice.drugstore { border-color: #d7c7ed; background: linear-gradient(135deg,#fcf8ff,#eadff7); }
+.supply-choice.drugstore b { color: #7653a1; }
 .map-choice-dialog { padding: 21px; }
 .map-choice-intro { margin: 10px 0 15px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .76rem; }
 .map-choice-grid { display: grid; gap: 9px; }
