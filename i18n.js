@@ -118,7 +118,7 @@
     "目的地": "Destination", "例：渋谷駅前喫煙所\n或粘贴第三方网站分享链接": "Example: 渋谷駅前喫煙所\nor paste a share link",
     "从剪贴板粘贴": "Paste from clipboard", "清空": "Clear", "已准备导航": "Ready to navigate",
     "地图软件会根据文字或坐标再次确认地点": "Your map app will confirm the place using the text or coordinates",
-    "Google 地图": "Google Maps", "高德地图": "Amap", "Apple 地图": "Apple Maps", "豚一下（收藏）": "Save this place", "🐽 豚一下（收藏）": "🐽 Save this place", "🇯🇵 给日本人看": "🇯🇵 Show to a local",
+    "Google 地图": "Google Maps", "高德地图": "Amap", "高德地图 · 直接跳转": "Amap · Open directly", "复制日文词，手动搜索": "Copy Japanese term and search manually", "已复制，去高德粘贴搜索": "Copied · Paste into Amap", "复制失败，请手动输入右边日文词": "Copy failed · Type the Japanese term shown", "若高德跳到中国或没搜到附近：先把地图移到日本，再粘贴上面的日文词搜索。": "If Amap searches in China or misses nearby places, move the map to Japan, then paste the Japanese term above.", "Apple 地图": "Apple Maps", "豚一下（收藏）": "Save this place", "🐽 豚一下（收藏）": "🐽 Save this place", "🇯🇵 给日本人看": "🇯🇵 Show to a local",
     "在日本通常优先推荐 Google Maps；高德对部分日本地点和步行路线的识别可能不完整。": "Google Maps is usually recommended in Japan. Amap may have fewer Japanese places and walking routes.",
     "选一句，把屏幕直接递给对方；左右滑动查看更多。": "Choose a phrase and show the screen to the other person. Swipe for more.",
     "常用日语": "Useful Japanese", "找厕所": "Find a toilet", "找吸烟点": "Find a smoking area", "请指地图": "Point on map", "怎么走": "Directions",

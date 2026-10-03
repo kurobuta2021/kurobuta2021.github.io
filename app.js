@@ -466,6 +466,8 @@
     amapLink.dataset.requireCurrentLocation = options.amapCurrentLocation === true ? "true" : "false";
     amapLink.dataset.locationQuery = amapQuery;
     amapLink.href = options.amapCurrentLocation === true ? "#" : mapSearchUrl("amap", amapQuery);
+    document.querySelector("#mapChoiceAmapCopy").dataset.keyword = options.amapManualQuery || query;
+    document.querySelector("#mapChoiceAmapKeyword").textContent = options.amapManualQuery || query;
     document.querySelector("#mapChoiceApple").href = mapSearchUrl("apple", query);
     els.mapChoiceDialog.showModal();
   }
@@ -1228,6 +1230,17 @@
       openAmapAtCurrentPosition(locatedAmapLink);
       return;
     }
+    const amapCopyButton = event.target.closest("#mapChoiceAmapCopy");
+    if (amapCopyButton) {
+      copyText(amapCopyButton.dataset.keyword, `已复制「${amapCopyButton.dataset.keyword}」，请在高德地图中粘贴搜索`)
+        .then(copied => {
+          const label = document.querySelector("#mapChoiceAmapCopyLabel");
+          label.textContent = copied ? "已复制，去高德粘贴搜索" : "复制失败，请手动输入右边日文词";
+          clearTimeout(amapCopyButton.resetTimer);
+          amapCopyButton.resetTimer = setTimeout(() => { label.textContent = "复制日文词，手动搜索"; }, 2800);
+        });
+      return;
+    }
 
     const currentAreaButton = event.target.closest("#currentAreaButton");
     if (currentAreaButton) {
@@ -1242,6 +1255,7 @@
         intro: "完全憋不住就直接用 Google 或 Apple 地图；还能忍一忍，再用全国厕所地图慢慢选环境。",
         amapCurrentLocation: true,
         amapQuery: "トイレ",
+        amapManualQuery: "トイレ",
         googleDescription: "完全憋不住啦！日本地点较完整 · 需要当地网络才能打开哦！",
         appleDescription: "完全憋不住啦！适合 iPhone",
         amapDescription: "随缘，我控制得住，慢慢逛过去。中国手机更方便 · 日本厕所数据相对较少",

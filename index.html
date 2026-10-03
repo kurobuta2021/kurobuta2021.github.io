@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261002-card-copy" />
+    <link rel="stylesheet" href="./styles.css?v=20261003-amap-fallback" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -365,7 +365,11 @@
           <a id="mapChoiceApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>适合 iPhone</small></a>
           <a id="mapChoiceCommunity" class="map-choice community" href="https://www.toilet-map-jp.com/ja/map" target="_blank" rel="noopener" hidden><span>🚻</span><strong>トイレマップ｜日本全国厕所地图</strong><small>覆盖日本全国 · 可定位当前位置 · 第一推荐</small></a>
           <div id="mapChoiceExtraList" class="map-choice-extra-list" hidden></div>
-          <a id="mapChoiceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图</strong><small>中国手机更方便 · 日本厕所数据相对较少</small></a>
+          <div class="map-choice-amap-group">
+            <a id="mapChoiceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图 · 直接跳转</strong><small>中国手机更方便 · 日本厕所数据相对较少</small></a>
+            <button id="mapChoiceAmapCopy" class="map-choice-amap-copy" type="button"><strong id="mapChoiceAmapCopyLabel" aria-live="polite">复制日文词，手动搜索</strong><span id="mapChoiceAmapKeyword" lang="ja">トイレ</span></button>
+            <p class="map-choice-amap-tip">若高德跳到中国或没搜到附近：先把地图移到日本，再粘贴上面的日文词搜索。</p>
+          </div>
         </div>
         <p id="mapChoiceNote" class="map-choice-note">在日本建议优先使用 Google 地图；搜不到时可换其他地图。</p>
       </form>
@@ -410,8 +414,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261002-card-copy"></script>
+    <script src="./i18n.js?v=20261003-amap-fallback"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261002-drugstore"></script>
+    <script src="./app.js?v=20261003-amap-fallback"></script>
   </body>
 </html>

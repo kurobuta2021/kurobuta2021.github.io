@@ -436,7 +436,7 @@ main { min-height: calc(100dvh - 66px); }
 .supply-choice.supermarket b { color: #367c55; }
 .supply-choice.drugstore { border-color: #d7c7ed; background: linear-gradient(135deg,#fcf8ff,#eadff7); }
 .supply-choice.drugstore b { color: #7653a1; }
-.map-choice-dialog { padding: 21px; }
+.map-choice-dialog { max-height: 90vh; max-height: 90dvh; overflow-y: auto; padding: 21px; }
 .map-choice-intro { margin: 10px 0 15px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .76rem; }
 .map-choice-grid { display: grid; gap: 9px; }
 .map-choice { min-height: 68px; display: grid; grid-template-columns: 43px 1fr; grid-template-rows: auto auto; align-items: center; column-gap: 11px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); text-decoration: none; box-shadow: 0 5px 14px rgba(51,41,31,.05); }
@@ -444,6 +444,11 @@ main { min-height: calc(100dvh - 66px); }
 .map-choice strong { align-self: end; font-size: .89rem; }
 .map-choice small { align-self: start; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .65rem; }
 .map-choice.amap > span { background: #28a65e; }
+.map-choice-amap-group { display: grid; gap: 7px; }
+.map-choice-amap-copy { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 9px 12px; border: 1px solid #b7dcc5; border-radius: 13px; background: #f2faf4; color: #216b40; text-align: left; cursor: pointer; }
+.map-choice-amap-copy strong { font-size: .76rem; }
+.map-choice-amap-copy span { flex: none; padding: 4px 8px; border-radius: 8px; background: #fff; font-size: .73rem; user-select: text; }
+.map-choice-amap-tip { margin: 0 3px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .62rem; line-height: 1.4; }
 .map-choice.google > span { background: #4285f4; }
 .map-choice.apple > span { background: #333; font-size: 1.15rem; }
 .map-choice.community { border-color: #bce7d0; background: #f1fff6; }
