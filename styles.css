@@ -447,7 +447,12 @@ main { min-height: calc(100dvh - 66px); }
 .map-choice-amap-group { display: grid; gap: 7px; }
 .map-choice-amap-copy { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 9px 12px; border: 1px solid #b7dcc5; border-radius: 13px; background: #f2faf4; color: #216b40; text-align: left; cursor: pointer; }
 .map-choice-amap-copy strong { font-size: .76rem; }
-.map-choice-amap-copy span { flex: none; padding: 4px 8px; border-radius: 8px; background: #fff; font-size: .73rem; user-select: text; }
+.map-choice-amap-copy .map-choice-amap-copy-text { display: grid; gap: 3px; min-width: 0; }
+.map-choice-amap-copy-text small { color: #587866; font-family: "PingFang SC", sans-serif; font-size: .63rem; line-height: 1.35; }
+.map-choice-amap-copy .map-choice-amap-keyword { flex: none; padding: 4px 8px; border-radius: 8px; background: #fff; font-size: .73rem; user-select: text; }
+.map-choice-onsen-private-copy { border-color: #e4cda8; background: #fff8ec; color: #8b5d23; }
+.map-choice-onsen-private-copy .map-choice-amap-copy-text small { color: #8c7250; }
+.map-choice-amap-copy[hidden] { display: none; }
 .map-choice-amap-tip { margin: 0 3px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .62rem; line-height: 1.4; }
 .map-choice.google > span { background: #4285f4; }
 .map-choice.apple > span { background: #333; font-size: 1.15rem; }

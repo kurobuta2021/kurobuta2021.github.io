@@ -458,6 +458,7 @@
       </a>
     `).join("");
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
+    document.querySelector("#mapChoiceGoogle strong").textContent = options.googleName || "Google 地图";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
     document.querySelector("#mapChoiceApple small").textContent = options.appleDescription || "适合 iPhone";
     document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
@@ -468,7 +469,16 @@
     amapLink.href = options.amapCurrentLocation === true ? "#" : mapSearchUrl("amap", amapQuery);
     document.querySelector("#mapChoiceAmapCopy").dataset.keyword = options.amapManualQuery || query;
     document.querySelector("#mapChoiceAmapKeyword").textContent = options.amapManualQuery || query;
-    document.querySelector("#mapChoiceApple").href = mapSearchUrl("apple", query);
+    const onsenManualSearch = label === "泡个温泉";
+    document.querySelector("#mapChoiceAmapCopyHint").hidden = !onsenManualSearch;
+    document.querySelector("#mapChoiceOnsenPrivateCopy").hidden = !onsenManualSearch;
+    const appleLink = document.querySelector("#mapChoiceApple");
+    appleLink.href = mapSearchUrl("apple", query);
+    if (onsenManualSearch) {
+      document.querySelector(".map-choice-grid").append(appleLink);
+    } else {
+      document.querySelector(".map-choice-grid").insertBefore(appleLink, communityLink);
+    }
     els.mapChoiceDialog.showModal();
   }
 
@@ -1230,14 +1240,16 @@
       openAmapAtCurrentPosition(locatedAmapLink);
       return;
     }
-    const amapCopyButton = event.target.closest("#mapChoiceAmapCopy");
+    const amapCopyButton = event.target.closest("#mapChoiceAmapCopy, #mapChoiceOnsenPrivateCopy");
     if (amapCopyButton) {
       copyText(amapCopyButton.dataset.keyword, `已复制「${amapCopyButton.dataset.keyword}」，请在高德地图中粘贴搜索`)
         .then(copied => {
-          const label = document.querySelector("#mapChoiceAmapCopyLabel");
+          const isPrivateBath = amapCopyButton.id === "mapChoiceOnsenPrivateCopy";
+          const label = document.querySelector(isPrivateBath ? "#mapChoiceOnsenPrivateCopyLabel" : "#mapChoiceAmapCopyLabel");
+          const originalLabel = isPrivateBath ? "复制私汤日文词" : "复制日文词，手动搜索";
           label.textContent = copied ? "已复制，去高德粘贴搜索" : "复制失败，请手动输入右边日文词";
           clearTimeout(amapCopyButton.resetTimer);
-          amapCopyButton.resetTimer = setTimeout(() => { label.textContent = "复制日文词，手动搜索"; }, 2800);
+          amapCopyButton.resetTimer = setTimeout(() => { label.textContent = originalLabel; }, 2800);
         });
       return;
     }
@@ -1268,11 +1280,12 @@
     if (onsenButton) {
       showMapChoice("日帰り温泉", "泡个温泉", {
         intro: "先用 Google 地图找附近的日归温泉；需要私汤时，使用下面的专门入口。",
+        googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {
-            url: "https://www.spa.or.jp/search_f/",
+            url: mapSearchUrl("google", "貸切温泉"),
             icon: "私",
-            name: "找私汤／家庭浴池",
+            name: "找私汤／家庭温泉（纹身 OK）",
             description: "私汤（貸切風呂／貸切温泉）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
             className: "private-bath"
           }
