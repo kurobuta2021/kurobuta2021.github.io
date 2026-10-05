@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261005-onsen-copy-preview" />
+    <link rel="stylesheet" href="./styles.css?v=20261005-food-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -90,7 +90,7 @@
               <button class="mini-tool laundry-mini" type="button" data-map-query="コインランドリー" data-map-label="附近洗衣房" data-tool-id="laundry"><img src="./assets/card-laundry.png" alt="" loading="lazy" decoding="async" /><span><strong>洗衣房</strong><small>找附近的自助洗衣房</small></span><b>›</b></button>
               <button class="mini-tool bus-mini" type="button" data-category="freebus" data-tool-id="tokyo-free-bus"><i class="mini-tool-icon">🚌</i><span><em>薅羊毛 · 0元 · 3条线</em><strong>东京站免费巴士</strong><small>丸之内、日本桥一带，上车不用买票</small></span><b>›</b></button>
               <button class="mini-tool map-mini fishing-mini" type="button" data-fishing-choice data-tool-id="fishing"><i class="mini-tool-icon">竿</i><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
-              <button class="mini-tool map-mini trash-mini" type="button" data-external="https://japantrashmap.com/ja/" data-tool-id="trash"><i class="mini-tool-icon">♻</i><span><strong>扔一下</strong><small>找附近公共垃圾桶 · 可定位</small></span><b>›</b></button>
+              <button class="mini-tool map-mini parking-mini" type="button" data-parking-choice data-tool-id="parking"><i class="mini-tool-icon">P</i><span><strong>停车场</strong><small>自驾游 · 找附近收费停车场</small></span><b>›</b></button>
             </div>
             <p class="more-tools-note">地图地点来自第三方服务，请以现场为准。</p>
           </section>
@@ -165,6 +165,14 @@
             <span>日本語</span><p id="japanesePhrase" lang="ja">すみません。トイレはどこですか？</p><hr /><small id="chinesePhrase">不好意思，请问厕所在哪里？</small><em id="phraseDestination" hidden></em>
           </article>
           <div class="phrase-actions"><button id="speakJapanese" class="primary-action" type="button">🔊 播放日语</button><button id="copyJapanese" class="secondary-action" type="button">复制日文</button></div>
+          <div class="japanese-translate-links" aria-label="更多翻译方式">
+            <p>没找到想说的？用 Google 翻译</p>
+            <div>
+              <a href="https://translate.google.com/?sl=zh-CN&amp;tl=ja&amp;op=translate" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">文</span><strong>自己打字翻译</strong><small>中文 → 日文 ↗</small></a>
+              <a href="https://translate.google.com/?sl=ja&amp;tl=zh-CN&amp;op=images" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▣</span><strong>照片翻译</strong><small>日文照片 → 中文 ↗</small></a>
+            </div>
+            <small>将跳转到 Google 翻译；图片页可上传已拍照片。手机若无法使用，请在 Google 翻译 App 点「相机」。</small>
+          </div>
           <p id="smokingSafety" class="safety-note" hidden>20岁以下不得进入吸烟区域，请以现场标识为准。</p>
         </section>
 
@@ -204,10 +212,15 @@
         </section>
 
         <section class="view tun-preview-view" data-view="favorites" aria-labelledby="favoritesTitle">
-          <div class="page-heading tun-preview-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">COMING TO HEITUN</p><h1 id="favoritesTitle">豚一下</h1><p>好吃的、好玩的，黑豚正在慢慢整理。</p></div></div>
+          <div class="page-heading tun-preview-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">HEITUN PICKS</p><h1 id="favoritesTitle">豚一下</h1><p>好吃的先找起来，其他玩法慢慢整理。</p></div></div>
 
           <section class="tun-coming" aria-labelledby="tunComingTitle">
-            <div class="tun-coming-copy"><span>先透露一点</span><h2 id="tunComingTitle">黑豚正在准备这些</h2><p>内容还在踩点和整理，但现在已经可以先来问我。</p></div>
+            <div class="tun-coming-copy"><span>边用边整理</span><h2 id="tunComingTitle">先找附近好用的</h2><p>想吃点日本特色的？先从美食入口选。</p></div>
+            <button class="tun-food-hub" type="button" data-go="food" data-tool-id="food-hub">
+              <span class="tun-food-hub-top"><span class="tun-food-hub-icon" aria-hidden="true">🍱</span><span class="tun-food-hub-copy"><small>现在能用 · 打开地图找附近</small><strong>附近吃什么</strong><span>寿司、拉面、烧肉、咖喱、日式火锅……</span></span><b aria-hidden="true">›</b></span>
+              <span class="tun-food-hub-strip" aria-hidden="true"><span class="tun-food-hub-track"><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 米饭定食</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 米饭定食</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span></span></span>
+              <span class="tun-food-hub-cta">打开美食分类 <span aria-hidden="true">→</span></span>
+            </button>
             <article class="tun-help-card">
               <div class="tun-help-main">
                 <div class="tun-help-top"><span class="tun-help-icon">🤝</span><em>现在可以联系</em></div>
@@ -218,14 +231,6 @@
               <button type="button" data-direct-contact data-tool-id="help-request">联系黑豚 <span>›</span></button>
             </article>
             <div class="tun-coming-grid">
-              <article class="tun-coming-card food-coming-card">
-                <div class="tun-card-top"><span class="tun-card-icon">🍜</span><em>首批内容整理中</em></div>
-                <h3>日本美食指南</h3>
-                <p>东京、大阪、京都，当地吃法和不容易踩雷的选择。</p>
-                <div class="tun-tags"><span>拉面</span><span>烧肉</span><span>居酒屋</span><span>当地小店</span></div>
-                <button type="button" data-direct-contact data-tool-id="food-consult">问黑豚找美食</button>
-              </article>
-
               <article class="tun-coming-card route-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
                 <h3>个性化小众线路</h3>
@@ -241,6 +246,31 @@
             <div id="favoriteList" class="favorite-list"></div>
             <p class="storage-note">不用登录。清除浏览器数据或更换手机后，收藏不会自动同步。</p>
           </section>
+        </section>
+
+        <section class="view food-hub-view" data-view="food" aria-labelledby="foodHubTitle">
+          <button class="back-button" type="button" data-go="favorites">‹ 返回豚一下</button>
+          <div class="food-hub-heading"><span aria-hidden="true">🍱</span><div><p class="eyebrow">EAT NEAR YOU</p><h1 id="foodHubTitle">附近吃什么</h1><p>选想吃的，再用常用地图找附近的店。</p></div></div>
+          <aside class="food-reservation-card" aria-label="餐厅预约协助">
+            <div><strong>有家特别想吃的店，怕到了才发现没位？</strong><p>预约、改期或日语电话，可以找黑豚提前帮你联系餐厅。</p></div>
+            <button type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+          </aside>
+          <div class="food-hub-kicker"><strong>先选一类</strong><small>地图结果不保证有对应菜品，去之前看看菜单和营业时间。</small></div>
+          <div class="food-hub-grid">
+            <button type="button" class="food-hub-item" data-sushi-open data-tool-id="sushi-nearby"><span>🍣</span><strong>回转寿司</strong><small>附近门店・连锁品牌</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-ramen-open data-tool-id="ramen-nearby"><span>🍜</span><strong>拉面</strong><small>豚骨・味噌・沾面</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-wagyu-open data-tool-id="wagyu-nearby"><span>🥩</span><strong>烧肉</strong><small>和牛・烤肉自助</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-izakaya-open data-tool-id="izakaya-nearby"><span>🏮</span><strong>居酒屋</strong><small>烧鸟・海鲜现烤</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-rice-open data-tool-id="rice-nearby"><span>🍚</span><strong>米饭・定食</strong><small>海鲜丼・鳗鱼饭・定食</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-hotpot-open data-tool-id="hotpot-nearby"><span>🍲</span><strong>日式火锅</strong><small>涮涮锅・寿喜锅</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-curry-open data-tool-id="curry-nearby"><span>🍛</span><strong>日式咖喱</strong><small>咖喱饭・汤咖喱</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-tempura-open data-tool-id="tempura-nearby"><span>🍤</span><strong>天妇罗</strong><small>天丼・天妇罗定食</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-noodle-open data-tool-id="noodle-nearby"><span>🥢</span><strong>荞麦面・乌冬</strong><small>冷热都能找</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-cutlet-open data-tool-id="cutlet-nearby"><span>🍽️</span><strong>炸猪排・炸牛排</strong><small>先选肉类，再找店</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-sweets-open data-tool-id="sweets-nearby"><span>🍡</span><strong>甜品・茶</strong><small>和果子・抹茶甜品</small><b>›</b></button>
+            <button type="button" class="food-hub-item" data-kansai-open data-tool-id="kansai-food-nearby"><span>🐙</span><strong>关西小吃</strong><small>大阪烧・章鱼烧</small><b>›</b></button>
+          </div>
+          <p class="food-hub-footnote">各地店铺数量不同；地图搜索可以使用，不代表附近一定有对应店铺。</p>
         </section>
 
         <section class="view contact-flow" data-view="contact" aria-labelledby="contactTitle">
@@ -306,28 +336,33 @@
               <span>刚才选择</span><strong id="inquirySummaryText"></strong>
               <button id="copyInquiry" type="button">复制需求</button>
             </div>
-            <section class="recommended-contact" aria-label="微信联系方式">
-              <div class="recommended-label">推荐</div>
-              <div class="wechat-main-row"><span class="channel-icon wechat-icon">微</span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">查看二维码</button></span></div>
-            </section>
-            <div class="contact-channel messaging-channel line-channel"><span class="channel-icon line-icon">LINE</span><span><strong>LINE 咨询</strong><small>LINE ID：648627464</small></span><span class="channel-actions"><a href="https://line.me/ti/p/~648627464" target="_blank" rel="noopener" data-contact-channel="line-open">打开 LINE</a><button type="button" data-contact-qr="line" data-contact-channel="line-qr">查看二维码</button></span></div>
-            <div class="contact-channel messaging-channel whatsapp-channel"><span class="channel-icon whatsapp-icon">WA</span><span><strong>WhatsApp 咨询</strong><small>用户名：@kurobutajapan</small></span><span class="channel-actions"><button class="primary-action" type="button" data-copy-whatsapp data-contact-channel="whatsapp-copy">复制用户名</button><button type="button" data-contact-qr="whatsapp" data-contact-channel="whatsapp-qr">查看二维码</button></span></div>
-            <div class="contact-channel email-channel email-contact-standalone"><span class="channel-icon email-icon">✉</span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
-            <div class="contact-channel-list" aria-label="其他联系方式">
-              <a class="contact-channel" href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu"><span class="channel-icon xhs-icon">RED</span><span><strong>黑豚的小红书</strong><small>打开我的小红书主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin"><span class="channel-icon douyin-icon">♪</span><span><strong>黑豚的抖音</strong><small>打开我的抖音主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili"><span class="channel-icon bili-icon">B</span><span><strong>黑豚的B站</strong><small>打开我的B站主页</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube"><span class="channel-icon youtube-icon">▶</span><span><strong>黑豚的YouTube</strong><small>打开我的YouTube频道</small></span><b>›</b></a>
-              <a class="contact-channel" href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok"><span class="channel-icon tiktok-icon">♪</span><span><strong>黑豚的TikTok</strong><small>打开我的TikTok主页</small></span><b>›</b></a>
+            <div class="contact-methods">
+              <section class="recommended-contact contact-method" aria-label="微信联系方式">
+                <div class="recommended-label">推荐</div>
+                <div class="wechat-main-row"><span class="channel-icon wechat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M23 9C13 9 6 15 6 23c0 4 2 7.5 5 10l-1.5 6 6.6-3.1c2.1.7 4.4 1.1 6.9 1.1 9.4 0 17-6.3 17-14S32.4 9 23 9Z" fill="currentColor"/><circle cx="17" cy="22" r="2.1" fill="#19ad59"/><circle cx="28" cy="22" r="2.1" fill="#19ad59"/></svg></span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">查看二维码</button></span></div>
+              </section>
+              <div class="contact-channel messaging-channel line-channel contact-method"><span class="channel-icon line-icon" aria-hidden="true">LINE</span><span><strong>LINE 咨询</strong><small>LINE ID：648627464</small></span><span class="channel-actions"><a href="https://line.me/ti/p/~648627464" target="_blank" rel="noopener" data-contact-channel="line-open">打开 LINE</a><button type="button" data-contact-qr="line" data-contact-channel="line-qr">查看二维码</button></span></div>
+              <div class="contact-channel messaging-channel whatsapp-channel contact-method"><span class="channel-icon whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 7a17 17 0 0 0-14.5 26L7 41l8.3-2.3A17 17 0 1 0 24 7Z" fill="none" stroke="currentColor" stroke-width="3.4"/><path d="M18 16c-.8-.5-2.6.6-2.8 2.8-.3 5 6 12 11.5 13.4 2.7.7 5.2-1 5.2-2.7 0-.6-4.8-2.8-5.3-2.4l-1.7 2c-2.9-1.1-5-3.2-6.3-6.2l1.7-1.5c.5-.5-1.6-5.1-2.3-5.4Z" fill="currentColor"/></svg></span><span><strong>WhatsApp 咨询</strong><small>用户名：@kurobutajapan</small></span><span class="channel-actions"><button class="primary-action" type="button" data-copy-whatsapp data-contact-channel="whatsapp-copy">复制用户名</button><button type="button" data-contact-qr="whatsapp" data-contact-channel="whatsapp-qr">查看二维码</button></span></div>
+              <div class="contact-channel email-channel email-contact-standalone contact-method"><span class="channel-icon email-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="23" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="m10 17 14 11 14-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
             </div>
+            <section class="contact-socials" aria-label="黑豚的社交平台">
+              <div class="contact-socials-heading"><strong>也可以来黑豚的频道看看</strong><small>点图标打开主页</small></div>
+              <div class="contact-socials-grid">
+                <a class="social-link" href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu" aria-label="打开黑豚的小红书主页"><span class="social-glyph xhs-glyph" aria-hidden="true">小红书</span><strong>小红书</strong></a>
+                <a class="social-link" href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin" aria-label="打开黑豚的抖音主页"><span class="social-glyph douyin-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><strong>抖音</strong></a>
+                <a class="social-link" href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili" aria-label="打开黑豚的B站主页"><span class="social-glyph bili-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="m16 9 4 5m12-5-4 5M11 17h26c2.2 0 4 1.8 4 4v15c0 2.2-1.8 4-4 4H11c-2.2 0-4-1.8-4-4V21c0-2.2 1.8-4 4-4z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 25v6m14-6v6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M19 35c3 2 7 2 10 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><strong>B站</strong></a>
+                <a class="social-link" href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube" aria-label="打开黑豚的YouTube频道"><span class="social-glyph youtube-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="11" width="38" height="26" rx="9" fill="currentColor"/><path d="m21 18 12 6-12 6V18z" fill="#e62117"/></svg></span><strong>YouTube</strong></a>
+                <a class="social-link" href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok" aria-label="打开黑豚的TikTok主页"><span class="social-glyph tiktok-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><strong>TikTok</strong></a>
+              </div>
+            </section>
           </section>
         </section>
       </main>
 
       <nav class="bottom-nav" aria-label="主要导航">
         <button class="active" type="button" data-go="home"><span>⌂</span>首页</button>
-        <button type="button" data-go="favorites"><span>♡</span>豚一下<i id="navFavoriteCount" hidden>0</i></button>
-        <button type="button" data-go="contact"><span>●</span>找黑豚</button>
+        <button type="button" data-go="favorites" data-update-key="favorites"><span>♡</span>豚一下<i id="navFavoriteCount" hidden>0</i></button>
+        <button type="button" data-go="contact" data-update-key="contact"><span>●</span>找黑豚</button>
       </nav>
     </div>
 
@@ -354,6 +389,158 @@
           <button class="supply-choice supermarket" type="button" data-supply-kind="supermarket" data-tool-id="supermarket"><span>🛒</span><strong>附近超市</strong><small>熟食・便当・日常采购<br />选择更多，通常更划算</small><b>马上找</b></button>
           <button class="supply-choice drugstore" type="button" data-supply-kind="drugstore" data-tool-id="drugstore"><span>💄</span><strong>附近药妆店</strong><small>药妆・护肤・日用品<br />日文搜索「ドラッグストア」</small><b>马上找</b></button>
         </div>
+      </form>
+    </dialog>
+    <dialog id="sushiChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">SUSHI NEAR YOU</p><h2>附近想吃哪家寿司？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">先挑品牌，再选常用地图。地图会列出附近门店，点进具体分店后再导航。</p>
+        <div class="food-choice-list">
+          <button type="button" data-sushi-query="回転寿司" data-sushi-label="附近回转寿司"><span class="food-choice-mark">📍</span><strong>不挑品牌，就近找</strong><small>回転寿司 · 附近有什么吃什么</small><b>›</b></button>
+          <button type="button" data-sushi-query="スシロー" data-sushi-label="スシロー"><span class="food-choice-mark"><img src="./assets/sushi-sushiro.svg" alt="" /></span><strong>寿司郎 · <span lang="ja">スシロー</span></strong><small>搜索附近的スシロー门店</small><b>›</b></button>
+          <button type="button" data-sushi-query="くら寿司" data-sushi-label="くら寿司"><span class="food-choice-mark"><img src="./assets/sushi-kura.svg" alt="" /></span><strong>藏寿司 · <span lang="ja">くら寿司</span></strong><small>搜索附近的くら寿司门店</small><b>›</b></button>
+          <button type="button" data-sushi-query="はま寿司" data-sushi-label="はま寿司"><span class="food-choice-mark"><img src="./assets/sushi-hama.png" alt="" /></span><strong>滨寿司 · <span lang="ja">はま寿司</span></strong><small>搜索附近的はま寿司门店</small><b>›</b></button>
+          <button type="button" data-sushi-query="かっぱ寿司" data-sushi-label="かっぱ寿司"><span class="food-choice-mark"><img src="./assets/sushi-kappa.png" alt="" /></span><strong>河童寿司 · <span lang="ja">かっぱ寿司</span></strong><small>搜索附近的かっぱ寿司门店</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">品牌标志仅用于辨认门店；请以各品牌及地图显示的信息为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="ramenChoiceDialog" class="app-dialog sushi-choice-dialog ramen-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">RAMEN NEAR YOU</p><h2>附近想吃什么拉面？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">按口味找店，再选常用地图。搜索结果只是线索，进店前记得看菜单。</p>
+        <div class="food-choice-list ramen-choice-list">
+          <button type="button" data-ramen-query="ラーメン" data-ramen-label="附近拉面店"><span class="food-choice-mark">📍</span><strong>不挑口味，就近找</strong><small>ラーメン · 先看看附近有什么</small><b>›</b></button>
+          <button type="button" data-ramen-query="豚骨ラーメン" data-ramen-label="豚骨拉面"><span class="food-choice-mark" lang="ja">豚</span><strong>豚骨拉面</strong><small>豚骨ラーメン · 浓郁骨汤</small><b>›</b></button>
+          <button type="button" data-ramen-query="味噌ラーメン" data-ramen-label="味噌拉面"><span class="food-choice-mark" lang="ja">噌</span><strong>味噌拉面</strong><small>味噌ラーメン · 香浓咸鲜</small><b>›</b></button>
+          <button type="button" data-ramen-query="醤油ラーメン" data-ramen-label="酱油拉面"><span class="food-choice-mark" lang="ja">醤</span><strong>酱油拉面</strong><small>醤油ラーメン · 日式酱油风味</small><b>›</b></button>
+          <button type="button" data-ramen-query="塩ラーメン" data-ramen-label="盐味拉面"><span class="food-choice-mark" lang="ja">塩</span><strong>盐味拉面</strong><small>塩ラーメン · 相对清爽</small><b>›</b></button>
+          <button type="button" data-ramen-query="つけ麺" data-ramen-label="沾面"><span class="food-choice-mark" lang="ja">麺</span><strong>沾面</strong><small>つけ麺 · 面和蘸汤分开上</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">分类可能重叠；具体口味、营业时间和排队情况请查看门店信息。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="wagyuChoiceDialog" class="app-dialog sushi-choice-dialog wagyu-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">YAKINIKU NEAR YOU</p><h2>附近想吃哪种烧肉？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">先选吃法，再用地图找附近的店。进店前记得核对菜单和价格。</p>
+        <div class="food-choice-list wagyu-choice-list">
+          <button type="button" data-wagyu-query="和牛 焼肉" data-wagyu-label="和牛烤肉"><span class="food-choice-mark">🥩</span><strong>和牛烤肉</strong><small>和牛 焼肉 · 看菜单，按喜好点菜</small><b>›</b></button>
+          <button type="button" data-wagyu-query="焼肉 食べ放題" data-wagyu-label="烤肉自助"><span class="food-choice-mark">♨</span><strong>烤肉自助</strong><small>焼肉 食べ放題 · 想吃和牛请核对套餐</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">自助不一定提供和牛；请确认菜品、时限、价格及预约条件。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="izakayaChoiceDialog" class="app-dialog sushi-choice-dialog izakaya-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">IZAKAYA NEAR YOU</p><h2>附近想去哪种居酒屋？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">先按想吃的选，再用地图看附近有什么店。</p>
+        <div class="food-choice-list izakaya-choice-list">
+          <button type="button" data-izakaya-query="居酒屋" data-izakaya-label="附近居酒屋"><span class="food-choice-mark">📍</span><strong>不挑，就近找居酒屋</strong><small>居酒屋 · 看看附近有什么</small><b>›</b></button>
+          <button type="button" data-izakaya-query="焼き鳥 居酒屋" data-izakaya-label="烧鸟居酒屋"><span class="food-choice-mark">🍢</span><strong>烧鸟</strong><small>焼き鳥 居酒屋 · 烤鸡肉串</small><b>›</b></button>
+          <button type="button" data-izakaya-query="海鮮 居酒屋" data-izakaya-label="海鲜居酒屋"><span class="food-choice-mark">🐟</span><strong>海鲜</strong><small>海鮮 居酒屋 · 刺身、烤鱼等</small><b>›</b></button>
+          <button type="button" data-izakaya-query="海鮮 浜焼き" data-izakaya-label="海鲜现烤"><span class="food-choice-mark">🦪</span><strong>海鲜现烤</strong><small>海鮮 浜焼き · 找烤贝类、鱼虾的店</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">“就近”是按当前位置找店，不保证第一条最近；菜单、营业时间请以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="tempuraChoiceDialog" class="app-dialog sushi-choice-dialog tempura-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">TEMPURA NEAR YOU</p><h2>附近想吃哪种天妇罗？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">按吃法找店，再选常用地图；实际菜单请点进门店确认。</p>
+        <div class="food-choice-list tempura-choice-list">
+          <button type="button" data-tempura-query="天ぷら" data-tempura-label="附近天妇罗"><span class="food-choice-mark">📍</span><strong>不挑，就近找天妇罗</strong><small>天ぷら · 先看看附近有什么</small><b>›</b></button>
+          <button type="button" data-tempura-query="天丼" data-tempura-label="天丼"><span class="food-choice-mark">🍚</span><strong>天丼 · 天妇罗盖饭</strong><small>天丼 · 炸物盖在米饭上</small><b>›</b></button>
+          <button type="button" data-tempura-query="天ぷら 定食" data-tempura-label="天妇罗定食"><span class="food-choice-mark">🍤</span><strong>天妇罗定食</strong><small>天ぷら 定食 · 天妇罗配饭和小菜</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">同一家店可能提供不止一种吃法；菜单、价格和营业时间请以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="noodleChoiceDialog" class="app-dialog sushi-choice-dialog noodle-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">NOODLES NEAR YOU</p><h2>附近想吃哪种面？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">选好荞麦面或乌冬，再用地图找附近的店。</p>
+        <div class="food-choice-list noodle-choice-list">
+          <button type="button" data-noodle-query="そば" data-noodle-label="荞麦面"><span class="food-choice-mark">🥢</span><strong>荞麦面</strong><small>そば · 可冷吃，也可热吃</small><b>›</b></button>
+          <button type="button" data-noodle-query="うどん" data-noodle-label="乌冬"><span class="food-choice-mark">🍜</span><strong>乌冬</strong><small>うどん · 粗面条，热汤或凉拌</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">两种面有些店都会卖；具体菜单、营业时间以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="cutletChoiceDialog" class="app-dialog sushi-choice-dialog cutlet-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">CUTLETS NEAR YOU</p><h2>附近想吃哪种炸排？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">猪排和牛排分开搜，避免到店才发现不是想吃的那种。</p>
+        <div class="food-choice-list cutlet-choice-list">
+          <button type="button" data-cutlet-query="とんかつ" data-cutlet-label="炸猪排"><span class="food-choice-mark">🐖</span><strong>炸猪排</strong><small>とんかつ · 猪肉裹粉油炸</small><b>›</b></button>
+          <button type="button" data-cutlet-query="牛カツ" data-cutlet-label="炸牛排"><span class="food-choice-mark">🐂</span><strong>炸牛排</strong><small>牛カツ · 牛肉裹粉油炸</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">具体肉类、熟度、价格和营业时间请以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="riceChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">RICE & SET MEALS</p><h2>想吃哪种米饭？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="sushi-choice-intro">这里按游客找饭的习惯放在一起，并不是说每一种都是定食。</p>
+        <div class="food-choice-list">
+          <button type="button" data-rice-query="定食" data-rice-label="日式定食"><span class="food-choice-mark">🍱</span><strong>日式定食</strong><small>定食 · 米饭、主菜和配菜</small><b>›</b></button>
+          <button type="button" data-rice-query="海鮮丼" data-rice-label="海鲜丼"><span class="food-choice-mark">🐟</span><strong>海鲜丼</strong><small>海鮮丼 · 海鲜盖饭</small><b>›</b></button>
+          <button type="button" data-eel-open data-tool-id="eel-nearby"><span class="food-choice-mark">🍚</span><strong>鳗鱼饭</strong><small>うなぎ · 到店确认うな丼或うな重</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">想吃咖喱饭请返回分类选择「日式咖喱」。菜单、价格和营业时间以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="hotpotChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">JAPANESE HOT POT</p><h2>想吃哪种日式火锅？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="food-choice-list">
+          <button type="button" data-hotpot-query="しゃぶしゃぶ" data-hotpot-label="涮涮锅"><span class="food-choice-mark">🥬</span><strong>涮涮锅</strong><small>しゃぶしゃぶ · 涮肉和蔬菜</small><b>›</b></button>
+          <button type="button" data-hotpot-query="すき焼き" data-hotpot-label="寿喜锅"><span class="food-choice-mark">🍲</span><strong>寿喜锅</strong><small>すき焼き · 偏甜咸口味</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">涮涮锅不代表一定有和牛；肉类、套餐、价格和预约条件请以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="curryChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">JAPANESE CURRY</p><h2>想吃哪种咖喱？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="food-choice-list">
+          <button type="button" data-curry-query="カレーライス" data-curry-label="日式咖喱饭"><span class="food-choice-mark">🍛</span><strong>日式咖喱饭</strong><small>カレーライス · 想吃炸猪排咖喱可看カツカレー</small><b>›</b></button>
+          <button type="button" data-curry-query="スープカレー" data-curry-label="汤咖喱"><span class="food-choice-mark">🥄</span><strong>北海道汤咖喱</strong><small>スープカレー · 札幌代表美食</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">汤咖喱在北海道更有代表性，其他地方不一定找得到；具体菜单请以门店为准。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="sweetsChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">SWEETS & TEA</p><h2>想吃哪种甜品？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="food-choice-list">
+          <button type="button" data-sweets-query="和菓子" data-sweets-label="和果子"><span class="food-choice-mark">🍡</span><strong>和果子</strong><small>和菓子 · 团子、大福等日式点心</small><b>›</b></button>
+          <button type="button" data-sweets-query="抹茶 スイーツ" data-sweets-label="抹茶甜品"><span class="food-choice-mark">🍵</span><strong>抹茶甜品</strong><small>抹茶 スイーツ · 先看店里的具体甜品</small><b>›</b></button>
+          <button type="button" data-sweets-query="喫茶店" data-sweets-label="日式咖啡店"><span class="food-choice-mark">☕</span><strong>日式咖啡店</strong><small>喫茶店 · 坐下来喝茶吃点心</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">搜索结果不保证供应某款点心；进店前请查看菜单与营业时间。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+      </form>
+    </dialog>
+    <dialog id="kansaiChoiceDialog" class="app-dialog sushi-choice-dialog">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">KANSAI BITES</p><h2>想吃哪种关西小吃？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <div class="food-choice-list">
+          <button type="button" data-kansai-query="お好み焼き" data-kansai-label="大阪烧"><span class="food-choice-mark">🥘</span><strong>大阪烧</strong><small>お好み焼き · 铁板现煎</small><b>›</b></button>
+          <button type="button" data-kansai-query="たこ焼き" data-kansai-label="章鱼烧"><span class="food-choice-mark">🐙</span><strong>章鱼烧</strong><small>たこ焼き · 经典街头小吃</small><b>›</b></button>
+        </div>
+        <p class="sushi-brand-note">这两种是关西代表小吃；其他地区也可搜索，但附近不一定有店。</p>
+        <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
       </form>
     </dialog>
     <dialog id="mapChoiceDialog" class="app-dialog map-choice-dialog">
@@ -415,8 +602,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261005-onsen-label-preview"></script>
+    <script src="./i18n.js?v=20261005-food-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261005-onsen-apple-last-preview"></script>
+    <script src="./app.js?v=20261005-food-release"></script>
   </body>
 </html>

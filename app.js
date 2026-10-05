@@ -4,6 +4,50 @@
   const FAVORITES_KEY = "heitu-favorites-v1";
   const CITY_KEY = "heitu-city-v1";
   const WAYBACK_KEY = "heitu-wayback-places-v1";
+  const UPDATE_SEEN_KEY = "heitu-seen-updates-v1";
+  // Only list entries with actual changes. Bump an entry's version when that section changes again.
+  const ENTRY_UPDATES = Object.freeze({
+    favorites: "20261005-food",
+    "food-hub": "20261005-food",
+    onsen: "20261005-private-bath",
+    "japanese-help": "20261005-translate",
+    parking: "20261005-parking",
+    contact: "20261005-contact"
+  });
+  const seenUpdates = (() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(UPDATE_SEEN_KEY) || "{}");
+      return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+    } catch {
+      return {};
+    }
+  })();
+  function updateEntryKey(element) {
+    return element?.dataset.updateKey || element?.dataset.toolId;
+  }
+  function refreshUpdateBadges() {
+    document.querySelectorAll("button[data-update-key], button[data-tool-id]").forEach(button => {
+      const key = updateEntryKey(button);
+      const version = ENTRY_UPDATES[key];
+      const badge = Array.from(button.children).find(child => child.classList.contains("update-badge"));
+      if (!version || seenUpdates[key] === version) {
+        badge?.remove();
+      } else if (!badge) {
+        const label = document.createElement("span");
+        label.className = "update-badge";
+        label.textContent = "有更新";
+        button.append(label);
+      }
+    });
+  }
+  function markEntryUpdateSeen(button) {
+    const key = updateEntryKey(button);
+    const version = ENTRY_UPDATES[key];
+    if (!version || seenUpdates[key] === version) return;
+    seenUpdates[key] = version;
+    try { localStorage.setItem(UPDATE_SEEN_KEY, JSON.stringify(seenUpdates)); } catch { /* Private browsing can block storage. */ }
+    refreshUpdateBadges();
+  }
   const WAYBACK_LIMIT = 10;
   const ANALYTICS_HOST = "heitun.pages.dev";
   const shareUtils = window.HeituShareUtils;
@@ -205,6 +249,18 @@
     comingDialog: document.querySelector("#comingDialog"),
     contactQrDialog: document.querySelector("#contactQrDialog"),
     supplyChoiceDialog: document.querySelector("#supplyChoiceDialog"),
+    sushiChoiceDialog: document.querySelector("#sushiChoiceDialog"),
+    ramenChoiceDialog: document.querySelector("#ramenChoiceDialog"),
+    wagyuChoiceDialog: document.querySelector("#wagyuChoiceDialog"),
+    izakayaChoiceDialog: document.querySelector("#izakayaChoiceDialog"),
+    tempuraChoiceDialog: document.querySelector("#tempuraChoiceDialog"),
+    noodleChoiceDialog: document.querySelector("#noodleChoiceDialog"),
+    cutletChoiceDialog: document.querySelector("#cutletChoiceDialog"),
+    riceChoiceDialog: document.querySelector("#riceChoiceDialog"),
+    hotpotChoiceDialog: document.querySelector("#hotpotChoiceDialog"),
+    curryChoiceDialog: document.querySelector("#curryChoiceDialog"),
+    sweetsChoiceDialog: document.querySelector("#sweetsChoiceDialog"),
+    kansaiChoiceDialog: document.querySelector("#kansaiChoiceDialog"),
     mapChoiceDialog: document.querySelector("#mapChoiceDialog"),
     waybackNavDialog: document.querySelector("#waybackNavDialog"),
     saveSiteDialog: document.querySelector("#saveSiteDialog"),
@@ -488,7 +544,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view)) || (target === "favorites" && view === "food");
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1180,6 +1236,7 @@
   }
 
   document.addEventListener("click", event => {
+    markEntryUpdateSeen(event.target.closest("button[data-update-key], button[data-tool-id]"));
     const trackedTool = event.target.closest("[data-tool-id]");
     if (trackedTool) recordOncePerSession("tool_click", trackedTool.dataset.toolId);
     const contactChannel = event.target.closest("[data-contact-channel]");
@@ -1192,10 +1249,162 @@
     }
     const directContact = event.target.closest("[data-direct-contact]");
     if (directContact) {
+      const openDialog = directContact.closest("dialog[open]");
+      if (openDialog) openDialog.close();
       go("contact");
       document.querySelector("#inquirySummary").hidden = true;
       showContactStep("channels", "profile");
       return;
+    }
+    if (event.target.closest("[data-sushi-open]")) {
+      els.sushiChoiceDialog.showModal();
+      return;
+    }
+    const sushiOption = event.target.closest("[data-sushi-query]");
+    if (sushiOption) {
+      const query = sushiOption.dataset.sushiQuery;
+      els.sushiChoiceDialog.close();
+      showMapChoice(query, sushiOption.dataset.sushiLabel, {
+        intro: "先在地图里搜索，再点进具体分店查看路线；搜索范围可能受地图当前区域影响。",
+        googleDescription: "按日文店名搜索门店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文店名搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文店名 · 如果位置不对，可复制日文词手动搜",
+        note: "地图先显示搜索结果，不会直接导航；营业时间和排队情况请以具体门店信息为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-ramen-open]")) {
+      els.ramenChoiceDialog.showModal();
+      return;
+    }
+    const ramenOption = event.target.closest("[data-ramen-query]");
+    if (ramenOption) {
+      const query = ramenOption.dataset.ramenQuery;
+      els.ramenChoiceDialog.close();
+      showMapChoice(query, ramenOption.dataset.ramenLabel, {
+        intro: "先在地图里搜索，再点进具体门店查看路线；地图搜索结果不保证店里一定供应这种口味。",
+        googleDescription: "按日文口味搜索拉面店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文口味搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文口味 · 位置不对时可复制日文词手动搜",
+        note: "地图先显示搜索结果，不会直接导航；菜单、营业时间和排队情况请以具体门店信息为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-wagyu-open]")) {
+      els.wagyuChoiceDialog.showModal();
+      return;
+    }
+    const wagyuOption = event.target.closest("[data-wagyu-query]");
+    if (wagyuOption) {
+      els.wagyuChoiceDialog.close();
+      showMapChoice(wagyuOption.dataset.wagyuQuery, wagyuOption.dataset.wagyuLabel, {
+        intro: "先在地图里找附近的店，再点进具体门店看路线。搜索结果不保证菜单或套餐内容。",
+        googleDescription: "按日文词搜索烧肉店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文词搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "烤肉自助不一定提供和牛；菜品、价格、时限和预约条件请以门店为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-izakaya-open]")) {
+      els.izakayaChoiceDialog.showModal();
+      return;
+    }
+    const izakayaOption = event.target.closest("[data-izakaya-query]");
+    if (izakayaOption) {
+      els.izakayaChoiceDialog.close();
+      showMapChoice(izakayaOption.dataset.izakayaQuery, izakayaOption.dataset.izakayaLabel, {
+        intro: "先在地图里看附近的店，再点进具体门店查看路线。地图结果可能受当前区域影响。",
+        googleDescription: "按日文词搜索居酒屋 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文词搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "搜索结果不保证供应对应菜品；菜单、营业时间和预约情况请以门店为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-tempura-open]")) {
+      els.tempuraChoiceDialog.showModal();
+      return;
+    }
+    const tempuraOption = event.target.closest("[data-tempura-query]");
+    if (tempuraOption) {
+      els.tempuraChoiceDialog.close();
+      showMapChoice(tempuraOption.dataset.tempuraQuery, tempuraOption.dataset.tempuraLabel, {
+        intro: "先在地图里找附近的店，再点进具体门店查看路线；搜索结果不保证菜单内容。",
+        googleDescription: "按日文词搜索天妇罗 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文词搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "同一家店可能提供多种吃法；菜单、价格和营业时间请以具体门店为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-eel-open]")) {
+      if (els.riceChoiceDialog.open) els.riceChoiceDialog.close();
+      showMapChoice("うなぎ", "附近鳗鱼饭", {
+        intro: "用日文搜索附近的鳗鱼料理店；想吃鳗鱼饭，请点进门店确认有うな丼或うな重。",
+        googleDescription: "搜索附近鳗鱼料理店 · 需要当地网络才能打开哦！",
+        appleDescription: "搜索附近鳗鱼料理店 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "搜索结果不保证供应鳗鱼饭；菜单、价格、营业时间请以门店为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-noodle-open]")) {
+      els.noodleChoiceDialog.showModal();
+      return;
+    }
+    const noodleOption = event.target.closest("[data-noodle-query]");
+    if (noodleOption) {
+      els.noodleChoiceDialog.close();
+      showMapChoice(noodleOption.dataset.noodleQuery, noodleOption.dataset.noodleLabel, {
+        intro: "先在地图里找附近的面店，再点进具体门店看路线。",
+        googleDescription: "按日文词搜索面店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文词搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "菜单、营业时间和排队情况请以具体门店为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-cutlet-open]")) {
+      els.cutletChoiceDialog.showModal();
+      return;
+    }
+    const cutletOption = event.target.closest("[data-cutlet-query]");
+    if (cutletOption) {
+      els.cutletChoiceDialog.close();
+      showMapChoice(cutletOption.dataset.cutletQuery, cutletOption.dataset.cutletLabel, {
+        intro: "猪排与牛排分开搜索；先点进具体门店确认菜单，再导航过去。",
+        googleDescription: "按日文词搜索炸排店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文词搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: "搜索结果不保证供应对应肉类；菜单、价格和营业时间请以门店为准。"
+      });
+      return;
+    }
+    const newFoodChoices = [
+      ["rice", els.riceChoiceDialog],
+      ["hotpot", els.hotpotChoiceDialog],
+      ["curry", els.curryChoiceDialog],
+      ["sweets", els.sweetsChoiceDialog],
+      ["kansai", els.kansaiChoiceDialog]
+    ];
+    for (const [kind, dialog] of newFoodChoices) {
+      if (event.target.closest(`[data-${kind}-open]`)) {
+        dialog.showModal();
+        return;
+      }
+      const option = event.target.closest(`[data-${kind}-query]`);
+      if (option) {
+        dialog.close();
+        showMapChoice(option.dataset[`${kind}Query`], option.dataset[`${kind}Label`], {
+          intro: "先在地图里找附近的店，再点进具体门店确认菜单和路线。",
+          googleDescription: "按日文词搜索附近的店 · 需要当地网络才能打开哦！",
+          appleDescription: "按日文词搜索 · 适合 iPhone",
+          amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+          note: "地图搜索结果不保证供应对应菜品；菜单、价格、营业时间请以具体门店为准。"
+        });
+        return;
+      }
     }
     const saveSiteButton = event.target.closest("[data-save-site]");
     if (saveSiteButton) {
@@ -1285,7 +1494,7 @@
           {
             url: mapSearchUrl("google", "貸切温泉"),
             icon: "私",
-            name: "找私汤／家庭温泉（纹身 OK）",
+            name: "找私汤／情侣家庭温泉（纹身 OK）",
             description: "私汤（貸切風呂／貸切温泉）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
             className: "private-bath"
           }
@@ -1372,6 +1581,16 @@
       return;
     }
 
+    if (event.target.closest("[data-parking-choice]")) {
+      showMapChoice("コインパーキング", "附近收费停车场", {
+        intro: "自驾游找临时收费车位。先在地图查看附近停车场，再选具体地点导航过去。",
+        googleDescription: "日文搜索收费停车场 · 需要当地网络才能打开哦！",
+        appleDescription: "日文搜索收费停车场 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 若位置不对，可复制日文词手动搜",
+        note: "地图排序不保证最近，也不保证有空位；停车费用、营业时间、限高及付款方式请以现场标识为准。"
+      });
+      return;
+    }
     const mapSearchButton = event.target.closest("[data-map-query]");
     if (mapSearchButton) {
       const query = mapSearchButton.dataset.mapQuery;
@@ -1546,6 +1765,7 @@
 
   if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
   showContactStep("choose");
+  refreshUpdateBadges();
   updateFavoriteCount();
   renderWaybackPlaces();
   renderSources();

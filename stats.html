@@ -32,7 +32,8 @@
     <p class="muted">更完整的来源、国家和设备数据可在 <a href="https://dash.cloudflare.com/4adf8a79fc3df76bee97f9279aec0cb8/web-analytics/overview?siteTag~in=6b851b44c9f34c1998eeebea27bb830a" target="_blank" rel="noopener">Cloudflare Web Analytics</a> 查看。</p>
   </div>
 </main><script>
-const labels={toilet:"随便O（附近厕所）",smoking:"来一根",wayback:"路痴救星",onsen:"泡个温泉",convenience:"便利一下","convenience-store":"附近便利店",supermarket:"附近超市",drugstore:"附近药妆店",luggage:"行李寄存",anime:"动漫原景地","japanese-help":"给日本人看",laundry:"洗衣房",contact:"问黑豚",fishing:"渔具店",trash:"扔一下","help-request":"找人帮忙","food-consult":"美食咨询","custom-route-consult":"个性化小众线路"};
+const labels={toilet:"随便O（附近厕所）",smoking:"来一根",wayback:"路痴救星",onsen:"泡个温泉",convenience:"便利一下","convenience-store":"附近便利店",supermarket:"附近超市",drugstore:"附近药妆店",luggage:"行李寄存",anime:"动漫原景地","japanese-help":"给日本人看",laundry:"洗衣房",contact:"问黑豚",fishing:"渔具店",trash:"扔一下",parking:"停车场","food-hub":"附近吃什么","sushi-nearby":"附近回转寿司","ramen-nearby":"附近拉面店","wagyu-nearby":"附近烧肉店","izakaya-nearby":"附近居酒屋","rice-nearby":"米饭・定食","hotpot-nearby":"日式火锅","curry-nearby":"日式咖喱","sweets-nearby":"甜品・茶","kansai-food-nearby":"关西小吃","tempura-nearby":"附近天妇罗","eel-nearby":"附近鳗鱼饭","noodle-nearby":"荞麦面／乌冬","cutlet-nearby":"炸猪排／炸牛排","help-request":"找人帮忙","food-consult":"美食咨询","custom-route-consult":"个性化小众线路"};
+labels["food-reservation-help"]="餐厅预约协助";
 const countryFallback={jp:"日本",cn:"中国大陆",tw:"台湾",my:"马来西亚",hk:"香港",mo:"澳门",sg:"新加坡",th:"泰国",kr:"韩国",us:"美国",ca:"加拿大",au:"澳大利亚",gb:"英国",xx:"未知地区"};
 const chinaRegionNames={ah:"安徽",bj:"北京",cq:"重庆",fj:"福建",gs:"甘肃",gd:"广东",gx:"广西",gz:"贵州",hi:"海南",he:"河北",hl:"黑龙江",ha:"河南",hb:"湖北",hn:"湖南",js:"江苏",jx:"江西",jl:"吉林",ln:"辽宁",nm:"内蒙古",nx:"宁夏",qh:"青海",sn:"陕西",sd:"山东",sh:"上海",sx:"山西",sc:"四川",tj:"天津",xj:"新疆",xz:"西藏",yn:"云南",zj:"浙江",unknown:"未识别"};
 const regionNames=typeof Intl.DisplayNames==="function"?new Intl.DisplayNames(["zh-CN"],{type:"region"}):null;
