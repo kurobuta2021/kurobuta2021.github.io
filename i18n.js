@@ -340,7 +340,8 @@
     "落地机场了，能找人来接吗？": "Can someone pick me up at the airport?", "我想吃的那家店订不到位，能帮我问问吗？": "The restaurant I want is fully booked. Can you ask for me?", "我想泡私汤，日语电话搞不定": "I want a private bath, but I can't handle the phone call in Japanese", "我在日本遇到点事，能帮我一下吗？": "Something came up in Japan. Could you help me?",
     "我想买个限定款，能帮我找找吗？": "I want a limited edition item. Can you help me find it?", "我有个想法，想找你聊聊合作": "I have an idea and want to talk about working together", "想带爸妈轻松玩一天，有什么路线？": "I want an easy day out with my parents. Any route ideas?", "带娃来日本，哪儿玩比较省心？": "Where can I take my kids in Japan for an easy day out?",
 "我想约家好吃的鳗鱼饭": "I want to book a good unagi restaurant", "我想找家实惠的和牛烤肉": "I want an affordable wagyu yakiniku place", "我想去合掌村看看雪景": "I want to see Shirakawa-go in the snow", "我想去配一副眼镜": "I want to get a pair of glasses made", "我想去定制一套西装": "I want to have a suit tailored", "我想约个体检": "I want to book a health checkup", "我想找个陪同翻译": "I want an interpreter to accompany me", "拖一拖球，点一句，看看有没有你想的，咱们聊聊怎么弄。": "Drag the globe and pick an idea that sounds like yours. Let's talk it through.",
-    "有想法先聊聊。需要我帮忙预约、代办或陪同的，我会先把服务费说清楚，你觉得合适再决定。": "Let's talk about your idea first. If you need me to book, handle something, or accompany you, I'll explain the service fee up front so you can decide."
+    "有想法先聊聊。需要我帮忙安排，预约、代办或陪同的，我会先把服务费说清楚，你觉得合适再决定。": "Let's talk about your idea first. If you need me to make arrangements, book, handle something, or accompany you, I'll explain the service fee up front so you can decide.",
+    "我想找个和服店租和服": "I want to find a shop where I can rent a kimono", "我想迪士尼早晚接送一下": "I want a ride to Disney in the morning and back in the evening", "我想去北海道玩儿一圈": "I want to travel around Hokkaido", "我想去九州各地泡温泉": "I want to visit hot springs around Kyushu", "我想冲绳帮我约一下浮潜": "I want help booking snorkeling in Okinawa", "我想去一趟蜡笔小新的老家": "I want to visit Crayon Shin-chan's hometown"
   };
 
   const originals = new WeakMap();
