@@ -427,6 +427,14 @@ main { min-height: calc(100dvh - 66px); }
 .shopping-options button small { max-width: 100%; overflow-wrap: anywhere; color: #687971; font-size: .58rem; font-weight: 500; }
 .shopping-city { display: block; max-width: 100%; margin-top: 3px; color: #627b70; font-size: .56rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
 .shopping-options button:active { transform: scale(.98); }
+.shopping-experience-card { margin-top: 11px; padding: 13px; border: 1px solid #ded5eb; border-radius: 15px; background: linear-gradient(135deg,#faf5ff,#fff9f1); }
+.shopping-experience-label { display: inline-block; margin-bottom: 8px; color: #725c8b; font-size: .59rem; font-weight: 850; letter-spacing: .04em; }
+.shopping-experience-head { display: flex; align-items: center; gap: 7px; }
+.shopping-experience-head > span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: #fff; font-size: 1rem; }
+.shopping-experience-head strong { color: #3d3347; font-size: .81rem; }
+.shopping-experience-head small { color: #81758c; font-size: .61rem; font-weight: 550; }
+.shopping-experience-card p { margin: 9px 0 11px; color: #62596a; font-size: .68rem; line-height: 1.6; }
+.shopping-experience-card button { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 9px 11px; border: 0; border-radius: 10px; background: #765d91; color: #fff; font: inherit; font-size: .68rem; font-weight: 850; cursor: pointer; }
 .shopping-hub-note { margin: 13px 2px 0; color: var(--muted); font-size: .65rem; line-height: 1.6; }
 .food-hub-view { padding-bottom: 25px; }
 .food-hub-heading { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 13px; margin: 16px 0 22px; padding: 18px; border: 1px solid #e8d1b5; border-radius: 23px; background: linear-gradient(135deg,#fff7e7,#f3e3cd); }

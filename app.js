@@ -10,7 +10,7 @@
     favorites: "20261006-explore-cards",
     "food-hub": "20261006-gyudon-logos-order",
     "specialty-food-nearby": "20261005-specialty",
-    "shopping-hub": "20261006-generic-reuse-anime",
+    "shopping-hub": "20261006-maid-cafe",
     onsen: "20261006-onsen-booking-help-top",
     "japanese-help": "20261005-translate",
     parking: "20261005-parking",
@@ -1271,12 +1271,13 @@
     const shoppingOption = event.target.closest("[data-shopping-query]");
     if (shoppingOption) {
       const generic = shoppingOption.hasAttribute("data-shopping-generic");
+      const maidCafe = shoppingOption.dataset.shoppingQuery === "メイドカフェ";
       showMapChoice(shoppingOption.dataset.shoppingQuery, shoppingOption.dataset.shoppingLabel, {
-        intro: generic ? "先用地图看附近有哪些店，再点进具体门店确认卖什么、营业时间和路线。" : "先用地图看附近的搜索结果，再点进具体门店确认楼层、品牌和路线。",
+        intro: maidCafe ? "先在地图上找附近的女仆咖啡厅，再看具体门店的费用、营业时间和评价。" : generic ? "先用地图看附近有哪些店，再点进具体门店确认卖什么、营业时间和路线。" : "先用地图看附近的搜索结果，再点进具体门店确认楼层、品牌和路线。",
         googleDescription: generic ? "用日文类别词搜索 · 需要当地网络才能打开哦！" : "用日文店名搜索 · 需要当地网络才能打开哦！",
         appleDescription: generic ? "用日文类别词搜索 · 适合 iPhone" : "用日文店名搜索 · 适合 iPhone",
         amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
-        note: shoppingOption.dataset.shoppingQuery === "リユースショップ"
+        note: maidCafe ? "部分店另外收座位费，进店前先看价格。" : shoppingOption.dataset.shoppingQuery === "リユースショップ"
           ? "搜索结果可能包含只收购、不零售的店；请看具体门店的照片、经营内容和营业时间。"
           : "地图只显示搜索结果，不保证附近有店、品牌有货或支持免税；请查看具体门店信息。"
       });
