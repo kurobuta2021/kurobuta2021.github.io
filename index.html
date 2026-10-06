@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261006-maid-cafe-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261006-arrival-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -41,7 +41,7 @@
       <main id="mainContent">
         <section class="view active" data-view="home" aria-labelledby="homeTitle">
           <section class="travel-hero" aria-label="黑豚日本旅行">
-            <div class="travel-hero-copy"><strong>纯干货！！<br />当地人共享的宝藏工具，<br />中文直达！</strong><small>📍 日本全国可用</small></div>
+            <div class="travel-hero-copy"><strong>邪修！！纯干货！<br />日本自由行宝藏网站<br />中文直达！</strong><small>📍 日本全国可用</small></div>
           </section>
           <section class="quick-section" aria-labelledby="quickTitle">
             <div class="section-heading">
@@ -74,9 +74,9 @@
                 <img class="tool-illustration" src="./assets/card-luggage.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
-              <button class="tool-card wayback-feature-card" type="button" data-go="wayback" data-tool-id="wayback">
-                <span class="tool-copy"><strong>路痴救星</strong><small>不迷路<br />定个位<br />导航返回</small></span>
-                <img class="tool-illustration" src="./assets/card-lost.png" alt="" decoding="async" />
+              <button class="tool-card arrival-feature-card" type="button" data-go="arrival" data-tool-id="arrival">
+                <span class="tool-copy"><strong>入境小助手</strong><small>官方填写入口<br />申报单范本<br />第一次入境不慌</small></span>
+                <span class="arrival-card-art" aria-hidden="true">🛂</span>
                 <b>›</b>
               </button>
             </div>
@@ -88,9 +88,10 @@
               <button class="mini-tool anime-mini" type="button" data-category="anime" data-tool-id="anime"><img src="./assets/card-anime.png" alt="" loading="lazy" decoding="async" /><span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span><b>›</b></button>
               <button class="mini-tool japanese-mini" type="button" data-go="japanese" data-tool-id="japanese-help"><img src="./assets/card-japanese-help.png" alt="" loading="lazy" decoding="async" /><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
               <button class="mini-tool laundry-mini" type="button" data-map-query="コインランドリー" data-map-label="附近洗衣房" data-tool-id="laundry"><img src="./assets/card-laundry.png" alt="" loading="lazy" decoding="async" /><span><strong>洗衣房</strong><small>找附近的自助洗衣房</small></span><b>›</b></button>
-              <button class="mini-tool bus-mini" type="button" data-category="freebus" data-tool-id="tokyo-free-bus"><i class="mini-tool-icon">🚌</i><span><em>薅羊毛 · 0元 · 3条线</em><strong>东京站免费巴士</strong><small>丸之内、日本桥一带，上车不用买票</small></span><b>›</b></button>
+              <button class="mini-tool wayback-mini" type="button" data-go="wayback" data-tool-id="wayback"><img src="./assets/card-lost.png" alt="" loading="lazy" decoding="async" /><span><strong>路痴救星</strong><small>记住地点，导航返回</small></span><b>›</b></button>
               <button class="mini-tool map-mini fishing-mini" type="button" data-fishing-choice data-tool-id="fishing"><i class="mini-tool-icon">竿</i><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
               <button class="mini-tool map-mini parking-mini" type="button" data-parking-choice data-tool-id="parking"><i class="mini-tool-icon">P</i><span><strong>停车场</strong><small>自驾游 · 找附近收费停车场</small></span><b>›</b></button>
+              <button class="mini-tool bus-mini" type="button" data-category="freebus" data-tool-id="tokyo-free-bus"><i class="mini-tool-icon">🚌</i><span><em>薅羊毛 · 0元 · 3条线</em><strong>东京站免费巴士</strong><small>丸之内、日本桥一带，上车不用买票</small></span><b>›</b></button>
             </div>
             <p class="more-tools-note">地图地点来自第三方服务，请以现场为准。</p>
           </section>
@@ -174,6 +175,79 @@
             <small>将跳转到 Google 翻译；图片页可上传已拍照片。手机若无法使用，请在 Google 翻译 App 点「相机」。</small>
           </div>
           <p id="smokingSafety" class="safety-note" hidden>20岁以下不得进入吸烟区域，请以现场标识为准。</p>
+        </section>
+
+        <section class="view arrival-view" data-view="arrival" aria-labelledby="arrivalTitle">
+          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
+          <div class="arrival-hero"><span aria-hidden="true">🛂</span><div><p class="eyebrow">FIRST TIME IN JAPAN</p><h1 id="arrivalTitle">日本入境助手</h1><p>第一次来日本，填资料、查提醒、走出机场一步步来。</p></div></div>
+          <section class="arrival-official" aria-labelledby="arrivalOfficialTitle">
+            <span class="arrival-kicker">先做这件事</span>
+            <h2 id="arrivalOfficialTitle">入境资料，两种办法</h2>
+            <div class="arrival-options">
+              <div class="arrival-option arrival-option--digital">
+                <span class="arrival-option-number">1</span>
+                <div><h3>电子入境卡直通</h3><p>出发前在官网填好，落地亮二维码，省去现场填表丝滑入关。</p></div>
+              </div>
+              <div class="arrival-option arrival-option--paper">
+                <span class="arrival-option-number">2</span>
+                <div>
+                  <h3>现场填写纸质表</h3><p>来不及提前弄也别慌，到了按现场指引填表。多花点填写时间，现场排队人一般较多。</p>
+                  <div class="arrival-samples">
+                    <details class="arrival-sample" name="arrival-paper-samples">
+                      <summary>看范本：入境记录 <span aria-hidden="true">⌄</span></summary>
+                      <p>虚构信息填写示例，点开看整张。</p>
+                      <button class="arrival-zoom-trigger" type="button" data-arrival-zoom="ed">查看整张入境记录范本 ↗</button>
+                      <div class="arrival-form-scroll"><div class="arrival-form-example arrival-form-example--ed" role="img" aria-label="外国人入境记录填写示例：用虚构信息演示姓名、出生日期、旅游目的、航班、住宿地址、问题勾选和签名位置">
+                        <img src="./assets/arrival-ed-1.png" alt="" loading="lazy" />
+                        <span style="--x:20%;--y:24.8%">SAMPLE</span><span style="--x:48%;--y:24.8%">TARO</span>
+                        <span style="--x:21%;--y:31.3%">01&nbsp;&nbsp;&nbsp;&nbsp;01&nbsp;&nbsp;&nbsp;&nbsp;1990</span><span style="--x:48%;--y:31.3%">CHINA&nbsp; / &nbsp;SHANGHAI</span>
+                        <span style="--x:21.4%;--y:36.4%">✓</span><span style="--x:56%;--y:36.2%">JL999</span><span style="--x:56%;--y:41.6%">5 DAYS</span>
+                        <span style="--x:20%;--y:46%">TOKYO, CHIYODA-KU, SAMPLE HOTEL&nbsp; / &nbsp;03-0000-0000</span>
+                        <span style="--x:68.4%;--y:55.7%">✓</span><span style="--x:68.4%;--y:61.2%">✓</span><span style="--x:68.4%;--y:66.9%">✓</span>
+                        <span style="--x:20%;--y:73.3%">SAMPLE TARO</span>
+                      </div></div>
+                      <p class="arrival-form-warning">姓名、地址和勾选只是示范，填写时按你自己的真实情况来。</p>
+                      <a class="arrival-sample-source" href="https://www.moj.go.jp/isa/content/930002133.pdf" target="_blank" rel="noopener noreferrer">出入国在留管理厅原件 ↗</a>
+                    </details>
+                    <details class="arrival-sample" name="arrival-paper-samples">
+                      <summary>看范本：海关申报 <span aria-hidden="true">⌄</span></summary>
+                      <p>虚构信息填写示例，点开看整张。</p>
+                      <button class="arrival-zoom-trigger" type="button" data-arrival-zoom="customs">查看整张海关申报范本 ↗</button>
+                      <div class="arrival-form-scroll"><div class="arrival-form-example arrival-form-example--customs" role="img" aria-label="海关携带品申报单填写示例：用虚构信息演示航班、日期、姓名、住址、护照号码、申报问题和签名位置">
+                        <img src="./assets/arrival-customs-1.png" alt="" loading="lazy" />
+                        <span style="--x:29%;--y:17.7%">JL999</span><span style="--x:64%;--y:17.7%">SHANGHAI</span><span style="--x:30%;--y:20%">2026&nbsp;&nbsp;&nbsp;10&nbsp;&nbsp;&nbsp;06</span>
+                        <span style="--x:30%;--y:23.9%">SAMPLE TARO</span><span style="--x:30%;--y:27%">TOKYO, CHIYODA-KU, SAMPLE HOTEL</span>
+                        <span style="--x:29%;--y:30.8%">CHINA</span><span style="--x:62%;--y:30.8%">OFFICE WORKER</span><span style="--x:30%;--y:33.1%">1990&nbsp;&nbsp;&nbsp;01&nbsp;&nbsp;&nbsp;01</span>
+                        <span style="--x:30%;--y:35.8%">EXAMPLE123</span><span style="--x:34%;--y:38.2%">0</span><span style="--x:55%;--y:38.2%">0</span><span style="--x:76%;--y:38.2%">0</span>
+                        <span style="--x:83%;--y:45%">✓</span><span style="--x:83%;--y:47.4%">✓</span><span style="--x:83%;--y:49.6%">✓</span><span style="--x:83%;--y:51.8%">✓</span><span style="--x:83%;--y:54.2%">✓</span><span style="--x:83%;--y:56.5%">✓</span>
+                        <span style="--x:83%;--y:64.1%">✓</span><span style="--x:83%;--y:74.4%">✓</span><span style="--x:23%;--y:91.8%">SAMPLE TARO</span>
+                      </div></div>
+                      <p class="arrival-form-warning">“是／否”只是示范，携带物品和申报事项要按真实情况填写。</p>
+                      <a class="arrival-sample-source" href="https://www.customs.go.jp/kaisei/youshiki/form_C/C5360-D.pdf" target="_blank" rel="noopener noreferrer">日本海关原件 ↗</a>
+                    </details>
+                  </div>
+                  <small class="arrival-sample-note">先认个样子，现场按拿到的表格填写就好。</small>
+                </div>
+              </div>
+            </div>
+            <a class="arrival-primary-link" href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener noreferrer">去 Visit Japan Web 官网填写 <span aria-hidden="true">↗</span></a>
+            <p class="arrival-help-note">不会填？到短视频平台搜「Visit Japan Web 填写教程」看看，个人资料记得只在官网填。</p>
+            <a class="arrival-text-link" href="https://services.digital.go.jp/visit-japan-web/guide/" target="_blank" rel="noopener noreferrer">看官方使用说明 ↗</a>
+            <small>核对网址为 vjw.digital.go.jp；具体适用手续和现场指引以日本官方为准。</small>
+          </section>
+          <section class="arrival-panel" aria-labelledby="arrivalStepsTitle"><div class="arrival-panel-heading"><span>01</span><h2 id="arrivalStepsTitle">第一次填写，先准备这些</h2></div><div class="arrival-steps"><div><b>①</b><strong>证件与航班</strong><p>护照、航班号、抵达日期；签证或免签资格按本人国籍单独核实。</p></div><div><b>②</b><strong>日本住宿信息</strong><p>准备第一晚住处的名称、日文地址和电话，填写时照订单核对。</p></div><div><b>③</b><strong>确认登记结果</strong><p>按官网步骤完成后，确认页面显示的二维码；出发前再检查信息是否与证件一致。</p></div></div></section>
+          <section class="arrival-panel" aria-labelledby="arrivalChecklistTitle"><div class="arrival-panel-heading"><span>02</span><h2 id="arrivalChecklistTitle">出发前的小清单</h2></div><div class="arrival-checklist"><label><input type="checkbox" /><span>核对护照有效期；确认签证或免签资格</span></label><label><input type="checkbox" /><span>核对机票与住宿资料</span></label><label><input type="checkbox" /><span>检查 Visit Japan Web 登记资料与二维码</span></label><label><input type="checkbox" /><span>有食品、药品或动植物？先查官方携带规定</span></label></div><small>勾选仅在当前页面临时保留，不会上传。</small></section>
+          <section class="arrival-panel arrival-reference" aria-labelledby="arrivalTipsTitle">
+            <div class="arrival-panel-heading"><span>03</span><h2 id="arrivalTipsTitle">机场便民设施提醒</h2></div>
+            <p>过完入境和海关，离开机场前花一分钟看看这些；不一定都要办，市区有，但是不如机场集中，不懂得你还可以直接去问讯台找个工作人员给你指。</p>
+            <div class="arrival-facilities">
+              <div><span aria-hidden="true">💳</span><strong>交通 IC 卡办了没？</strong><p>地铁、巴士、便利店、自动贩卖机等地方都能用，很方便；想办实体 Suica 等交通卡，建议问机场询问台。苹果手机可以直接注册电子版，更方便，提前在家弄好都行。</p></div>
+              <div><span aria-hidden="true">📶</span><strong>手机网搞没搞定？</strong><p>漫游和租的Wi-Fi能用不？机场还有SIM 卡或 Wi‑Fi 柜台，营业时间和套餐自己确认。</p></div>
+              <div><span aria-hidden="true">💴</span><strong>备用的现金准备好了没有？</strong><p>许多小店爱收现金，人均备个1-2万日元就差不多了，机场有换汇柜台和 ATM；市区便利店的 ATM 也能用银联卡取日元。</p></div>
+              <div><span aria-hidden="true">🚻</span><strong>出机场前，再检查一遍！</strong><p>有的机场到市内要一个多小时，厕所先上好；想抽烟就去指定吸烟室，随身行李带齐了没？人齐没齐检查一遍哈！</p></div>
+            </div>
+            <div class="arrival-transfer-cta"><strong>日本各机场接送机预约</strong><button type="button" data-direct-contact data-tool-id="airport-transfer-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
+          </section>
         </section>
 
         <section class="view wayback-view" data-view="wayback" aria-labelledby="waybackTitle">
@@ -648,6 +722,12 @@
         <p id="mapChoiceNote" class="map-choice-note">在日本建议优先使用 Google 地图；搜不到时可换其他地图。</p>
       </form>
     </dialog>
+    <dialog id="arrivalZoomDialog" class="app-dialog arrival-zoom-dialog">
+      <form method="dialog"><div class="dialog-heading"><h2 id="arrivalZoomTitle">填写范本</h2><button value="cancel" aria-label="关闭">×</button></div></form>
+      <p>默认看整张；想看字，点“放大细节”后左右滑动。实际资料和申报按自己的情况填写。</p>
+      <button id="arrivalZoomToggle" class="arrival-zoom-toggle" type="button" aria-pressed="false">放大细节</button>
+      <div class="arrival-zoom-scroll" data-arrival-zoom-content></div>
+    </dialog>
     <dialog id="waybackNavDialog" class="app-dialog wayback-nav-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">WALK BACK</p><h2>走回这个地方</h2></div><button value="cancel" aria-label="关闭">×</button></div>
@@ -688,8 +768,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261006-maid-cafe-release"></script>
+    <script src="./i18n.js?v=20261006-arrival-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261006-maid-cafe-release"></script>
+    <script src="./app.js?v=20261006-arrival-release"></script>
   </body>
 </html>

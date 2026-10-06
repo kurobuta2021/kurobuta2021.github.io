@@ -1,4 +1,4 @@
-const CACHE_NAME = "heitu-toolbox-v31";
+const CACHE_NAME = "heitu-toolbox-v36";
 const APP_SHELL = [
   "./", "./index.html", "./styles.css", "./i18n.js", "./share-utils.js", "./app.js",
   "./heitu-jun.png", "./heitu-contact.png", "./wechat-group-qr.jpg",
@@ -19,7 +19,8 @@ const APP_SHELL = [
   "./assets/shopping-gu.svg", "./assets/shopping-muji.svg", "./assets/shopping-daiso.svg",
   "./assets/shopping-loft.png", "./assets/shopping-hands.png", "./assets/shopping-3coins.png",
   "./assets/shopping-komehyo.svg", "./assets/shopping-secondstreet.svg", "./assets/shopping-surugaya.svg",
-  "./assets/shopping-animate.svg", "./assets/shopping-mandarake.png", "./assets/shopping-lashinbang.png"
+  "./assets/shopping-animate.svg", "./assets/shopping-mandarake.png", "./assets/shopping-lashinbang.png",
+  "./assets/arrival-ed-1.png", "./assets/arrival-customs-1.png"
 ];
 
 self.addEventListener("install", event => {

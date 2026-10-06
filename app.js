@@ -7,6 +7,8 @@
   const UPDATE_SEEN_KEY = "heitu-seen-updates-v1";
   // Only list entries with actual changes. Bump an entry's version when that section changes again.
   const ENTRY_UPDATES = Object.freeze({
+    arrival: "20261006-arrival-samples-fixed",
+    wayback: "20261006-arrival-preview",
     favorites: "20261006-explore-cards",
     "food-hub": "20261006-gyudon-logos-order",
     "specialty-food-nearby": "20261005-specialty",
@@ -556,7 +558,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1795,6 +1797,22 @@
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
   document.querySelectorAll("[data-copy-whatsapp]").forEach(button => button.addEventListener("click", () => copyText("@kurobutajapan", "WhatsApp 用户名已复制：@kurobutajapan")));
   document.querySelectorAll("[data-contact-qr]").forEach(button => button.addEventListener("click", () => openContactQr(button.dataset.contactQr)));
+  document.querySelectorAll("[data-arrival-zoom]").forEach(button => button.addEventListener("click", () => {
+    const source = button.closest(".arrival-sample")?.querySelector(".arrival-form-example");
+    const dialog = document.querySelector("#arrivalZoomDialog");
+    if (!source || !dialog) return;
+    dialog.classList.remove("is-zoomed");
+    dialog.querySelector("#arrivalZoomToggle").textContent = "放大细节";
+    dialog.querySelector("#arrivalZoomToggle").setAttribute("aria-pressed", "false");
+    dialog.querySelector("#arrivalZoomTitle").textContent = button.dataset.arrivalZoom === "ed" ? "入境记录填写范本" : "海关申报填写范本";
+    dialog.querySelector("[data-arrival-zoom-content]").replaceChildren(source.cloneNode(true));
+    dialog.showModal();
+  }));
+  document.querySelector("#arrivalZoomToggle").addEventListener("click", event => {
+    const zoomed = document.querySelector("#arrivalZoomDialog").classList.toggle("is-zoomed");
+    event.currentTarget.textContent = zoomed ? "看整张" : "放大细节";
+    event.currentTarget.setAttribute("aria-pressed", String(zoomed));
+  });
   document.querySelectorAll("[data-copy-email]").forEach(button => button.addEventListener("click", () => copyText("kurobuta2021@gmail.com", "邮箱已复制：kurobuta2021@gmail.com")));
   document.querySelector("#relocateToilets").addEventListener("click", startToiletLocator);
   document.querySelector("#searchMapArea").addEventListener("click", () => {

@@ -752,6 +752,10 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .wayback-feature-card > b { color: #317692; }
 .wayback-feature-card small { max-width: 112px; }
 .wayback-feature-card .tool-illustration { right: -8px; bottom: 2px; width: 67%; max-width: 150px; }
+.arrival-feature-card { background: radial-gradient(circle at 88% 8%, rgba(255,255,255,.6), transparent 72px), linear-gradient(140deg,#e7efff,#c7d7f1); }
+.arrival-feature-card > b { color: #416b9d; }
+.arrival-feature-card .tool-copy small { max-width: 106px; }
+.arrival-card-art { position: absolute; z-index: 2; right: 13px; bottom: 16px; width: 92px; height: 92px; display: grid; place-items: center; border-radius: 24px; background: rgba(255,255,255,.72); box-shadow: 0 9px 22px rgba(46,83,136,.11), inset 0 1px rgba(255,255,255,.9); font-size: 3.5rem; line-height: 1; pointer-events: none; }
 .wayback-callout { z-index: 3; width: max-content; margin: 7px 0 3px; padding: 5px 8px; border-radius: 999px; background: #347f9e; color: #fff; box-shadow: 0 5px 12px rgba(45,104,129,.2); font-family: "PingFang SC", sans-serif; font-size: .68rem; font-style: normal; font-weight: 900; letter-spacing: 0; }
 
 .home-shortcuts { display: grid; gap: 10px; margin-top: 19px; }
@@ -803,6 +807,72 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .coverage-note { margin-top: 12px; }
 
 .wayback-view { padding-top: 10px; }
+.arrival-view { padding-top: 10px; }
+.arrival-hero { display: flex; align-items: center; gap: 14px; margin: 11px 0 14px; padding: 20px 19px; border-radius: 24px; background: linear-gradient(130deg,#e8f0ff,#d3e0f3); box-shadow: 0 10px 24px rgba(59,86,122,.1); }
+.arrival-hero > span { flex: 0 0 auto; width: 65px; height: 65px; display: grid; place-items: center; border-radius: 19px; background: #fffdf7; font-size: 2.1rem; box-shadow: 0 5px 14px rgba(54,83,119,.1); }
+.arrival-hero h1 { margin: 2px 0 5px; font-size: 1.8rem; line-height: 1.1; letter-spacing: -.05em; }
+.arrival-hero p:last-child { margin: 0; color: #516579; font-size: .75rem; }
+.arrival-official,.arrival-panel { margin: 0 0 12px; padding: 19px; border: 1px solid #e4e0d9; border-radius: 22px; background: #fffdfa; box-shadow: 0 6px 18px rgba(55,43,31,.045); }
+.arrival-official { border-color: #c9ddcd; background: linear-gradient(150deg,#f6fff7,#fffdf8); }
+.arrival-kicker { display: inline-block; padding: 4px 9px; border-radius: 99px; background: #dcf0df; color: #397747; font-size: .65rem; font-weight: 900; }
+.arrival-official h2 { margin: 9px 0 7px; font-size: 1.32rem; }
+.arrival-official p,.arrival-panel > p { margin: 0 0 13px; color: #5e625d; font-size: .78rem; line-height: 1.65; }
+.arrival-options { display: grid; gap: 9px; margin: 13px 0 15px; }
+.arrival-option { display: grid; grid-template-columns: 26px minmax(0,1fr); gap: 10px; align-items: start; padding: 13px; border: 1px solid #d7e5d9; border-radius: 16px; background: #eff9f0; }
+.arrival-option--paper { border-color: #e7e2d9; background: #f8f6f2; }
+.arrival-option-number { width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; background: #34845b; color: #fff; font-size: .7rem; font-weight: 900; }
+.arrival-option--paper .arrival-option-number { background: #99958d; }
+.arrival-option h3 { margin: 1px 0 4px; font-size: .9rem; line-height: 1.25; }
+.arrival-option p { margin: 0; font-size: .74rem; line-height: 1.55; }
+.arrival-samples { display: grid; gap: 7px; margin-top: 11px; }
+.arrival-sample { min-width: 0; overflow: hidden; border: 1px solid #d9dfeb; border-radius: 12px; background: #fff; }
+.arrival-sample summary { min-height: 39px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 11px; color: #345a82; font-size: .75rem; font-weight: 850; cursor: pointer; list-style: none; }
+.arrival-sample summary::-webkit-details-marker { display: none; }
+.arrival-sample[open] summary { border-bottom: 1px solid #e5e9ef; }
+.arrival-sample summary span { font-size: 1.1rem; transition: transform .15s ease; }
+.arrival-sample[open] summary span { transform: rotate(180deg); }
+.arrival-sample > p { margin: 9px 10px 6px; color: #706e69; font-size: .66rem; }
+.arrival-zoom-trigger { width: calc(100% - 20px); min-height: 36px; margin: 2px 10px 9px; border: 0; border-radius: 9px; background: #e9f1fa; color: #285984; font-size: .7rem; font-weight: 850; cursor: pointer; }
+.arrival-form-scroll { max-width: 100%; overflow: hidden; margin: 0 9px 8px; border: 1px solid #e5e3df; border-radius: 9px; background: #fff; }
+.arrival-form-example { position: relative; width: 100%; container-type: inline-size; }
+.arrival-form-example img { display: block; width: 100%; height: auto; }
+.arrival-form-example > span { position: absolute; left: var(--x); top: var(--y); color: #1666a5; font: 800 1.6cqw/1.1 Arial,sans-serif; white-space: nowrap; text-shadow: 0 1px #fff; }
+.arrival-form-example--customs > span { font-size: 2.2cqw; }
+.arrival-sample .arrival-form-warning { margin: 0 10px 9px; color: #a35b40; font-size: .67rem; font-weight: 700; }
+.arrival-zoom-dialog { width: min(96vw, 760px); max-height: 91vh; padding: 15px; }
+.arrival-zoom-dialog form { margin: 0 0 5px; }
+.arrival-zoom-dialog .dialog-heading h2 { font-size: 1rem; }
+.arrival-zoom-dialog > p { margin: 0 0 10px; color: #6f6862; font-size: .68rem; line-height: 1.4; }
+.arrival-zoom-toggle { min-height: 34px; margin: 0 0 9px; padding: 6px 12px; border: 0; border-radius: 9px; background: #e9f1fa; color: #285984; font-size: .72rem; font-weight: 850; cursor: pointer; }
+.arrival-zoom-scroll { max-height: calc(91vh - 105px); overflow: auto; border: 1px solid #e5e3df; border-radius: 10px; background: #fff; -webkit-overflow-scrolling: touch; }
+.arrival-zoom-scroll .arrival-form-example { width: 100%; }
+.arrival-zoom-dialog.is-zoomed .arrival-form-example--ed { width: 700px; }
+.arrival-zoom-dialog.is-zoomed .arrival-form-example--customs { width: 425px; }
+.arrival-sample-source { display: inline-block; margin: 0 10px 11px; color: #3a678d; font-size: .67rem; font-weight: 750; }
+.arrival-sample-note { display: block; margin-top: 8px; color: #77736e; font-size: .65rem; line-height: 1.45; }
+.arrival-official .arrival-help-note { margin: 11px 0 0; font-size: .72rem; }
+.arrival-primary-link { min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px; border-radius: 14px; background: #34845b; color: #fff; font-size: .84rem; font-weight: 900; text-align: center; text-decoration: none; }
+.arrival-text-link { display: inline-block; margin: 12px 0 5px; color: #326d56; font-size: .73rem; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.arrival-official > small,.arrival-panel > small { display: block; color: #77746f; font-size: .64rem; line-height: 1.5; }
+.arrival-panel-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 13px; }
+.arrival-panel-heading > span { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 9px; background: #e4ebf6; color: #456890; font: 900 .67rem/1 Arial,sans-serif; }
+.arrival-panel-heading h2 { margin: 0; font-size: 1.02rem; line-height: 1.2; }
+.arrival-steps { display: grid; gap: 8px; }
+.arrival-steps > div { display: grid; grid-template-columns: 27px 1fr; column-gap: 8px; padding: 10px 11px; border-radius: 13px; background: #f6f5f1; }
+.arrival-steps b { grid-row: span 2; color: #6485a2; }
+.arrival-steps strong { font-size: .78rem; }
+.arrival-steps p { margin: 3px 0 0; color: #65625e; font-size: .69rem; line-height: 1.45; }
+.arrival-checklist { display: grid; gap: 8px; margin-bottom: 10px; }
+.arrival-checklist label { display: flex; align-items: start; gap: 9px; padding: 10px; border-radius: 12px; background: #f7f7f3; font-size: .73rem; cursor: pointer; }
+.arrival-checklist input { flex: 0 0 auto; width: 18px; height: 18px; margin: 0; accent-color: #34845b; }
+.arrival-facilities { display: grid; gap: 8px; margin: 0 0 14px; }
+.arrival-facilities > div { display: grid; grid-template-columns: 32px 1fr; column-gap: 9px; padding: 11px 12px; border-radius: 13px; background: #f4f7f8; }
+.arrival-facilities > div > span { grid-row: span 2; align-self: start; font-size: 1.13rem; }
+.arrival-facilities strong { color: #263948; font-size: .78rem; }
+.arrival-facilities p { margin: 3px 0 0; color: #5a656a; font-size: .68rem; line-height: 1.5; }
+.arrival-transfer-cta { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px; border: 1px solid #d9e6e7; border-radius: 14px; background: #eef8f8; }
+.arrival-transfer-cta strong { color: #27515a; font-size: .78rem; line-height: 1.35; }
+.arrival-transfer-cta button { flex: 0 0 auto; min-height: 36px; padding: 7px 11px; border: 0; border-radius: 10px; background: #2d7887; color: #fff; font-size: .72rem; font-weight: 800; cursor: pointer; }
 .wayback-heading { min-height: 130px; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 12px 0 10px; padding: 23px 20px; overflow: hidden; border: 1px solid rgba(49,118,146,.09); border-radius: 25px; background: radial-gradient(circle at 90% 18%, rgba(255,255,255,.7), transparent 66px), linear-gradient(140deg,#e8f7f5,#c5e6ec); box-shadow: 0 10px 24px rgba(51,89,100,.09); }
 .wayback-heading h1 { margin: 2px 0 5px; font-size: 2rem; line-height: 1; font-weight: 950; letter-spacing: -.06em; }
 .wayback-heading p:last-child { margin: 0; color: #4f676e; font-size: .78rem; }
@@ -1204,6 +1274,7 @@ a.contact-channel:active { transform: scale(.985); }
   }
   .anime-mini { background: linear-gradient(145deg,#e8f7ff,#ccecfb); }
   .japanese-mini { background: linear-gradient(145deg,#f4ecff,#e4d8f7); }
+  .wayback-mini { background: linear-gradient(140deg,#e5f6f6,#cce9ed); }
   .laundry-mini { background: linear-gradient(145deg,#e9fbf8,#d0f0eb); }
   .fishing-mini { background: linear-gradient(145deg,#e8f7ff,#ccecfb); }
   .parking-mini { background: linear-gradient(145deg,#edf5ff,#d7e8fa); }
@@ -1213,7 +1284,7 @@ a.contact-channel:active { transform: scale(.985); }
   .bus-mini em { width: max-content; padding: 3px 7px; border-radius: 999px; background: #c84e3a; color: #fff; font-size: .52rem; font-style: normal; font-weight: 900; letter-spacing: .03em; }
   .bus-mini strong { margin-top: 1px; color: #3c2b24; font-size: clamp(.9rem,3.6vw,1.05rem); }
   .bus-mini small { color: #75594c; font-size: clamp(.55rem,2.2vw,.64rem); }
-  .map-mini { grid-column: span 3; min-height: 84px; grid-template-columns: 47px minmax(0,1fr); padding-inline: 10px 23px; }
+  .map-mini { grid-column: span 2; }
   .mini-tool-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 14px; color: #fff; box-shadow: inset 0 1px rgba(255,255,255,.45), 0 5px 10px rgba(55,43,31,.08); font-size: 1.2rem; font-style: normal; font-weight: 950; }
   .fishing-mini .mini-tool-icon { background: linear-gradient(145deg,#55bfe0,#278caf); }
   .parking-mini .mini-tool-icon { border-radius: 11px; background: #1769bd; box-shadow: inset 0 0 0 3px #fff, 0 5px 12px rgba(18,75,133,.2); font-family: Arial, sans-serif; font-size: 1.7rem; font-weight: 900; line-height: 1; }
@@ -1223,6 +1294,7 @@ a.contact-channel:active { transform: scale(.985); }
   .mini-tool > span { min-width: 0; display: grid; gap: 3px; }
   .mini-tool strong { font-size: clamp(.7rem, 2.85vw, .82rem); line-height: 1.14; font-weight: 900; }
   .mini-tool small { color: #5f5953; font-size: clamp(.49rem, 1.95vw, .58rem); line-height: 1.35; }
+  .wayback-mini small { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
   .mini-tool > b { position: absolute; right: 6px; bottom: 8px; width: 19px; height: 19px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.7); color: #5d8da3; font-size: .9rem; }
   .more-tools-note { margin: 7px 4px 0; color: #7a736c; font-family: "PingFang SC", sans-serif; font-size: .55rem; line-height: 1.4; }
 
@@ -1329,6 +1401,7 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .primary-grid { gap: 7px; }
   .tool-card { height: 108px; min-height: 108px; padding: 10px 11px; border-radius: 18px; }
   .tool-copy { width: 68%; gap: 2px; }
+  .arrival-card-art { right: 6px; bottom: 5px; width: 51px; height: 51px; border-radius: 14px; font-size: 2.35rem; }
   .tool-card strong { font-size: clamp(.98rem, 4.3vw, 1.16rem); }
   .tool-card small { color: #38322d; font-size: clamp(.54rem, 2.25vw, .64rem); line-height: 1.27; font-weight: 700; text-shadow: 0 1px rgba(255,255,255,.72); }
   .tool-illustration { right: -8%; bottom: -14%; width: 68%; height: 70%; }
