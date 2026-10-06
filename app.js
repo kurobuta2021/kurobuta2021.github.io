@@ -564,7 +564,7 @@
     if (view === "favorites") renderFavorites();
     if (view === "japanese") renderPhrase();
     if (view === "wayback") renderWaybackPlaces();
-    if (view === "contact") showContactStep("choose", "travel");
+    if (view === "contact") showContactStep("channels", "profile");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -1230,6 +1230,120 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  const contactSphere = document.querySelector("#contactWordSphere");
+  const contactWords = [...contactSphere.querySelectorAll("button")];
+  const contactSphereToggle = document.querySelector("#contactSphereToggle");
+  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  const contactSpherePageSize = 14;
+  let contactSphereAngle = 0;
+  let contactSphereTilt = 0;
+  let contactSphereWindow = Math.max(0, contactWords.length - contactSpherePageSize);
+  let contactSphereLastSwap = Date.now();
+  let contactSpherePaused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function drawContactSphere() {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      contactWords.forEach(button => {
+        button.style.display = "";
+        button.style.transform = "none";
+        button.style.opacity = "1";
+        button.style.pointerEvents = "auto";
+      });
+      return;
+    }
+    const visibleCount = Math.min(contactSpherePageSize, contactWords.length);
+    const activeWords = Array.from({ length: visibleCount }, (_, index) => contactWords[(contactSphereWindow + index) % contactWords.length]);
+    contactWords.forEach(button => { button.style.display = activeWords.includes(button) ? "" : "none"; });
+    const radius = Math.min(contactSphere.clientWidth * .36, 140);
+    const cosine = Math.cos(contactSphereAngle);
+    const sine = Math.sin(contactSphereAngle);
+    const tiltCosine = Math.cos(contactSphereTilt);
+    const tiltSine = Math.sin(contactSphereTilt);
+    activeWords.forEach((button, index) => {
+      const y = 1 - (index + .5) * 2 / activeWords.length;
+      const ring = Math.sqrt(1 - y * y);
+      const theta = index * goldenAngle;
+      const x = Math.cos(theta) * ring;
+      const z = Math.sin(theta) * ring;
+      const projectedX = x * cosine + z * sine;
+      const rotatedZ = z * cosine - x * sine;
+      const projectedY = y * tiltCosine - rotatedZ * tiltSine;
+      const depth = y * tiltSine + rotatedZ * tiltCosine;
+      button.style.transform = `translate(-50%, -50%) translate(${(projectedX * radius).toFixed(1)}px, ${(projectedY * radius * .87).toFixed(1)}px) scale(${(.77 + (depth + 1) * .15).toFixed(2)})`;
+      const visible = depth > -.22;
+      button.style.opacity = visible ? String(.68 + (depth + .22) * .26) : "0";
+      button.style.pointerEvents = visible ? "auto" : "none";
+      button.style.zIndex = String(Math.round((depth + 1) * 100));
+    });
+  }
+  function setContactSpherePaused(paused) {
+    contactSpherePaused = paused;
+    contactSphereToggle.textContent = paused ? "继续转动" : "暂停转动";
+    contactSphereToggle.setAttribute("aria-pressed", String(paused));
+  }
+  contactWords.forEach(button => {
+    button.addEventListener("pointerdown", () => setContactSpherePaused(true));
+    button.addEventListener("click", () => {
+      contactWords.forEach(item => item.classList.toggle("is-picked", item === button));
+      document.querySelector("#contactIdeaPicked").textContent = button.textContent;
+      setContactSpherePaused(true);
+    });
+  });
+  let contactSphereDrag = null;
+  let contactSphereIgnoreClick = false;
+  contactSphere.addEventListener("pointerdown", event => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || (event.pointerType === "mouse" && event.button !== 0)) return;
+    contactSphereDrag = { id: event.pointerId, x: event.clientX, y: event.clientY, moved: false };
+    setContactSpherePaused(true);
+  });
+  contactSphere.addEventListener("pointermove", event => {
+    if (!contactSphereDrag || contactSphereDrag.id !== event.pointerId) return;
+    const dx = event.clientX - contactSphereDrag.x;
+    const dy = event.clientY - contactSphereDrag.y;
+    if (!contactSphereDrag.moved && Math.abs(dx) + Math.abs(dy) > 3) {
+      contactSphereDrag.moved = true;
+      contactSphere.setPointerCapture(event.pointerId);
+      contactSphere.classList.add("is-dragging");
+    }
+    contactSphereAngle += dx * .008;
+    contactSphereTilt = Math.max(-.7, Math.min(.7, contactSphereTilt + dy * .006));
+    contactSphereDrag.x = event.clientX;
+    contactSphereDrag.y = event.clientY;
+    drawContactSphere();
+  });
+  function finishContactSphereDrag(event) {
+    if (!contactSphereDrag || contactSphereDrag.id !== event.pointerId) return;
+    if (contactSphereDrag.moved) {
+      contactSphereIgnoreClick = true;
+      window.setTimeout(() => { contactSphereIgnoreClick = false; }, 250);
+    }
+    contactSphereDrag = null;
+    contactSphere.classList.remove("is-dragging");
+    if (contactSphere.hasPointerCapture(event.pointerId)) contactSphere.releasePointerCapture(event.pointerId);
+  }
+  contactSphere.addEventListener("pointerup", finishContactSphereDrag);
+  contactSphere.addEventListener("pointercancel", finishContactSphereDrag);
+  contactSphere.addEventListener("click", event => {
+    if (!contactSphereIgnoreClick) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    contactSphereIgnoreClick = false;
+  }, true);
+  contactSphereToggle.addEventListener("click", () => setContactSpherePaused(!contactSpherePaused));
+  document.querySelector("#contactIdeaAsk").addEventListener("click", () => document.querySelector("#contactMethods").scrollIntoView({ behavior: "smooth", block: "center" }));
+  window.addEventListener("resize", drawContactSphere);
+  drawContactSphere();
+  setContactSpherePaused(contactSpherePaused);
+  window.setInterval(() => {
+    if (contactSpherePaused || state.view !== "contact" || document.hidden) return;
+    if (Date.now() - contactSphereLastSwap > 6500) {
+      contactSphereWindow = (contactSphereWindow + 3) % contactWords.length;
+      contactSphereLastSwap = Date.now();
+    }
+    contactSphereAngle += .012;
+    drawContactSphere();
+  }, 50);
+
   function submitTravelInquiry(event) {
     event.preventDefault();
     const data = new FormData(els.contactForm);
@@ -1784,19 +1898,35 @@
     document.querySelector("#inquirySummary").hidden = true;
     showContactStep("channels", path);
   }));
-  document.querySelector("[data-contact-back]").addEventListener("click", () => {
-    if (state.contactStep === "choose") {
-      go("home");
-    } else if (state.contactStep === "channels" && state.contactPath === "travel") {
-      showContactStep("travel", "travel");
-    } else {
-      showContactStep("choose", state.contactPath);
-    }
-  });
+  document.querySelector("[data-contact-back]").addEventListener("click", () => go(state.previousView && state.previousView !== "contact" ? state.previousView : "home", false));
   document.querySelector("#copyInquiry").addEventListener("click", () => copyText(buildInquiry(), "咨询内容已复制，可粘贴到微信"));
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
   document.querySelectorAll("[data-copy-whatsapp]").forEach(button => button.addEventListener("click", () => copyText("@kurobutajapan", "WhatsApp 用户名已复制：@kurobutajapan")));
   document.querySelectorAll("[data-contact-qr]").forEach(button => button.addEventListener("click", () => openContactQr(button.dataset.contactQr)));
+  const arrivalMenuButtons = [...document.querySelectorAll("[data-arrival-open]")];
+  const arrivalPanels = [...document.querySelectorAll("[data-arrival-panel]")];
+  arrivalMenuButtons.forEach(button => button.addEventListener("click", () => {
+    const next = button.getAttribute("aria-expanded") === "true" ? "" : button.dataset.arrivalOpen;
+    arrivalMenuButtons.forEach(item => item.setAttribute("aria-expanded", String(item.dataset.arrivalOpen === next)));
+    arrivalPanels.forEach(panel => { panel.hidden = panel.dataset.arrivalPanel !== next; });
+  }));
+  const arrivalHotelInput = document.querySelector("#arrivalHotelInput");
+  const arrivalHotelResults = document.querySelector("#arrivalHotelResults");
+  arrivalHotelInput.addEventListener("input", () => { arrivalHotelResults.hidden = true; });
+  document.querySelector("#arrivalHotelForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const hotel = arrivalHotelInput.value.trim();
+    if (!hotel) { arrivalHotelInput.focus(); return; }
+    const encoded = encodeURIComponent(hotel);
+    document.querySelector("#arrivalHotelGoogle").href = `https://www.google.com/maps/dir/?api=1&destination=${encoded}`;
+    document.querySelector("#arrivalHotelApple").href = `https://maps.apple.com/?daddr=${encoded}`;
+    document.querySelector("#arrivalHotelAmap").href = mapSearchUrl("amap", hotel);
+    arrivalHotelResults.hidden = false;
+  });
+  document.querySelector("#arrivalHotelCopy").addEventListener("click", () => {
+    const hotel = arrivalHotelInput.value.trim();
+    if (hotel) copyText(hotel, "酒店名称／地址已复制");
+  });
   document.querySelectorAll("[data-arrival-zoom]").forEach(button => button.addEventListener("click", () => {
     const source = button.closest(".arrival-sample")?.querySelector(".arrival-form-example");
     const dialog = document.querySelector("#arrivalZoomDialog");
@@ -1825,7 +1955,7 @@
   });
 
   if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
-  showContactStep("choose");
+  showContactStep("channels", "profile");
   refreshUpdateBadges();
   updateFavoriteCount();
   renderWaybackPlaces();

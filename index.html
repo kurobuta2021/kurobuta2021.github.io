@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261006-arrival-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261006-contact-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -100,7 +100,7 @@
             <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>保存到桌面</strong><small>收藏好！下次一按就打开。</small><b>›</b></button>
           </div>
 
-          <button class="ask-card ask-card-home" type="button" data-go="contact" data-tool-id="contact">
+          <button class="ask-card ask-card-home" type="button" data-direct-contact data-tool-id="contact">
             <img src="./heitu-contact.png" alt="" />
             <span class="ask-copy"><strong>在日本遇到问题？<em>问黑豚</em></strong><small>旅行问题・行程建议・当地情报<br />有需要再问我！</small><b>›</b></span>
           </button>
@@ -180,7 +180,14 @@
         <section class="view arrival-view" data-view="arrival" aria-labelledby="arrivalTitle">
           <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
           <div class="arrival-hero"><span aria-hidden="true">🛂</span><div><p class="eyebrow">FIRST TIME IN JAPAN</p><h1 id="arrivalTitle">日本入境助手</h1><p>第一次来日本，填资料、查提醒、走出机场一步步来。</p></div></div>
-          <section class="arrival-official" aria-labelledby="arrivalOfficialTitle">
+          <nav class="arrival-menu" aria-label="入境小助手功能">
+            <button type="button" data-arrival-open="forms" aria-expanded="false"><span aria-hidden="true">🛂</span><strong>入境资料</strong><small>电子填写 · 纸表范本</small></button>
+            <button type="button" data-arrival-open="prepare" aria-expanded="false"><span aria-hidden="true">🧳</span><strong>填写准备</strong><small>证件 · 航班 · 住宿</small></button>
+            <button type="button" data-arrival-open="checklist" aria-expanded="false"><span aria-hidden="true">✓</span><strong>出发清单</strong><small>临行前检查一遍</small></button>
+            <button type="button" data-arrival-open="airport" aria-expanded="false"><span aria-hidden="true">✈</span><strong>机场便民</strong><small>交通卡 · 网络 · 现金</small></button>
+            <button type="button" data-arrival-open="hotel" aria-expanded="false"><span aria-hidden="true">🏨</span><strong>去酒店</strong><small>粘贴地址 · 打开地图</small></button>
+          </nav>
+          <section class="arrival-official" data-arrival-panel="forms" aria-labelledby="arrivalOfficialTitle" hidden>
             <span class="arrival-kicker">先做这件事</span>
             <h2 id="arrivalOfficialTitle">入境资料，两种办法</h2>
             <div class="arrival-options">
@@ -235,9 +242,9 @@
             <a class="arrival-text-link" href="https://services.digital.go.jp/visit-japan-web/guide/" target="_blank" rel="noopener noreferrer">看官方使用说明 ↗</a>
             <small>核对网址为 vjw.digital.go.jp；具体适用手续和现场指引以日本官方为准。</small>
           </section>
-          <section class="arrival-panel" aria-labelledby="arrivalStepsTitle"><div class="arrival-panel-heading"><span>01</span><h2 id="arrivalStepsTitle">第一次填写，先准备这些</h2></div><div class="arrival-steps"><div><b>①</b><strong>证件与航班</strong><p>护照、航班号、抵达日期；签证或免签资格按本人国籍单独核实。</p></div><div><b>②</b><strong>日本住宿信息</strong><p>准备第一晚住处的名称、日文地址和电话，填写时照订单核对。</p></div><div><b>③</b><strong>确认登记结果</strong><p>按官网步骤完成后，确认页面显示的二维码；出发前再检查信息是否与证件一致。</p></div></div></section>
-          <section class="arrival-panel" aria-labelledby="arrivalChecklistTitle"><div class="arrival-panel-heading"><span>02</span><h2 id="arrivalChecklistTitle">出发前的小清单</h2></div><div class="arrival-checklist"><label><input type="checkbox" /><span>核对护照有效期；确认签证或免签资格</span></label><label><input type="checkbox" /><span>核对机票与住宿资料</span></label><label><input type="checkbox" /><span>检查 Visit Japan Web 登记资料与二维码</span></label><label><input type="checkbox" /><span>有食品、药品或动植物？先查官方携带规定</span></label></div><small>勾选仅在当前页面临时保留，不会上传。</small></section>
-          <section class="arrival-panel arrival-reference" aria-labelledby="arrivalTipsTitle">
+          <section class="arrival-panel" data-arrival-panel="prepare" aria-labelledby="arrivalStepsTitle" hidden><div class="arrival-panel-heading"><span>01</span><h2 id="arrivalStepsTitle">第一次填写，先准备这些</h2></div><div class="arrival-steps"><div><b>①</b><strong>证件与航班</strong><p>护照、航班号、抵达日期；签证或免签资格按本人国籍单独核实。</p></div><div><b>②</b><strong>日本住宿信息</strong><p>准备第一晚住处的名称、日文地址和电话，填写时照订单核对。</p></div><div><b>③</b><strong>确认登记结果</strong><p>按官网步骤完成后，确认页面显示的二维码；出发前再检查信息是否与证件一致。</p></div></div></section>
+          <section class="arrival-panel" data-arrival-panel="checklist" aria-labelledby="arrivalChecklistTitle" hidden><div class="arrival-panel-heading"><span>02</span><h2 id="arrivalChecklistTitle">出发前的小清单</h2></div><div class="arrival-checklist"><label><input type="checkbox" /><span>核对护照有效期；确认签证或免签资格</span></label><label><input type="checkbox" /><span>核对机票与住宿资料</span></label><label><input type="checkbox" /><span>检查 Visit Japan Web 登记资料与二维码</span></label><label><input type="checkbox" /><span>有没有带违禁品？食品、药品或动植物？先查官方携带规定</span></label></div><small>勾选仅在当前页面临时保留，不会上传。</small></section>
+          <section class="arrival-panel arrival-reference" data-arrival-panel="airport" aria-labelledby="arrivalTipsTitle" hidden>
             <div class="arrival-panel-heading"><span>03</span><h2 id="arrivalTipsTitle">机场便民设施提醒</h2></div>
             <p>过完入境和海关，离开机场前花一分钟看看这些；不一定都要办，市区有，但是不如机场集中，不懂得你还可以直接去问讯台找个工作人员给你指。</p>
             <div class="arrival-facilities">
@@ -247,6 +254,22 @@
               <div><span aria-hidden="true">🚻</span><strong>出机场前，再检查一遍！</strong><p>有的机场到市内要一个多小时，厕所先上好；想抽烟就去指定吸烟室，随身行李带齐了没？人齐没齐检查一遍哈！</p></div>
             </div>
             <div class="arrival-transfer-cta"><strong>日本各机场接送机预约</strong><button type="button" data-direct-contact data-tool-id="airport-transfer-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
+          </section>
+          <section class="arrival-panel arrival-hotel" data-arrival-panel="hotel" aria-labelledby="arrivalHotelTitle" hidden>
+            <div class="arrival-panel-heading"><span aria-hidden="true">🏨</span><h2 id="arrivalHotelTitle">出机场，去酒店</h2></div>
+            <p>把订单上的酒店名称或地址复制进来，选个地图打开。进地图后看一眼是不是你订的那家，再点路线。</p>
+            <form id="arrivalHotelForm" class="arrival-hotel-form">
+              <label for="arrivalHotelInput">酒店名称或地址</label>
+              <div><input id="arrivalHotelInput" type="text" autocomplete="off" required placeholder="粘贴酒店名称或地址" /><button type="submit">找酒店</button></div>
+            </form>
+            <div id="arrivalHotelResults" class="arrival-hotel-results" hidden>
+              <a id="arrivalHotelGoogle" href="#" target="_blank" rel="noopener noreferrer">Google 地图 <span aria-hidden="true">↗</span></a>
+              <a id="arrivalHotelApple" href="#" target="_blank" rel="noopener noreferrer">Apple 地图 <span aria-hidden="true">↗</span></a>
+              <a id="arrivalHotelAmap" href="#" target="_blank" rel="noopener noreferrer">高德地图 <span aria-hidden="true">↗</span></a>
+              <button id="arrivalHotelCopy" type="button">复制酒店名称／地址</button>
+              <small>高德若跳转后没找到，就复制上面的文字，在地图里手动搜索。输入内容只用来打开地图，不保存在本站。</small>
+            </div>
+            <div class="arrival-transfer-cta"><strong>日本各机场接送机预约</strong><button type="button" data-direct-contact data-tool-id="hotel-transfer-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
           </section>
         </section>
 
@@ -300,15 +323,6 @@
               <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span></span></span>
               <span class="tun-shop-hub-cta">打开逛什么分类 <span aria-hidden="true">→</span></span>
             </button>
-            <article class="tun-help-card">
-              <div class="tun-help-main">
-                <div class="tun-help-top"><span class="tun-help-icon">🤝</span><em>现在可以联系</em></div>
-                <h3>找人帮忙</h3>
-                <p>在日本遇到事情搞不定？可以先问问。</p>
-                <div class="tun-help-tags"><span>陪同</span><span>跑腿儿</span><span>帮打电话</span><span>餐厅预约 / 改期</span></div>
-              </div>
-              <button type="button" data-direct-contact data-tool-id="help-request">联系黑豚 <span>›</span></button>
-            </article>
             <div class="tun-coming-grid">
               <article class="tun-coming-card route-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
@@ -407,9 +421,6 @@
         <section class="view contact-flow" data-view="contact" aria-labelledby="contactTitle">
           <div class="contact-flow-bar">
             <button id="contactBack" class="back-button" type="button" data-contact-back>‹ 返回</button>
-            <ol class="contact-progress" aria-label="找黑豚进度">
-              <li class="active" data-contact-progress="1">1</li><li data-contact-progress="2">2</li><li data-contact-progress="3">3</li>
-            </ol>
           </div>
 
           <section class="contact-step active" data-contact-step="choose" aria-labelledby="contactTitle">
@@ -458,7 +469,8 @@
             </form>
           </section>
 
-          <section class="contact-step" data-contact-step="channels" aria-labelledby="channelsTitle" hidden>
+          <section class="contact-step" data-contact-step="channels" aria-labelledby="contactDirectTitle" hidden>
+            <div class="contact-direct-heading"><h1 id="contactDirectTitle">有事就找我聊聊</h1><p>先看看黑豚的频道，想说什么直接联系我。</p></div>
             <section class="contact-socials" aria-label="黑豚的社交平台">
               <div class="contact-socials-heading"><strong>也可以来黑豚的频道看看</strong><small>点图标打开主页</small></div>
               <div class="contact-socials-grid">
@@ -473,7 +485,7 @@
               <span>刚才选择</span><strong id="inquirySummaryText"></strong>
               <button id="copyInquiry" type="button">复制需求</button>
             </div>
-            <div class="contact-methods">
+            <div id="contactMethods" class="contact-methods">
               <section class="recommended-contact contact-method" aria-label="微信联系方式">
                 <div class="recommended-label">推荐</div>
                 <div class="wechat-main-row"><span class="channel-icon wechat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M23 9C13 9 6 15 6 23c0 4 2 7.5 5 10l-1.5 6 6.6-3.1c2.1.7 4.4 1.1 6.9 1.1 9.4 0 17-6.3 17-14S32.4 9 23 9Z" fill="currentColor"/><circle cx="17" cy="22" r="2.1" fill="#19ad59"/><circle cx="28" cy="22" r="2.1" fill="#19ad59"/></svg></span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">查看二维码</button></span></div>
@@ -486,6 +498,19 @@
               <img src="./heitu-jun.png" alt="黑豚君" />
               <div><span>收到啦！</span><strong id="channelsTitle">找个方便的方式聊聊</strong><small data-channel-intro-travel>加我的时候，把刚才选的需求告诉我就行。</small><small data-channel-intro-other hidden>日本相关的其他事情，直接来聊聊就好。</small><small data-channel-intro-profile hidden>微信和我的自媒体主页都在这里。</small></div>
             </div>
+            <section class="contact-ideas" aria-labelledby="contactIdeasTitle">
+              <div class="contact-ideas-heading"><div><span>TRAVEL THOUGHTS</span><h2 id="contactIdeasTitle">你是不是也在想这些？</h2><p>拖一拖球，点一句，看看有没有你想的，咱们聊聊怎么弄。</p></div><button id="contactSphereToggle" type="button" aria-pressed="false">暂停转动</button></div>
+              <div id="contactWordSphere" class="contact-word-sphere" aria-label="可以找黑豚聊的想法">
+                <button type="button">我想包车一天去追红叶</button><button type="button">樱花季想一天多跑几个地方</button><button type="button">我想从大阪一路玩到东京</button><button type="button">我想从札幌去二世古滑一天雪</button>
+                <button type="button">落地机场了，能找人来接吗？</button><button type="button">我想吃的那家店订不到位，能帮我问问吗？</button><button type="button">我想泡私汤，日语电话搞不定</button><button type="button">我在日本遇到点事，能帮我一下吗？</button>
+                <button type="button">我想买个限定款，能帮我找找吗？</button><button type="button">我有个想法，想找你聊聊合作</button><button type="button">想带爸妈轻松玩一天，有什么路线？</button><button type="button">带娃来日本，哪儿玩比较省心？</button>
+                <button type="button">我们想包车去富士山一天</button><button type="button">我老婆过几天生日，能帮我订个蛋糕送到酒店吗？</button><button type="button">我护照丢酒店了，你能帮我打个电话问问嘛。</button>
+                <button type="button">我想订一天海景温泉</button><button type="button">我想找个情侣泡的私汤温泉</button><button type="button">我想去乡下玩儿一天</button><button type="button">我想去海钓一天</button><button type="button">我想带家人玩儿十天，多玩几个城市。</button><button type="button">我想去当地人逛的海鲜市场</button><button type="button">帮我代买个游戏机</button><button type="button">我想带娃去农场逛逛</button>
+    <button type="button">我想约家好吃的鳗鱼饭</button><button type="button">我想找家实惠的和牛烤肉</button><button type="button">我想去合掌村看看雪景</button><button type="button">我想去配一副眼镜</button><button type="button">我想去定制一套西装</button><button type="button">我想约个体检</button><button type="button">我想找个陪同翻译</button>
+              </div>
+              <div class="contact-idea-picked"><span>刚刚看到</span><strong id="contactIdeaPicked">有事直接说就好</strong><button id="contactIdeaAsk" type="button">找黑豚聊聊 ↑</button></div>
+              <p class="contact-service-note">有想法先聊聊。需要我帮忙预约、代办或陪同的，我会先把服务费说清楚，你觉得合适再决定。</p>
+            </section>
           </section>
         </section>
       </main>
@@ -768,8 +793,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261006-arrival-release"></script>
+    <script src="./i18n.js?v=20261006-contact-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261006-arrival-release"></script>
+    <script src="./app.js?v=20261006-contact-release"></script>
   </body>
 </html>

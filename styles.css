@@ -459,18 +459,6 @@ main { min-height: calc(100dvh - 66px); }
 .food-hub-item small { max-width: calc(100% - 12px); margin-top: 3px; overflow: hidden; color: #71695e; font-size: .58rem; text-overflow: ellipsis; white-space: nowrap; }
 .food-hub-item b { position: absolute; right: 11px; bottom: 12px; color: #a16d4b; font-size: 1rem; }
 .food-hub-footnote { margin: 13px 2px; color: var(--muted); font-size: .62rem; line-height: 1.55; }
-.tun-help-card { position: relative; overflow: hidden; margin-bottom: 12px; padding: 18px; border-radius: 21px; color: #fff; background: radial-gradient(circle at 94% 3%,rgba(255,255,255,.2),transparent 105px),linear-gradient(135deg,#263e38,#3f705f); box-shadow: 0 10px 22px rgba(35,70,57,.18); }
-.tun-help-card::after { content: "帮"; position: absolute; right: 13px; top: 1px; color: rgba(255,255,255,.065); font-family: "Hannotate SC", "STKaiti", "KaiTi", serif; font-size: 6.3rem; font-weight: 900; line-height: 1; transform: rotate(-7deg); pointer-events: none; }
-.tun-help-main { position: relative; z-index: 1; }
-.tun-help-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.tun-help-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: rgba(255,255,255,.15); font-size: 1.55rem; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
-.tun-help-top em { padding: 5px 9px; border-radius: 999px; background: #f5d68d; color: #36443f; font-size: .6rem; font-style: normal; font-weight: 950; }
-.tun-help-card h3 { margin: 13px 0 5px; font-size: 1.16rem; }
-.tun-help-card p { margin: 0; color: rgba(255,255,255,.8); font-size: .74rem; line-height: 1.55; }
-.tun-help-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.tun-help-tags span { padding: 5px 8px; border-radius: 8px; background: rgba(255,255,255,.11); color: rgba(255,255,255,.9); font-size: .61rem; font-weight: 800; }
-.tun-help-card > button { position: relative; z-index: 1; width: 100%; min-height: 47px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; border: 0; border-radius: 13px; background: #fff; color: #29483e; font-size: .8rem; font-weight: 950; cursor: pointer; box-shadow: 0 7px 16px rgba(19,44,35,.18); }
-.tun-help-card > button span { font-size: 1.18rem; line-height: 1; }
 .tun-sushi-card { display: grid; grid-template-columns: 54px minmax(0,1fr); align-items: center; gap: 11px 12px; margin-bottom: 12px; padding: 15px; border: 1px solid #eccbad; border-radius: 20px; background: linear-gradient(135deg,#fff9ec,#fbe9d6); box-shadow: 0 7px 17px rgba(111,70,40,.08); }
 .tun-sushi-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; background: #fff; font-size: 1.65rem; box-shadow: 0 5px 12px rgba(112,66,35,.09); }
 .tun-sushi-copy small { color: #ad5e3e; font-size: .61rem; font-weight: 900; }
@@ -812,6 +800,22 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .arrival-hero > span { flex: 0 0 auto; width: 65px; height: 65px; display: grid; place-items: center; border-radius: 19px; background: #fffdf7; font-size: 2.1rem; box-shadow: 0 5px 14px rgba(54,83,119,.1); }
 .arrival-hero h1 { margin: 2px 0 5px; font-size: 1.8rem; line-height: 1.1; letter-spacing: -.05em; }
 .arrival-hero p:last-child { margin: 0; color: #516579; font-size: .75rem; }
+.arrival-menu { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-bottom: 14px; }
+.arrival-menu button { min-width: 0; min-height: 98px; display: grid; grid-template-columns: 36px 1fr; grid-template-rows: auto auto; column-gap: 9px; align-content: center; padding: 14px 11px; border: 1px solid #dedfda; border-radius: 18px; background: #fffdfa; box-shadow: 0 5px 15px rgba(55,43,31,.05); color: #283544; text-align: left; cursor: pointer; }
+.arrival-menu button > span { grid-row: span 2; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 11px; background: #eaf0f8; color: #537399; font-size: 1.14rem; font-weight: 900; }
+.arrival-menu button strong { font-size: .89rem; line-height: 1.25; }
+.arrival-menu button small { color: #6e7880; font-size: .63rem; line-height: 1.4; }
+.arrival-menu button[aria-expanded="true"] { border-color: #83a4c8; background: #f2f7fd; box-shadow: 0 7px 18px rgba(70,111,158,.1); }
+.arrival-menu button:last-child { grid-column: 1 / -1; min-height: 70px; }
+.arrival-view [data-arrival-panel][hidden],.arrival-hotel-results[hidden] { display: none; }
+.arrival-hotel-form label { display: block; margin: 0 0 7px; font-size: .75rem; font-weight: 850; }
+.arrival-hotel-form > div { display: flex; gap: 7px; }
+.arrival-hotel-form input { min-width: 0; flex: 1; min-height: 45px; padding: 10px 12px; border: 1px solid #d1d9df; border-radius: 12px; background: #fff; font: inherit; font-size: .78rem; }
+.arrival-hotel-form button { flex: 0 0 auto; padding: 0 14px; border: 0; border-radius: 12px; background: #416b9d; color: #fff; font-size: .75rem; font-weight: 850; cursor: pointer; }
+.arrival-hotel-results { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 13px; }
+.arrival-hotel-results a,.arrival-hotel-results button { min-height: 45px; display: flex; align-items: center; justify-content: space-between; gap: 5px; padding: 10px 12px; border: 1px solid #d8e2ec; border-radius: 12px; background: #f4f8fc; color: #315578; font-size: .75rem; font-weight: 800; text-align: left; text-decoration: none; cursor: pointer; }
+.arrival-hotel-results small { grid-column: 1 / -1; color: #77736e; font-size: .66rem; line-height: 1.5; }
+.arrival-hotel .arrival-transfer-cta { margin-top: 14px; }
 .arrival-official,.arrival-panel { margin: 0 0 12px; padding: 19px; border: 1px solid #e4e0d9; border-radius: 22px; background: #fffdfa; box-shadow: 0 6px 18px rgba(55,43,31,.045); }
 .arrival-official { border-color: #c9ddcd; background: linear-gradient(150deg,#f6fff7,#fffdf8); }
 .arrival-kicker { display: inline-block; padding: 4px 9px; border-radius: 99px; background: #dcf0df; color: #397747; font-size: .65rem; font-weight: 900; }
@@ -1434,4 +1438,46 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .contact-methods .channel-actions a,
   .contact-methods .channel-actions button { min-height: 30px; }
   .contact-socials { margin-top: 10px; }
+}
+
+/* 联系页预览：先看频道和联系方式，旅行念头轻轻围成一团。 */
+.contact-flow-bar { display: flex; justify-content: flex-start; }
+.contact-direct-heading { margin: 0 1px 11px; }
+.contact-direct-heading h1 { margin: 0 0 3px; color: #18334d; font-size: 1.32rem; line-height: 1.2; letter-spacing: -.04em; }
+.contact-direct-heading p { margin: 0; color: #74808a; font-size: .72rem; }
+.contact-ideas { margin: 15px 0 20px; padding: 17px 14px 15px; overflow: hidden; border: 1px solid #dbe2e8; border-radius: 24px; background: radial-gradient(circle at 50% 42%,#eef5fc 0,#f7fafc 42%,#fffaf3 100%); box-shadow: 0 10px 26px rgba(35,62,86,.065); }
+.contact-ideas-heading { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
+.contact-ideas-heading span { color: #a57853; font-size: .55rem; font-weight: 900; letter-spacing: .18em; }
+.contact-ideas-heading h2 { margin: 3px 0 2px; color: #203d57; font-size: 1.02rem; letter-spacing: -.04em; }
+.contact-ideas-heading p { margin: 0; color: #75818b; font-size: .66rem; }
+.contact-ideas-heading > button { flex: 0 0 auto; min-height: 29px; padding: 5px 9px; border: 1px solid #cbd9e6; border-radius: 99px; background: #fff; color: #4c6b85; font-size: .6rem; font-weight: 800; cursor: pointer; }
+.contact-word-sphere { position: relative; height: 330px; margin: 7px auto 0; isolation: isolate; touch-action: none; user-select: none; cursor: grab; }
+.contact-word-sphere.is-dragging { cursor: grabbing; }
+.contact-word-sphere::before { content: ""; position: absolute; width: min(78%, 286px); aspect-ratio: 1; top: 50%; left: 50%; transform: translate(-50%,-50%); border: 1px solid rgba(115,151,177,.23); border-radius: 50%; background: radial-gradient(circle at 27% 21%,rgba(255,255,255,.98) 0,rgba(255,255,255,.72) 19%,transparent 48%),radial-gradient(circle at 75% 77%,rgba(155,191,213,.21),transparent 55%),linear-gradient(145deg,#f9fbfc 0,#e9f2f8 55%,#dae9f2 100%); box-shadow: inset -18px -20px 27px rgba(86,127,155,.12),inset 11px 11px 20px rgba(255,255,255,.83),0 16px 28px rgba(61,96,119,.1); }
+.contact-word-sphere::after { content: ""; position: absolute; width: min(78%, 286px); height: 86px; top: 50%; left: 50%; transform: translate(-50%,-50%) rotate(-18deg); border: 1px solid rgba(93,143,183,.21); border-top-color: rgba(93,143,183,.11); border-bottom-color: rgba(93,143,183,.29); border-radius: 50%; pointer-events: none; }
+.contact-word-sphere button { position: absolute; top: 50%; left: 50%; max-width: 148px; min-height: 31px; padding: 5px 9px; border: 1px solid rgba(194,211,223,.9); border-radius: 99px; background: rgba(255,255,255,.92); box-shadow: 0 3px 10px rgba(46,85,115,.09); color: #274863; font-size: .66rem; font-weight: 850; line-height: 1.3; text-align: center; cursor: pointer; will-change: transform; }
+.contact-word-sphere button:nth-child(3n + 2) { border-color: #e5d5c5; background: #fffaf4; color: #7b5a3e; }
+.contact-word-sphere button:nth-child(4n + 1) { border-color: #c9ded7; background: #f8fffc; color: #416b5d; }
+.contact-word-sphere button.is-picked { border-color: #d99e76; background: #fff0e2; color: #7a4229; box-shadow: 0 0 0 3px rgba(237,174,122,.23),0 5px 14px rgba(84,54,33,.12); }
+.contact-word-sphere button:focus-visible { outline: 3px solid #3775a8; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .contact-word-sphere { display: flex; flex-wrap: wrap; justify-content: center; align-content: center; gap: 8px; height: auto; min-height: 290px; padding: 22px 0; }
+  .contact-word-sphere button { position: relative; top: auto; left: auto; }
+}
+.contact-idea-picked { display: flex; align-items: center; gap: 8px; padding: 10px 11px; border: 1px solid #dfebf2; border-radius: 15px; background: rgba(255,255,255,.88); }
+.contact-idea-picked span { flex: 0 0 auto; color: #929ba3; font-size: .59rem; }
+.contact-idea-picked strong { flex: 1; color: #284761; font-size: .72rem; line-height: 1.3; }
+.contact-idea-picked button { flex: 0 0 auto; padding: 8px 10px; border: 0; border-radius: 10px; background: #315d80; color: #fff; font-size: .62rem; font-weight: 850; cursor: pointer; }
+.contact-service-note { margin: 10px 3px 0; color: #697984; font-size: .66rem; line-height: 1.55; }
+@media (max-width: 390px) {
+  .contact-word-sphere { height: 306px; }
+  .contact-word-sphere button { max-width: 126px; font-size: .6rem; }
+  .contact-idea-picked { flex-wrap: wrap; }
+  .contact-idea-picked button { margin-left: auto; }
+}
+@media (max-width: 390px) and (prefers-reduced-motion: reduce) {
+  .contact-word-sphere { height: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-word-sphere button { transition: none; }
 }
