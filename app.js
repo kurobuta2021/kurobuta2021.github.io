@@ -7,9 +7,11 @@
   const UPDATE_SEEN_KEY = "heitu-seen-updates-v1";
   // Only list entries with actual changes. Bump an entry's version when that section changes again.
   const ENTRY_UPDATES = Object.freeze({
-    favorites: "20261005-food",
-    "food-hub": "20261005-food",
-    onsen: "20261005-private-bath",
+    favorites: "20261006-explore-cards",
+    "food-hub": "20261006-gyudon-logos-order",
+    "specialty-food-nearby": "20261005-specialty",
+    "shopping-hub": "20261006-generic-reuse-anime",
+    onsen: "20261006-onsen-booking-help-top",
     "japanese-help": "20261005-translate",
     parking: "20261005-parking",
     contact: "20261005-contact"
@@ -250,6 +252,8 @@
     contactQrDialog: document.querySelector("#contactQrDialog"),
     supplyChoiceDialog: document.querySelector("#supplyChoiceDialog"),
     sushiChoiceDialog: document.querySelector("#sushiChoiceDialog"),
+    gyudonChoiceDialog: document.querySelector("#gyudonChoiceDialog"),
+    specialtyChoiceDialog: document.querySelector("#specialtyChoiceDialog"),
     ramenChoiceDialog: document.querySelector("#ramenChoiceDialog"),
     wagyuChoiceDialog: document.querySelector("#wagyuChoiceDialog"),
     izakayaChoiceDialog: document.querySelector("#izakayaChoiceDialog"),
@@ -491,7 +495,9 @@
       description: "还能忍一忍，我选个环境。覆盖日本全国 · 可定位当前位置 · 需要当地网络才能打开哦！"
     } : options.community;
     document.querySelector("#mapChoiceTitle").textContent = community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
-    document.querySelector("#mapChoiceIntro").textContent = options.intro || (community
+    const mapChoiceIntro = document.querySelector("#mapChoiceIntro");
+    mapChoiceIntro.hidden = label === "泡个温泉";
+    mapChoiceIntro.textContent = options.intro || (community
       ? "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。"
       : "已经选好服务了，现在选择你手机里方便使用的地图。");
     document.querySelector("#mapChoiceNote").textContent = options.note || (community
@@ -526,6 +532,7 @@
     document.querySelector("#mapChoiceAmapCopy").dataset.keyword = options.amapManualQuery || query;
     document.querySelector("#mapChoiceAmapKeyword").textContent = options.amapManualQuery || query;
     const onsenManualSearch = label === "泡个温泉";
+    document.querySelector("#mapChoiceOnsenHelp").hidden = !onsenManualSearch;
     document.querySelector("#mapChoiceAmapCopyHint").hidden = !onsenManualSearch;
     document.querySelector("#mapChoiceOnsenPrivateCopy").hidden = !onsenManualSearch;
     const appleLink = document.querySelector("#mapChoiceApple");
@@ -541,10 +548,15 @@
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
+    const exploreContext = ["favorites", "food", "shopping"].includes(view);
+    document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
+    document.querySelector("#brandTagline").textContent = exploreContext
+      ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
+      : "定位离你最近的厕所、吸烟区、商超便利店等。";
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view)) || (target === "favorites" && view === "food");
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1256,6 +1268,20 @@
       showContactStep("channels", "profile");
       return;
     }
+    const shoppingOption = event.target.closest("[data-shopping-query]");
+    if (shoppingOption) {
+      const generic = shoppingOption.hasAttribute("data-shopping-generic");
+      showMapChoice(shoppingOption.dataset.shoppingQuery, shoppingOption.dataset.shoppingLabel, {
+        intro: generic ? "先用地图看附近有哪些店，再点进具体门店确认卖什么、营业时间和路线。" : "先用地图看附近的搜索结果，再点进具体门店确认楼层、品牌和路线。",
+        googleDescription: generic ? "用日文类别词搜索 · 需要当地网络才能打开哦！" : "用日文店名搜索 · 需要当地网络才能打开哦！",
+        appleDescription: generic ? "用日文类别词搜索 · 适合 iPhone" : "用日文店名搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        note: shoppingOption.dataset.shoppingQuery === "リユースショップ"
+          ? "搜索结果可能包含只收购、不零售的店；请看具体门店的照片、经营内容和营业时间。"
+          : "地图只显示搜索结果，不保证附近有店、品牌有货或支持免税；请查看具体门店信息。"
+      });
+      return;
+    }
     if (event.target.closest("[data-sushi-open]")) {
       els.sushiChoiceDialog.showModal();
       return;
@@ -1270,6 +1296,22 @@
         appleDescription: "按日文店名搜索 · 适合 iPhone",
         amapDescription: "直接搜索日文店名 · 如果位置不对，可复制日文词手动搜",
         note: "地图先显示搜索结果，不会直接导航；营业时间和排队情况请以具体门店信息为准。"
+      });
+      return;
+    }
+    if (event.target.closest("[data-gyudon-open]")) {
+      els.gyudonChoiceDialog.showModal();
+      return;
+    }
+    const gyudonOption = event.target.closest("[data-gyudon-query]");
+    if (gyudonOption) {
+      els.gyudonChoiceDialog.close();
+      showMapChoice(gyudonOption.dataset.gyudonQuery, gyudonOption.dataset.gyudonLabel, {
+        intro: "先在地图里搜索，再点进具体门店查看菜单和路线；搜索范围可能受地图当前区域影响。",
+        googleDescription: "按日文店名搜索门店 · 需要当地网络才能打开哦！",
+        appleDescription: "按日文店名搜索 · 适合 iPhone",
+        amapDescription: "直接搜索日文店名 · 如果位置不对，可复制日文词手动搜",
+        note: "地图先显示搜索结果，不会直接导航；价格、菜单和营业时间请以具体门店为准。"
       });
       return;
     }
@@ -1386,7 +1428,8 @@
       ["hotpot", els.hotpotChoiceDialog],
       ["curry", els.curryChoiceDialog],
       ["sweets", els.sweetsChoiceDialog],
-      ["kansai", els.kansaiChoiceDialog]
+      ["kansai", els.kansaiChoiceDialog],
+      ["specialty", els.specialtyChoiceDialog]
     ];
     for (const [kind, dialog] of newFoodChoices) {
       if (event.target.closest(`[data-${kind}-open]`)) {
@@ -1488,7 +1531,6 @@
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
       showMapChoice("日帰り温泉", "泡个温泉", {
-        intro: "先用 Google 地图找附近的日归温泉；需要私汤时，使用下面的专门入口。",
         googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {

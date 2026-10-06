@@ -325,7 +325,9 @@ main { min-height: calc(100dvh - 66px); }
 .tun-preview-heading { position: relative; min-height: 152px; overflow: hidden; margin-bottom: 15px; padding: 20px 18px; border: 1px solid #eadbc8; border-radius: 25px; background: radial-gradient(circle at 88% 6%,rgba(255,255,255,.9),transparent 88px),linear-gradient(145deg,#fff7e8,#f2e1cc); box-shadow: 0 9px 24px rgba(72,49,29,.07); }
 .tun-preview-heading > div { position: relative; z-index: 2; max-width: 68%; }
 .tun-preview-heading h1 { margin: 3px 0 6px; font-family: "Hannotate SC", "STKaiti", "KaiTi", serif; font-size: 2.35rem; line-height: 1.06; }
-.tun-preview-heading p:last-child { line-height: 1.55; }
+.tun-preview-heading > div > p:last-of-type { line-height: 1.55; }
+.tun-preview-heading .tun-preview-contact { display: inline-flex; align-items: center; gap: 11px; min-height: 31px; margin-top: 10px; padding: 5px 11px; border: 1px solid #d7b695; border-radius: 999px; background: rgba(255,255,255,.85); color: #8e5234; font-size: .65rem; font-weight: 850; cursor: pointer; }
+.tun-preview-heading .tun-preview-contact span { font-size: 1rem; line-height: .7; }
 .tun-preview-heading .heading-mascot { position: absolute; width: 126px; height: 126px; right: 2px; bottom: -9px; filter: drop-shadow(0 8px 11px rgba(65,43,25,.12)); }
 .tun-coming { padding: 17px; border: 1px solid var(--line); border-radius: 23px; background: rgba(255,255,255,.7); box-shadow: 0 8px 23px rgba(55,43,30,.055); }
 .tun-coming-copy > span { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #2e463a; color: #fff; font-size: .62rem; font-weight: 900; }
@@ -343,8 +345,89 @@ main { min-height: calc(100dvh - 66px); }
 .tun-food-hub-track { width: max-content; display: flex; gap: 7px; animation: food-hub-drift 28s linear infinite; }
 .tun-food-hub-track > span { flex: none; padding: 6px 10px; border: 1px solid #efdac0; border-radius: 999px; background: rgba(255,255,255,.75); color: #695641; font-size: .61rem; font-weight: 850; white-space: nowrap; }
 .tun-food-hub-cta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding: 10px 12px; border-radius: 11px; background: #9d553c; color: #fff; font-size: .77rem; font-weight: 900; }
+.tun-shop-hub { position: relative; width: 100%; display: block; overflow: hidden; margin: 0 0 13px; padding: 17px; border: 1px solid #cbdedb; border-radius: 22px; background: radial-gradient(circle at 97% 0,rgba(255,255,255,.9),transparent 110px),linear-gradient(130deg,#eff9f5,#dbeff0); color: var(--ink); text-align: left; box-shadow: 0 10px 22px rgba(49,90,90,.09); cursor: pointer; }
+.tun-shop-hub-top { display: grid; grid-template-columns: 54px minmax(0,1fr) auto; align-items: center; gap: 12px; }
+.tun-shop-hub-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 17px; background: rgba(255,255,255,.83); font-size: 1.7rem; box-shadow: 0 5px 12px rgba(49,90,90,.07); }
+.tun-shop-hub-copy { min-width: 0; display: grid; gap: 3px; }
+.tun-shop-hub-copy small { color: #3b7978; font-size: .61rem; font-weight: 900; }
+.tun-shop-hub-copy strong { font-size: 1.36rem; line-height: 1.2; }
+.tun-shop-hub-copy > span { overflow: hidden; color: #647775; font-size: .69rem; text-overflow: ellipsis; white-space: nowrap; }
+.tun-shop-hub-top > b { color: #55908b; font-size: 1.7rem; font-weight: 500; }
+.tun-shop-hub-strip { display: block; overflow: hidden; margin: 17px -17px 0; padding: 1px 0 5px; }
+.tun-shop-hub-track { width: max-content; display: flex; gap: 7px; animation: food-hub-drift 31s linear infinite; }
+.tun-shop-hub-track > span { flex: none; padding: 6px 10px; border: 1px solid #cfe1db; border-radius: 999px; background: rgba(255,255,255,.8); color: #3e6562; font-size: .61rem; font-weight: 850; white-space: nowrap; }
+.tun-shop-hub-cta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding: 10px 12px; border-radius: 11px; background: #397b77; color: #fff; font-size: .77rem; font-weight: 900; }
 @keyframes food-hub-drift { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .tun-food-hub-track { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .tun-food-hub-track, .tun-shop-hub-track { animation: none; } }
+.shopping-hub-view { padding-bottom: 25px; }
+.shopping-hub-heading { display: grid; grid-template-columns: 62px minmax(0,1fr); align-items: center; gap: 13px; margin: 16px 0 18px; padding: 18px; border: 1px solid #cbdedb; border-radius: 23px; background: linear-gradient(135deg,#f0faf5,#e5f0f4); }
+.shopping-hub-heading > span { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,.84); font-size: 1.9rem; }
+.shopping-hub-heading h1 { margin: 3px 0 4px; font-size: 1.53rem; }
+.shopping-hub-heading p:last-child { margin: 0; color: #61736e; font-size: .7rem; line-height: 1.45; }
+.shopping-hub-intro { margin: 0 2px 14px; color: #5d6d67; font-size: .73rem; line-height: 1.6; }
+.shopping-hub-list { display: grid; gap: 10px; }
+.shopping-group { overflow: hidden; border: 1px solid #d8e3dd; border-radius: 19px; background: #fffdfa; box-shadow: 0 5px 14px rgba(50,75,63,.045); }
+.shopping-group:nth-child(2n) { border-color: #e6decb; background: #fffaf1; }
+.shopping-group summary { min-height: 82px; display: grid; grid-template-columns: 47px minmax(0,1fr) 18px; align-items: center; gap: 12px; padding: 14px; list-style: none; cursor: pointer; }
+.shopping-group summary::-webkit-details-marker { display: none; }
+.shopping-group-icon { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 14px; background: #edf5f0; font-size: 1.35rem; }
+.shopping-group:nth-child(2n) .shopping-group-icon { background: #f5ead4; }
+.shopping-group-copy { min-width: 0; display: grid; gap: 3px; }
+.shopping-group-copy strong { font-size: .91rem; line-height: 1.2; }
+.shopping-group-copy small { color: #6c7971; font-size: .65rem; line-height: 1.35; }
+.shopping-group-tip { display: block; margin-top: 5px; color: #536f61; font-size: .63rem; line-height: 1.45; font-weight: 600; }
+.shopping-group summary > b { color: #71867b; font-size: 1.25rem; font-weight: 500; transition: transform .2s ease; }
+.shopping-group[open] summary > b { transform: rotate(180deg); }
+.shopping-group-body { padding: 0 14px 14px; }
+.shopping-group-body > p { margin: 0 0 11px; padding-top: 11px; border-top: 1px solid #e7e8e0; color: #68746c; font-size: .68rem; line-height: 1.55; }
+.shopping-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; }
+.shopping-options button { min-width: 0; min-height: 57px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 9px 11px; border: 1px solid #dce7df; border-radius: 12px; background: #f5faf6; color: #254c3a; font-size: .7rem; font-weight: 850; line-height: 1.25; text-align: left; cursor: pointer; }
+.shopping-options button[data-shopping-query] { position: relative; }
+.shopping-options button[data-shopping-query]:not([data-shopping-generic]):not([data-shopping-query="百貨店"]):not([data-shopping-query="家電量販店"]) { min-height: 104px; }
+.shopping-options button[data-shopping-query]:not([data-shopping-generic]):not([data-shopping-query="百貨店"]):not([data-shopping-query="家電量販店"]):not([data-shopping-query="エディオン"])::before { content: ""; display: block; width: 100%; height: 31px; margin-bottom: 4px; background-image: var(--shopping-logo); background-repeat: no-repeat; background-position: left center; background-size: contain; }
+.shopping-options button.shopping-generic-option { min-height: 57px; }
+.shopping-options button.shopping-generic-option::before { display: none; }
+.shopping-options button[data-shopping-query="大丸"] { --shopping-logo: url("./assets/shopping-daimaru.svg"); }
+.shopping-options button[data-shopping-query="高島屋"] { --shopping-logo: url("./assets/shopping-takashimaya.svg"); }
+.shopping-options button[data-shopping-query="三越"] { --shopping-logo: url("./assets/shopping-mitsukoshi.svg"); }
+.shopping-options button[data-shopping-query="伊勢丹"] { --shopping-logo: url("./assets/shopping-isetan.svg"); }
+.shopping-options button[data-shopping-query="阪急百貨店"] { --shopping-logo: url("./assets/shopping-hankyu.svg"); }
+.shopping-options button[data-shopping-query="松坂屋"] { --shopping-logo: url("./assets/shopping-matsuzakaya.png"); }
+.shopping-options button[data-shopping-query="丸井今井"] { --shopping-logo: url("./assets/shopping-maruiimai.png"); }
+.shopping-options button[data-shopping-query="岩田屋"] { --shopping-logo: url("./assets/shopping-iwataya.png"); }
+.shopping-options button[data-shopping-query="イオンモール"] { --shopping-logo: url("./assets/shopping-aeonmall.svg"); }
+.shopping-options button[data-shopping-query="ららぽーと"] { --shopping-logo: url("./assets/shopping-lalaport.svg"); }
+.shopping-options button[data-shopping-query="アリオ"] { --shopping-logo: url("./assets/shopping-ario.png"); }
+.shopping-options button[data-shopping-query="ビックカメラ"] { --shopping-logo: url("./assets/shopping-bic.svg"); }
+.shopping-options button[data-shopping-query="ヨドバシカメラ"] { --shopping-logo: url("./assets/shopping-yodobashi.png"); }
+.shopping-options button[data-shopping-query="ヤマダデンキ"] { --shopping-logo: url("./assets/shopping-yamada.png"); }
+.shopping-wordmark--edion { display: block; height: 35px; margin-bottom: 4px; color: #145191; font-size: 1.32rem; font-weight: 950; line-height: 1.2; letter-spacing: -.06em; }
+.shopping-wordmark--edion span { color: #eb6d23; }
+.shopping-options button[data-shopping-query="ユニクロ"] { --shopping-logo: url("./assets/shopping-uniqlo.svg"); }
+.shopping-options button[data-shopping-query="ジーユー"] { --shopping-logo: url("./assets/shopping-gu.svg"); }
+.shopping-options button[data-shopping-query="ダイソー"] { --shopping-logo: url("./assets/shopping-daiso.svg"); }
+.shopping-options button[data-shopping-query="ドン・キホーテ"] { --shopping-logo: url("./assets/shopping-donki.svg"); }
+.shopping-options button[data-shopping-query="無印良品"] { --shopping-logo: url("./assets/shopping-muji.svg"); }
+.shopping-options button[data-shopping-query="ロフト"] { --shopping-logo: url("./assets/shopping-loft.png"); }
+.shopping-options button[data-shopping-query="ハンズ"] { --shopping-logo: url("./assets/shopping-hands.png"); }
+.shopping-options button[data-shopping-query="スリーコインズ"] { --shopping-logo: url("./assets/shopping-3coins.png"); }
+.shopping-options button[data-shopping-query="コメ兵"] { --shopping-logo: url("./assets/shopping-komehyo.svg"); }
+.shopping-options button[data-shopping-query="セカンドストリート"] { --shopping-logo: url("./assets/shopping-secondstreet.svg"); }
+.shopping-options button[data-shopping-query="駿河屋"] { --shopping-logo: url("./assets/shopping-surugaya.svg"); }
+.shopping-options button[data-shopping-query="アニメイト"] { --shopping-logo: url("./assets/shopping-animate.svg"); }
+.shopping-options button[data-shopping-query="まんだらけ"] { --shopping-logo: url("./assets/shopping-mandarake.png"); }
+.shopping-options button[data-shopping-query="らしんばん"] { --shopping-logo: url("./assets/shopping-lashinbang.png"); }
+.shopping-options button:first-child { grid-column: 1/-1; background: #eaf4ee; }
+.shopping-options--brands-only button:first-child { grid-column: auto; background: #f5faf6; }
+.shopping-options--brands-only button:last-child:nth-child(odd) { grid-column: 1/-1; }
+.shopping-subhead { grid-column: 1/-1; margin-top: 3px; color: #617167; font-size: .65rem; font-weight: 850; letter-spacing: .04em; }
+.shopping-options--familiar .shopping-subhead:first-child { margin-top: 0; }
+.shopping-options--familiar button:last-child { grid-column: auto; }
+.shopping-group-body > .shopping-familiar-note { margin: 10px 1px 0; padding: 0; border: 0; font-size: .59rem; }
+.shopping-options button small { max-width: 100%; overflow-wrap: anywhere; color: #687971; font-size: .58rem; font-weight: 500; }
+.shopping-city { display: block; max-width: 100%; margin-top: 3px; color: #627b70; font-size: .56rem; font-weight: 650; line-height: 1.3; overflow-wrap: anywhere; }
+.shopping-options button:active { transform: scale(.98); }
+.shopping-hub-note { margin: 13px 2px 0; color: var(--muted); font-size: .65rem; line-height: 1.6; }
 .food-hub-view { padding-bottom: 25px; }
 .food-hub-heading { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 13px; margin: 16px 0 22px; padding: 18px; border: 1px solid #e8d1b5; border-radius: 23px; background: linear-gradient(135deg,#fff7e7,#f3e3cd); }
 .food-hub-heading > span { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,.82); font-size: 1.9rem; }
@@ -517,6 +600,7 @@ main { min-height: calc(100dvh - 66px); }
 .food-choice-list .food-choice-mark { grid-row: 1 / 3; width: 41px; height: 41px; display: grid; place-items: center; overflow: hidden; border: 1px solid #eee8e2; border-radius: 12px; background: #fff; font-size: 1.24rem; }
 .food-choice-list button:first-child .food-choice-mark { background: #fff1e5; border-color: #f5e3d2; }
 .food-choice-mark img { display: block; width: 34px; height: 34px; object-fit: contain; }
+.gyudon-choice-dialog [data-gyudon-query="松屋"] .food-choice-mark img { width: 39px; height: 39px; object-fit: cover; object-position: left center; }
 .sushi-brand-note { margin: 12px 2px 1px; color: var(--muted); font-family: "PingFang SC", sans-serif; font-size: .57rem; line-height: 1.45; }
 .food-dialog-contact { width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 42px; margin-top: 12px; border: 1px solid #c9dcd0; border-radius: 12px; background: #f1f8f2; color: #315f4f; font-size: .7rem; font-weight: 850; cursor: pointer; }
 .food-dialog-contact span { font-size: 1.1rem; }
@@ -561,6 +645,9 @@ main { min-height: calc(100dvh - 66px); }
 .map-choice-extra-list[hidden] { display: none; }
 .map-choice.private-bath { border-color: #ead7b4; background: #fffaf0; }
 .map-choice.private-bath > span { background: #c58a3a; }
+.map-choice-onsen-help { display: flex; align-items: center; justify-content: space-between; gap: 9px; margin: 10px 0 15px; padding: 10px 11px; border: 1px solid #ead7b4; border-radius: 13px; background: #fff8ed; color: #705332; font-size: .7rem; font-weight: 750; line-height: 1.4; }
+.map-choice-onsen-help[hidden] { display: none; }
+.map-choice-onsen-help button { flex: none; min-height: 34px; padding: 0 10px; border: 0; border-radius: 10px; background: #a36b38; color: #fff; font-size: .66rem; font-weight: 850; white-space: nowrap; cursor: pointer; }
 .map-choice.reservation { border-color: #efd7b1; background: #fff9ed; }
 .map-choice.reservation > span { background: #cf8b32; }
 .map-choice-note { margin: 12px 2px 0; color: #817a72; font-family: "PingFang SC", sans-serif; font-size: .62rem; line-height: 1.45; }
@@ -1217,6 +1304,7 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .brand-mascot img { width: 59px; left: -8px; top: -4px; }
   .brand strong { font-size: clamp(.8rem, 3.45vw, .96rem); }
   .brand small { font-size: clamp(.44rem, 1.85vw, .54rem); }
+  .brand--explore small { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; white-space: normal; text-overflow: clip; }
   .city-button, .language-picker { min-height: 32px; padding-inline: 7px; }
   .city-button strong { max-width: 66px; font-size: .57rem; }
   .language-picker > span { font-size: .48rem; }
@@ -1240,4 +1328,29 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .tattoo-feature-card .tool-illustration { right: -11%; bottom: -13%; width: 73%; height: 72%; }
   .tool-card > b { left: 10px; bottom: 8px; width: 27px; height: 27px; font-size: 1.05rem; }
   .tattoo-callout { max-width: 105px; margin-top: 1px; padding: 3px 5px; font-size: clamp(.43rem, 1.75vw, .5rem); }
+}
+
+/* 联系页首屏：联系方式与频道入口同时可见，避免空白卡片挤掉信任背书。 */
+@media screen and (max-width: 600px) {
+  .contact-flow { padding-top: 4px; }
+  .contact-flow-bar { min-height: 34px; margin-bottom: 5px; }
+  .channels-hero { min-height: 80px; padding: 8px 12px; border-radius: 18px; }
+  [data-contact-step="channels"] .channels-hero { margin-top: 10px; }
+  .channels-hero img { width: 19%; max-width: 77px; bottom: -14%; }
+  .channels-hero > div { width: 79%; gap: 1px; padding: 7px 10px; border-radius: 14px; }
+  .channels-hero > div > span { font-size: .82rem; }
+  .channels-hero strong { font-size: .78rem; }
+  .channels-hero small { font-size: .55rem; }
+  .contact-methods { gap: 7px; margin-top: 8px; }
+  .contact-methods .contact-method { min-height: 104px; padding: 10px 9px 8px; border-radius: 16px; }
+  .contact-methods .wechat-main-row,
+  .contact-methods .contact-channel { grid-template-columns: 33px minmax(0,1fr); grid-template-rows: auto auto; gap: 6px; }
+  .contact-methods .wechat-main-row { padding-top: 5px; }
+  .contact-methods .contact-method .channel-icon { width: 33px; height: 33px; border-radius: 10px; }
+  .contact-methods .contact-method .channel-icon svg { width: 25px; height: 25px; }
+  .contact-methods .contact-method strong { font-size: .68rem; }
+  .contact-methods .contact-method small { font-size: .51rem; }
+  .contact-methods .channel-actions a,
+  .contact-methods .channel-actions button { min-height: 30px; }
+  .contact-socials { margin-top: 10px; }
 }

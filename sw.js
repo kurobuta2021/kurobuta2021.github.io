@@ -1,4 +1,4 @@
-const CACHE_NAME = "heitu-toolbox-v12";
+const CACHE_NAME = "heitu-toolbox-v30";
 const APP_SHELL = [
   "./", "./index.html", "./styles.css", "./i18n.js", "./share-utils.js", "./app.js",
   "./heitu-jun.png", "./heitu-contact.png", "./wechat-group-qr.jpg",
@@ -8,7 +8,18 @@ const APP_SHELL = [
   "./assets/card-luggage.png", "./assets/card-anime.png", "./assets/card-japanese-help.png",
   "./assets/card-laundry.png",
   "./assets/sushi-hama.png", "./assets/sushi-kappa.png",
-  "./assets/sushi-kura.svg", "./assets/sushi-sushiro.svg"
+  "./assets/sushi-kura.svg", "./assets/sushi-sushiro.svg",
+  "./assets/gyudon-yoshinoya.svg", "./assets/gyudon-sukiya.svg", "./assets/gyudon-matsuya.png",
+  "./assets/shopping-daimaru.svg", "./assets/shopping-takashimaya.svg", "./assets/shopping-mitsukoshi.svg",
+  "./assets/shopping-isetan.svg", "./assets/shopping-hankyu.svg", "./assets/shopping-matsuzakaya.png",
+  "./assets/shopping-maruiimai.png", "./assets/shopping-iwataya.png", "./assets/shopping-aeonmall.svg",
+  "./assets/shopping-lalaport.svg", "./assets/shopping-ario.png",
+  "./assets/shopping-bic.svg", "./assets/shopping-yodobashi.png", "./assets/shopping-yamada.png",
+  "./assets/shopping-uniqlo.svg", "./assets/shopping-donki.svg",
+  "./assets/shopping-gu.svg", "./assets/shopping-muji.svg", "./assets/shopping-daiso.svg",
+  "./assets/shopping-loft.png", "./assets/shopping-hands.png", "./assets/shopping-3coins.png",
+  "./assets/shopping-komehyo.svg", "./assets/shopping-secondstreet.svg", "./assets/shopping-surugaya.svg",
+  "./assets/shopping-animate.svg", "./assets/shopping-mandarake.png", "./assets/shopping-lashinbang.png"
 ];
 
 self.addEventListener("install", event => {
