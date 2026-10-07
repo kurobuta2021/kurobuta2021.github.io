@@ -563,7 +563,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival", "seasonal"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival", "seasonal", "seasonal-detail"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1804,6 +1804,24 @@
     const externalButton = event.target.closest("[data-external]");
     if (externalButton) {
       window.open(externalButton.dataset.external, "_blank", "noopener");
+      return;
+    }
+    const seasonalButton = event.target.closest("[data-seasonal-open]");
+    if (seasonalButton) {
+      const topic = seasonalButton.dataset.seasonalOpen;
+      const guide = document.querySelector(`[data-seasonal-guide="${topic}"]`);
+      if (guide) {
+        if (topic === "fireworks" || topic === "festivals") {
+          const dateParts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(part => [part.type, part.value]));
+          const now = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+          const events = [...guide.querySelectorAll("[data-firework-date], [data-festival-date]")];
+          events.forEach(item => { item.hidden = (item.dataset.fireworkEnd || item.dataset.festivalEnd || item.dataset.fireworkDate || item.dataset.festivalDate) < now; });
+          guide.querySelector(".seasonal-dated-empty").hidden = events.some(item => !item.hidden);
+        }
+        document.querySelectorAll("[data-seasonal-guide]").forEach(item => { item.hidden = item !== guide; });
+        document.querySelector("#seasonalDetailTitle").textContent = seasonalButton.querySelector("strong").textContent;
+        go("seasonal-detail");
+      }
       return;
     }
     const goButton = event.target.closest("[data-go]");

@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261007-seasonal-snow-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261007-seasonal-guide-preview" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -83,7 +83,7 @@
           </section>
 
           <button class="seasonal-strip" type="button" data-go="seasonal" data-tool-id="seasonal">
-            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时 <span aria-hidden="true">↗</span></strong><small>樱花 · 红叶 · 花火 · 当地热闹</small></span>
+            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时</strong><small>樱花 · 红叶 · 花火 · 当地热闹</small><span class="seasonal-strip-cta">点开看最近有什么好玩 <span aria-hidden="true">→</span></span></span>
             <span class="seasonal-strip-art" aria-hidden="true">
               <svg class="seasonal-strip-fireworks" viewBox="0 0 150 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="#FFD9A5" stroke-width="1.35" stroke-linecap="round" opacity=".84">
@@ -128,18 +128,89 @@
           <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
           <div class="seasonal-heading"><span aria-hidden="true">🌸 🍁 🎆</span><div><p class="eyebrow">JAPAN IN SEASON</p><h1 id="seasonalTitle">日本正当时</h1><p>看看你去的那几天，哪座城市正好有花，有烟火，有热闹。</p></div></div>
           <div class="seasonal-grid">
-            <a class="seasonal-choice seasonal-choice-sakura" href="https://www.japan.travel/en/see-and-do/cherry-blossom-forecast/" target="_blank" rel="noopener"><span aria-hidden="true">🌸</span><strong>看樱花</strong><small>看各地预计开花时间</small><b>查看花期 ↗</b></a>
-            <a class="seasonal-choice seasonal-choice-leaves" href="https://www.japan.travel/en/see-and-do/autumn-leaves-forecast/" target="_blank" rel="noopener"><span aria-hidden="true">🍁</span><strong>追红叶</strong><small>看各地预计见顷</small><b>查看见顷 ↗</b></a>
-            <a class="seasonal-choice seasonal-choice-fireworks" href="https://www.japan47go.travel/ja/featured/fireworks" target="_blank" rel="noopener"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>看全国花火大会资讯</small><b>查看花火 ↗</b></a>
-            <a class="seasonal-choice seasonal-choice-festivals" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>看看当地这几天有什么活动</small><b>查看活动 ↗</b></a>
-            <a class="seasonal-choice seasonal-choice-snow" href="https://www.jma.go.jp/bosai/snow/" target="_blank" rel="noopener"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去</strong><small>看全国哪里有积雪；想玩雪，再确认场地是否开放。</small></span><b>看积雪地图 ↗</b></a>
-            <a class="seasonal-choice seasonal-choice-local" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><span aria-hidden="true">🍜</span><span class="seasonal-choice-local-copy"><strong>当地有什么好玩</strong><small>拉面大赛、美食节、市集、展览……</small></span><b>去看看 ↗</b></a>
+            <button class="seasonal-choice seasonal-choice-sakura" type="button" data-seasonal-open="sakura"><span aria-hidden="true">🌸</span><strong>看樱花</strong><small>城市花期参考＋中文预报</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-leaves" type="button" data-seasonal-open="leaves"><span aria-hidden="true">🍁</span><strong>追红叶</strong><small>城市见顷参考＋中文情报</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-fireworks" type="button" data-seasonal-open="fireworks"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>按接下来已公布的日期找</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-festivals" type="button" data-seasonal-open="festivals"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>看接下来有哪些热闹</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-snow" type="button" data-seasonal-open="snow"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去</strong><small>先看哪里容易有雪，再查现在雪况。</small></span><b>打开看看 ›</b></button>
+            <a class="seasonal-choice seasonal-choice-local" href="https://www.japan.travel/tw/things-to-do/attraction/seasonal-event/" target="_blank" rel="noopener"><span aria-hidden="true">🍜</span><span class="seasonal-choice-local-copy"><strong>当地有什么好玩</strong><small>拉面大赛、美食节、市集、展览……</small></span><b>中文找灵感 ↗</b></a>
           </div>
           <p class="seasonal-note">花期是预测，活动也可能改期；出发前再看详情与主办方最新通知。</p>
           <div class="seasonal-trip-help">
             <span><strong>想去参加的活动地点远，怎么接行程？</strong><small>时间、路线拿不准，来找我聊聊。</small></span>
             <button type="button" data-direct-contact data-tool-id="seasonal-trip-help">找黑豚问问 <span aria-hidden="true">›</span></button>
           </div>
+        </section>
+
+        <section class="view seasonal-detail-view" data-view="seasonal-detail" aria-labelledby="seasonalDetailTitle">
+          <button class="back-button" type="button" data-go="seasonal">‹ 返回日本正当时</button>
+          <h1 id="seasonalDetailTitle" class="seasonal-detail-title">日本正当时</h1>
+
+          <article class="seasonal-guide" data-seasonal-guide="sakura" hidden>
+            <p class="seasonal-guide-kicker">🌸 下一次赏樱，先看大致顺序</p>
+            <p class="seasonal-guide-lead">樱花从南往北走。下面是常年开花时间参考，<strong>不是下一季预测</strong>；临出发再点中文版预报。</p>
+            <div class="seasonal-reference-map"><img src="./assets/sakura-reference-map.svg" alt="日本地图标出札幌、青森、仙台、金泽、东京、大阪、广岛、福冈和鹿儿岛的常年樱花初开参考日期" /></div>
+            <div class="seasonal-extra-dates" aria-label="其他城市常年樱花初开日期"><span>钏路 <b>5/16</b></span><span>秋田 <b>4/17</b></span><span>新潟 <b>4/8</b></span><span>长野 <b>4/11</b></span><span>名古屋 <b>3/24</b></span><span>高知 <b>3/22</b></span></div>
+            <p class="seasonal-source-note">参考日本观光局所列各城市多年平均初开时间；“初开”不等于“满开”。冲绳等早樱品种另算。</p>
+            <a class="seasonal-guide-link" href="https://www.japan.travel/tw/see-and-do/cherry-blossom-forecast/" target="_blank" rel="noopener"><strong>查最新樱花预报</strong><small>日本观光局・繁体中文｜往下看城市日期表</small><b>↗</b></a>
+          </article>
+
+          <article class="seasonal-guide" data-seasonal-guide="leaves" hidden>
+            <p class="seasonal-guide-kicker">🍁 红叶先在北边，慢慢往南走</p>
+            <p class="seasonal-guide-lead">先用这张图挑地区，再查最新情况。同一座城市，<strong>山上和市区可能差好几周</strong>。</p>
+            <div class="seasonal-reference-map"><img src="./assets/leaves-reference-map.svg" alt="日本地图标出札幌、青森、仙台、金泽、东京、大阪、广岛、福冈和鹿儿岛的常年红叶最佳观赏参考日期" /></div>
+            <div class="seasonal-extra-dates seasonal-extra-dates-leaves" aria-label="其他城市常年红叶最佳观赏日期"><span>钏路 <b>10/16</b></span><span>秋田 <b>11/12</b></span><span>新潟 <b>11/15</b></span><span>长野 <b>11/12</b></span><span>名古屋 <b>11/28</b></span><span>高知 <b>12/2</b></span></div>
+            <p class="seasonal-source-note">图上是日本观光局列出的多年平均日期，不是 2026 年实时预测；高海拔地区通常更早。</p>
+            <a class="seasonal-guide-link" href="https://www.japan.travel/tw/see-and-do/autumn-leaves-forecast/" target="_blank" rel="noopener"><strong>查最新红叶情报</strong><small>日本观光局・繁体中文｜往下看城市见顷表</small><b>↗</b></a>
+          </article>
+
+          <article class="seasonal-guide" data-seasonal-guide="fireworks" hidden>
+            <p class="seasonal-guide-kicker">🎆 想看花火，先从城市挑</p>
+            <p class="seasonal-guide-lead">按现在往后的日期排，只放<strong>2026 年已公布</strong>的场次。点开可看举办方公告。</p>
+            <div class="seasonal-events seasonal-dated-events">
+              <a data-firework-date="2026-10-12" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>10/12</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-17" href="https://www.city.fujisawa.kanagawa.jp/kankou/event/2025fujisawaenoshimahanabitaikai.html" target="_blank" rel="noopener"><time>10/17</time><strong>神奈川江之岛｜花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-17" href="https://www.city.chikusei.lg.jp/kankou/kankou-news/page013678.html" target="_blank" rel="noopener"><time>10/17</time><strong>茨城筑西｜花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-19" data-firework-end="2026-10-23" href="https://www.city.kobe.lg.jp/a44800/570186926290.html" target="_blank" rel="noopener"><time>10/19–23</time><strong>兵库神户｜港之花火</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-25" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>10/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-07" href="https://www.ibarakiguide.jp/event.php?code=736&mode=detail" target="_blank" rel="noopener"><time>11/7</time><strong>茨城土浦｜全国花火竞技大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-08" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>11/8</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-23" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>11/23</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-12-06" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>12/6</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-12-25" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>12/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+            </div>
+            <p class="seasonal-dated-empty" hidden>目前整理的场次都结束了；新日期公布后再补，先到下方按地区查。</p>
+            <p class="seasonal-source-note">按日本时间自动隐藏已过日期。这里只列已核实的部分场次；天气、售票和变更，出发前再看举办方公告。</p>
+            <a class="seasonal-guide-link" href="https://www.japan.travel/tw/things-to-do/" target="_blank" rel="noopener"><strong>用中文看日本观光局的烟火介绍</strong><small>繁体中文｜进入后找“烟火”栏目；不是实时日历</small><b>↗</b></a>
+            <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan47go.travel/ja/featured/fireworks" target="_blank" rel="noopener"><strong>按地区查更多花火大会</strong><small>日本观光振兴协会・日文｜进入后按地区找，日期请再核对</small><b>↗</b></a>
+          </article>
+
+          <article class="seasonal-guide" data-seasonal-guide="festivals" hidden>
+            <p class="seasonal-guide-kicker">🏮 路过一座城，顺便赶场热闹</p>
+            <p class="seasonal-guide-lead">先看<strong>2026 年接下来已公布</strong>的几场祭典。点开能看当地的具体安排。</p>
+            <div class="seasonal-events seasonal-dated-events">
+              <a data-festival-date="2026-10-09" data-festival-end="2026-10-10" href="https://www.hidatakayama.or.jp/spot/detail_2004.html" target="_blank" rel="noopener"><time>10/9–10</time><strong>岐阜高山｜秋季高山祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-17" data-festival-end="2026-10-18" href="https://koedo.or.jp/event/%E5%B7%9D%E8%B6%8A%E3%81%BE%E3%81%A4%E3%82%8A-4/" target="_blank" rel="noopener"><time>10/17–18</time><strong>埼玉川越｜川越祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-22" href="https://ja.kyoto.travel/event/single.php?event_id=7049" target="_blank" rel="noopener"><time>10/22</time><strong>京都｜时代祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-11-02" data-festival-end="2026-11-04" href="https://www.city.karatsu.lg.jp/page/4344.html" target="_blank" rel="noopener"><time>11/2–4</time><strong>佐贺唐津｜唐津曳山祭</strong><b>↗</b></a>
+            </div>
+            <p class="seasonal-dated-empty" hidden>目前整理的场次都结束了；到下方网站按城市、日期找新活动。</p>
+            <p class="seasonal-source-note">想找更详细的节日？去下面的活动日历，按目的地和日期筛选。这里不是全国完整名单，出发前再看举办方通知。</p>
+            <a class="seasonal-guide-link" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><strong>按城市、日期找更多祭典</strong><small>日本观光振兴协会・日文｜选目的地和日期筛选</small><b>↗</b></a>
+            <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan.travel/tw/see-and-do/festivals-and-events/" target="_blank" rel="noopener"><strong>用中文找祭典灵感</strong><small>日本观光局・繁体中文｜按季节看活动介绍</small><b>↗</b></a>
+          </article>
+
+          <article class="seasonal-guide" data-seasonal-guide="snow" hidden>
+            <p class="seasonal-guide-kicker">❄️ 想看雪，先找对地方</p>
+            <p class="seasonal-guide-lead">先看冬天哪些地方容易有雪。这张是<strong>常见雪区示意，不代表今天那里正在下雪</strong>。出发前再查最新雪况。</p>
+            <div class="seasonal-map-card seasonal-map-card-snow">
+              <div class="seasonal-map-art"><img src="./assets/japan-season-map.svg" alt="日本列岛主要雪区位置示意，不按比例绘制" /><span class="seasonal-map-stamp">常见雪区</span></div>
+              <ol class="seasonal-map-timeline"><li><strong>北海道</strong><span>札幌近郊・新雪谷・富良野</span></li><li><strong>东北</strong><span>青森・秋田・山形</span></li><li><strong>甲信越</strong><span>长野白马・新潟越后汤泽</span></li><li><strong>北陆</strong><span>富山・石川山区</span></li></ol>
+            </div>
+            <p class="seasonal-source-note">想拍雪景和想滑雪不是一回事；雪场积雪不代表市区有雪，开放情况也要另外确认。</p>
+            <a class="seasonal-guide-link" href="https://www.japowdb.com/zh-tw/resorts/" target="_blank" rel="noopener"><strong>中文看各雪场资料和雪况</strong><small>JapowDB・繁体中文｜第三方雪场数据，不代表市区雪况</small><b>↗</b></a>
+            <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://tenki.jp/snow-map/" target="_blank" rel="noopener"><strong>看全国积雪深度图</strong><small>日本气象协会・日文｜选“積雪の深さ”，不是“降雪量”</small><b>↗</b></a>
+          </article>
         </section>
 
         <section class="view toilet-map-view" data-view="toilet-map" aria-labelledby="toiletMapTitle">
@@ -372,8 +443,8 @@
             <div class="tun-coming-grid">
               <article class="tun-coming-card route-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
-                <h3>个性化小众线路</h3>
-                <p>日本各地红叶路线、雪景、樱花线路。不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
+                <h3>个性化小众一日/两日游线路</h3>
+                <p>时间有限！直达精髓！日本各地红叶、雪景、樱花，动漫，牧场，温泉等。挑几条个性化小众一日游线路体验。包车不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
                 <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询安排路线</button>
               </article>
             </div>
@@ -879,6 +950,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="./i18n.js?v=20261007-seasonal-snow-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261007-seasonal-snow-release"></script>
+    <script src="./app.js?v=20261007-seasonal-guide-preview"></script>
   </body>
 </html>
