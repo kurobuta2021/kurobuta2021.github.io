@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 390" role="img" aria-labelledby="title desc">
+  <title id="title">日本列岛南北位置示意</title>
+  <desc id="desc">从北海道、东北、关东与中部、关西与中国、四国到九州的概略位置，不按比例绘制。</desc>
+  <g fill="#e8edf0" stroke="#a8b8c1" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M163 19l18-6 18 10 16-2 17 14-4 15-15 2-8 17-17 3-10 15-18-8-10-20 8-19z"/>
+    <path d="M155 86l11 1 8 13-7 11 8 14-5 16-10 3-5 15-16 8-1 17-14 8-5 18-15 10-7 24-19 10-3 17-16 5-10 19-20 3-10-12 9-17 11-6 9-17 15-7 6-19 14-13 5-19 12-10 1-19 16-13 3-19 14-12 3-18 13-9z"/>
+    <path d="M62 287l22-8 22 4 4 10-21 8-22-3z"/>
+    <path d="M41 297l18 5 1 14-11 11-4 15-14 5-5 18-16-4 2-16 10-12-2-18z"/>
+    <path d="M6 375l12 2-3 8-11-2z"/>
+  </g>
+  <g fill="#796d77" font-size="12" font-family="system-ui, sans-serif" font-weight="700">
+    <text x="110" y="30">北海道</text>
+    <text x="182" y="127">东北</text>
+    <text x="171" y="197">关东</text>
+    <text x="128" y="250">关西</text>
+    <text x="7" y="284">九州</text>
+  </g>
+</svg>
