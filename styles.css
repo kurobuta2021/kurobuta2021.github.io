@@ -1598,3 +1598,74 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .view[data-view="home"] { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
   .toast { bottom: calc(68px + env(safe-area-inset-bottom)); }
 }
+
+/* 首页季节入口：和免费巴士一样占一横条，内页再展开选择。 */
+.seasonal-strip { position: relative; width: 100%; min-height: 93px; display: flex; align-items: center; justify-content: space-between; gap: 10px; overflow: hidden; margin-top: 15px; padding: 12px 19px; border: 1px solid #303954; border-radius: 22px; background: radial-gradient(circle at 88% 12%,rgba(251,144,159,.32),transparent 27%),radial-gradient(circle at 64% 100%,rgba(246,178,91,.18),transparent 38%),linear-gradient(115deg,#252d47,#363451 63%,#483954); box-shadow: 0 10px 23px rgba(37,36,62,.2); color: #fff; text-align: left; cursor: pointer; }
+.seasonal-strip::after { content: ""; position: absolute; right: -28px; top: -47px; width: 158px; height: 158px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; pointer-events: none; }
+.seasonal-strip:focus-visible { outline: 3px solid #e99a6d; outline-offset: 3px; }
+.seasonal-strip-copy { position: relative; z-index: 1; min-width: 0; display: grid; justify-items: start; gap: 3px; }
+.seasonal-strip-copy em { padding: 3px 8px; border: 1px solid rgba(255,212,155,.48); border-radius: 999px; background: rgba(244,153,95,.2); color: #ffdbab; font-size: .61rem; font-style: normal; font-weight: 800; line-height: 1.1; letter-spacing: .02em; }
+.seasonal-strip-copy strong { font-size: 1.21rem; font-weight: 950; line-height: 1.1; letter-spacing: .01em; }
+.seasonal-strip-copy strong span { margin-left: 3px; color: #ffcf9a; font-size: .92rem; }
+.seasonal-strip-copy small { color: #f0e2e7; font-size: .72rem; line-height: 1.3; }
+.seasonal-strip-art { position: relative; z-index: 1; flex: 0 0 90px; height: 74px; }
+.seasonal-strip-fireworks { position: absolute; top: -13px; left: clamp(-75px,-15vw,-48px); width: 150px; height: 94px; opacity: .9; filter: drop-shadow(0 0 3px rgba(255,200,139,.38)); pointer-events: none; }
+.seasonal-strip-art i { position: absolute; display: grid; place-items: center; width: 43px; height: 43px; font-size: 1.55rem; font-style: normal; filter: drop-shadow(0 2px 4px rgba(21,22,39,.35)); }
+.seasonal-strip-art i:nth-child(1) { top: 5px; left: 1px; transform: rotate(-12deg); }
+.seasonal-strip-art i:nth-child(2) { top: 28px; right: 0; transform: rotate(12deg); }
+.seasonal-strip-art i:nth-child(3) { top: -3px; right: 1px; transform: rotate(8deg); }
+.seasonal-strip + .more-tools { margin-top: 22px; }
+.seasonal-heading { display: flex; align-items: center; gap: 15px; margin: 8px 0 19px; padding: 20px; border-radius: 24px; background: linear-gradient(125deg,#fff0e7,#f4eaff); }
+.seasonal-heading > span { flex: 0 0 76px; font-size: 1.9rem; line-height: 1.25; text-align: center; }
+.seasonal-heading h1 { margin: 2px 0 5px; font-size: clamp(1.7rem,5vw,2.2rem); line-height: 1.1; }
+.seasonal-heading p:last-child { margin: 0; color: #725f69; font-size: .86rem; line-height: 1.5; }
+.seasonal-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.seasonal-choice { min-height: 146px; display: flex; flex-direction: column; align-items: flex-start; padding: 17px; border: 1px solid rgba(113,76,79,.12); border-radius: 22px; color: #312c33; text-decoration: none; box-shadow: 0 5px 16px rgba(77,58,57,.05); }
+.seasonal-choice > span { font-size: 1.65rem; line-height: 1; }
+.seasonal-choice strong { margin-top: 9px; font-size: 1.05rem; line-height: 1.1; }
+.seasonal-choice small { margin-top: 5px; color: #685d64; font-size: .7rem; line-height: 1.35; }
+.seasonal-choice b { margin-top: auto; padding-top: 10px; color: #8b4e70; font-size: .68rem; }
+.seasonal-choice-sakura { background: linear-gradient(145deg,#fff9f8,#ffe4ea); }
+.seasonal-choice-leaves { background: linear-gradient(145deg,#fff9ee,#f9dfc4); }
+.seasonal-choice-fireworks { background: linear-gradient(145deg,#f1f3ff,#dae3f8); }
+.seasonal-choice-festivals { background: linear-gradient(145deg,#fff9ec,#f8e7c7); }
+.seasonal-choice-snow { grid-column: 1 / -1; min-height: 100px; flex-direction: row; align-items: center; gap: 12px; background: linear-gradient(120deg,#f2faff,#dfeefa); }
+.seasonal-choice-snow > span:first-child { flex: 0 0 46px; width: 46px; height: 46px; display: grid; place-items: center; }
+.seasonal-choice-snow-copy { min-width: 0; display: grid; gap: 5px; }
+.seasonal-choice-snow-copy strong, .seasonal-choice-snow-copy small { margin-top: 0; }
+.seasonal-choice-snow b { flex: 0 0 auto; margin-left: auto; padding-top: 0; white-space: nowrap; }
+.seasonal-choice-local { grid-column: 1 / -1; min-height: 100px; display: flex; flex-direction: row; align-items: center; gap: 12px; background: linear-gradient(120deg,#f3f9ed,#e6f2df); }
+.seasonal-choice-local > span:first-child { flex: 0 0 46px; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 15px; background: #fff9e9; }
+.seasonal-choice-local-copy { min-width: 0; display: grid; gap: 5px; }
+.seasonal-choice-local-copy strong, .seasonal-choice-local-copy small { margin-top: 0; }
+.seasonal-choice-local b { flex: 0 0 auto; margin-left: auto; padding-top: 0; white-space: nowrap; }
+.seasonal-note { margin: 14px 3px 0; color: #736a69; font-size: .72rem; line-height: 1.55; }
+.seasonal-trip-help { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 13px 15px; border: 1px solid #d9d0e4; border-radius: 18px; background: linear-gradient(120deg,#fffaf5,#f7f0ff); }
+.seasonal-trip-help > span { min-width: 0; display: grid; gap: 3px; }
+.seasonal-trip-help strong { color: #332b3b; font-size: .88rem; line-height: 1.3; }
+.seasonal-trip-help small { color: #766d77; font-size: .68rem; line-height: 1.4; }
+.seasonal-trip-help button { flex: 0 0 auto; min-height: 38px; padding: 8px 12px; border: 0; border-radius: 11px; background: #664b79; color: #fff; font-size: .72rem; font-weight: 800; cursor: pointer; }
+@media (max-width: 699px) {
+  .seasonal-strip { min-height: 88px; margin-top: 11px; padding: 9px 13px; border-radius: 19px; }
+  .seasonal-strip-copy em { font-size: .6rem; }
+  .seasonal-strip-copy strong { font-size: 1.22rem; }
+  .seasonal-strip-copy small { font-size: .66rem; }
+  .seasonal-strip-art { flex-basis: 75px; height: 67px; }
+  .seasonal-strip-art i { width: 37px; height: 37px; border-radius: 13px; font-size: 1.26rem; }
+  .seasonal-strip + .more-tools { margin-top: 17px; }
+  .seasonal-heading { gap: 9px; padding: 15px; }
+  .seasonal-heading > span { flex-basis: 58px; font-size: 1.5rem; }
+  .seasonal-heading p:last-child { font-size: .72rem; }
+  .seasonal-grid { gap: 9px; }
+  .seasonal-choice { min-height: 137px; padding: 13px; border-radius: 18px; }
+  .seasonal-choice strong { font-size: .94rem; }
+  .seasonal-choice small { font-size: .64rem; }
+  .seasonal-choice-local { min-height: 83px; gap: 9px; }
+  .seasonal-choice-snow { min-height: 83px; gap: 9px; }
+  .seasonal-choice-snow > span:first-child { flex-basis: 42px; width: 42px; height: 42px; }
+  .seasonal-choice-snow-copy small { font-size: .6rem; }
+  .seasonal-choice-snow b { font-size: .61rem; }
+  .seasonal-choice-local > span:first-child { flex-basis: 42px; width: 42px; height: 42px; }
+  .seasonal-choice-local-copy small { font-size: .6rem; }
+  .seasonal-choice-local b { font-size: .61rem; }
+}

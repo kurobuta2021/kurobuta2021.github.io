@@ -563,7 +563,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival", "seasonal"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();

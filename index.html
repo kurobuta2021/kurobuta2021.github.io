@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261007-balanced-bottom-nav-preview" />
+    <link rel="stylesheet" href="./styles.css?v=20261007-seasonal-snow-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -82,6 +82,22 @@
             </div>
           </section>
 
+          <button class="seasonal-strip" type="button" data-go="seasonal" data-tool-id="seasonal">
+            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时 <span aria-hidden="true">↗</span></strong><small>樱花 · 红叶 · 花火 · 当地热闹</small></span>
+            <span class="seasonal-strip-art" aria-hidden="true">
+              <svg class="seasonal-strip-fireworks" viewBox="0 0 150 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="#FFD9A5" stroke-width="1.35" stroke-linecap="round" opacity=".84">
+                  <path d="M41 38l-10-9m14 4-1-13m6 14 10-11m-6 17 14-1M49 46l8 12m-17-8-2 14m-4-20-13 6m11-13-14-2"/>
+                  <path d="M116 20l-5-7m9 5 2-9m3 12 8-4m-6 8 8 5m-14-2-1 10m-5-12-8 4" opacity=".72"/>
+                </g>
+                <g fill="#FFE7BF"><circle cx="41" cy="39" r="2"/><circle cx="31" cy="28" r="1.4"/><circle cx="61" cy="23" r="1.4"/><circle cx="68" cy="39" r="1.6"/><circle cx="57" cy="59" r="1.5"/><circle cx="21" cy="50" r="1.5"/><circle cx="121" cy="23" r="1.8"/><circle cx="122" cy="9" r="1.2"/><circle cx="135" cy="30" r="1.2"/></g>
+                <g fill="#F5A9B5" opacity=".9"><circle cx="14" cy="14" r="1.3"/><circle cx="76" cy="14" r="1.2"/><circle cx="91" cy="72" r="1.5"/><circle cx="144" cy="57" r="1.4"/></g>
+                <path d="M14 73v6m-3-3h6M78 8v5m-2.5-2.5h5M132 72v5m-2.5-2.5h5" stroke="#FFF0D9" stroke-width="1.1" stroke-linecap="round" opacity=".68"/>
+              </svg>
+              <i>🌸</i><i>🍁</i><i>🎆</i>
+            </span>
+          </button>
+
           <section class="more-tools" aria-labelledby="moreToolsTitle">
             <div class="more-tools-heading"><h2 id="moreToolsTitle">更多实用地图探索</h2><span>还有更多实用工具，助你轻松玩转日本！</span></div>
             <div class="more-tools-grid">
@@ -106,6 +122,24 @@
           </button>
 
           <p class="coverage-note">本站负责中文整理和操作辅助；地点信息与实际服务由跳转后的第三方网站提供。</p>
+        </section>
+
+        <section class="view seasonal-view" data-view="seasonal" aria-labelledby="seasonalTitle">
+          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
+          <div class="seasonal-heading"><span aria-hidden="true">🌸 🍁 🎆</span><div><p class="eyebrow">JAPAN IN SEASON</p><h1 id="seasonalTitle">日本正当时</h1><p>看看你去的那几天，哪座城市正好有花，有烟火，有热闹。</p></div></div>
+          <div class="seasonal-grid">
+            <a class="seasonal-choice seasonal-choice-sakura" href="https://www.japan.travel/en/see-and-do/cherry-blossom-forecast/" target="_blank" rel="noopener"><span aria-hidden="true">🌸</span><strong>看樱花</strong><small>看各地预计开花时间</small><b>查看花期 ↗</b></a>
+            <a class="seasonal-choice seasonal-choice-leaves" href="https://www.japan.travel/en/see-and-do/autumn-leaves-forecast/" target="_blank" rel="noopener"><span aria-hidden="true">🍁</span><strong>追红叶</strong><small>看各地预计见顷</small><b>查看见顷 ↗</b></a>
+            <a class="seasonal-choice seasonal-choice-fireworks" href="https://www.japan47go.travel/ja/featured/fireworks" target="_blank" rel="noopener"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>看全国花火大会资讯</small><b>查看花火 ↗</b></a>
+            <a class="seasonal-choice seasonal-choice-festivals" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>看看当地这几天有什么活动</small><b>查看活动 ↗</b></a>
+            <a class="seasonal-choice seasonal-choice-snow" href="https://www.jma.go.jp/bosai/snow/" target="_blank" rel="noopener"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去</strong><small>看全国哪里有积雪；想玩雪，再确认场地是否开放。</small></span><b>看积雪地图 ↗</b></a>
+            <a class="seasonal-choice seasonal-choice-local" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><span aria-hidden="true">🍜</span><span class="seasonal-choice-local-copy"><strong>当地有什么好玩</strong><small>拉面大赛、美食节、市集、展览……</small></span><b>去看看 ↗</b></a>
+          </div>
+          <p class="seasonal-note">花期是预测，活动也可能改期；出发前再看详情与主办方最新通知。</p>
+          <div class="seasonal-trip-help">
+            <span><strong>想去参加的活动地点远，怎么接行程？</strong><small>时间、路线拿不准，来找我聊聊。</small></span>
+            <button type="button" data-direct-contact data-tool-id="seasonal-trip-help">找黑豚问问 <span aria-hidden="true">›</span></button>
+          </div>
         </section>
 
         <section class="view toilet-map-view" data-view="toilet-map" aria-labelledby="toiletMapTitle">
@@ -843,8 +877,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261007-arrival-prepare-preview"></script>
+    <script src="./i18n.js?v=20261007-seasonal-snow-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261006-onsen-stays-preview-b"></script>
+    <script src="./app.js?v=20261007-seasonal-snow-release"></script>
   </body>
 </html>

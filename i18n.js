@@ -14,6 +14,16 @@
   };
 
   const englishMap = {
+    "日本正当时": "Japan in season", "查看最新实时情报": "See the latest updates", "查当季花期与活动": "Seasonal blooms and events", "樱花 · 红叶 · 花火 · 当地热闹": "Blossoms · Autumn leaves · Fireworks · Local events",
+    "看看你去的那几天，哪座城市正好有花，有烟火，有热闹。": "See which city has blossoms, fireworks or festivals during your trip.",
+    "看樱花": "Cherry blossoms", "看开花、满开时间和地区": "Bloom and full-bloom dates by region", "看各地预计开花时间": "Forecast bloom dates by region", "查看花期 ↗": "View bloom dates ↗",
+    "追红叶": "Autumn leaves", "看各地变色与见顷": "Color changes and peak dates", "看各地预计见顷": "Forecast peak colors by region", "查看见顷 ↗": "View peak colors ↗",
+    "看花火大会": "Fireworks festivals", "按月份、地区找大会": "Find events by month and region", "看全国花火大会资讯": "Fireworks events across Japan", "查看日历 ↗": "View calendar ↗", "查看花火 ↗": "View fireworks ↗",
+    "赶祭典活动": "Local festivals", "看看当地这几天有什么活动": "See what's on during your trip", "查看活动 ↗": "View events ↗",
+    "当地有什么好玩": "What's on nearby", "拉面大赛、美食节、市集、展览……": "Ramen contests, food fairs, markets and exhibitions…", "去看看 ↗": "Explore events ↗",
+    "追雪去": "Find the snow", "看全国哪里有积雪；想玩雪，再确认场地是否开放。": "See where snow has settled across Japan; check that snow-play venues are open before going.", "看积雪地图 ↗": "View snow map ↗",
+    "花期是预测，活动也可能改期；出发前再看详情与主办方最新通知。": "Bloom dates are forecasts, and events can change. Check the details and organizer updates before you go.",
+    "想去参加的活动地点远，怎么接行程？": "The event is far away—how can it fit into your trip?", "时间、路线拿不准，来找我聊聊。": "Not sure about timing or routes? Ask me.",
     "简体": "简体", "繁體": "繁體", "选择语言": "Choose language", "语言切换": "Language", "主要导航": "Main navigation", "有更新": "Updated",
     "黑豚君 · 日本旅行工具箱": "Heitun · Japan Toolbox",
     "黑豚的日本旅行工具箱": "Heitun's Japan Toolbox",
