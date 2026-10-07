@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261007-seasonal-guide-preview" />
+    <link rel="stylesheet" href="./styles.css?v=20261008-play-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -24,9 +24,14 @@
           <span><strong>黑豚的日本旅行工具箱</strong><small id="brandTagline">定位离你最近的厕所、吸烟区、商超便利店等。</small></span>
         </button>
         <div class="header-controls">
-          <button id="currentAreaButton" class="city-button" type="button" aria-label="定位当前地区">
-            <span>●</span><strong id="currentAreaText">定位当前区</strong><b>›</b>
-          </button>
+          <div class="area-button-stack" role="group" aria-label="搜索地点">
+            <button id="currentAreaButton" class="city-button" type="button" aria-label="定位当前地区">
+              <span>●</span><strong id="currentAreaText">定位当前区</strong>
+            </button>
+            <button id="customAreaButton" class="city-button custom-area-button" type="button" aria-label="换个地方搜索">
+              <strong id="customAreaText">换个地方</strong>
+            </button>
+          </div>
           <label class="language-picker" aria-label="选择语言">
             <span>语言切换</span>
             <select id="languageSelect">
@@ -125,7 +130,7 @@
         </section>
 
         <section class="view seasonal-view" data-view="seasonal" aria-labelledby="seasonalTitle">
-          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
+          <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
           <div class="seasonal-heading"><span aria-hidden="true">🌸 🍁 🎆</span><div><p class="eyebrow">JAPAN IN SEASON</p><h1 id="seasonalTitle">日本正当时</h1><p>看看你去的那几天，哪座城市正好有花，有烟火，有热闹。</p></div></div>
           <div class="seasonal-grid">
             <button class="seasonal-choice seasonal-choice-sakura" type="button" data-seasonal-open="sakura"><span aria-hidden="true">🌸</span><strong>看樱花</strong><small>城市花期参考＋中文预报</small><b>打开看看 ›</b></button>
@@ -428,6 +433,32 @@
               <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span></span></span>
               <span class="tun-shop-hub-cta">打开逛什么分类 <span aria-hidden="true">→</span></span>
             </button>
+          </section>
+
+          <section id="savedPlacesBlock" class="saved-places-block" aria-labelledby="savedPlacesTitle" hidden>
+            <div class="saved-places-heading"><div><small>SAVED ON THIS PHONE</small><h2 id="savedPlacesTitle">已经豚下来的地点</h2></div><button type="button" data-go="navigator">＋ 收藏新地点</button></div>
+            <div id="favoriteList" class="favorite-list"></div>
+            <p class="storage-note">不用登录。清除浏览器数据或更换手机后，收藏不会自动同步。</p>
+          </section>
+        </section>
+
+        <section class="view play-view" data-view="play" aria-labelledby="playTitle">
+          <section class="play-channels" aria-label="黑豚的频道">
+            <div class="play-channels-heading"><strong>先来黑豚的频道看看</strong><small>点图标打开主页</small></div>
+            <div class="play-channels-grid">
+              <a href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu" aria-label="打开黑豚的小红书主页"><span class="social-glyph xhs-glyph" aria-hidden="true">小红书</span><small>小红书</small></a>
+              <a href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin" aria-label="打开黑豚的抖音主页"><span class="social-glyph douyin-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><small>抖音</small></a>
+              <a href="https://space.bilibili.com/34637054" target="_blank" rel="noopener" data-contact-channel="bilibili" aria-label="打开黑豚的B站主页"><span class="social-glyph bili-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="m16 9 4 5m12-5-4 5M11 17h26c2.2 0 4 1.8 4 4v15c0 2.2-1.8 4-4 4H11c-2.2 0-4-1.8-4-4V21c0-2.2 1.8-4 4-4z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 25v6m14-6v6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M19 35c3 2 7 2 10 0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><small>B站</small></a>
+              <a href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube" aria-label="打开黑豚的YouTube频道"><span class="social-glyph youtube-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="11" width="38" height="26" rx="9" fill="currentColor"/><path d="m21 18 12 6-12 6V18z" fill="#e62117"/></svg></span><small>YouTube</small></a>
+              <a href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok" aria-label="打开黑豚的TikTok主页"><span class="social-glyph tiktok-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><small>TikTok</small></a>
+            </div>
+          </section>
+          <div class="play-heading"><span class="play-heading-art" aria-hidden="true">🌸 <i>🎆</i></span><div><p class="eyebrow">PLAY JAPAN</p><h1 id="playTitle">玩日本</h1><p>想看一场热闹，住一晚温泉，或者走一条不一样的路？从这里挑个想法。</p></div></div>
+          <button class="play-seasonal-entry" type="button" data-go="seasonal" data-tool-id="seasonal">
+            <span class="play-seasonal-copy"><small>最新实时情报</small><strong>日本正当时</strong><span>樱花、红叶、花火、当地活动和雪景</span><b>点开看看最近有什么好玩 <span aria-hidden="true">→</span></b></span><span class="play-seasonal-art" aria-hidden="true">🌸<span>🎆</span>🍁</span>
+          </button>
+          <div class="play-services-heading"><h2>说说你想怎么玩</h2><p>有喜欢的，点进去看看；需要安排就直接找我聊。</p></div>
+          <div class="play-services">
             <div class="tun-onsen-stay-hub">
               <button class="tun-onsen-stay-main" type="button" data-go="onsen-stays" data-tool-id="onsen-stays">
                 <span class="tun-onsen-stay-icon" aria-hidden="true">♨</span>
@@ -448,18 +479,13 @@
                 <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询安排路线</button>
               </article>
             </div>
+            <button class="play-airport-help" type="button" data-direct-contact data-tool-id="play-airport-help"><span aria-hidden="true">✈️</span><span><strong>落地后怎么走？</strong><small>想安排机场接送，告诉我机场、日期和人数。</small></span><b aria-hidden="true">›</b></button>
             <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
-          </section>
-
-          <section id="savedPlacesBlock" class="saved-places-block" aria-labelledby="savedPlacesTitle" hidden>
-            <div class="saved-places-heading"><div><small>SAVED ON THIS PHONE</small><h2 id="savedPlacesTitle">已经豚下来的地点</h2></div><button type="button" data-go="navigator">＋ 收藏新地点</button></div>
-            <div id="favoriteList" class="favorite-list"></div>
-            <p class="storage-note">不用登录。清除浏览器数据或更换手机后，收藏不会自动同步。</p>
-          </section>
+          </div>
         </section>
 
         <section class="view onsen-stays-view" data-view="onsen-stays" aria-labelledby="onsenStaysTitle">
-          <button class="back-button" type="button" data-go="favorites">‹ 返回逛吃日本</button>
+          <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
           <div class="onsen-stays-heading"><span aria-hidden="true">♨</span><div><p class="eyebrow">STAY AT AN ONSEN</p><h1 id="onsenStaysTitle">住一晚温泉</h1><p>说说你想怎么住，我帮你挑温泉酒店。</p></div></div>
           <div class="onsen-stays-choices">
             <fieldset><legend>想看什么景？</legend><div class="onsen-stays-options">
@@ -673,6 +699,7 @@
       <nav class="bottom-nav" aria-label="主要导航">
         <button class="active" type="button" data-go="home"><span>⌂</span>工具箱</button>
         <button type="button" data-go="favorites" data-update-key="favorites"><span>✧</span>逛吃日本<i id="navFavoriteCount" hidden>0</i></button>
+        <button type="button" data-go="play" data-update-key="play"><span>✦</span>玩日本</button>
         <button type="button" data-go="contact" data-update-key="contact"><span>●</span>找黑豚</button>
       </nav>
     </div>
@@ -882,10 +909,37 @@
         <button class="food-dialog-contact" type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚问问 <span aria-hidden="true">›</span></button>
       </form>
     </dialog>
+    <dialog id="customAreaDialog" class="app-dialog custom-area-dialog">
+      <div class="dialog-heading"><div><p class="eyebrow">CHOOSE AN AREA</p><h2>想搜日本哪里附近？</h2></div><button id="closeCustomArea" type="button" aria-label="关闭">×</button></div>
+      <p class="custom-area-intro">人还没到日本，照样可以先看看落脚地附近有啥逛、吃、玩！</p>
+      <form id="customAreaForm" class="custom-area-form">
+        <label>城市／都道府县<input id="customAreaCity" list="customAreaCities" placeholder="例如 东京、大阪、札幌" autocomplete="address-level1" required /></label>
+        <datalist id="customAreaCities"><option value="东京"></option><option value="大阪"></option><option value="京都"></option><option value="札幌"></option><option value="福冈"></option><option value="名古屋"></option><option value="神户"></option><option value="横滨"></option><option value="冲绳"></option><option value="鹿儿岛"></option></datalist>
+        <label>区／町名（可选）<input id="customAreaDistrict" placeholder="例如 新宿区、难波" autocomplete="address-level2" /></label>
+        <label>街道／地标（可选）<input id="customAreaStreet" placeholder="例如 歌舞伎町、京都站" autocomplete="street-address" /></label>
+        <button class="custom-area-save" type="submit">用这个地点搜索</button>
+      </form>
+      <div class="custom-area-divider">知道日本邮编？也可以直接用</div>
+      <form id="customAreaPostalForm" class="custom-area-postal-form">
+        <label for="customAreaPostal">日本邮编（7 位）</label>
+        <div><input id="customAreaPostal" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="8" placeholder="例如 100-0001" required /><button type="submit">用邮编搜索</button></div>
+        <p id="customAreaPostalStatus" aria-live="polite">邮编只定位大致区域，不是酒店门牌位置。</p>
+      </form>
+      <details id="customAreaMapDetails" class="custom-area-map-details">
+        <summary>或者在地图上选位置 <span aria-hidden="true">⌄</span></summary>
+        <p class="custom-area-map-tip">拖动地图放大，再点你想找的地方。</p>
+        <div id="customAreaMap" class="custom-area-map" role="application" aria-label="日本地点选择地图"></div>
+        <p id="customAreaPoint" class="custom-area-point" aria-live="polite">还没在地图上选点</p>
+        <button id="saveCustomAreaPoint" class="custom-area-save-point" type="button" disabled>用地图上的点搜索</button>
+      </details>
+      <button id="clearCustomArea" class="custom-area-clear" type="button">恢复当前位置</button>
+      <p class="custom-area-caveat">地图结果由各平台排序，不保证严格按选定点由近到远。地图资料 © OpenStreetMap contributors。</p>
+    </dialog>
     <dialog id="mapChoiceDialog" class="app-dialog map-choice-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">CHOOSE YOUR MAP</p><h2 id="mapChoiceTitle">用哪个地图打开？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
         <p id="mapChoiceIntro" class="map-choice-intro">已经选好服务了，现在选择你手机里方便使用的地图。</p>
+        <p id="mapChoiceArea" class="map-choice-area" hidden></p>
         <div id="mapChoiceOnsenHelp" class="map-choice-onsen-help" hidden><span>不会日语，想预约某家店的私汤？</span><button type="button" data-direct-contact data-tool-id="onsen-booking-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
         <div class="map-choice-grid">
           <a id="mapChoiceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>日本地点较完整 · 第二推荐</small></a>
@@ -948,8 +1002,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261007-seasonal-snow-release"></script>
+    <script src="./i18n.js?v=20261008-play-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261007-seasonal-guide-preview"></script>
+    <script src="./app.js?v=20261008-play-release"></script>
   </body>
 </html>

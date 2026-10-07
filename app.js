@@ -3,6 +3,7 @@
 
   const FAVORITES_KEY = "heitu-favorites-v1";
   const CITY_KEY = "heitu-city-v1";
+  const SEARCH_AREA_KEY = "heitu-search-area-v1";
   const WAYBACK_KEY = "heitu-wayback-places-v1";
   const UPDATE_SEEN_KEY = "heitu-seen-updates-v1";
   // Only list entries with actual changes. Bump an entry's version when that section changes again.
@@ -10,6 +11,7 @@
     arrival: "20261006-arrival-samples-fixed",
     wayback: "20261006-arrival-preview",
     favorites: "20261006-onsen-stays-preview",
+    play: "20261008-play-release",
     "onsen-stays": "20261006-onsen-stays-preview",
     "food-hub": "20261006-gyudon-logos-order",
     "specialty-food-nearby": "20261005-specialty",
@@ -237,6 +239,10 @@
     activeWaybackPlace: null,
     sharedPlace: shareUtils?.sharedPlaceFromUrl(location.href) || null,
     city: localStorage.getItem(CITY_KEY) || "东京",
+    searchArea: readSearchArea(),
+    customAreaMap: null,
+    customAreaMarker: null,
+    customAreaPoint: null,
     activeBusRoute: "marunouchi",
     toiletMap: null,
     toiletUserMarker: null,
@@ -269,6 +275,7 @@
     sweetsChoiceDialog: document.querySelector("#sweetsChoiceDialog"),
     kansaiChoiceDialog: document.querySelector("#kansaiChoiceDialog"),
     mapChoiceDialog: document.querySelector("#mapChoiceDialog"),
+    customAreaDialog: document.querySelector("#customAreaDialog"),
     waybackNavDialog: document.querySelector("#waybackNavDialog"),
     saveSiteDialog: document.querySelector("#saveSiteDialog"),
     sharedPlaceDialog: document.querySelector("#sharedPlaceDialog"),
@@ -391,13 +398,45 @@
     toast.timer = setTimeout(() => els.toast.classList.remove("show"), 2200);
   }
 
-  function mapSearchUrl(provider, query, position) {
-    const encoded = encodeURIComponent(query);
+  function readSearchArea() {
+    try {
+      const area = JSON.parse(localStorage.getItem(SEARCH_AREA_KEY) || "null");
+      if (!area || typeof area.label !== "string" || area.label.length > 100) return null;
+      if (area.kind === "text" && area.label.trim()) return { kind: "text", label: area.label.trim() };
+      if (area.kind === "postal" && /^\d{7}$/.test(area.postalCode)) {
+        return { kind: "postal", label: `〒${area.postalCode.slice(0, 3)}-${area.postalCode.slice(3)}`, postalCode: area.postalCode };
+      }
+      if (area.kind === "point" && isValidPosition(area)) return { kind: "point", label: area.label, lat: area.lat, lng: area.lng };
+    } catch { /* An invalid saved area should not break the site. */ }
+    return null;
+  }
+
+  let currentAreaLabel = "定位当前区";
+
+  function updateSearchArea(area) {
+    state.searchArea = area;
+    try {
+      if (area) localStorage.setItem(SEARCH_AREA_KEY, JSON.stringify(area));
+      else localStorage.removeItem(SEARCH_AREA_KEY);
+    } catch { /* Private browsing may block storage. */ }
+    document.querySelector("#currentAreaText").textContent = area ? area.label : currentAreaLabel;
+    document.querySelector("#customAreaButton").classList.toggle("is-active", Boolean(area));
+  }
+
+  function mapSearchUrl(provider, query, position, area = null) {
+    const center = area?.kind === "point" ? area : position;
+    const targetQuery = area?.kind === "text" ? `${query} ${area.label.replaceAll(" · ", " ")} 日本`
+      : area?.kind === "postal" ? `${query} 〒${area.postalCode.slice(0, 3)}-${area.postalCode.slice(3)} 日本`
+      : area?.kind === "point" ? `${query} near ${area.lat.toFixed(5)},${area.lng.toFixed(5)}` : query;
+    const encoded = encodeURIComponent(targetQuery);
     if (provider === "amap") {
-      const center = position ? `&center=${position.lng.toFixed(6)},${position.lat.toFixed(6)}&coordinate=wgs84&view=map` : "";
-      return `https://uri.amap.com/search?keyword=${encoded}${center}&src=heitu&callnative=1`;
+      const centerParams = center ? `&center=${center.lng.toFixed(6)},${center.lat.toFixed(6)}&coordinate=wgs84&view=map` : "";
+      return `https://uri.amap.com/search?keyword=${encodeURIComponent(area?.kind === "point" ? query : targetQuery)}${centerParams}&src=heitu&callnative=1`;
     }
-    if (provider === "apple") return `https://maps.apple.com/?q=${encoded}`;
+    if (provider === "apple") {
+      if (area?.kind === "point") return `https://maps.apple.com/search?query=${encodeURIComponent(query)}&center=${area.lat.toFixed(6)},${area.lng.toFixed(6)}`;
+      return `https://maps.apple.com/?q=${encoded}`;
+    }
     return `https://www.google.com/maps/search/?api=1&query=${encoded}`;
   }
 
@@ -462,8 +501,10 @@
   function locateCurrentArea() {
     const button = document.querySelector("#currentAreaButton");
     const label = document.querySelector("#currentAreaText");
+    updateSearchArea(null);
     if (!navigator.geolocation) {
-      label.textContent = "浏览器不支持定位";
+      currentAreaLabel = "浏览器不支持定位";
+      label.textContent = currentAreaLabel;
       return;
     }
     button.disabled = true;
@@ -478,19 +519,89 @@
         const city = address.state || address.province || address.city || address.municipality;
         const district = address.city_district || address.city || address.town || address.suburb || address.county;
         const parts = [city, district].filter((part, index, list) => part && list.indexOf(part) === index);
-        label.textContent = parts.slice(0, 2).join(" · ") || "当前位置";
+        currentAreaLabel = parts.slice(0, 2).join(" · ") || "当前位置";
+        label.textContent = currentAreaLabel;
       } catch (error) {
-        label.textContent = "已定位 · 地区未知";
+        currentAreaLabel = "已定位 · 地区未知";
+        label.textContent = currentAreaLabel;
       } finally {
         button.disabled = false;
       }
     }, () => {
-      label.textContent = "定位失败 · 点此重试";
+      currentAreaLabel = "定位失败 · 点此重试";
+      label.textContent = currentAreaLabel;
       button.disabled = false;
     }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
   }
 
+  function openCustomAreaDialog() {
+    els.customAreaDialog.showModal();
+    if (document.querySelector("#customAreaMapDetails").open) initCustomAreaMap();
+  }
+
+  function initCustomAreaMap() {
+    if (!window.L) {
+      document.querySelector("#customAreaPoint").textContent = "地图暂时加载不了，仍可以填写上面的地点。";
+      return;
+    }
+    if (!state.customAreaMap) {
+      const map = L.map("customAreaMap", { zoomControl: true, maxBounds: [[23, 121], [47, 155]] }).setView([36.2, 138.2], 5);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap contributors", maxZoom: 19
+      }).addTo(map);
+      map.on("click", event => {
+        const point = { lat: event.latlng.lat, lng: event.latlng.lng };
+        state.customAreaPoint = point;
+        if (state.customAreaMarker) state.customAreaMarker.setLatLng(event.latlng);
+        else state.customAreaMarker = L.marker(event.latlng).addTo(map);
+        document.querySelector("#customAreaPoint").textContent = `已选地图点：${point.lat.toFixed(4)}, ${point.lng.toFixed(4)}`;
+        document.querySelector("#saveCustomAreaPoint").disabled = false;
+      });
+      state.customAreaMap = map;
+    }
+    const area = state.searchArea;
+    if (area?.kind === "point") {
+      const point = { lat: area.lat, lng: area.lng };
+      state.customAreaPoint = point;
+      state.customAreaMap.setView([point.lat, point.lng], 13);
+      if (state.customAreaMarker) state.customAreaMarker.setLatLng([point.lat, point.lng]);
+      else state.customAreaMarker = L.marker([point.lat, point.lng]).addTo(state.customAreaMap);
+      document.querySelector("#customAreaPoint").textContent = `已选地图点：${point.lat.toFixed(4)}, ${point.lng.toFixed(4)}`;
+      document.querySelector("#saveCustomAreaPoint").disabled = false;
+    }
+    requestAnimationFrame(() => state.customAreaMap.invalidateSize());
+  }
+
+  function saveCustomAreaFromText(event) {
+    event.preventDefault();
+    const parts = ["customAreaCity", "customAreaDistrict", "customAreaStreet"]
+      .map(id => document.querySelector(`#${id}`).value.trim()).filter(Boolean);
+    if (!parts.length) return;
+    const label = parts.join(" · ").slice(0, 100);
+    updateSearchArea({ kind: "text", label });
+    els.customAreaDialog.close();
+    toast(`以后会参考「${label}」搜索`);
+  }
+
+  function saveCustomAreaFromPostal(event) {
+    event.preventDefault();
+    const input = document.querySelector("#customAreaPostal");
+    const status = document.querySelector("#customAreaPostalStatus");
+    const digits = input.value.normalize("NFKC").replace(/[-\s〒]/g, "");
+    if (!/^\d{7}$/.test(digits)) {
+      status.textContent = "请输入日本 7 位邮编，例如 100-0001。";
+      input.focus();
+      return;
+    }
+    const label = `〒${digits.slice(0, 3)}-${digits.slice(3)}`;
+    updateSearchArea({ kind: "postal", label, postalCode: digits });
+    status.textContent = "邮编只定位大致区域，不是酒店门牌位置。";
+    els.customAreaDialog.close();
+    toast(`以后会参考「${label}」搜索`);
+  }
+
   function showMapChoice(query, label, options = {}) {
+    const area = state.searchArea;
     const community = options.community === true ? {
       url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
@@ -503,6 +614,9 @@
     mapChoiceIntro.textContent = options.intro || (community
       ? "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。"
       : "已经选好服务了，现在选择你手机里方便使用的地图。");
+    const areaNote = document.querySelector("#mapChoiceArea");
+    areaNote.hidden = !area;
+    areaNote.textContent = area ? `搜索参考地点：${area.label} · 地图结果不保证严格按距离排序` : "";
     document.querySelector("#mapChoiceNote").textContent = options.note || (community
       ? "建议先看日本网友共享地图，再试 Google 地图；搜不到时可换其他地图。"
       : "在日本建议优先使用 Google 地图；搜不到时可换其他地图。");
@@ -526,12 +640,12 @@
     document.querySelector("#mapChoiceGoogle strong").textContent = options.googleName || "Google 地图";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
     document.querySelector("#mapChoiceApple small").textContent = options.appleDescription || "适合 iPhone";
-    document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query);
+    document.querySelector("#mapChoiceGoogle").href = mapSearchUrl("google", query, null, area);
     const amapLink = document.querySelector("#mapChoiceAmap");
     const amapQuery = options.amapQuery || query;
-    amapLink.dataset.requireCurrentLocation = options.amapCurrentLocation === true ? "true" : "false";
+    amapLink.dataset.requireCurrentLocation = options.amapCurrentLocation === true && !area ? "true" : "false";
     amapLink.dataset.locationQuery = amapQuery;
-    amapLink.href = options.amapCurrentLocation === true ? "#" : mapSearchUrl("amap", amapQuery);
+    amapLink.href = options.amapCurrentLocation === true && !area ? "#" : mapSearchUrl("amap", amapQuery, null, area);
     document.querySelector("#mapChoiceAmapCopy").dataset.keyword = options.amapManualQuery || query;
     const amapCopyLabel = document.querySelector("#mapChoiceAmapCopyLabel");
     amapCopyLabel.textContent = options.amapCopyLabel || "复制日文词，手动搜索";
@@ -543,7 +657,7 @@
     document.querySelector("#mapChoiceAmapCopyHint").hidden = !onsenManualSearch;
     document.querySelector("#mapChoiceOnsenPrivateCopy").hidden = !onsenManualSearch;
     const appleLink = document.querySelector("#mapChoiceApple");
-    appleLink.href = mapSearchUrl("apple", query);
+    appleLink.href = mapSearchUrl("apple", query, null, area);
     if (onsenManualSearch) {
       document.querySelector(".map-choice-grid").append(appleLink);
     } else {
@@ -555,15 +669,18 @@
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
-    const exploreContext = ["favorites", "food", "shopping", "onsen-stays"].includes(view);
+    const exploreContext = ["favorites", "food", "shopping"].includes(view);
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
-    document.querySelector("#brandTagline").textContent = exploreContext
-      ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
-      : "定位离你最近的厕所、吸烟区、商超便利店等。";
+    document.querySelector("#brandTagline").textContent = playContext
+      ? "看看日本当季有什么好玩，也可以找黑豚聊聊安排。"
+      : exploreContext
+        ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
+        : "定位离你最近的厕所、吸烟区、商超便利店等。";
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival", "seasonal", "seasonal-detail"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1654,6 +1771,10 @@
       locateCurrentArea();
       return;
     }
+    if (event.target.closest("#customAreaButton")) {
+      openCustomAreaDialog();
+      return;
+    }
 
     const toiletButton = event.target.closest("[data-toilet-choice]");
     if (toiletButton) {
@@ -1677,7 +1798,7 @@
         googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {
-            url: mapSearchUrl("google", "貸切温泉"),
+            url: mapSearchUrl("google", "貸切温泉", null, state.searchArea),
             icon: "私",
             name: "找私汤／情侣家庭温泉（纹身 OK）",
             description: "私汤（貸切風呂／貸切温泉）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
@@ -2001,6 +2122,28 @@
     state.toiletPosition = position;
     queryNearbyToilets(position);
   });
+
+  document.querySelector("#customAreaForm").addEventListener("submit", saveCustomAreaFromText);
+  document.querySelector("#customAreaPostalForm").addEventListener("submit", saveCustomAreaFromPostal);
+  document.querySelector("#customAreaMapDetails").addEventListener("toggle", event => {
+    if (event.target.open) initCustomAreaMap();
+  });
+  document.querySelector("#closeCustomArea").addEventListener("click", () => els.customAreaDialog.close());
+  document.querySelector("#saveCustomAreaPoint").addEventListener("click", () => {
+    const point = state.customAreaPoint;
+    if (!isValidPosition(point)) return;
+    const label = `地图点 ${point.lat.toFixed(4)}, ${point.lng.toFixed(4)}`;
+    updateSearchArea({ kind: "point", label, lat: point.lat, lng: point.lng });
+    els.customAreaDialog.close();
+    toast("已设置地图搜索参考地点");
+  });
+  document.querySelector("#clearCustomArea").addEventListener("click", () => {
+    updateSearchArea(null);
+    els.customAreaDialog.close();
+    toast("已恢复按当前位置搜索");
+  });
+
+  updateSearchArea(state.searchArea);
 
   if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
   showContactStep("channels", "profile");

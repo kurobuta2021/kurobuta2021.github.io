@@ -14,6 +14,12 @@
   };
 
   const englishMap = {
+    "玩日本": "Enjoy Japan", "‹ 返回玩日本": "‹ Back to Enjoy Japan", "先来黑豚的频道看看": "Explore Heitun's channels first",
+    "想看一场热闹，住一晚温泉，或者走一条不一样的路？从这里挑个想法。": "Find a local event, stay at an onsen, or take a different route. Pick an idea here.",
+    "最新实时情报": "Latest updates", "樱花、红叶、花火、当地活动和雪景": "Blossoms, leaves, fireworks, local events and snow", "看看最近有什么好玩 →": "See what's happening soon →", "点开看看最近有什么好玩": "Tap to see what's on now",
+    "说说你想怎么玩": "How would you like to explore?", "有喜欢的，点进去看看；需要安排就直接找我聊。": "Open what interests you, or message me if you need help arranging it.",
+    "落地后怎么走？": "Getting there from the airport?", "想安排机场接送，告诉我机场、日期和人数。": "For an airport transfer, tell me the airport, date and group size.",
+    "看看日本当季有什么好玩，也可以找黑豚聊聊安排。": "See what's on in Japan this season, or ask Heitun for help planning.",
     "日本正当时": "Japan in season", "查看最新实时情报": "See the latest updates", "查当季花期与活动": "Seasonal blooms and events", "樱花 · 红叶 · 花火 · 当地热闹": "Blossoms · Autumn leaves · Fireworks · Local events", "点开看最近有什么好玩": "See what's happening soon",
     "看看你去的那几天，哪座城市正好有花，有烟火，有热闹。": "See which city has blossoms, fireworks or festivals during your trip.",
     "看樱花": "Cherry blossoms", "看开花、满开时间和地区": "Bloom and full-bloom dates by region", "看各地预计开花时间": "Forecast bloom dates by region", "查看花期 ↗": "View bloom dates ↗",
@@ -28,7 +34,7 @@
     "黑豚君 · 日本旅行工具箱": "Heitun · Japan Toolbox",
     "黑豚的日本旅行工具箱": "Heitun's Japan Toolbox",
     "定位离你最近的厕所、吸烟区、商超便利店等。": "Locate the nearest toilets, smoking areas, supermarkets, convenience stores and more.",
-    "回到首页": "Back to home", "回到工具箱": "Back to toolbox", "定位当前地区": "Locate current area", "定位当前区": "Locate me", "文": "文",
+    "回到首页": "Back to home", "回到工具箱": "Back to toolbox", "定位当前地区": "Locate current area", "定位当前区": "Locate me", "换个地方": "Change place", "换个地方搜索": "Search another place", "搜索地点": "Search area", "文": "文",
     "纯干货！！": "Only the useful stuff!", "当地人共享的宝藏工具，": "Local-approved travel tools,", "邪修！！纯干货！": "Travel hacks! Only the useful stuff!", "日本自由行宝藏网站": "A Japan travel site worth saving", "中文直达！": "made easy for you.",
     "日本吃喝拉撒": "Everyday Japan, made easier", "📍 日本全国可用": "📍 Available across Japan", "黑豚日本旅行": "Heitun Japan travel",
     "📍立刻定位离你最近的什么？": "📍 What can I find near me?", "随便O": "Find a toilet", "人有三急，附近厕所，": "When nature calls,", "随便屙！": "find one nearby!",
