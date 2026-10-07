@@ -1579,3 +1579,22 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
 @media (prefers-reduced-motion: reduce) {
   .contact-word-sphere button { transition: none; }
 }
+
+/* 手机浏览器自带工具栏已占一行，本站底部导航保持紧凑。 */
+@media (max-width: 699px) {
+  .bottom-nav {
+    min-height: calc(60px + env(safe-area-inset-bottom));
+    padding: 5px 10px max(7px, env(safe-area-inset-bottom));
+  }
+  .bottom-nav button {
+    min-height: 48px;
+    align-content: center;
+    gap: 0;
+    font-size: .66rem;
+    line-height: 1.1;
+  }
+  .bottom-nav button > span { font-size: 1.2rem; }
+  .view { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .view[data-view="home"] { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .toast { bottom: calc(68px + env(safe-area-inset-bottom)); }
+}
