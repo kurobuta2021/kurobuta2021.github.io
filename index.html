@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261006-contact-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261007-onsen-contact-preview" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -181,15 +181,15 @@
           <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
           <div class="arrival-hero"><span aria-hidden="true">🛂</span><div><p class="eyebrow">FIRST TIME IN JAPAN</p><h1 id="arrivalTitle">日本入境助手</h1><p>第一次来日本，填资料、查提醒、走出机场一步步来。</p></div></div>
           <nav class="arrival-menu" aria-label="入境小助手功能">
-            <button type="button" data-arrival-open="forms" aria-expanded="false"><span aria-hidden="true">🛂</span><strong>入境资料</strong><small>电子填写 · 纸表范本</small></button>
-            <button type="button" data-arrival-open="prepare" aria-expanded="false"><span aria-hidden="true">🧳</span><strong>填写准备</strong><small>证件 · 航班 · 住宿</small></button>
-            <button type="button" data-arrival-open="checklist" aria-expanded="false"><span aria-hidden="true">✓</span><strong>出发清单</strong><small>临行前检查一遍</small></button>
-            <button type="button" data-arrival-open="airport" aria-expanded="false"><span aria-hidden="true">✈</span><strong>机场便民</strong><small>交通卡 · 网络 · 现金</small></button>
+            <button type="button" data-arrival-open="forms" aria-expanded="false"><span aria-hidden="true">🛂</span><strong>入境卡怎么填？</strong><small>电子填写、纸表范本</small></button>
+            <button type="button" data-arrival-open="prepare" aria-expanded="false"><span aria-hidden="true">🧳</span><strong>填之前准备啥？</strong><small>护照、航班、住宿信息</small></button>
+            <button type="button" data-arrival-open="checklist" aria-expanded="false"><span aria-hidden="true">✓</span><strong>出发前再看一眼</strong><small>证件、机票和住宿，临走核对一遍</small></button>
+            <button type="button" data-arrival-open="airport" aria-expanded="false"><span aria-hidden="true">✈</span><strong>落地了先别急着走</strong><small>交通卡、手机网络、现金和机场设施</small></button>
             <button type="button" data-arrival-open="hotel" aria-expanded="false"><span aria-hidden="true">🏨</span><strong>去酒店</strong><small>粘贴地址 · 打开地图</small></button>
           </nav>
           <section class="arrival-official" data-arrival-panel="forms" aria-labelledby="arrivalOfficialTitle" hidden>
             <span class="arrival-kicker">先做这件事</span>
-            <h2 id="arrivalOfficialTitle">入境资料，两种办法</h2>
+            <h2 id="arrivalOfficialTitle">入境资料，两种办法二选一</h2>
             <div class="arrival-options">
               <div class="arrival-option arrival-option--digital">
                 <span class="arrival-option-number">1</span>
@@ -242,7 +242,7 @@
             <a class="arrival-text-link" href="https://services.digital.go.jp/visit-japan-web/guide/" target="_blank" rel="noopener noreferrer">看官方使用说明 ↗</a>
             <small>核对网址为 vjw.digital.go.jp；具体适用手续和现场指引以日本官方为准。</small>
           </section>
-          <section class="arrival-panel" data-arrival-panel="prepare" aria-labelledby="arrivalStepsTitle" hidden><div class="arrival-panel-heading"><span>01</span><h2 id="arrivalStepsTitle">第一次填写，先准备这些</h2></div><div class="arrival-steps"><div><b>①</b><strong>证件与航班</strong><p>护照、航班号、抵达日期；签证或免签资格按本人国籍单独核实。</p></div><div><b>②</b><strong>日本住宿信息</strong><p>准备第一晚住处的名称、日文地址和电话，填写时照订单核对。</p></div><div><b>③</b><strong>确认登记结果</strong><p>按官网步骤完成后，确认页面显示的二维码；出发前再检查信息是否与证件一致。</p></div></div></section>
+          <section class="arrival-panel" data-arrival-panel="prepare" aria-labelledby="arrivalStepsTitle" hidden><div class="arrival-panel-heading"><span>01</span><h2 id="arrivalStepsTitle">第一次填写，先准备这些</h2></div><div class="arrival-steps"><div><b>①</b><strong>证件与航班</strong><p>护照、航班号、抵达日期；签证或免签资格按本人国籍单独核实。</p></div><div><b>②</b><strong>日本住宿信息</strong><p>准备酒店住处的名称、日文地址和电话，填写时照订单核对。</p></div><div><b>③</b><strong>确认登记结果</strong><p>电子版按官网步骤完成后，确认页面显示的二维码；出发前再检查信息是否与证件一致。</p></div></div></section>
           <section class="arrival-panel" data-arrival-panel="checklist" aria-labelledby="arrivalChecklistTitle" hidden><div class="arrival-panel-heading"><span>02</span><h2 id="arrivalChecklistTitle">出发前的小清单</h2></div><div class="arrival-checklist"><label><input type="checkbox" /><span>核对护照有效期；确认签证或免签资格</span></label><label><input type="checkbox" /><span>核对机票与住宿资料</span></label><label><input type="checkbox" /><span>检查 Visit Japan Web 登记资料与二维码</span></label><label><input type="checkbox" /><span>有没有带违禁品？食品、药品或动植物？先查官方携带规定</span></label></div><small>勾选仅在当前页面临时保留，不会上传。</small></section>
           <section class="arrival-panel arrival-reference" data-arrival-panel="airport" aria-labelledby="arrivalTipsTitle" hidden>
             <div class="arrival-panel-heading"><span>03</span><h2 id="arrivalTipsTitle">机场便民设施提醒</h2></div>
@@ -320,15 +320,27 @@
             </button>
             <button class="tun-shop-hub" type="button" data-go="shopping" data-tool-id="shopping-hub">
               <span class="tun-shop-hub-top"><span class="tun-shop-hub-icon" aria-hidden="true">🛍️</span><span class="tun-shop-hub-copy"><small>现在能用 · 按购物目的找</small><strong>附近逛什么</strong><span>服饰、百货、数码、中古、二次元……</span></span><b aria-hidden="true">›</b></span>
-              <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span></span></span>
+              <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span></span></span>
               <span class="tun-shop-hub-cta">打开逛什么分类 <span aria-hidden="true">→</span></span>
+            </button>
+            <div class="tun-onsen-stay-hub">
+              <button class="tun-onsen-stay-main" type="button" data-go="onsen-stays" data-tool-id="onsen-stays">
+                <span class="tun-onsen-stay-icon" aria-hidden="true">♨</span>
+                <span class="tun-onsen-stay-copy"><strong>住一晚温泉</strong><small>海景、雪景、情侣私汤、带家人去……说说你想怎么泡，我帮你挑。</small></span>
+                <span class="tun-onsen-stay-arrow" aria-hidden="true">›</span>
+              </button>
+              <button class="tun-onsen-stay-contact" type="button" data-direct-contact data-tool-id="onsen-stay-direct-contact">找黑豚问问 <span aria-hidden="true">→</span></button>
+            </div>
+            <button class="tun-food-consult-hub" type="button" data-direct-contact data-tool-id="food-consult-hub">
+              <span class="tun-food-consult-icon" aria-hidden="true">🍽️</span>
+              <span class="tun-food-consult-copy"><strong>约一顿想吃的</strong><small>想吃黑豚视频里那家？或者不知道怎么选，想让我推荐一家？怕没位、不会打日语电话，都可以来找我聊聊，看看能不能帮你约。</small><span>找黑豚问问 <span aria-hidden="true">→</span></span></span>
             </button>
             <div class="tun-coming-grid">
               <article class="tun-coming-card route-coming-card">
                 <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
                 <h3>个性化小众线路</h3>
                 <p>日本各地红叶路线、雪景、樱花线路。不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
-                <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询路线</button>
+                <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询安排路线</button>
               </article>
             </div>
             <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
@@ -341,15 +353,43 @@
           </section>
         </section>
 
+        <section class="view onsen-stays-view" data-view="onsen-stays" aria-labelledby="onsenStaysTitle">
+          <button class="back-button" type="button" data-go="favorites">‹ 返回逛吃日本</button>
+          <div class="onsen-stays-heading"><span aria-hidden="true">♨</span><div><p class="eyebrow">STAY AT AN ONSEN</p><h1 id="onsenStaysTitle">住一晚温泉</h1><p>说说你想怎么住，我帮你挑温泉酒店。</p></div></div>
+          <div class="onsen-stays-choices">
+            <fieldset><legend>想看什么景？</legend><div class="onsen-stays-options">
+              <label><input type="radio" name="onsenStayView" value="海景" /><span>🌊 海景</span></label>
+              <label><input type="radio" name="onsenStayView" value="山景" /><span>⛰️ 山景</span></label>
+              <label><input type="radio" name="onsenStayView" value="雪景" /><span>❄️ 雪景</span></label>
+              <label><input type="radio" name="onsenStayView" value="不挑" /><span>都行，你推荐</span></label>
+            </div></fieldset>
+            <fieldset><legend>和谁去？</legend><div class="onsen-stays-options onsen-stays-options--with">
+              <label><input type="radio" name="onsenStayWith" value="两个人" /><span>💑 两个人</span></label>
+              <label><input type="radio" name="onsenStayWith" value="带娃" /><span>👶 带娃</span></label>
+              <label><input type="radio" name="onsenStayWith" value="带长辈" /><span>👨‍👩‍👧 带长辈</span></label>
+            </div></fieldset>
+            <fieldset><legend>想怎么泡？</legend><div class="onsen-stays-options">
+              <label><input type="radio" name="onsenStayBath" value="客房自带私汤" /><span>客房自带私汤</span></label>
+              <label><input type="radio" name="onsenStayBath" value="可预约私汤" /><span>可预约私汤</span></label>
+              <label><input type="radio" name="onsenStayBath" value="大浴场" /><span>大浴场</span></label>
+              <label><input type="radio" name="onsenStayBath" value="都可以" /><span>都可以</span></label>
+            </div></fieldset>
+          </div>
+          <p class="onsen-stays-hint">日期、地点、预算还没定也没关系，聊的时候再说。</p>
+          <button class="onsen-stays-contact" type="button" data-onsen-contact data-tool-id="onsen-stay-consult">找黑豚问问 <span aria-hidden="true">→</span></button>
+        </section>
+
         <section class="view shopping-hub-view" data-view="shopping" aria-labelledby="shoppingHubTitle">
           <button class="back-button" type="button" data-go="favorites">‹ 返回逛吃日本</button>
           <div class="shopping-hub-heading"><span aria-hidden="true">🛍️</span><div><p class="eyebrow">SHOP NEAR YOU</p><h1 id="shoppingHubTitle">附近逛什么</h1><p>先想好要逛什么，再用地图找附近的店。</p></div></div>
           <p class="shopping-hub-intro">想逛熟悉的连锁店、商场、百货或电器卖场，先选一类。大牌化妆品可到百货店找；具体品牌请看门店楼层信息。</p>
           <div class="shopping-hub-list">
-            <details class="shopping-group"><summary><span class="shopping-group-icon" aria-hidden="true">👕</span><span class="shopping-group-copy"><strong>熟悉的连锁店</strong><small>优衣库・GU・DAISO 等</small></span><b aria-hidden="true">⌄</b></summary><div class="shopping-group-body"><p>衣服、杂货和生活用品，从熟悉的品牌开始找；点开后用日文店名搜附近门店。</p><div class="shopping-options shopping-options--brands-only shopping-options--familiar">
-              <span class="shopping-subhead">服饰</span>
+            <details class="shopping-group"><summary><span class="shopping-group-icon" aria-hidden="true">👕</span><span class="shopping-group-copy"><strong>熟悉的连锁店</strong><small>优衣库・H&amp;M・ABC-MART 等</small></span><b aria-hidden="true">⌄</b></summary><div class="shopping-group-body"><p>衣服、鞋子、杂货和生活用品，从熟悉的品牌开始找；点开后用店名搜附近门店。</p><div class="shopping-options shopping-options--brands-only shopping-options--familiar">
+              <span class="shopping-subhead">服饰・鞋店</span>
               <button type="button" data-shopping-query="ユニクロ" data-shopping-label="优衣库">优衣库 <small lang="ja">ユニクロ</small><span class="shopping-city">📍 全国多地</span></button>
               <button type="button" data-shopping-query="ジーユー" data-shopping-label="GU">GU · 平价服饰 <small lang="ja">ジーユー</small><span class="shopping-city">📍 全国多地</span></button>
+              <button type="button" data-shopping-query="H&amp;M" data-shopping-label="H&amp;M 服装店">H&amp;M · 服装店 <small lang="ja">H&amp;M</small><span class="shopping-city">📍 全国多地</span></button>
+              <button type="button" data-shopping-query="ABCマート" data-shopping-label="ABC-MART 鞋店">ABC-MART · 鞋店 <small lang="ja">ABCマート</small><span class="shopping-city">📍 全国多地</span></button>
               <span class="shopping-subhead">杂货・生活用品</span>
               <button type="button" data-shopping-query="ダイソー" data-shopping-label="DAISO 日本百元店">DAISO · 日本百元店 <small lang="ja">ダイソー</small><span class="shopping-city">📍 全国多地</span></button>
               <button type="button" data-shopping-query="ドン・キホーテ" data-shopping-label="唐吉诃德">唐吉诃德 <small lang="ja">ドン・キホーテ</small><span class="shopping-city">📍 全国多地</span></button>
@@ -386,6 +426,14 @@
               <button type="button" data-shopping-query="まんだらけ" data-shopping-label="Mandarake">Mandarake <small lang="ja">まんだらけ · 主打中古收藏</small></button>
               <button type="button" data-shopping-query="らしんばん" data-shopping-label="らしんばん">らしんばん <small lang="ja">らしんばん · 主打中古周边</small></button>
             </div><div class="shopping-experience-card"><span class="shopping-experience-label">黑豚碎碎念 · 顺路体验</span><div class="shopping-experience-head"><span aria-hidden="true">☕</span><strong>女仆咖啡厅 <small lang="ja">メイドカフェ</small></strong></div><p>东西难吃，主打互动情绪价值高！一般都在当地的动漫街附近，部分店另外收座位费，进店前先看价格。</p><button type="button" data-shopping-query="メイドカフェ" data-shopping-label="附近女仆咖啡厅" data-shopping-generic>打开地图找附近 <span aria-hidden="true">↗</span></button></div></div></details>
+            <details class="shopping-group"><summary><span class="shopping-group-icon" aria-hidden="true">📚</span><span class="shopping-group-copy"><strong>书店</strong><small>找本书・逛文具・顺路看看</small></span><b aria-hidden="true">⌄</b></summary><div class="shopping-group-body"><p>不挑就搜附近书店；想逛连锁店，也可以按日文店名找。各分店规模和卖的东西不一样，点进地图看看照片和营业时间。</p><div class="shopping-options shopping-options--bookstores">
+              <button type="button" class="shopping-generic-option" data-shopping-query="書店" data-shopping-label="附近书店" data-shopping-generic>不挑品牌，就近找 <small lang="ja">書店 · 看看附近有什么</small></button>
+              <button type="button" data-shopping-query="蔦屋書店" data-shopping-label="茑屋书店">茑屋书店 <small lang="ja">蔦屋書店</small></button>
+              <button type="button" data-shopping-query="紀伊國屋書店" data-shopping-label="纪伊国屋书店">纪伊国屋书店 <small lang="ja">紀伊國屋書店</small></button>
+              <button type="button" data-shopping-query="丸善 書店" data-shopping-label="丸善书店">丸善书店 <small lang="ja">丸善</small></button>
+              <button type="button" data-shopping-query="ジュンク堂書店" data-shopping-label="淳久堂书店">淳久堂书店 <small lang="ja">ジュンク堂書店</small></button>
+              <button type="button" data-shopping-query="未来屋書店" data-shopping-label="未来屋书店">未来屋书店 <small lang="ja">未来屋書店</small></button>
+            </div></div></details>
             <details class="shopping-group"><summary><span class="shopping-group-icon" aria-hidden="true">📷</span><span class="shopping-group-copy"><strong>大型电器卖场</strong><small>相机・耳机・家电・数码产品</small></span><b aria-hidden="true">⌄</b></summary><div class="shopping-group-body"><p>这些是电器卖场的搜索入口；同一品牌也有不同规模的门店，先看门店照片和楼层。</p><div class="shopping-options"><button type="button" data-shopping-query="家電量販店" data-shopping-label="附近电器卖场">不挑品牌，就近找 <small lang="ja">家電量販店</small></button><button type="button" data-shopping-query="ビックカメラ" data-shopping-label="必客 Bic Camera">必客 · Bic Camera <small lang="ja">ビックカメラ</small><span class="shopping-city">📍 东京・大阪・福冈等</span></button><button type="button" data-shopping-query="ヨドバシカメラ" data-shopping-label="友都八喜 Yodobashi">友都八喜 · Yodobashi <small lang="ja">ヨドバシカメラ</small><span class="shopping-city">📍 东京・大阪・福冈等</span></button><button type="button" data-shopping-query="ヤマダデンキ" data-shopping-label="山田电机 Yamada Denki">山田电机 · Yamada <small lang="ja">ヤマダデンキ</small><span class="shopping-city">📍 全国多地</span></button><button type="button" data-shopping-query="エディオン" data-shopping-label="爱电王 EDION"><span class="shopping-wordmark shopping-wordmark--edion" aria-hidden="true">EDI<span>O</span>N</span>爱电王 · EDION <small lang="ja">エディオン</small><span class="shopping-city">📍 大阪・名古屋・福冈等</span></button></div></div></details>
           </div>
           <p class="shopping-hub-note">城市仅举例，不代表只在这些地方有店；附近有没有仍以地图和门店信息为准。地图不保证品牌有货或支持免税。药妆、超市和便利店仍在首页「便利一下」。</p>
@@ -495,11 +543,13 @@
               <div class="contact-channel email-channel email-contact-standalone contact-method"><span class="channel-icon email-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="23" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="m10 17 14 11 14-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
             </div>
             <div class="channels-hero">
-              <img src="./heitu-jun.png" alt="黑豚君" />
-              <div><span>收到啦！</span><strong id="channelsTitle">找个方便的方式聊聊</strong><small data-channel-intro-travel>加我的时候，把刚才选的需求告诉我就行。</small><small data-channel-intro-other hidden>日本相关的其他事情，直接来聊聊就好。</small><small data-channel-intro-profile hidden>微信和我的自媒体主页都在这里。</small></div>
+              <img src="./heitu-jun.png" alt="" />
+              <button id="contactSeeIdeas" type="button" aria-controls="contactIdeasTitle"><strong id="channelsTitle">看看大家都有哪些需求？</strong><small>点这里往下看</small><svg class="channels-hero-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></button>
             </div>
+            <p class="contact-service-note">旅游服务（接送机，行程定制，一日/多日游等）可免费约餐厅；单独代预约、代办等服务会收取少量服务费，觉得合适再决定。</p>
             <section class="contact-ideas" aria-labelledby="contactIdeasTitle">
-              <div class="contact-ideas-heading"><div><span>TRAVEL THOUGHTS</span><h2 id="contactIdeasTitle">你是不是也在想这些？</h2><p>拖一拖球，点一句，看看有没有你想的，咱们聊聊怎么弄。</p></div><button id="contactSphereToggle" type="button" aria-pressed="false">暂停转动</button></div>
+              <div class="contact-ideas-heading"><div><span>TRAVEL THOUGHTS</span><h2 id="contactIdeasTitle">你是不是也在想这些？</h2></div><button id="contactSphereToggle" type="button" aria-pressed="false">暂停转动</button></div>
+              <div class="contact-idea-picked"><span>刚刚看到</span><strong id="contactIdeaPicked">有事直接说就好</strong><button id="contactIdeaAsk" type="button">找黑豚聊聊 ↑</button></div>
               <div id="contactWordSphere" class="contact-word-sphere" aria-label="可以找黑豚聊的想法">
                 <button type="button">我想包车一天去追红叶</button><button type="button">樱花季想一天多跑几个地方</button><button type="button">我想从大阪一路玩到东京</button><button type="button">我想从札幌去二世古滑一天雪</button>
                 <button type="button">落地机场了，能找人来接吗？</button><button type="button">我想吃的那家店订不到位，能帮我问问吗？</button><button type="button">我想泡私汤，日语电话搞不定</button><button type="button">我在日本遇到点事，能帮我一下吗？</button>
@@ -509,8 +559,7 @@
                 <button type="button">我想约家好吃的鳗鱼饭</button><button type="button">我想找家实惠的和牛烤肉</button><button type="button">我想去合掌村看看雪景</button><button type="button">我想去配一副眼镜</button><button type="button">我想去定制一套西装</button><button type="button">我想约个体检</button><button type="button">我想找个陪同翻译</button>
                 <button type="button">我想找个和服店租和服</button><button type="button">我想迪士尼早晚接送一下</button><button type="button">我想去北海道玩儿一圈</button><button type="button">我想去九州各地泡温泉</button><button type="button">我想冲绳帮我约一下浮潜</button><button type="button">我想去一趟蜡笔小新的老家</button>
               </div>
-              <div class="contact-idea-picked"><span>刚刚看到</span><strong id="contactIdeaPicked">有事直接说就好</strong><button id="contactIdeaAsk" type="button">找黑豚聊聊 ↑</button></div>
-              <p class="contact-service-note">有想法先聊聊。需要我帮忙安排，预约、代办或陪同的，我会先把服务费说清楚，你觉得合适再决定。</p>
+              <p class="contact-sphere-hint">拖一拖球，点一句，看看有没有你想的，咱们聊聊怎么弄。</p>
             </section>
           </section>
         </section>
@@ -794,8 +843,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261006-contact-wishes-release"></script>
+    <script src="./i18n.js?v=20261007-arrival-prepare-preview"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261006-contact-release"></script>
+    <script src="./app.js?v=20261006-onsen-stays-preview-b"></script>
   </body>
 </html>

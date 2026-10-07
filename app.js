@@ -9,7 +9,8 @@
   const ENTRY_UPDATES = Object.freeze({
     arrival: "20261006-arrival-samples-fixed",
     wayback: "20261006-arrival-preview",
-    favorites: "20261006-explore-cards",
+    favorites: "20261006-onsen-stays-preview",
+    "onsen-stays": "20261006-onsen-stays-preview",
     "food-hub": "20261006-gyudon-logos-order",
     "specialty-food-nearby": "20261005-specialty",
     "shopping-hub": "20261006-maid-cafe",
@@ -532,6 +533,10 @@
     amapLink.dataset.locationQuery = amapQuery;
     amapLink.href = options.amapCurrentLocation === true ? "#" : mapSearchUrl("amap", amapQuery);
     document.querySelector("#mapChoiceAmapCopy").dataset.keyword = options.amapManualQuery || query;
+    const amapCopyLabel = document.querySelector("#mapChoiceAmapCopyLabel");
+    amapCopyLabel.textContent = options.amapCopyLabel || "复制日文词，手动搜索";
+    amapCopyLabel.dataset.originalLabel = amapCopyLabel.textContent;
+    document.querySelector(".map-choice-amap-tip").textContent = options.amapTip || "若高德跳到中国或没搜到附近：先把地图移到日本，再粘贴上面的日文词搜索。";
     document.querySelector("#mapChoiceAmapKeyword").textContent = options.amapManualQuery || query;
     const onsenManualSearch = label === "泡个温泉";
     document.querySelector("#mapChoiceOnsenHelp").hidden = !onsenManualSearch;
@@ -550,7 +555,7 @@
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
-    const exploreContext = ["favorites", "food", "shopping"].includes(view);
+    const exploreContext = ["favorites", "food", "shopping", "onsen-stays"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = exploreContext
       ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
@@ -558,13 +563,18 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping", "onsen-stays"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
     if (view === "japanese") renderPhrase();
     if (view === "wayback") renderWaybackPlaces();
-    if (view === "contact") showContactStep("channels", "profile");
+    if (view === "contact") {
+      const inquirySummary = document.querySelector("#inquirySummary");
+      inquirySummary.hidden = true;
+      delete inquirySummary.dataset.copyText;
+      showContactStep("channels", "profile");
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -1220,17 +1230,12 @@
       item.classList.toggle("active", itemStep === stepNumber);
       item.classList.toggle("done", itemStep < stepNumber);
     });
-    const travelIntro = document.querySelector("[data-channel-intro-travel]");
-    const otherIntro = document.querySelector("[data-channel-intro-other]");
-    const profileIntro = document.querySelector("[data-channel-intro-profile]");
-    travelIntro.hidden = !(step === "channels" && path === "travel");
-    otherIntro.hidden = !(step === "channels" && path === "other");
-    profileIntro.hidden = !(step === "channels" && path === "profile");
     if (step === "choose") els.contactForm.reset();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   const contactSphere = document.querySelector("#contactWordSphere");
+  document.querySelector("#contactSeeIdeas").addEventListener("click", () => document.querySelector("#contactIdeasTitle").scrollIntoView({ behavior: "smooth", block: "start" }));
   const contactWords = [...contactSphere.querySelectorAll("button")];
   const contactSphereToggle = document.querySelector("#contactSphereToggle");
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
@@ -1358,7 +1363,9 @@
       return;
     }
     document.querySelector("#inquirySummaryText").textContent = `${data.getAll("service").join("、")} · ${data.get("timing")}`;
-    document.querySelector("#inquirySummary").hidden = false;
+    const inquirySummary = document.querySelector("#inquirySummary");
+    delete inquirySummary.dataset.copyText;
+    inquirySummary.hidden = false;
     recordOncePerSession("contact_form_complete", "travel");
     showContactStep("channels", "travel");
   }
@@ -1371,8 +1378,23 @@
     if (contactChannel) recordMetric("contact_channel_click", contactChannel.dataset.contactChannel);
     const contactIntro = event.target.closest("[data-contact-intro]");
     if (contactIntro) {
-      document.querySelector("#inquirySummary").hidden = true;
+      const inquirySummary = document.querySelector("#inquirySummary");
+      inquirySummary.hidden = true;
+      delete inquirySummary.dataset.copyText;
       showContactStep("channels", "profile");
+      return;
+    }
+    if (event.target.closest("[data-onsen-contact]")) {
+      const picks = ["onsenStayView", "onsenStayWith", "onsenStayBath"]
+        .map(name => document.querySelector(`input[name="${name}"]:checked`)?.value)
+        .filter(Boolean);
+      const selected = picks.length ? picks.join(" · ") : "还没选好，想请你推荐";
+      const message = `你好，黑豚君，我想找温泉酒店住一晚。\n想法：${selected}\n日期、地点、预算：我再告诉你。`;
+      go("contact");
+      const inquirySummary = document.querySelector("#inquirySummary");
+      document.querySelector("#inquirySummaryText").textContent = `温泉酒店 · ${selected}`;
+      inquirySummary.dataset.copyText = message;
+      inquirySummary.hidden = false;
       return;
     }
     const directContact = event.target.closest("[data-direct-contact]");
@@ -1387,13 +1409,17 @@
     const shoppingOption = event.target.closest("[data-shopping-query]");
     if (shoppingOption) {
       const generic = shoppingOption.hasAttribute("data-shopping-generic");
+      const latinBrand = shoppingOption.dataset.shoppingQuery === "H&M";
       const maidCafe = shoppingOption.dataset.shoppingQuery === "メイドカフェ";
+      const bookstore = Boolean(shoppingOption.closest(".shopping-options--bookstores"));
       showMapChoice(shoppingOption.dataset.shoppingQuery, shoppingOption.dataset.shoppingLabel, {
-        intro: maidCafe ? "先在地图上找附近的女仆咖啡厅，再看具体门店的费用、营业时间和评价。" : generic ? "先用地图看附近有哪些店，再点进具体门店确认卖什么、营业时间和路线。" : "先用地图看附近的搜索结果，再点进具体门店确认楼层、品牌和路线。",
-        googleDescription: generic ? "用日文类别词搜索 · 需要当地网络才能打开哦！" : "用日文店名搜索 · 需要当地网络才能打开哦！",
-        appleDescription: generic ? "用日文类别词搜索 · 适合 iPhone" : "用日文店名搜索 · 适合 iPhone",
-        amapDescription: "直接搜索日文词 · 位置不对时可复制日文词手动搜",
-        note: maidCafe ? "部分店另外收座位费，进店前先看价格。" : shoppingOption.dataset.shoppingQuery === "リユースショップ"
+        intro: maidCafe ? "先在地图上找附近的女仆咖啡厅，再看具体门店的费用、营业时间和评价。" : bookstore ? "先在地图里找附近书店，再点进具体门店看路线和营业时间。" : generic ? "先用地图看附近有哪些店，再点进具体门店确认卖什么、营业时间和路线。" : "先用地图看附近的搜索结果，再点进具体门店确认楼层、品牌和路线。",
+        googleDescription: generic ? "用日文类别词搜索 · 需要当地网络才能打开哦！" : latinBrand ? "用品牌名搜索 · 需要当地网络才能打开哦！" : "用日文店名搜索 · 需要当地网络才能打开哦！",
+        appleDescription: generic ? "用日文类别词搜索 · 适合 iPhone" : latinBrand ? "用品牌名搜索 · 适合 iPhone" : "用日文店名搜索 · 适合 iPhone",
+        amapDescription: latinBrand ? "直接搜索品牌名 · 位置不对时可复制品牌名手动搜" : "直接搜索日文词 · 位置不对时可复制日文词手动搜",
+        amapCopyLabel: latinBrand ? "复制品牌名，手动搜索" : undefined,
+        amapTip: latinBrand ? "若高德跳到中国或没搜到附近：先把地图移到日本，再粘贴上面的品牌名搜索。" : undefined,
+        note: maidCafe ? "部分店另外收座位费，进店前先看价格。" : bookstore ? "各分店规模、库存和营业时间不同，出发前看一下具体门店。" : shoppingOption.dataset.shoppingQuery === "リユースショップ"
           ? "搜索结果可能包含只收购、不零售的店；请看具体门店的照片、经营内容和营业时间。"
           : "地图只显示搜索结果，不保证附近有店、品牌有货或支持免税；请查看具体门店信息。"
       });
@@ -1615,7 +1641,7 @@
         .then(copied => {
           const isPrivateBath = amapCopyButton.id === "mapChoiceOnsenPrivateCopy";
           const label = document.querySelector(isPrivateBath ? "#mapChoiceOnsenPrivateCopyLabel" : "#mapChoiceAmapCopyLabel");
-          const originalLabel = isPrivateBath ? "复制私汤日文词" : "复制日文词，手动搜索";
+          const originalLabel = isPrivateBath ? "复制私汤日文词" : label.dataset.originalLabel || "复制日文词，手动搜索";
           label.textContent = copied ? "已复制，去高德粘贴搜索" : "复制失败，请手动输入右边日文词";
           clearTimeout(amapCopyButton.resetTimer);
           amapCopyButton.resetTimer = setTimeout(() => { label.textContent = originalLabel; }, 2800);
@@ -1899,7 +1925,7 @@
     showContactStep("channels", path);
   }));
   document.querySelector("[data-contact-back]").addEventListener("click", () => go(state.previousView && state.previousView !== "contact" ? state.previousView : "home", false));
-  document.querySelector("#copyInquiry").addEventListener("click", () => copyText(buildInquiry(), "咨询内容已复制，可粘贴到微信"));
+  document.querySelector("#copyInquiry").addEventListener("click", () => copyText(document.querySelector("#inquirySummary").dataset.copyText || buildInquiry(), "咨询内容已复制，可粘贴到微信"));
   document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
   document.querySelectorAll("[data-copy-whatsapp]").forEach(button => button.addEventListener("click", () => copyText("@kurobutajapan", "WhatsApp 用户名已复制：@kurobutajapan")));
   document.querySelectorAll("[data-contact-qr]").forEach(button => button.addEventListener("click", () => openContactQr(button.dataset.contactQr)));
@@ -1909,6 +1935,10 @@
     const next = button.getAttribute("aria-expanded") === "true" ? "" : button.dataset.arrivalOpen;
     arrivalMenuButtons.forEach(item => item.setAttribute("aria-expanded", String(item.dataset.arrivalOpen === next)));
     arrivalPanels.forEach(panel => { panel.hidden = panel.dataset.arrivalPanel !== next; });
+    if (next && window.matchMedia("(max-width: 600px)").matches) {
+      const panel = arrivalPanels.find(item => item.dataset.arrivalPanel === next);
+      requestAnimationFrame(() => panel?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    }
   }));
   const arrivalHotelInput = document.querySelector("#arrivalHotelInput");
   const arrivalHotelResults = document.querySelector("#arrivalHotelResults");
