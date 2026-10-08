@@ -353,6 +353,9 @@ main { min-height: calc(100dvh - 66px); }
 .tun-food-consult-copy small { color: #70615e; font-size: .67rem; font-weight: 650; line-height: 1.42; }
 .tun-food-consult-copy > span { width: fit-content; margin-top: 2px; color: #aa5d47; font-size: .68rem; font-weight: 850; }
 .tun-food-consult-hub:focus-visible { outline: 2px solid #aa5d47; outline-offset: 2px; }
+.tun-local-experience-hub { border-color: #d7e1d3; background: linear-gradient(125deg,#f3faf0,#edf6f2); }
+.tun-local-experience-hub .tun-food-consult-copy > span { color: #3d7867; }
+.tun-local-experience-hub:focus-visible { outline-color: #3d7867; }
 .tun-shop-hub-top { display: grid; grid-template-columns: 54px minmax(0,1fr) auto; align-items: center; gap: 12px; }
 .tun-shop-hub-icon { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 17px; background: rgba(255,255,255,.83); font-size: 1.7rem; box-shadow: 0 5px 12px rgba(49,90,90,.07); }
 .tun-shop-hub-copy { min-width: 0; display: grid; gap: 3px; }
@@ -389,8 +392,17 @@ main { min-height: calc(100dvh - 66px); }
 .onsen-stays-options span { min-height: 38px; display: flex; align-items: center; justify-content: center; padding: 6px 8px; border: 1px solid #e4e1e8; border-radius: 10px; background: #f8f7f8; color: #605965; font-size: .68rem; font-weight: 750; text-align: center; }
 .onsen-stays-options input:checked + span { border-color: #aa819d; background: #f4eaf2; color: #724d6c; box-shadow: inset 0 0 0 1px #aa819d; }
 .onsen-stays-options input:focus-visible + span { outline: 2px solid #6b5194; outline-offset: 2px; }
-.onsen-stays-hint { margin: 10px 2px 8px; color: #6f6a70; font-size: .65rem; line-height: 1.4; }
+.onsen-stays-hint { margin: 10px 0 8px; padding: 8px 10px; border-radius: 10px; background: #f2eaf2; color: #705673; font-size: .7rem; line-height: 1.5; }
 .onsen-stays-contact { width: 100%; display: flex; justify-content: space-between; align-items: center; min-height: 44px; padding: 10px 14px; border: 0; border-radius: 12px; background: #705673; color: #fff; font-size: .82rem; font-weight: 850; cursor: pointer; }
+.tun-cruise-hub { margin-top: 11px; border-color: #cbdde8; background: linear-gradient(125deg,#f1f9fc,#e7f1f8); }
+.tun-cruise-hub .tun-food-consult-copy > span { color: #356f91; }
+.tun-cruise-hub:focus-visible { outline-color: #356f91; }
+.cruise-heading { border-color: #cbdde8; background: linear-gradient(125deg,#f1f9fc,#e7f1f8); }
+.cruise-heading > span { color: #356f91; }
+.cruise-options label:last-child { grid-column: 1 / -1; }
+.cruise-options input:checked + span { border-color: #79a4bd; background: #e7f3f9; color: #285e7d; box-shadow: inset 0 0 0 1px #79a4bd; }
+.cruise-hint { background: #eaf4f9; color: #35647e; }
+.cruise-contact { background: #356f91; }
 @keyframes food-hub-drift { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .tun-food-hub-track, .tun-shop-hub-track { animation: none; } }
 @media (max-width: 600px) {
@@ -809,7 +821,14 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .travel-hero-copy small { width: fit-content; justify-self: center; margin-top: 3px; padding: 3px 10px 4px; background: linear-gradient(102deg, transparent 0, rgba(255,250,229,.96) 7%, rgba(255,247,218,.94) 93%, transparent 100%); color: #ad3d2f; filter: drop-shadow(0 2px 2px rgba(93,56,36,.16)); font-family: "Hiragino Kaku Gothic ProN", "PingFang SC", sans-serif; font-size: clamp(.8rem, 3.2vw, .93rem); line-height: 1.15; font-weight: 950; letter-spacing: -.035em; text-shadow: 0 1px rgba(255,255,255,.95); }
 .travel-hero-copy small::before { content: "⌖"; display: inline-block; margin-right: 4px; color: #286f80; font-size: .95em; transform: translateY(-.02em); }
 .travel-hero-copy strong { color: #24211f; font-family: "Hannotate SC", "STKaiti", "KaiTi", serif; font-size: clamp(.9rem, 4vw, 1.12rem); line-height: 1.3; letter-spacing: .02em; text-shadow: 0 1px #fff; }
-.quick-section .section-heading { justify-content: flex-start; gap: 7px; margin: 0 3px 10px; }
+.site-guide-entry { flex: none; min-height: 26px; padding: 3px 6px; border: 0; border-radius: 7px; background: #263d53; color: #fff; font: 800 .68rem/1.1 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; white-space: nowrap; cursor: pointer; }
+.site-guide-entry:hover { background: #375a76; }
+.site-guide-entry:focus-visible { outline: 3px solid #b65b40; outline-offset: 2px; }
+.site-guide-dialog p:not(.eyebrow) { margin: 10px 0; color: #34465a; font-size: .88rem; line-height: 1.55; }
+.site-guide-dialog p.site-guide-origin { margin: 5px 0 14px; color: #64776f; font-size: .77rem; line-height: 1.55; }
+.site-guide-map-note { color: #2f7580; font-weight: 750; }
+.site-guide-dialog p.site-guide-reminder { margin-top: 14px; color: #a3533b; font-size: .84rem; }
+.quick-section .section-heading { align-items: center; justify-content: space-between; gap: 5px; margin: 0 3px 10px; }
 .quick-section .section-heading h1 { margin: 0; font-size: clamp(1.7rem, 7.8vw, 2.25rem); line-height: 1.05; font-weight: 950; letter-spacing: -.065em; }
 .accent-spark { align-self: flex-start; color: #ee746b; font-size: 1.55rem; font-weight: 900; transform: rotate(-17deg); }
 .primary-grid { grid-template-columns: 1fr 1fr; gap: 11px; }
@@ -1541,7 +1560,7 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .travel-hero-copy small { margin-top: 1px; padding: 2px 6px 3px; font-size: clamp(.61rem, 2.5vw, .71rem); }
   .travel-hero-copy small::before { content: none; }
   .quick-section .section-heading { margin: 0 3px 5px; }
-  .quick-section .section-heading h1 { font-size: clamp(1.14rem, 5.6vw, 1.52rem); line-height: 1.1; white-space: nowrap; }
+  .quick-section .section-heading h1 { font-size: clamp(.86rem, 4.9vw, 1.2rem); line-height: 1.1; white-space: nowrap; }
   .accent-spark { font-size: 1.15rem; }
   .primary-grid { gap: 7px; }
   .tool-card { height: 108px; min-height: 108px; padding: 10px 11px; border-radius: 18px; }

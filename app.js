@@ -670,17 +670,19 @@
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
     const exploreContext = ["favorites", "food", "shopping"].includes(view);
-    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays"].includes(view);
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
-    document.querySelector("#brandTagline").textContent = playContext
-      ? "看看日本当季有什么好玩，也可以找黑豚聊聊安排。"
-      : exploreContext
-        ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
-        : "定位离你最近的厕所、吸烟区、商超便利店等。";
+    document.querySelector("#brandTagline").textContent = view === "contact"
+      ? "我就是你日本的人脉！哈哈哈哈哈"
+      : playContext
+        ? "看看日本当季有什么好玩，也可以找黑豚聊聊安排。"
+        : exploreContext
+          ? "定位离你最近的日本美食、二次元周边、数码卖场和百货店。"
+          : "定位离你最近的厕所、吸烟区、商超便利店等。";
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays"].includes(view));
+      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1514,6 +1516,16 @@
       inquirySummary.hidden = false;
       return;
     }
+    if (event.target.closest("[data-cruise-contact]")) {
+      const selected = document.querySelector('input[name="cruisePlan"]:checked')?.value || "还没想好";
+      const message = `你好，黑豚君，我坐邮轮靠岸，想安排当天玩一玩。\n想法：${selected}\n靠岸港口：\n实际离船时间：\n最晚返船时间：\n想去的地方：`;
+      go("contact");
+      const inquirySummary = document.querySelector("#inquirySummary");
+      document.querySelector("#inquirySummaryText").textContent = `邮轮靠岸 · ${selected}`;
+      inquirySummary.dataset.copyText = message;
+      inquirySummary.hidden = false;
+      return;
+    }
     const directContact = event.target.closest("[data-direct-contact]");
     if (directContact) {
       const openDialog = directContact.closest("dialog[open]");
@@ -2112,6 +2124,7 @@
     event.currentTarget.textContent = zoomed ? "看整张" : "放大细节";
     event.currentTarget.setAttribute("aria-pressed", String(zoomed));
   });
+  document.querySelector("#siteGuideButton").addEventListener("click", () => document.querySelector("#siteGuideDialog").showModal());
   document.querySelectorAll("[data-copy-email]").forEach(button => button.addEventListener("click", () => copyText("kurobuta2021@gmail.com", "邮箱已复制：kurobuta2021@gmail.com")));
   document.querySelector("#relocateToilets").addEventListener("click", startToiletLocator);
   document.querySelector("#searchMapArea").addEventListener("click", () => {

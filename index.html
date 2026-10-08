@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261008-play-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261008-play-services-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -51,7 +51,7 @@
           <section class="quick-section" aria-labelledby="quickTitle">
             <div class="section-heading">
               <div><h1 id="homeTitle">📍立刻定位离你最近的什么？</h1></div>
-              <span class="accent-spark" aria-hidden="true">〃</span>
+              <button id="siteGuideButton" class="site-guide-entry" type="button" aria-haspopup="dialog" aria-controls="siteGuideDialog">网站玩法</button>
             </div>
             <div class="primary-grid">
               <button class="tool-card toilet-card" type="button" data-toilet-choice data-tool-id="toilet">
@@ -88,7 +88,7 @@
           </section>
 
           <button class="seasonal-strip" type="button" data-go="seasonal" data-tool-id="seasonal">
-            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时</strong><small>樱花 · 红叶 · 花火 · 当地热闹</small><span class="seasonal-strip-cta">点开看最近有什么好玩 <span aria-hidden="true">→</span></span></span>
+            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时</strong><small>花火大会 · 红叶 · 樱花 · 当地热闹</small><span class="seasonal-strip-cta">点开看最近有什么好玩 <span aria-hidden="true">→</span></span></span>
             <span class="seasonal-strip-art" aria-hidden="true">
               <svg class="seasonal-strip-fireworks" viewBox="0 0 150 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="#FFD9A5" stroke-width="1.35" stroke-linecap="round" opacity=".84">
@@ -462,7 +462,7 @@
             <div class="tun-onsen-stay-hub">
               <button class="tun-onsen-stay-main" type="button" data-go="onsen-stays" data-tool-id="onsen-stays">
                 <span class="tun-onsen-stay-icon" aria-hidden="true">♨</span>
-                <span class="tun-onsen-stay-copy"><strong>住一晚温泉</strong><small>海景、雪景、情侣私汤、带家人去……说说你想怎么泡，我帮你挑。</small></span>
+                <span class="tun-onsen-stay-copy"><strong>住一晚温泉</strong><small>时间紧，空出两天住一晚温泉，海景，山景，雪景，情侣私汤，带家人去日本乡下边走边玩，体验一趟温泉游。</small></span>
                 <span class="tun-onsen-stay-arrow" aria-hidden="true">›</span>
               </button>
               <button class="tun-onsen-stay-contact" type="button" data-direct-contact data-tool-id="onsen-stay-direct-contact">找黑豚问问 <span aria-hidden="true">→</span></button>
@@ -470,6 +470,10 @@
             <button class="tun-food-consult-hub" type="button" data-direct-contact data-tool-id="food-consult-hub">
               <span class="tun-food-consult-icon" aria-hidden="true">🍽️</span>
               <span class="tun-food-consult-copy"><strong>约一顿想吃的</strong><small>想吃黑豚视频里那家？或者不知道怎么选，想让我推荐一家？怕没位、不会打日语电话，都可以来找我聊聊，看看能不能帮你约。</small><span>找黑豚问问 <span aria-hidden="true">→</span></span></span>
+            </button>
+            <button class="tun-food-consult-hub tun-local-experience-hub" type="button" data-direct-contact data-tool-id="local-experience-hub">
+              <span class="tun-food-consult-icon" aria-hidden="true">🎣</span>
+              <span class="tun-food-consult-copy"><strong>约个当地体验</strong><small>寿司制作、章鱼小丸子制作、海钓……约好时间，可自行前往。</small><small>体验地点、费用和能不能中文接待，先找黑豚问清楚。</small><span>找黑豚问问 <span aria-hidden="true">→</span></span>
             </button>
             <div class="tun-coming-grid">
               <article class="tun-coming-card route-coming-card">
@@ -479,9 +483,27 @@
                 <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询安排路线</button>
               </article>
             </div>
-            <button class="play-airport-help" type="button" data-direct-contact data-tool-id="play-airport-help"><span aria-hidden="true">✈️</span><span><strong>落地后怎么走？</strong><small>想安排机场接送，告诉我机场、日期和人数。</small></span><b aria-hidden="true">›</b></button>
+            <button class="play-airport-help" type="button" data-direct-contact data-tool-id="play-airport-help"><span aria-hidden="true">✈️</span><span><strong>落地机场接送</strong><small>行李多，老人小孩照顾，转车麻烦，还不如包个车接送酒店更省心省钱。</small></span><b aria-hidden="true">›</b></button>
+            <button class="tun-food-consult-hub tun-cruise-hub" type="button" data-go="cruise" data-tool-id="cruise-hub">
+              <span class="tun-food-consult-icon" aria-hidden="true">🚢</span>
+              <span class="tun-food-consult-copy"><strong>邮轮靠岸怎么玩</strong><small>邮轮只停一天，想逛港口附近，还是包车去远一点？告诉我靠岸港口、上下船时间和想去的地方，一起安排当天怎么玩。</small><span>点开选个玩法 <span aria-hidden="true">→</span></span></span>
+            </button>
             <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
           </div>
+        </section>
+
+        <section class="view onsen-stays-view cruise-view" data-view="cruise" aria-labelledby="cruiseTitle">
+          <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
+          <div class="onsen-stays-heading cruise-heading"><span aria-hidden="true">🚢</span><div><p class="eyebrow">CRUISE DAY</p><h1 id="cruiseTitle">邮轮靠岸怎么玩</h1><p>只停一天，挑个舒服的玩法。</p></div></div>
+          <div class="onsen-stays-choices">
+            <fieldset><legend>想怎么玩？</legend><div class="onsen-stays-options cruise-options">
+              <label><input type="radio" name="cruisePlan" value="轻松逛港口附近" /><span>轻松逛港口附近</span></label>
+              <label><input type="radio" name="cruisePlan" value="包车玩一天" /><span>包车玩一天</span></label>
+              <label><input type="radio" name="cruisePlan" value="还没想好" /><span>还没想好</span></label>
+            </div></fieldset>
+          </div>
+          <p class="onsen-stays-hint cruise-hint">先确认实际能下船和必须返船的时间，别只按公布的停靠时间安排。靠岸港口、时间和想去的地方，联系时告诉我；能不能安排，先聊清楚。</p>
+          <button class="onsen-stays-contact cruise-contact" type="button" data-cruise-contact data-tool-id="cruise-consult">找黑豚问问 <span aria-hidden="true">→</span></button>
         </section>
 
         <section class="view onsen-stays-view" data-view="onsen-stays" aria-labelledby="onsenStaysTitle">
@@ -506,7 +528,7 @@
               <label><input type="radio" name="onsenStayBath" value="都可以" /><span>都可以</span></label>
             </div></fieldset>
           </div>
-          <p class="onsen-stays-hint">日期、地点、预算还没定也没关系，聊的时候再说。</p>
+          <p class="onsen-stays-hint">选项只在你手机上，我看不到哦。想好了点「找黑豚问问」，再点「复制需求」发给我；日期、地点、预算可以慢慢聊。</p>
           <button class="onsen-stays-contact" type="button" data-onsen-contact data-tool-id="onsen-stay-consult">找黑豚问问 <span aria-hidden="true">→</span></button>
         </section>
 
@@ -974,6 +996,17 @@
         <button id="copyWaybackPlace" class="copy-wayback-place" type="button">复制完整位置</button>
       </form>
     </dialog>
+    <dialog id="siteGuideDialog" class="app-dialog site-guide-dialog" aria-labelledby="siteGuideTitle">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">HOW TO USE</p><h2 id="siteGuideTitle">黑豚工具箱，照着点就行</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="site-guide-origin">初衷：我想做一个就算不会日语、英语，来到日本也安全感满满。想找什么，就像有个熟门熟路的朋友在身边一样的工具。</p>
+        <p>① 人在日本，点「定位当前区」，查找附近最便利；还没出发，点「换个地方」，提前看看住处附近。</p>
+        <p>② 想找厕所、吃饭或逛店，点对应卡片，选个顺手的地图打开，<span class="site-guide-map-note">都加了高德地图与复制日文词，作为应急用。</span></p>
+        <p>③ 想看近期当地烟火大会，节日，热闹活动，去「玩日本」；有事需要人帮忙，直接点「找黑豚」。</p>
+        <p class="site-guide-reminder">提醒：语言支持简繁英切换，点击需求，工具会自动使用当地日语搜索，首选谷歌地图与苹果地图，当地资源最丰富。</p>
+        <button class="dialog-primary" value="default">知道啦</button>
+      </form>
+    </dialog>
     <dialog id="saveSiteDialog" class="app-dialog save-site-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">SAVE FOR LATER</p><h2 id="saveSiteTitle">保存随便O</h2></div><button value="cancel" aria-label="关闭">×</button></div>
@@ -1002,8 +1035,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261008-play-release"></script>
+    <script src="./i18n.js?v=20261008-play-services-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261008-play-release"></script>
+    <script src="./app.js?v=20261008-play-services-release"></script>
   </body>
 </html>
