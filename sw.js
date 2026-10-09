@@ -1,4 +1,4 @@
-const CACHE_NAME = "heitu-toolbox-v49";
+const CACHE_NAME = "heitu-toolbox-v50";
 const APP_SHELL = [
   "./", "./index.html", "./styles.css", "./i18n.js", "./share-utils.js", "./app.js",
   "./heitu-jun.png", "./heitu-contact.png", "./wechat-group-qr.jpg",

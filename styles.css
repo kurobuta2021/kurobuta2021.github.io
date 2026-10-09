@@ -367,6 +367,11 @@ main { min-height: calc(100dvh - 66px); }
 .tun-shop-hub-track { width: max-content; display: flex; gap: 7px; animation: food-hub-drift 31s linear infinite; }
 .tun-shop-hub-track > span { flex: none; padding: 6px 10px; border: 1px solid #cfe1db; border-radius: 999px; background: rgba(255,255,255,.8); color: #3e6562; font-size: .61rem; font-weight: 850; white-space: nowrap; }
 .tun-shop-hub-cta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding: 10px 12px; border-radius: 11px; background: #397b77; color: #fff; font-size: .77rem; font-weight: 900; }
+.tun-anime-hub { border-color: #d9d1eb; background: radial-gradient(circle at 95% 0,rgba(255,255,255,.9),transparent 110px),linear-gradient(130deg,#f7f3ff,#eae7f7); box-shadow: 0 10px 22px rgba(76,61,114,.09); }
+.tun-anime-hub .tun-shop-hub-copy small, .tun-anime-hub .tun-shop-hub-top > b { color: #74629c; }
+.tun-anime-hub .tun-shop-hub-copy > span { color: #6f697c; }
+.tun-anime-hub .tun-shop-hub-track > span { border-color: #e2dced; color: #625879; }
+.tun-anime-hub .tun-shop-hub-cta { background: #68588d; }
 .tun-onsen-stay-hub { position: relative; width: 100%; margin: 0 0 13px; padding: 12px 14px; border: 1px solid #d9d2e2; border-radius: 18px; background: linear-gradient(125deg,#f8f2fa,#eef3f5); color: var(--ink); }
 .tun-onsen-stay-main { width: 100%; display: grid; grid-template-columns: 48px minmax(0,1fr) auto; align-items: center; gap: 11px; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
 .tun-onsen-stay-icon { width: 46px; height: 46px; display: grid; place-items: center; border-radius: 13px; background: #fff; color: #8d6b99; font-size: 1.9rem; line-height: 1; }
@@ -886,6 +891,7 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .spread-action strong { align-self: end; overflow: hidden; font-size: .82rem; text-overflow: ellipsis; white-space: nowrap; }
 .spread-action small { align-self: start; overflow: hidden; color: #6c655e; font-size: .6rem; text-overflow: ellipsis; white-space: nowrap; }
 .spread-action.save-site { background: linear-gradient(135deg, #fff5da, #f6e5b9); }
+.spread-action.save-site strong, .spread-action.save-site small { white-space: normal; text-overflow: clip; line-height: 1.2; }
 .spread-action.share-site { background: linear-gradient(135deg, #e9f6f2, #d3ebe5); }
 .community-maps { margin-top: 23px; }
 .community-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin: 0 3px 11px; }
@@ -1760,6 +1766,7 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
 .seasonal-guide[hidden] { display: none; }
 .seasonal-guide-kicker { margin: 0 0 8px; color: #7c4566; font-size: 1.05rem; font-weight: 850; }
 .seasonal-guide-lead { margin: 0 0 16px; color: #4d4950; font-size: .88rem; line-height: 1.65; }
+.seasonal-detail-contact { margin: -4px 0 13px; padding: 7px 11px; border: 1px solid #decbd8; border-radius: 999px; background: #fff7fb; color: #754665; font-size: .72rem; font-weight: 800; cursor: pointer; }
 .seasonal-map-card { display: grid; grid-template-columns: minmax(110px, 42%) minmax(0, 1fr); gap: 5px; min-height: 300px; padding: 12px; border-radius: 19px; background: linear-gradient(145deg, #fff1f4, #f7f5f0); }
 .seasonal-map-card-leaves { background: linear-gradient(145deg, #fff2df, #faf4ea); }
 .seasonal-map-card-snow { background: linear-gradient(145deg, #e8f5ff, #f7fbff); }

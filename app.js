@@ -105,21 +105,31 @@
     anime: {
       title: "附近动漫原景地",
       emoji: "🎬",
-      intro: "先用中文圣地地图看当前位置附近；想看更多场景和登场话数，再打开 OTABiS",
+      intro: "这里整理了几个好用的动漫圣地地图，中文、日文网站都有；点开直达原站，支持原创。",
       phrase: "map",
       items: [
         {
-          name: "圣地地图 Screen Pilgrimage",
+          name: "Anitabi 动画巡礼地图",
           trust: "第一推荐",
+          description: "中文地图，按作品找动漫原景地；点开后在 Anitabi 原站查看地点和场景。",
+          badges: ["中文地图", "按作品找", "直达原站"],
+          action: "直接打开原站地图 ↗",
+          url: "https://anitabi.cn/map"
+        },
+        {
+          name: "圣地地图 Screen Pilgrimage",
+          trust: "第二推荐",
           description: "打开直接显示地图，支持简体中文、当前位置、作品搜索和路线整理。需要当地网络才能打开哦！",
           badges: ["简体中文", "可定位", "约8970个地点"],
+          action: "直接打开原站地图 ↗",
           url: "https://screenpilgrimage.com/"
         },
         {
           name: "OTABiS 动漫圣地巡礼地图",
-          trust: "第二推荐",
+          trust: "第三推荐",
           description: "点位更多，可查看场景、登场话数、路线与打卡；网页功能较多，以日文为主。需要当地网络才能打开哦！",
           badges: ["约14000个地点", "登场话数", "附近自动推荐"],
+          action: "直接打开原站地图 ↗",
           url: "https://app.otabis.jp/"
         }
       ]
@@ -608,9 +618,10 @@
       name: "トイレマップ｜日本全国厕所地图",
       description: "还能忍一忍，我选个环境。覆盖日本全国 · 可定位当前位置 · 需要当地网络才能打开哦！"
     } : options.community;
-    document.querySelector("#mapChoiceTitle").textContent = community ? `${label}，怎么找？` : `${label}，用哪个地图？`;
+    document.querySelector("#mapChoiceDialog .dialog-heading .eyebrow").textContent = label === "泡个温泉" ? "FIND YOUR ONSEN" : "CHOOSE YOUR MAP";
+    document.querySelector("#mapChoiceTitle").textContent = community || label === "泡个温泉" ? `${label}，怎么找？` : `${label}，用哪个地图？`;
     const mapChoiceIntro = document.querySelector("#mapChoiceIntro");
-    mapChoiceIntro.hidden = label === "泡个温泉";
+    mapChoiceIntro.hidden = label === "泡个温泉" && !options.intro;
     mapChoiceIntro.textContent = options.intro || (community
       ? "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。"
       : "已经选好服务了，现在选择你手机里方便使用的地图。");
@@ -636,6 +647,9 @@
         <span>${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.description)}</small>
       </a>
     `).join("");
+    document.querySelector(".map-choice-grid").insertBefore(extraList, label === "泡个温泉"
+      ? document.querySelector("#mapChoiceGoogle")
+      : document.querySelector(".map-choice-amap-group"));
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceGoogle strong").textContent = options.googleName || "Google 地图";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
@@ -669,7 +683,8 @@
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
-    const exploreContext = ["favorites", "food", "shopping"].includes(view);
+    const sourcesFromFavorites = view === "sources" && state.previousView === "favorites";
+    const exploreContext = ["favorites", "food", "shopping"].includes(view) || sourcesFromFavorites;
     const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = view === "contact"
@@ -682,7 +697,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && ["toilet-map", "sources", "navigator", "japanese", "wayback", "arrival"].includes(view)) || (target === "favorites" && ["food", "shopping"].includes(view)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -706,6 +721,10 @@
     }
     state.category = category;
     state.phrase = SOURCES[category].phrase;
+    const sourcesBack = document.querySelector('.view[data-view="sources"] .back-button');
+    const fromFavorites = state.view === "favorites";
+    sourcesBack.dataset.go = fromFavorites ? "favorites" : "home";
+    sourcesBack.textContent = fromFavorites ? "‹ 返回逛吃日本" : "‹ 返回工具箱";
     renderSources();
     go("sources");
   }
@@ -860,7 +879,7 @@
     els.sourceSummary.innerHTML = group.summary ? group.summary.map(item => `<span>✓ ${escapeHtml(item)}</span>`).join("") : "";
     els.sourceNote.hidden = !group.note;
     els.sourceNote.textContent = group.note || "";
-    const showHelper = state.category !== "freebus";
+    const showHelper = state.category !== "freebus" && state.category !== "anime";
     els.sourceHow.hidden = !showHelper;
     els.sourceAssistant.hidden = !showHelper;
     els.sourceJapanese.hidden = !showHelper;
@@ -1807,19 +1826,34 @@
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
       showMapChoice("日帰り温泉", "泡个温泉", {
+        intro: "有纹身，或想两个人一起泡？先找「貸切風呂」。能否接待纹身、是否要预约，出发前看店家说明。",
         googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {
+            url: "https://yuasobi.com/",
+            icon: "湯",
+            name: "YUASOBI · 日归貸切風呂",
+            description: "专找当天往返的家族风吕／私汤，可按地区或当前位置找。",
+            className: "private-bath"
+          },
+          {
+            url: "https://onsen.mobi/map/kashikiri",
+            icon: "図",
+            name: "全国日归温泉地图 · 貸切風呂",
+            description: "在地图上找附近可日归的貸切風呂。",
+            className: "private-bath"
+          },
+          {
             url: mapSearchUrl("google", "貸切温泉", null, state.searchArea),
             icon: "私",
-            name: "找私汤／情侣家庭温泉（纹身 OK）",
-            description: "私汤（貸切風呂／貸切温泉）通常可避开纹身限制，预约前请向店家确认；公共大浴场通常有限制，部分设施允许",
+            name: "Google 地图找附近私汤",
+            description: "搜「貸切温泉」，进店前确认预约与纹身规则。",
             className: "private-bath"
           }
         ],
         googleDescription: "日文搜索“日帰り温泉” · 不用住宿，泡完温泉就走 · 定位找附近最方便 · 需要当地网络才能打开哦！",
         amapDescription: "搜索“温泉” · 日本地点相对较少",
-        note: "有私汤不代表整家设施一定允许纹身；温泉规则可能变化，出发前请查看详情或向店家确认。"
+        note: "是否天然温泉、是否日归可用，以店家说明为准。"
       });
       return;
     }
@@ -1948,7 +1982,13 @@
           const dateParts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(part => [part.type, part.value]));
           const now = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
           const events = [...guide.querySelectorAll("[data-firework-date], [data-festival-date]")];
-          events.forEach(item => { item.hidden = (item.dataset.fireworkEnd || item.dataset.festivalEnd || item.dataset.fireworkDate || item.dataset.festivalDate) < now; });
+          const upcoming = events.filter(item => (item.dataset.fireworkEnd || item.dataset.festivalEnd || item.dataset.fireworkDate || item.dataset.festivalDate) >= now)
+            .sort((a, b) => (a.dataset.fireworkDate || a.dataset.festivalDate).localeCompare(b.dataset.fireworkDate || b.dataset.festivalDate));
+          events.forEach(item => { item.hidden = true; });
+          upcoming.forEach((item, index) => {
+            item.hidden = index >= 10;
+            item.parentElement.appendChild(item);
+          });
           guide.querySelector(".seasonal-dated-empty").hidden = events.some(item => !item.hidden);
         }
         document.querySelectorAll("[data-seasonal-guide]").forEach(item => { item.hidden = item !== guide; });

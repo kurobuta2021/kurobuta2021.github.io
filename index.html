@@ -10,7 +10,7 @@
     <meta name="description" content="黑豚君为中国游客整理的日本旅行工具入口：厕所、合法吸烟点、日文沟通、导航与收藏。" />
     <title>黑豚君 · 日本旅行工具箱</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261008-play-services-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261009-anime-onsen-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -118,7 +118,7 @@
           </section>
           <div class="spread-actions" aria-label="保存和分享随便O">
             <button class="spread-action share-site" type="button" data-share-site><span>↗</span><strong>分享给朋友</strong><small>发给要来日本的朋友</small><b>›</b></button>
-            <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>保存到桌面</strong><small>收藏好！下次一按就打开。</small><b>›</b></button>
+            <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>添加到手机桌面</strong><small>以后像 App 一样，一点就打开。</small><b>›</b></button>
           </div>
 
           <button class="ask-card ask-card-home" type="button" data-direct-contact data-tool-id="contact">
@@ -135,8 +135,8 @@
           <div class="seasonal-grid">
             <button class="seasonal-choice seasonal-choice-sakura" type="button" data-seasonal-open="sakura"><span aria-hidden="true">🌸</span><strong>看樱花</strong><small>城市花期参考＋中文预报</small><b>打开看看 ›</b></button>
             <button class="seasonal-choice seasonal-choice-leaves" type="button" data-seasonal-open="leaves"><span aria-hidden="true">🍁</span><strong>追红叶</strong><small>城市见顷参考＋中文情报</small><b>打开看看 ›</b></button>
-            <button class="seasonal-choice seasonal-choice-fireworks" type="button" data-seasonal-open="fireworks"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>按接下来已公布的日期找</small><b>打开看看 ›</b></button>
-            <button class="seasonal-choice seasonal-choice-festivals" type="button" data-seasonal-open="festivals"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>看接下来有哪些热闹</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-fireworks" type="button" data-seasonal-open="fireworks"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>接下来的花火日期</small><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-festivals" type="button" data-seasonal-open="festivals"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>接下来的祭典日期</small><b>打开看看 ›</b></button>
             <button class="seasonal-choice seasonal-choice-snow" type="button" data-seasonal-open="snow"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去</strong><small>先看哪里容易有雪，再查现在雪况。</small></span><b>打开看看 ›</b></button>
             <a class="seasonal-choice seasonal-choice-local" href="https://www.japan.travel/tw/things-to-do/attraction/seasonal-event/" target="_blank" rel="noopener"><span aria-hidden="true">🍜</span><span class="seasonal-choice-local-copy"><strong>当地有什么好玩</strong><small>拉面大赛、美食节、市集、展览……</small></span><b>中文找灵感 ↗</b></a>
           </div>
@@ -171,20 +171,29 @@
 
           <article class="seasonal-guide" data-seasonal-guide="fireworks" hidden>
             <p class="seasonal-guide-kicker">🎆 想看花火，先从城市挑</p>
-            <p class="seasonal-guide-lead">按现在往后的日期排，只放<strong>2026 年已公布</strong>的场次。点开可看举办方公告。</p>
+            <p class="seasonal-guide-lead">这里按日期列出接下来<strong>最多10场花火大会</strong>，不是全国完整名单。想找更多，去下面网站按城市、日期搜；拿不准也可以找黑豚问问。</p>
+            <button class="seasonal-detail-contact" type="button" data-direct-contact data-tool-id="fireworks-help">找黑豚问问 <span aria-hidden="true">›</span></button>
             <div class="seasonal-events seasonal-dated-events">
-              <a data-firework-date="2026-10-12" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>10/12</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-10" href="https://kounosuhanabi.com/about/gaiyo.html" target="_blank" rel="noopener"><time>10/10</time><strong>埼玉鸿巢｜鸿巢花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-11" href="https://www.welcome.city.yokohama.jp/eventinfo/ev_detail.php?bid=yw11005" target="_blank" rel="noopener"><time>10/11</time><strong>神奈川横滨｜夜间花火（约5分钟）</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-12" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>10/12</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-16" href="https://kitabiwako.jp/event/event_59062" target="_blank" rel="noopener"><time>10/16</time><strong>滋贺长滨｜余吴湖花火大会</strong><b>↗</b></a>
               <a data-firework-date="2026-10-17" href="https://www.city.fujisawa.kanagawa.jp/kankou/event/2025fujisawaenoshimahanabitaikai.html" target="_blank" rel="noopener"><time>10/17</time><strong>神奈川江之岛｜花火大会</strong><b>↗</b></a>
               <a data-firework-date="2026-10-17" href="https://www.city.chikusei.lg.jp/kankou/kankou-news/page013678.html" target="_blank" rel="noopener"><time>10/17</time><strong>茨城筑西｜花火大会</strong><b>↗</b></a>
               <a data-firework-date="2026-10-19" data-firework-end="2026-10-23" href="https://www.city.kobe.lg.jp/a44800/570186926290.html" target="_blank" rel="noopener"><time>10/19–23</time><strong>兵库神户｜港之花火</strong><b>↗</b></a>
-              <a data-firework-date="2026-10-25" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>10/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-24" href="https://www.city.kitakyushu.lg.jp/wakamatsu/vw4100210.html" target="_blank" rel="noopener"><time>10/24</time><strong>福冈北九州｜洞海湾花火祭</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-24" href="https://www.yaizu.gr.jp/news/9377" target="_blank" rel="noopener"><time>10/24</time><strong>静冈烧津｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-24" href="https://konan-hanabi.com/overview/" target="_blank" rel="noopener"><time>10/24</time><strong>爱知江南｜市民花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-24" href="https://www.welcome.city.yokohama.jp/eventinfo/ev_detail.php?bid=yw11005" target="_blank" rel="noopener"><time>10/24</time><strong>神奈川横滨｜夜间花火（约5分钟）</strong><b>↗</b></a>
+              <a data-firework-date="2026-10-25" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>10/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
               <a data-firework-date="2026-11-07" href="https://www.ibarakiguide.jp/event.php?code=736&mode=detail" target="_blank" rel="noopener"><time>11/7</time><strong>茨城土浦｜全国花火竞技大会</strong><b>↗</b></a>
-              <a data-firework-date="2026-11-08" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>11/8</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
-              <a data-firework-date="2026-11-23" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>11/23</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
-              <a data-firework-date="2026-12-06" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>12/6</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
-              <a data-firework-date="2026-12-25" href="https://www.city.atami.lg.jp/event/1009037/1014753" target="_blank" rel="noopener"><time>12/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-08" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>11/8</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-14" href="https://www.welcome.city.yokohama.jp/eventinfo/ev_detail.php?bid=yw11005" target="_blank" rel="noopener"><time>11/14</time><strong>神奈川横滨｜夜间花火（约5分钟）</strong><b>↗</b></a>
+              <a data-firework-date="2026-11-23" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>11/23</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-12-06" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>12/6</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
+              <a data-firework-date="2026-12-25" href="https://www.city.atami.lg.jp/event/1009037/1014753.html" target="_blank" rel="noopener"><time>12/25</time><strong>静冈热海｜海上花火大会</strong><b>↗</b></a>
             </div>
-            <p class="seasonal-dated-empty" hidden>目前整理的场次都结束了；新日期公布后再补，先到下方按地区查。</p>
+            <p class="seasonal-dated-empty" hidden>已整理的花火场次都过去了；可以去下面网站找新日期。</p>
             <p class="seasonal-source-note">按日本时间自动隐藏已过日期。这里只列已核实的部分场次；天气、售票和变更，出发前再看举办方公告。</p>
             <a class="seasonal-guide-link" href="https://www.japan.travel/tw/things-to-do/" target="_blank" rel="noopener"><strong>用中文看日本观光局的烟火介绍</strong><small>繁体中文｜进入后找“烟火”栏目；不是实时日历</small><b>↗</b></a>
             <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan47go.travel/ja/featured/fireworks" target="_blank" rel="noopener"><strong>按地区查更多花火大会</strong><small>日本观光振兴协会・日文｜进入后按地区找，日期请再核对</small><b>↗</b></a>
@@ -192,14 +201,23 @@
 
           <article class="seasonal-guide" data-seasonal-guide="festivals" hidden>
             <p class="seasonal-guide-kicker">🏮 路过一座城，顺便赶场热闹</p>
-            <p class="seasonal-guide-lead">先看<strong>2026 年接下来已公布</strong>的几场祭典。点开能看当地的具体安排。</p>
+            <p class="seasonal-guide-lead">这里按日期列出接下来<strong>最多10场祭典活动</strong>，不是全国完整名单。想找更多，去下面网站按城市、日期搜；拿不准也可以找黑豚问问。</p>
+            <button class="seasonal-detail-contact" type="button" data-direct-contact data-tool-id="festivals-help">找黑豚问问 <span aria-hidden="true">›</span></button>
             <div class="seasonal-events seasonal-dated-events">
-              <a data-festival-date="2026-10-09" data-festival-end="2026-10-10" href="https://www.hidatakayama.or.jp/spot/detail_2004.html" target="_blank" rel="noopener"><time>10/9–10</time><strong>岐阜高山｜秋季高山祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-09" data-festival-end="2026-10-10" href="https://www.hidatakayama.or.jp/event/detail_2004.html" target="_blank" rel="noopener"><time>10/9–10</time><strong>岐阜高山｜秋季高山祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-09" data-festival-end="2026-10-11" href="https://www.city.katori.lg.jp/sightseeing/matsuri/introduction/aki.html" target="_blank" rel="noopener"><time>10/9–11</time><strong>千叶佐原｜佐原秋祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-09" data-festival-end="2026-10-11" href="https://www.konpira.or.jp/?language=JAPANESE&amp;stageID=hp_time" target="_blank" rel="noopener"><time>10/9–11</time><strong>香川琴平｜金刀比罗宫例大祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-10" data-festival-end="2026-10-11" href="https://www.nrtk.jp/enjoy/shikisaisai/iidacho_akimatsuri.html" target="_blank" rel="noopener"><time>10/10–11</time><strong>千叶成田｜饭田町秋祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-10" data-festival-end="2026-10-11" href="https://otsu.or.jp/information/otsufestival2026" target="_blank" rel="noopener"><time>10/10–11</time><strong>滋贺大津｜大津祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-10" data-festival-end="2026-10-15" href="https://ja.kyoto.travel/event/single.php?event_id=4983" target="_blank" rel="noopener"><time>10/10–15</time><strong>京都｜粟田祭</strong><b>↗</b></a>
               <a data-festival-date="2026-10-17" data-festival-end="2026-10-18" href="https://koedo.or.jp/event/%E5%B7%9D%E8%B6%8A%E3%81%BE%E3%81%A4%E3%82%8A-4/" target="_blank" rel="noopener"><time>10/17–18</time><strong>埼玉川越｜川越祭</strong><b>↗</b></a>
               <a data-festival-date="2026-10-22" href="https://ja.kyoto.travel/event/single.php?event_id=7049" target="_blank" rel="noopener"><time>10/22</time><strong>京都｜时代祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-22" href="https://ja.kyoto.travel/event/single.php?event_id=4978" target="_blank" rel="noopener"><time>10/22</time><strong>京都鞍马｜火祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-22" data-festival-end="2026-10-24" href="https://yokanavi.com/events/239012" target="_blank" rel="noopener"><time>10/22–24</time><strong>福冈博多｜博多御九日祭</strong><b>↗</b></a>
+              <a data-festival-date="2026-10-31" data-festival-end="2026-11-01" href="https://www.miyazaki-city.tourism.or.jp/event/12284" target="_blank" rel="noopener"><time>10/31–11/1</time><strong>宫崎｜宫崎神宫大祭</strong><b>↗</b></a>
               <a data-festival-date="2026-11-02" data-festival-end="2026-11-04" href="https://www.city.karatsu.lg.jp/page/4344.html" target="_blank" rel="noopener"><time>11/2–4</time><strong>佐贺唐津｜唐津曳山祭</strong><b>↗</b></a>
             </div>
-            <p class="seasonal-dated-empty" hidden>目前整理的场次都结束了；到下方网站按城市、日期找新活动。</p>
+            <p class="seasonal-dated-empty" hidden>已整理的祭典活动都过去了；可以去下面网站找新日期。</p>
             <p class="seasonal-source-note">想找更详细的节日？去下面的活动日历，按目的地和日期筛选。这里不是全国完整名单，出发前再看举办方通知。</p>
             <a class="seasonal-guide-link" href="https://www.japan47go.travel/ja/event" target="_blank" rel="noopener"><strong>按城市、日期找更多祭典</strong><small>日本观光振兴协会・日文｜选目的地和日期筛选</small><b>↗</b></a>
             <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan.travel/tw/see-and-do/festivals-and-events/" target="_blank" rel="noopener"><strong>用中文找祭典灵感</strong><small>日本观光局・繁体中文｜按季节看活动介绍</small><b>↗</b></a>
@@ -422,7 +440,7 @@
           <div class="page-heading tun-preview-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">HEITUN PICKS</p><h1 id="favoritesTitle">逛吃日本</h1><p>附近吃什么、逛什么，选好再打开地图；优先参考评分高、评价多的店。</p><button class="tun-preview-contact" type="button" data-direct-contact data-tool-id="explore-help">找黑豚问问 <span aria-hidden="true">›</span></button></div></div>
 
           <section class="tun-coming" aria-labelledby="tunComingTitle">
-            <div class="tun-coming-copy"><span>边用边整理</span><h2 id="tunComingTitle">先找附近好用的</h2><p>美食和购物都能按日文词打开附近地图。</p></div>
+            <div class="tun-coming-copy"><span>边用边整理</span><h2 id="tunComingTitle">先找附近好用的</h2><p>吃饭、逛店、动漫场景打卡，从这里挑个入口。</p></div>
             <button class="tun-food-hub" type="button" data-go="food" data-tool-id="food-hub">
               <span class="tun-food-hub-top"><span class="tun-food-hub-icon" aria-hidden="true">🍱</span><span class="tun-food-hub-copy"><small>现在能用 · 打开地图找附近</small><strong>附近吃什么</strong><span>寿司、拉面、烧肉、咖喱、日式火锅……</span></span><b aria-hidden="true">›</b></span>
               <span class="tun-food-hub-strip" aria-hidden="true"><span class="tun-food-hub-track"><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 牛丼御三家</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 牛丼御三家</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span></span></span>
@@ -432,6 +450,11 @@
               <span class="tun-shop-hub-top"><span class="tun-shop-hub-icon" aria-hidden="true">🛍️</span><span class="tun-shop-hub-copy"><small>现在能用 · 按购物目的找</small><strong>附近逛什么</strong><span>服饰、百货、数码、中古、二次元……</span></span><b aria-hidden="true">›</b></span>
               <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span><span>👕 熟悉的连锁店</span><span>🏬 百货店</span><span>🛒 大型购物中心</span><span>📷 电器卖场</span><span>🧥 中古淘货</span><span>🎮 二次元周边</span><span>📚 书店</span></span></span>
               <span class="tun-shop-hub-cta">打开逛什么分类 <span aria-hidden="true">→</span></span>
+            </button>
+            <button class="tun-shop-hub tun-anime-hub" type="button" data-category="anime" data-tool-id="anime-hub">
+              <span class="tun-shop-hub-top"><span class="tun-shop-hub-icon" aria-hidden="true">🎬</span><span class="tun-shop-hub-copy"><small>中文、日文地图 · 直达原站</small><strong>动漫原景地</strong><span>找找附近出现过的动画场景。</span></span><b aria-hidden="true">›</b></span>
+              <span class="tun-shop-hub-strip" aria-hidden="true"><span class="tun-shop-hub-track"><span>🎞️ 按作品找地点</span><span>📍 附近场景打卡</span><span>🗺️ 中文地图</span><span>🌸 圣地巡礼</span><span>🎞️ 按作品找地点</span><span>📍 附近场景打卡</span><span>🗺️ 中文地图</span><span>🌸 圣地巡礼</span></span></span>
+              <span class="tun-shop-hub-cta">打开动漫圣地地图 <span aria-hidden="true">→</span></span>
             </button>
           </section>
 
@@ -473,7 +496,7 @@
             </button>
             <button class="tun-food-consult-hub tun-local-experience-hub" type="button" data-direct-contact data-tool-id="local-experience-hub">
               <span class="tun-food-consult-icon" aria-hidden="true">🎣</span>
-              <span class="tun-food-consult-copy"><strong>约个当地体验</strong><small>寿司制作、章鱼小丸子制作、海钓……约好时间，可自行前往。</small><small>体验地点、费用和能不能中文接待，先找黑豚问清楚。</small><span>找黑豚问问 <span aria-hidden="true">→</span></span>
+              <span class="tun-food-consult-copy"><strong>约个当地体验</strong><small>北海道小樽吹个自己的玻璃杯、札幌冰上钓鱼；大阪做寿司和章鱼小丸子、京都穿和服、东京湾海钓半日。约好时间，可自行前往。</small><small>所在当地城市有哪些体验活动？费用和能不能中文或英文接待，先找黑豚问清楚</small><span>找黑豚问问 <span aria-hidden="true">→</span></span>
             </button>
             <div class="tun-coming-grid">
               <article class="tun-coming-card route-coming-card">
@@ -1035,8 +1058,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261008-play-services-release"></script>
+    <script src="./i18n.js?v=20261009-anime-onsen-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261008-play-services-release"></script>
+    <script src="./app.js?v=20261009-anime-onsen-release"></script>
   </body>
 </html>
