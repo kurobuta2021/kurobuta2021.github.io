@@ -246,6 +246,12 @@
     favorites: readFavorites(),
     waybackPlaces: readWaybackPlaces(),
     waybackDraft: null,
+    waybackMap: null,
+    waybackMapPick: null,
+    waybackMapPickedMarker: null,
+    waybackMapUserMarker: null,
+    waybackWatchId: null,
+    waybackUserPosition: null,
     activeWaybackPlace: null,
     sharedPlace: shareUtils?.sharedPlaceFromUrl(location.href) || null,
     city: localStorage.getItem(CITY_KEY) || "东京",
@@ -311,6 +317,84 @@
     waybackCount: document.querySelector("#waybackCount"),
     contactForm: document.querySelector("#contactForm")
   };
+
+  const foodWheelDialog = document.querySelector("#foodWheelDialog");
+  const foodWheelDisc = document.querySelector("#foodWheelDisc");
+  const foodWheelResult = document.querySelector("#foodWheelResult");
+  const foodWheelSpin = document.querySelector("#foodWheelSpin");
+  const foodWheelFind = document.querySelector("#foodWheelFind");
+  const foodWheelShortNames = {
+    "回转寿司": "寿司", "米饭・定食": "定食", "牛丼御三家": "牛丼", "日式火锅": "火锅",
+    "特色料理": "特色", "荞麦面・乌冬": "面食", "炸猪排・炸牛排": "炸排", "甜品・茶": "甜品",
+    "关西小吃": "小吃", "日式咖喱": "咖喱"
+  };
+  const foodWheelColors = ["#f3c8b7", "#f6dbab", "#cbe2d2", "#d3dcef", "#efcadd", "#f8d7bc", "#cce5df"];
+  const foodWheelItems = Array.from(document.querySelectorAll(".food-hub-grid .food-hub-item")).map(button => {
+    const label = button.querySelector("strong").textContent.trim();
+    return { button, label, short: foodWheelShortNames[label] || label, emoji: button.querySelector("span").textContent.trim() };
+  });
+  let foodWheelRotation = 0;
+  let foodWheelSelected = -1;
+  let foodWheelTimer = null;
+
+  function buildFoodWheel() {
+    const slice = 360 / foodWheelItems.length;
+    foodWheelDisc.style.background = `conic-gradient(${foodWheelItems.map((_, index) => `${foodWheelColors[index % foodWheelColors.length]} ${index * slice}deg ${(index + 1) * slice}deg`).join(",")})`;
+    foodWheelDisc.style.setProperty("--food-wheel-slice", `${slice}deg`);
+    foodWheelItems.forEach((item, index) => {
+      const center = (index + .5) * slice * Math.PI / 180;
+      const label = document.createElement("span");
+      label.className = "food-wheel-label";
+      label.style.left = `${50 + 39 * Math.sin(center)}%`;
+      label.style.top = `${50 - 39 * Math.cos(center)}%`;
+      const emoji = document.createElement("span");
+      emoji.textContent = item.emoji;
+      const name = document.createElement("strong");
+      name.textContent = item.short;
+      label.append(emoji, name);
+      foodWheelDisc.append(label);
+    });
+  }
+
+  function spinFoodWheel() {
+    if (foodWheelTimer || !foodWheelItems.length) return;
+    let picked = Math.floor(Math.random() * foodWheelItems.length);
+    if (foodWheelItems.length > 1 && picked === foodWheelSelected) picked = (picked + 1 + Math.floor(Math.random() * (foodWheelItems.length - 1))) % foodWheelItems.length;
+    const slice = 360 / foodWheelItems.length;
+    const destination = (360 - (picked + .5) * slice + 360) % 360;
+    const current = ((foodWheelRotation % 360) + 360) % 360;
+    const delta = (destination - current + 360) % 360;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = reducedMotion ? 0 : 4200;
+    foodWheelRotation += 360 * (reducedMotion ? 0 : 6) + delta;
+    foodWheelDisc.style.transition = `transform ${duration}ms cubic-bezier(.12,.75,.16,1)`;
+    foodWheelDisc.style.transform = `rotate(${foodWheelRotation}deg)`;
+    foodWheelDisc.querySelectorAll(".food-wheel-label").forEach(label => {
+      label.style.transition = `transform ${duration}ms cubic-bezier(.12,.75,.16,1)`;
+      label.style.transform = `translate(-50%,-50%) rotate(${-foodWheelRotation}deg)`;
+    });
+    foodWheelResult.textContent = reducedMotion ? "正在翻牌…" : "转着呢，看看会停在哪儿…";
+    foodWheelFind.hidden = true;
+    foodWheelSpin.disabled = true;
+    foodWheelTimer = window.setTimeout(() => {
+      foodWheelSelected = picked;
+      foodWheelResult.textContent = `翻到「${foodWheelItems[picked].label}」！附近没有？换一家，再来一次。`;
+      foodWheelFind.hidden = false;
+      foodWheelSpin.disabled = false;
+      foodWheelSpin.textContent = "换一家，再来一次";
+      foodWheelTimer = null;
+    }, duration + 80);
+  }
+
+  buildFoodWheel();
+  document.querySelector("[data-food-wheel-open]").addEventListener("click", () => foodWheelDialog.showModal());
+  document.querySelector("#foodWheelClose").addEventListener("click", () => foodWheelDialog.close());
+  foodWheelSpin.addEventListener("click", spinFoodWheel);
+  foodWheelFind.addEventListener("click", () => {
+    if (foodWheelSelected < 0) return;
+    foodWheelDialog.close();
+    foodWheelItems[foodWheelSelected].button.click();
+  });
 
   function openContactQr(kind) {
     const qr = CONTACT_QR[kind];
@@ -611,7 +695,9 @@
   }
 
   function showMapChoice(query, label, options = {}) {
-    const area = state.searchArea;
+    const area = options.ignoreArea ? null : state.searchArea;
+    const toiletRanks = label === "附近厕所";
+    document.querySelectorAll("#mapChoiceDialog .map-choice-rank").forEach(badge => { badge.hidden = !toiletRanks; });
     const community = options.community === true ? {
       url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
@@ -680,12 +766,23 @@
     els.mapChoiceDialog.showModal();
   }
 
+  let streetCitySelection = null;
+  function setStreetCity(city) {
+    streetCitySelection = city;
+    document.querySelectorAll("[data-street-city-tab]").forEach(button => {
+      button.setAttribute("aria-pressed", String(button.dataset.streetCityTab === city));
+    });
+    document.querySelectorAll(".street-area-card[data-street-city]").forEach(card => {
+      card.hidden = card.dataset.streetCity !== city;
+    });
+  }
+
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
     const sourcesFromFavorites = view === "sources" && state.previousView === "favorites";
     const exploreContext = ["favorites", "food", "shopping"].includes(view) || sourcesFromFavorites;
-    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view);
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = view === "contact"
       ? "我就是你日本的人脉！哈哈哈哈哈"
@@ -697,12 +794,22 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise"].includes(view));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
+    if (view === "shopping" && !streetCitySelection) {
+      const initialCity = ["东京", "大阪", "名古屋", "福冈"].includes(state.city) ? state.city : "东京";
+      setStreetCity(initialCity);
+    }
     if (view === "japanese") renderPhrase();
-    if (view === "wayback") renderWaybackPlaces();
+    if (view === "wayback") {
+      renderWaybackPlaces();
+      ensureWaybackMap();
+    } else if (state.waybackWatchId !== null) {
+      navigator.geolocation.clearWatch(state.waybackWatchId);
+      state.waybackWatchId = null;
+    }
     if (view === "contact") {
       const inquirySummary = document.querySelector("#inquirySummary");
       inquirySummary.hidden = true;
@@ -1165,7 +1272,7 @@
   }
 
   function waybackIcon(label) {
-    return ({ "当前地点": "📍", "下车点": "🚕", "酒店": "🏨", "车站出口": "🚉", "商场门口": "🏬" })[label] || "📍";
+    return ({ "当前地点": "📍", "地图选点": "🗺️", "下车点": "🚕", "酒店": "🏨", "车站出口": "🚉", "商场门口": "🏬" })[label] || "📍";
   }
 
   function formatWaybackTime(timestamp) {
@@ -1216,6 +1323,100 @@
     return data.display_name || "日文地址暂时获取不到，请按坐标导航";
   }
 
+  function ensureWaybackMap() {
+    const status = document.querySelector("#waybackMapStatus");
+    if (!window.L) {
+      status.textContent = "地图暂时加载不了，还可以用上面的「记住这儿」。";
+      return;
+    }
+    if (!state.waybackMap) {
+      const start = state.searchArea?.kind === "point" ? state.searchArea : state.waybackPlaces[0];
+      const center = isValidPosition(start) ? [start.lat, start.lng] : [36.2, 138.2];
+      state.waybackMap = L.map("waybackMap", { zoomControl: true }).setView(center, start ? 15 : 5);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(state.waybackMap);
+      state.waybackMap.on("click", event => {
+        const point = { lat: event.latlng.lat, lng: event.latlng.lng };
+        state.waybackMapPick = point;
+        if (state.waybackMapPickedMarker) state.waybackMapPickedMarker.setLatLng(event.latlng);
+        else state.waybackMapPickedMarker = L.circleMarker(event.latlng, {
+          radius: 10, color: "#fff", weight: 3, fillColor: "#df8150", fillOpacity: 1
+        }).addTo(state.waybackMap);
+        status.textContent = `选好了：${point.lat.toFixed(5)}, ${point.lng.toFixed(5)}`;
+        document.querySelector("#waybackUseMapPoint").disabled = false;
+      });
+    }
+    requestAnimationFrame(() => state.waybackMap.invalidateSize());
+  }
+
+  function updateWaybackUserMarker(position, recenter = false) {
+    if (!state.waybackMap) return;
+    state.waybackUserPosition = position;
+    const point = [position.lat, position.lng];
+    if (state.waybackMapUserMarker) state.waybackMapUserMarker.setLatLng(point);
+    else state.waybackMapUserMarker = L.circleMarker(point, {
+      radius: 9, color: "#fff", weight: 3, fillColor: "#3182d8", fillOpacity: 1
+    }).addTo(state.waybackMap);
+    if (recenter) state.waybackMap.setView(point, 17);
+  }
+
+  function locateOnWaybackMap() {
+    const status = document.querySelector("#waybackMapStatus");
+    if (!state.waybackMap) {
+      ensureWaybackMap();
+      if (!state.waybackMap) return;
+    }
+    if (!navigator.geolocation) {
+      status.textContent = "这台设备不支持定位，仍可以点地图选位置。";
+      return;
+    }
+    if (state.waybackWatchId !== null) {
+      if (state.waybackUserPosition) state.waybackMap.setView([state.waybackUserPosition.lat, state.waybackUserPosition.lng], 17);
+      return;
+    }
+    status.textContent = "正在定位你的位置…";
+    let firstPosition = true;
+    state.waybackWatchId = navigator.geolocation.watchPosition(result => {
+      const position = { lat: result.coords.latitude, lng: result.coords.longitude };
+      if (!isValidPosition(position)) return;
+      updateWaybackUserMarker(position, firstPosition);
+      firstPosition = false;
+      if (!state.waybackMapPick) status.textContent = "蓝点是你现在的位置；点地图选要记住的点。";
+    }, error => {
+      if (!state.waybackMapPick) {
+        status.textContent = error?.code === 1
+          ? "没有允许定位，仍可以点地图选位置。"
+          : "定位暂时失败，仍可以点地图选位置。";
+      }
+      if (state.waybackWatchId !== null) navigator.geolocation.clearWatch(state.waybackWatchId);
+      state.waybackWatchId = null;
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 });
+  }
+
+  async function prepareWaybackDraft(position, source, accuracy = 0) {
+    const draft = {
+      lat: position.lat, lng: position.lng, accuracy,
+      address: `坐标 ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+    };
+    state.waybackDraft = draft;
+    document.querySelector("#waybackCaptureSource").textContent = source;
+    document.querySelector("#waybackAddress").textContent = draft.address;
+    document.querySelector("#waybackCoordinates").textContent = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
+    document.querySelector("#waybackAccuracy").textContent = accuracy ? `约 ${accuracy} 米` : "地图选点";
+    els.waybackCapture.hidden = false;
+    els.waybackCapture.scrollIntoView({ behavior: "smooth", block: "center" });
+    try {
+      const address = await reverseGeocodeWayback(position);
+      if (state.waybackDraft === draft) {
+        draft.address = address;
+        document.querySelector("#waybackAddress").textContent = address;
+      }
+    } catch (_) {
+      // The coordinates remain usable if the address lookup is unavailable.
+    }
+  }
+
   function locateWayback() {
     const button = document.querySelector("#rememberHere");
     if (!navigator.geolocation) {
@@ -1225,7 +1426,7 @@
     if (button.dataset.locating === "true") return;
     button.dataset.locating = "true";
     button.querySelector("strong").textContent = "正在定位…";
-    navigator.geolocation.getCurrentPosition(async result => {
+    navigator.geolocation.getCurrentPosition(result => {
       const position = { lat: result.coords.latitude, lng: result.coords.longitude };
       button.dataset.locating = "false";
       button.querySelector("strong").textContent = "记住这儿";
@@ -1233,23 +1434,8 @@
         toast("取得的位置格式不正确，请重新定位");
         return;
       }
-      state.waybackDraft = {
-        lat: position.lat,
-        lng: position.lng,
-        accuracy: Math.round(result.coords.accuracy || 0),
-        address: "正在获取日文地址…"
-      };
-      document.querySelector("#waybackAddress").textContent = state.waybackDraft.address;
-      document.querySelector("#waybackCoordinates").textContent = `${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`;
-      document.querySelector("#waybackAccuracy").textContent = state.waybackDraft.accuracy ? `约 ${state.waybackDraft.accuracy} 米` : "已定位";
-      els.waybackCapture.hidden = false;
-      els.waybackCapture.scrollIntoView({ behavior: "smooth", block: "center" });
-      try {
-        state.waybackDraft.address = await reverseGeocodeWayback(position);
-      } catch (_) {
-        state.waybackDraft.address = "日文地址暂时获取不到，请按坐标导航";
-      }
-      document.querySelector("#waybackAddress").textContent = state.waybackDraft.address;
+      updateWaybackUserMarker(position, true);
+      prepareWaybackDraft(position, "刚刚定位到", Math.round(result.coords.accuracy || 0));
     }, error => {
       button.dataset.locating = "false";
       button.querySelector("strong").textContent = "记住这儿";
@@ -1283,6 +1469,13 @@
     persistWaybackPlaces();
     renderWaybackPlaces();
     state.waybackDraft = null;
+    state.waybackMapPick = null;
+    if (state.waybackMapPickedMarker) {
+      state.waybackMapPickedMarker.remove();
+      state.waybackMapPickedMarker = null;
+    }
+    document.querySelector("#waybackUseMapPoint").disabled = true;
+    document.querySelector("#waybackMapStatus").textContent = "保存好了；再点地图可以选下一个位置。";
     els.waybackCapture.hidden = true;
     document.querySelector("#waybackNote").value = "";
     document.querySelector('input[name="waybackLabel"][value="当前地点"]').checked = true;
@@ -1545,6 +1738,15 @@
       inquirySummary.hidden = false;
       return;
     }
+    if (event.target.closest("[data-selfdrive-contact]")) {
+      const message = "你好，黑豚！我想在日本租车自己开。\n取车城市和地点：\n用车日期：\n还车城市和地点：\n人数、行李和想要的车型：\n我持有的驾照类型：\n想问问有没有合适的中文租车选择、费用和保险。";
+      go("contact");
+      const inquirySummary = document.querySelector("#inquirySummary");
+      document.querySelector("#inquirySummaryText").textContent = "日本自驾租车 · 想找中文沟通";
+      inquirySummary.dataset.copyText = message;
+      inquirySummary.hidden = false;
+      return;
+    }
     const directContact = event.target.closest("[data-direct-contact]");
     if (directContact) {
       const openDialog = directContact.closest("dialog[open]");
@@ -1552,6 +1754,24 @@
       go("contact");
       document.querySelector("#inquirySummary").hidden = true;
       showContactStep("channels", "profile");
+      return;
+    }
+    const streetCityTab = event.target.closest("[data-street-city-tab]");
+    if (streetCityTab) {
+      setStreetCity(streetCityTab.dataset.streetCityTab);
+      return;
+    }
+    const streetArea = event.target.closest("[data-street-query]");
+    if (streetArea) {
+      const otherCity = streetArea.dataset.streetCity === "其他";
+      showMapChoice(streetArea.dataset.streetQuery, streetArea.dataset.streetLabel, {
+        ignoreArea: !otherCity,
+        intro: otherCity ? "先用地图看看你选的地点附近有哪些店；点进具体门店再确认位置和营业时间。" : "先打开地图到这片街区，再挑感兴趣的店慢慢逛。这里不是固定的一家店。",
+        googleDescription: "按日文地名找街区 · 建议优先",
+        appleDescription: "按日文地名找街区 · 适合 iPhone",
+        amapDescription: "按日文地名找街区 · 若位置不对请手动搜索",
+        note: "街区店铺会变化；地图定位和营业时间请以具体门店页面为准。"
+      });
       return;
     }
     const shoppingOption = event.target.closest("[data-shopping-query]");
@@ -2077,6 +2297,13 @@
   });
   document.querySelector("#saveDestination").addEventListener("click", saveDestination);
   document.querySelector("#rememberHere").addEventListener("click", locateWayback);
+  document.querySelector("#waybackLocateMap").addEventListener("click", locateOnWaybackMap);
+  document.querySelector("#waybackUseMapPoint").addEventListener("click", () => {
+    const point = state.waybackMapPick;
+    if (!isValidPosition(point)) return;
+    document.querySelector('input[name="waybackLabel"][value="地图选点"]').checked = true;
+    prepareWaybackDraft(point, "地图上选的点");
+  });
   document.querySelector("#returnHere").addEventListener("click", () => {
     renderWaybackPlaces();
     document.querySelector("#waybackSaved").scrollIntoView({ behavior: "smooth", block: "start" });

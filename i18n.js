@@ -24,7 +24,7 @@
     "想看一场热闹，住一晚温泉，或者走一条不一样的路？从这里挑个想法。": "Find a local event, stay at an onsen, or take a different route. Pick an idea here.",
     "最新实时情报": "Latest updates", "樱花、红叶、花火、当地活动和雪景": "Blossoms, leaves, fireworks, local events and snow", "看看最近有什么好玩 →": "See what's happening soon →", "点开看看最近有什么好玩": "Tap to see what's on now",
     "说说你想怎么玩": "How would you like to explore?", "有喜欢的，点进去看看；需要安排就直接找我聊。": "Open what interests you, or message me if you need help arranging it.",
-    "落地机场接送": "Airport pickup and drop-off", "行李多，老人小孩照顾，转车麻烦，还不如包个车接送酒店更省心省钱。": "Travelling with luggage, older family members or kids? A private ride to your hotel can make transfers easier and may be better value for a group.",
+    "日本各地机场接送机预约": "Airport transfers across Japan", "行李多，老人小孩照顾，转车麻烦，还不如包个车接送酒店更省心省钱。": "Travelling with luggage, older family members or kids? A private ride to your hotel can make transfers easier and may be better value for a group.",
     "邮轮靠岸怎么玩": "What to do on a cruise stop", "邮轮只停一天，想逛港口附近，还是包车去远一点？告诉我靠岸港口、上下船时间和想去的地方，一起安排当天怎么玩。": "Only one day ashore? Explore near the port or take a private car farther out. Tell me your port, shore time and where you'd like to go.", "点开选个玩法": "Pick an idea", "只停一天，挑个舒服的玩法。": "One day ashore—pick a pace that suits you.", "想怎么玩？": "How would you like to explore?", "轻松逛港口附近": "Explore near the port", "包车玩一天": "Private car for the day", "还没想好": "Not sure yet", "先确认实际能下船和必须返船的时间，别只按公布的停靠时间安排。靠岸港口、时间和想去的地方，联系时告诉我；能不能安排，先聊清楚。": "Check when you can actually leave the ship and when you must return, not just the published port times. Share the port, times and places you want to visit so we can see what is possible.",
     "看看日本当季有什么好玩，也可以找黑豚聊聊安排。": "See what's on in Japan this season, or ask Heitun for help planning.",
     "我就是你日本的人脉！哈哈哈哈哈": "I'm your Japan connection! Haha!",
@@ -63,7 +63,9 @@
     "保存和分享随便O": "Save and share SuiBianO", "保存随便O": "Save SuiBianO", "下次一按就打开": "Open it in one tap next time", "收藏好！下次一按就打开。": "Save it now—open it in one tap next time.",
     "分享随便O": "Share SuiBianO", "分享给朋友": "Share with friends", "发给来日本的朋友": "Send it to friends visiting Japan", "发给要来日本的朋友": "Send it to friends visiting Japan", "添加到手机桌面": "Add to your phone's Home Screen", "以后像 App 一样，一点就打开。": "Open it in one tap, just like an app.", "保存到桌面": "Save to Home Screen",
     "先记住这个地方，想回来时直接导航。": "Save this place now and navigate back whenever you need.", "位置只保存在这台手机，不会上传": "Location stays on this device and is never uploaded", "🔒 位置只保存在这台手机，不会上传": "🔒 Location stays on this device and is never uploaded",
+    "🔒 记住的地点只保存在这台手机；地图和地址由第三方加载": "🔒 Saved places stay on this phone; maps and addresses load from third-party services",
     "路痴救星主要功能": "Never Get Lost tools", "记住这儿": "Save here", "获取现在的位置": "Get your current location", "原路回": "Find my way back", "↩️ 原路回": "↩️ Find my way back", "选择已保存地点": "Choose a saved place",
+    "也可以在地图上选": "Or pick a point on the map", "点「看我在哪」显示蓝点；也能直接点地图选位置。": "Show your location for a blue dot, or tap the map to pick a place.", "⌖ 看我在哪": "⌖ Show my location", "点地图选择要记住的位置": "Tap the map to choose a place to save", "点地图选位置，或点「看我在哪」": "Tap the map, or show your location", "记住选中的点": "Save selected point", "地图选点": "Map point", "🗺️ 地图选点": "🗺️ Map point", "地图上选的点": "Point chosen on map", "地图暂时加载不了，还可以用上面的「记住这儿」。": "The map isn't loading. You can still use Save here above.", "这台设备不支持定位，仍可以点地图选位置。": "Location isn't supported here. You can still tap the map.", "正在定位你的位置…": "Locating you…", "蓝点是你现在的位置；点地图选要记住的点。": "The blue dot is your current location. Tap the map to choose a place to save.", "没有允许定位，仍可以点地图选位置。": "Location permission was denied. You can still tap the map.", "定位暂时失败，仍可以点地图选位置。": "Location failed. You can still tap the map.", "保存好了；再点地图可以选下一个位置。": "Saved. Tap the map to choose another place.",
     "刚刚定位到": "Just located", "确认这个地点": "Confirm this place", "正在获取日文地址…": "Getting the Japanese address…", "这是哪里？": "What is this place?",
     "当前地点": "Current place", "下车点": "Drop-off point", "酒店": "Hotel", "车站出口": "Station exit", "商场门口": "Mall entrance",
     "📍 当前地点": "📍 Current place", "🚕 下车点": "🚕 Drop-off point", "🏨 酒店": "🏨 Hotel", "🚉 车站出口": "🚉 Station exit", "🏬 商场门口": "🏬 Mall entrance",
@@ -402,6 +404,7 @@
         .replace(/^正在查找周围 ([\d.]+) 公里的厕所…$/, "Searching for toilets within $1 km…")
         .replace(/^已定位：周围 ([\d.]+) 公里$/, "Located · Within $1 km")
         .replace(/^坐标 (.+)$/, "Coordinates $1")
+        .replace(/^选好了：(.+)$/, "Selected: $1")
         .replace(/^约 (\d+) 米$/, "About $1 m")
         .replace(/^提醒：(.+)$/, "Note: $1")
         .replace(/^目的地：(.+)$/, "Destination: $1")
