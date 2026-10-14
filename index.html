@@ -11,7 +11,7 @@
     <meta name="google-site-verification" content="yg7AnJtviCG_LtiI20t5CPaJop0m4OcRhL7n3JyypXA" />
     <title>黑豚的日本旅行工具箱｜随便O</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261011-play-kart-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261014-home-guide" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -1081,6 +1081,8 @@
         <p>② 想找厕所、吃饭或逛店，点对应卡片，选个顺手的地图打开，<span class="site-guide-map-note">都加了高德地图与复制日文词，作为应急用。</span></p>
         <p>③ 想看近期当地烟火大会，节日，热闹活动，去「玩日本」；有事需要人帮忙，直接点「找黑豚」。</p>
         <p class="site-guide-reminder">提醒：语言支持简繁英切换，点击需求，工具会自动使用当地日语搜索，首选谷歌地图与苹果地图，当地资源最丰富。</p>
+        <p class="site-guide-reminder site-guide-reminder-followup">提醒2：苹果点「共享」，安卓点浏览器菜单，选择「添加到主屏幕」或「安装应用」，以后像 App 一样从桌面打开。</p>
+        <button class="install-image-link" type="button" data-open-install-images>iPhone 看图操作 ›</button>
         <button class="dialog-primary" value="default">知道啦</button>
       </form>
     </dialog>
@@ -1088,8 +1090,19 @@
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">SAVE FOR LATER</p><h2 id="saveSiteTitle">保存随便O</h2></div><button value="cancel" aria-label="关闭">×</button></div>
         <div id="saveSiteGuide" class="save-site-guide"></div>
+        <button class="install-image-link" type="button" data-open-install-images>iPhone 看图操作 ›</button>
         <button id="installSiteButton" class="dialog-primary" type="button" hidden>添加到主屏幕</button>
         <button id="copySiteLink" class="copy-site-link" type="button">复制网址</button>
+      </form>
+    </dialog>
+    <dialog id="installImageDialog" class="app-dialog install-image-dialog" aria-labelledby="installImageTitle">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">IPHONE GUIDE</p><h2 id="installImageTitle">像 App 一样放到桌面</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="install-image-intro">苹果手机照这三步点；找不到时，先用 Safari 打开网页。</p>
+        <figure class="install-image-step"><figcaption>① 点浏览器的「共享」</figcaption><img src="./assets/add-home-iphone-share.jpg" alt="苹果浏览器中的共享入口" loading="lazy" /></figure>
+        <figure class="install-image-step" hidden><figcaption>② 点「查看更多」</figcaption><img src="./assets/add-home-iphone-more.png" alt="共享菜单中的查看更多按钮" loading="lazy" /></figure>
+        <figure class="install-image-step" hidden><figcaption>③ 点「添加到主屏幕」</figcaption><img src="./assets/add-home-iphone-final.jpg" alt="共享菜单中的添加到主屏幕选项" loading="lazy" /></figure>
+        <div class="install-image-controls"><button id="installImagePrev" type="button" disabled>上一步</button><span id="installImageCount">1 / 3</span><button id="installImageNext" type="button">下一步</button></div>
       </form>
     </dialog>
     <dialog id="sharedPlaceDialog" class="app-dialog shared-place-dialog">
@@ -1114,6 +1127,6 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="./i18n.js?v=20261011-play-kart-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261009-selfdrive-preview"></script>
+    <script src="./app.js?v=20261014-home-guide"></script>
   </body>
 </html>

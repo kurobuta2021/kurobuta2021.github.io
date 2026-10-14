@@ -883,6 +883,19 @@ html[lang="en"] .language-picker > span { font-size: .62rem; }
 .site-guide-dialog p.site-guide-origin { margin: 5px 0 14px; color: #64776f; font-size: .77rem; line-height: 1.55; }
 .site-guide-map-note { color: #2f7580; font-weight: 750; }
 .site-guide-dialog p.site-guide-reminder { margin-top: 14px; color: #a3533b; font-size: .84rem; }
+.site-guide-dialog p.site-guide-reminder-followup { margin-top: 4px; }
+.install-image-link { display: block; width: fit-content; margin: 4px 0 14px; padding: 7px 12px; border: 1px solid #d6c2a8; border-radius: 999px; background: #fffaf1; color: #8f4934; font: 750 .76rem/1.3 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; cursor: pointer; }
+.install-image-link:hover { background: #fff1df; }
+.install-image-dialog { max-height: min(84dvh, 720px); overflow-y: auto; }
+.install-image-intro { margin: 10px 0 14px; color: #6e655c; font-size: .78rem; line-height: 1.5; }
+.install-image-step { margin: 0; }
+.install-image-step[hidden] { display: none; }
+.install-image-step figcaption { margin: 0 0 8px; color: #303b4b; font-size: .9rem; font-weight: 800; }
+.install-image-step img { display: block; width: 100%; max-height: min(50dvh, 430px); object-fit: contain; border: 1px solid #ece2d5; border-radius: 13px; background: #f3f0ec; }
+.install-image-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.install-image-controls button { min-width: 86px; padding: 8px 12px; border: 1px solid #d8c7b3; border-radius: 9px; background: #fffaf3; color: #744c39; font: 750 .78rem/1.2 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif; cursor: pointer; }
+.install-image-controls button:disabled { opacity: .4; cursor: default; }
+.install-image-controls span { color: #756c64; font-size: .75rem; }
 .quick-section .section-heading { align-items: center; justify-content: space-between; gap: 5px; margin: 0 3px 10px; }
 .quick-section .section-heading h1 { margin: 0; font-size: clamp(1.7rem, 7.8vw, 2.25rem); line-height: 1.05; font-weight: 950; letter-spacing: -.065em; }
 .accent-spark { align-self: flex-start; color: #ee746b; font-size: 1.55rem; font-weight: 900; transform: rotate(-17deg); }

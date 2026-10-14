@@ -2392,6 +2392,21 @@
     event.currentTarget.setAttribute("aria-pressed", String(zoomed));
   });
   document.querySelector("#siteGuideButton").addEventListener("click", () => document.querySelector("#siteGuideDialog").showModal());
+  const installImageSteps = [...document.querySelectorAll("#installImageDialog .install-image-step")];
+  let installImageIndex = 0;
+  function showInstallImageStep(index) {
+    installImageIndex = Math.max(0, Math.min(index, installImageSteps.length - 1));
+    installImageSteps.forEach((step, stepIndex) => { step.hidden = stepIndex !== installImageIndex; });
+    document.querySelector("#installImageCount").textContent = `${installImageIndex + 1} / ${installImageSteps.length}`;
+    document.querySelector("#installImagePrev").disabled = installImageIndex === 0;
+    document.querySelector("#installImageNext").disabled = installImageIndex === installImageSteps.length - 1;
+  }
+  document.querySelectorAll("[data-open-install-images]").forEach(button => button.addEventListener("click", () => {
+    showInstallImageStep(0);
+    document.querySelector("#installImageDialog").showModal();
+  }));
+  document.querySelector("#installImagePrev").addEventListener("click", () => showInstallImageStep(installImageIndex - 1));
+  document.querySelector("#installImageNext").addEventListener("click", () => showInstallImageStep(installImageIndex + 1));
   document.querySelectorAll("[data-copy-email]").forEach(button => button.addEventListener("click", () => copyText("kurobuta2021@gmail.com", "邮箱已复制：kurobuta2021@gmail.com")));
   document.querySelector("#relocateToilets").addEventListener("click", startToiletLocator);
   document.querySelector("#searchMapArea").addEventListener("click", () => {
