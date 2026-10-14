@@ -780,9 +780,17 @@
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
+    if (view === "ski") {
+      document.querySelector("[data-ski-paths]").hidden = false;
+      document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = true; });
+      const returnToSeasonal = state.previousView === "seasonal";
+      const backButton = document.querySelector(".ski-view .back-button");
+      backButton.dataset.go = returnToSeasonal ? "seasonal" : "play";
+      backButton.textContent = returnToSeasonal ? "‹ 返回日本正当时" : "‹ 返回玩日本";
+    }
     const sourcesFromFavorites = view === "sources" && state.previousView === "favorites";
     const exploreContext = ["favorites", "food", "shopping"].includes(view) || sourcesFromFavorites;
-    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive"].includes(view);
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = view === "contact"
       ? "我就是你日本的人脉！哈哈哈哈哈"
@@ -794,7 +802,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive"].includes(view));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -2220,6 +2228,40 @@
     const goButton = event.target.closest("[data-go]");
     if (goButton) {
       go(goButton.dataset.go);
+      return;
+    }
+    const skiModeButton = event.target.closest("[data-ski-mode]");
+    if (skiModeButton) {
+      const mode = skiModeButton.dataset.skiMode;
+      document.querySelector("[data-ski-paths]").hidden = true;
+      document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = panel.dataset.skiPanel !== mode; });
+      return;
+    }
+    if (event.target.closest("[data-ski-reset]")) {
+      document.querySelector("[data-ski-paths]").hidden = false;
+      document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = true; });
+      return;
+    }
+    const skiMapButton = event.target.closest("[data-ski-map]");
+    if (skiMapButton) {
+      const isSnowPlay = skiMapButton.dataset.skiMap === "snow";
+      const query = isSnowPlay ? "雪遊び場" : "スキー場";
+      showMapChoice(query, isSnowPlay ? "附近玩雪地" : "附近滑雪场", {
+        intro: isSnowPlay
+          ? "用日文找附近的玩雪区；地图结果可能混有普通公园，请确认场地是否开放玩雪。"
+          : "用日文找附近雪场；点开具体雪场后，再核对当天开放和装备租借。",
+        amapCurrentLocation: true,
+        amapManualQuery: query,
+        googleDescription: "打开后核对搜索位置 · 日本地点较完整",
+        appleDescription: "打开后核对搜索位置 · 适合 iPhone",
+        amapDescription: "定位搜索 · 日本地点可能较少，可复制日文词重搜",
+        note: "未到日本？先点页面顶部「换个地方」。地图结果不保证按距离排序，雪场和玩雪区的开放情况以官网为准。"
+      });
+      return;
+    }
+    const skiCopyButton = event.target.closest("[data-ski-copy]");
+    if (skiCopyButton) {
+      copyText(skiCopyButton.dataset.skiCopy, `已复制「${skiCopyButton.dataset.skiCopy}」`);
       return;
     }
     const backButton = event.target.closest("[data-back]");

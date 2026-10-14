@@ -11,7 +11,7 @@
     <meta name="google-site-verification" content="yg7AnJtviCG_LtiI20t5CPaJop0m4OcRhL7n3JyypXA" />
     <title>黑豚的日本旅行工具箱｜随便O</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261014-home-guide" />
+    <link rel="stylesheet" href="./styles.css?v=20261014-play-cards-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -89,7 +89,7 @@
           </section>
 
           <button class="seasonal-strip" type="button" data-go="seasonal" data-tool-id="seasonal">
-            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时</strong><small>花火大会 · 红叶 · 樱花 · 当地热闹</small><span class="seasonal-strip-cta">点开看最近有什么好玩 <span aria-hidden="true">→</span></span></span>
+            <span class="seasonal-strip-copy"><em>查看最新实时情报</em><strong>日本正当时</strong><small>滑雪 · 花火大会 · 红叶 · 樱花 · 当地热闹</small><span class="seasonal-strip-cta">点开看最近有什么好玩 <span aria-hidden="true">→</span></span></span>
             <span class="seasonal-strip-art" aria-hidden="true">
               <svg class="seasonal-strip-fireworks" viewBox="0 0 150 94" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="#FFD9A5" stroke-width="1.35" stroke-linecap="round" opacity=".84">
@@ -138,12 +138,12 @@
             <button class="seasonal-choice seasonal-choice-leaves" type="button" data-seasonal-open="leaves"><span aria-hidden="true">🍁</span><strong>追红叶</strong><small>城市见顷参考＋中文情报</small><b>打开看看 ›</b></button>
             <button class="seasonal-choice seasonal-choice-fireworks" type="button" data-seasonal-open="fireworks"><span aria-hidden="true">🎆</span><strong>看花火大会</strong><small>接下来的花火日期</small><b>打开看看 ›</b></button>
             <button class="seasonal-choice seasonal-choice-festivals" type="button" data-seasonal-open="festivals"><span aria-hidden="true">🏮</span><strong>赶祭典活动</strong><small>接下来的祭典日期</small><b>打开看看 ›</b></button>
-            <button class="seasonal-choice seasonal-choice-snow" type="button" data-seasonal-open="snow"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去</strong><small>先看哪里容易有雪，再查现在雪况。</small></span><b>打开看看 ›</b></button>
+            <button class="seasonal-choice seasonal-choice-snow" type="button" data-go="ski"><span aria-hidden="true">❄️</span><span class="seasonal-choice-snow-copy"><strong>追雪去 滑雪 玩雪</strong><small>找附近滑雪场、玩雪地，再查当天雪况。</small></span><b>打开看看 ›</b></button>
             <a class="seasonal-choice seasonal-choice-local" href="https://www.japan.travel/tw/things-to-do/attraction/seasonal-event/" target="_blank" rel="noopener"><span aria-hidden="true">🍜</span><span class="seasonal-choice-local-copy"><strong>当地有什么好玩</strong><small>拉面大赛、美食节、市集、展览……</small></span><b>中文找灵感 ↗</b></a>
           </div>
           <p class="seasonal-note">花期是预测，活动也可能改期；出发前再看详情与主办方最新通知。</p>
           <div class="seasonal-trip-help">
-            <span><strong>想去参加的活动地点远，怎么接行程？</strong><small>时间、路线拿不准，来找我聊聊。</small></span>
+            <span><strong>想去的地方太远，怎么安排？</strong><small>时间、路线拿不准，来找我聊聊。</small></span>
             <button type="button" data-direct-contact data-tool-id="seasonal-trip-help">找黑豚问问 <span aria-hidden="true">›</span></button>
           </div>
         </section>
@@ -225,17 +225,6 @@
             <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan.travel/tw/see-and-do/festivals-and-events/" target="_blank" rel="noopener"><strong>用中文找祭典灵感</strong><small>日本观光局・繁体中文｜按季节看活动介绍</small><b>↗</b></a>
           </article>
 
-          <article class="seasonal-guide" data-seasonal-guide="snow" hidden>
-            <p class="seasonal-guide-kicker">❄️ 想看雪，先找对地方</p>
-            <p class="seasonal-guide-lead">先看冬天哪些地方容易有雪。这张是<strong>常见雪区示意，不代表今天那里正在下雪</strong>。出发前再查最新雪况。</p>
-            <div class="seasonal-map-card seasonal-map-card-snow">
-              <div class="seasonal-map-art"><img src="./assets/japan-season-map.svg" alt="日本列岛主要雪区位置示意，不按比例绘制" /><span class="seasonal-map-stamp">常见雪区</span></div>
-              <ol class="seasonal-map-timeline"><li><strong>北海道</strong><span>札幌近郊・新雪谷・富良野</span></li><li><strong>东北</strong><span>青森・秋田・山形</span></li><li><strong>甲信越</strong><span>长野白马・新潟越后汤泽</span></li><li><strong>北陆</strong><span>富山・石川山区</span></li></ol>
-            </div>
-            <p class="seasonal-source-note">想拍雪景和想滑雪不是一回事；雪场积雪不代表市区有雪，开放情况也要另外确认。</p>
-            <a class="seasonal-guide-link" href="https://www.japowdb.com/zh-tw/resorts/" target="_blank" rel="noopener"><strong>中文看各雪场资料和雪况</strong><small>JapowDB・繁体中文｜第三方雪场数据，不代表市区雪况</small><b>↗</b></a>
-            <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://tenki.jp/snow-map/" target="_blank" rel="noopener"><strong>看全国积雪深度图</strong><small>日本气象协会・日文｜选“積雪の深さ”，不是“降雪量”</small><b>↗</b></a>
-          </article>
         </section>
 
         <section class="view toilet-map-view" data-view="toilet-map" aria-labelledby="toiletMapTitle">
@@ -491,6 +480,7 @@
           </button>
           <div class="play-services-heading"><h2>说说你想怎么玩</h2><p>有喜欢的，点进去看看；需要安排就直接找我聊。</p></div>
           <div class="play-services">
+            <button class="play-ski-entry" type="button" data-go="ski" data-tool-id="ski-guide"><span class="play-ski-icon" aria-hidden="true">⛷️</span><span class="play-ski-copy"><strong>滑雪、玩雪去哪儿？</strong><small>想认真滑，还是只想玩玩雪？先选一个。</small><b>点开选玩法 <span aria-hidden="true">→</span></b></span></button>
             <div class="tun-onsen-stay-hub">
               <button class="tun-onsen-stay-main" type="button" data-go="onsen-stays" data-tool-id="onsen-stays">
                 <span class="tun-onsen-stay-icon" aria-hidden="true">♨</span>
@@ -526,6 +516,29 @@
               <span class="tun-food-consult-copy"><strong>邮轮靠岸一日游安排</strong><small>邮轮只停一天，想逛港口附近，还是包车去远一点？告诉我靠岸港口、上下船时间和想去的地方，一起安排当天怎么玩。</small><span>点开选个玩法 <span aria-hidden="true">→</span></span></span>
             </button>
             <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
+          </div>
+        </section>
+
+        <section class="view ski-view" data-view="ski" aria-labelledby="skiTitle">
+          <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
+          <div class="ski-heading"><span aria-hidden="true">❄️</span><div><p class="eyebrow">SNOW JAPAN</p><h1 id="skiTitle">搜索附近的什么？</h1><p>滑雪场、玩雪地，先选一个；再看看附近和当天雪况。</p></div></div>
+          <div class="ski-paths" data-ski-paths>
+            <button class="ski-path ski-path-primary" type="button" data-ski-mode="ski"><span aria-hidden="true">⛷️</span><strong>附近滑雪场</strong><small>找附近雪场，再查积雪、天气和现场画面</small><b aria-hidden="true">进去看看 →</b></button>
+            <button class="ski-path" type="button" data-ski-mode="snow"><span aria-hidden="true">🛷</span><strong>附近玩雪地</strong><small>不想滑雪也能玩，拍照、雪橇、雪圈都算</small><b aria-hidden="true">进去看看 →</b></button>
+            <div class="ski-transfer-help"><strong>雪场接送</strong><button type="button" data-direct-contact data-tool-id="ski-transfer-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
+          </div>
+          <div class="ski-panel" data-ski-panel="ski" hidden>
+            <button class="ski-change" type="button" data-ski-reset>‹ 换一种玩法</button>
+            <div class="ski-map-search"><div><strong>当前位置附近有没有滑雪场？</strong><p>打开地图后核对搜索位置；没到日本可先点顶部「换个地方」。</p></div><div class="ski-map-actions"><button class="ski-map-open" type="button" data-ski-map="ski" data-tool-id="ski-nearby-map">选地图打开 <span aria-hidden="true">↗</span></button><button class="ski-map-copy" type="button" data-ski-copy="スキー場" data-tool-id="ski-nearby-copy">复制日文词 <span lang="ja">スキー場</span></button></div></div>
+            <div class="ski-live"><strong>找更多雪场，查当天雪况</strong><p>按城市找完整名单，再确认积雪、开放情况和镜头。第三方信息会变化，不是本站实时播报。</p><a href="https://japan-skiguide.com/cn/" target="_blank" rel="noopener" data-tool-id="ski-jsg-directory">按城市找雪场 <small>Japan Ski Guide · 简体中文</small><b aria-hidden="true">↗</b></a><a href="https://www.snowy.fun/zh-Hant-HK/weather/snow/japan" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-weather">全国各个滑雪场 当前积雪厚度及天气查询 <small>SNOWY · 繁体中文</small><b aria-hidden="true">↗</b></a><a href="https://steep.jp/zh-tw/%E5%8D%B3%E6%99%82%E6%94%9D%E5%BD%B1%E6%A9%9F/" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-camera">当前看雪场直播 <small>STEEP · 繁体中文；不保证全天直播</small><b aria-hidden="true">↗</b></a></div>
+          </div>
+          <div class="ski-panel" data-ski-panel="snow" hidden>
+            <button class="ski-change" type="button" data-ski-reset>‹ 换一种玩法</button>
+            <div class="ski-map-search"><div><strong>当前位置附近有没有玩雪的地方？</strong><p>很多场所只在冬季雪季开放，夏天可能改做其他游乐项目。搜到后请确认当季是否能玩雪。</p></div><div class="ski-map-actions"><button class="ski-map-open" type="button" data-ski-map="snow" data-tool-id="snow-nearby-map">选地图打开 <span aria-hidden="true">↗</span></button><button class="ski-map-copy" type="button" data-ski-copy="雪遊び場" data-tool-id="snow-nearby-copy">复制日文词 <span lang="ja">雪遊び場</span></button></div></div>
+            <h2>不滑雪，也能痛快玩雪</h2><p class="ski-panel-intro">不用先学会滑雪，挑喜欢的雪上活动，再看目的地有没有、适不适合同行的人。</p>
+            <div class="snow-play-list"><div><span aria-hidden="true">🛷</span><strong>雪橇・雪圈</strong><small>轻松玩，带小朋友也能考虑；先查年龄和身高限制。</small></div><div><span aria-hidden="true">⛄</span><strong>雪地乐园</strong><small>堆雪人、打雪仗、拍雪景，适合不想上雪道的人。</small></div><div><span aria-hidden="true">🥾</span><strong>雪地散步</strong><small>想多看风景，可找有向导的雪鞋徒步体验。</small></div></div>
+            <div class="ski-live"><strong>怎么找附近能玩的地方？</strong><p>先用中文了解雪地活动，再到各场地官网确认开放日期、门票和交通。</p><a href="https://www.japan.travel/tw/things-to-do/action-and-adventure/ski-and-snowboard/" target="_blank" rel="noopener" data-tool-id="snow-play-jnto">看日本观光局中文雪季介绍 <small>第三方官网</small><b aria-hidden="true">↗</b></a></div>
+            <p class="ski-footnote">玩雪区不一定在滑雪票范围内，能否租装备、是否接受幼童，请以场地公告为准。</p>
           </div>
         </section>
 
@@ -1125,8 +1138,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261011-play-kart-release"></script>
+    <script src="./i18n.js?v=20261014-seasonal-help-copy"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261014-home-guide"></script>
+    <script src="./app.js?v=20261014-snow-merge"></script>
   </body>
 </html>
