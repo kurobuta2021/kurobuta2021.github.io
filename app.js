@@ -56,6 +56,47 @@
     refreshUpdateBadges();
   }
   const WAYBACK_LIMIT = 10;
+  const THEME_PARKS = [
+    { id: "fujiq", name: "富士急乐园", ja: "富士急ハイランド", area: "山梨 · 富士山旁", note: "想坐刺激过山车，先看这里。", point: [35.48767, 138.78121], site: "https://www.fujiq.jp/en/" },
+    { id: "puroland", name: "三丽鸥彩虹乐园", ja: "サンリオピューロランド", area: "东京 · 多摩", note: "三丽鸥角色和演出，室内也能玩。", point: [35.62455, 139.42939], site: "https://www.puroland.jp/" },
+    { id: "nagashima", name: "长岛乐园", ja: "ナガシマスパーランド", area: "三重 · 名古屋附近", note: "过山车多，也有适合亲子的项目。", point: [35.0297, 136.73001], site: "https://www.nagashima-onsen.co.jp/spaland/index.html" },
+    { id: "ghibli", name: "吉卜力公园", ja: "ジブリパーク", area: "爱知 · 长久手", note: "走进吉卜力作品世界；不是传统过山车乐园。", point: [35.174, 137.09], site: "https://ghibli-park.jp/en/" },
+    { id: "huis", name: "豪斯登堡", ja: "ハウステンボス", area: "长崎 · 佐世保", note: "欧风街景、季节活动和夜间灯光。", point: [33.08594, 129.78988], site: "https://chinese02.huistenbosch.co.jp/?lang=zh-cn" },
+    { id: "disney", name: "东京迪士尼度假区", ja: "東京ディズニーリゾート", area: "千叶 · 舞滨", note: "迪士尼乐园和迪士尼海洋都在这里。", point: [35.6302, 139.8815], site: "https://www.tokyodisneyresort.jp/treasure/parkguide/en/" },
+    { id: "usj", name: "日本环球影城", ja: "ユニバーサル・スタジオ・ジャパン", area: "大阪 · 此花区", note: "电影与角色主题项目，记得先查入园安排。", point: [34.665394, 135.432526], site: "https://www.usj.co.jp/web/en/us/" }
+  ];
+  let themeParksMap = null;
+  const themeParkMarkers = new Map();
+  let selectedThemePark = "fujiq";
+  const OUTLETS = [
+    { id: "sapporo", name: "三井奥特莱斯·札幌北广岛", ja: "三井アウトレットパーク 札幌北広島", area: "北海道 · 札幌周边", note: "室内购物，北海道下雪天也能慢慢逛。", point: [42.97, 141.47], site: "https://mitsui-shopping-park.com/mop/sapporo/cn/" },
+    { id: "sendai", name: "三井奥特莱斯·仙台港", ja: "三井アウトレットパーク 仙台港", area: "宫城 · 仙台", note: "仙台港一带，适合东北行程顺路逛。", point: [38.27, 140.98], site: "https://mitsui-shopping-park.com/mop/sendai/cn/" },
+    { id: "kisarazu", name: "三井奥特莱斯·木更津", ja: "三井アウトレットパーク 木更津", area: "千叶 · 东京湾东侧", note: "东京周边的大型奥莱，适合留半天逛。", point: [35.44, 139.93], site: "https://mitsui-shopping-park.com/mop/kisarazu/cn/" },
+    { id: "shisui", name: "酒酒井 Premium Outlets", ja: "酒々井プレミアム・アウトレット", area: "千叶 · 成田机场附近", note: "往返成田机场时，可以看看是否顺路。", point: [35.73, 140.29], site: "https://www.premiumoutlets.co.jp/chs/shisui/" },
+    { id: "gotemba", name: "御殿场 Premium Outlets", ja: "御殿場プレミアム・アウトレット", area: "静冈 · 富士山附近", note: "去富士山、箱根一带时可以考虑。", point: [35.3, 138.97], site: "https://www.premiumoutlets.co.jp/chs/gotemba/" },
+    { id: "oyabe", name: "三井奥特莱斯·北陆小矢部", ja: "三井アウトレットパーク 北陸小矢部", area: "富山 · 金泽与富山之间", note: "北陆行程想买东西，可从这里找起。", point: [36.68, 136.88], site: "https://mitsui-shopping-park.com/mop/oyabe/cn/" },
+    { id: "nagashima", name: "三井奥特莱斯·爵士之梦长岛", ja: "三井アウトレットパーク ジャズドリーム長島", area: "三重 · 名古屋周边", note: "旁边就是长岛乐园，购物和玩乐可安排一天。", point: [35.03, 136.73], site: "https://mitsui-shopping-park.com/mop/nagashima/cn/" },
+    { id: "rinku", name: "临空 Premium Outlets", ja: "りんくうプレミアム・アウトレット", area: "大阪 · 关西机场附近", note: "靠近关西机场，适合对照航班时间安排。", point: [34.41, 135.29], site: "https://www.premiumoutlets.co.jp/chs/rinku/" },
+    { id: "kurashiki", name: "三井奥特莱斯·仓敷", ja: "三井アウトレットパーク 倉敷", area: "冈山 · 仓敷站旁", note: "车站旁，逛完还能去仓敷美观地区。", point: [34.6, 133.77], site: "https://mitsui-shopping-park.com/mop/kurashiki/cn/" },
+    { id: "tosu", name: "鸟栖 Premium Outlets", ja: "鳥栖プレミアム・アウトレット", area: "佐贺 · 福冈周边", note: "九州行程可看看，从福冈出发也方便。", point: [33.4, 130.52], site: "https://www.premiumoutlets.co.jp/chs/tosu/" },
+    { id: "ashibinaa", name: "冲绳 ASHIBINAA 奥特莱斯", ja: "沖縄アウトレットモール あしびなー", area: "冲绳 · 丰见城", note: "那霸机场南侧，离岛前可考虑顺路逛。", point: [26.16, 127.66], site: "https://www.ashibinaa.com/" }
+  ];
+  let outletsMap = null;
+  const outletMarkers = new Map();
+  let selectedOutlet = "kisarazu";
+  // Representative destinations only. Pins are approximate; navigation opens a name search.
+  const SKI_RESORTS = [
+    { id: "niseko", name: "二世古联合滑雪场", ja: "ニセコユナイテッド", area: "北海道 · 二世古", note: "四个雪区相连，适合想多滑几天的人。", point: [42.86, 140.70], site: "https://www.niseko.ne.jp/en/", beginner: true, rental: true },
+    { id: "furano", name: "富良野滑雪场", ja: "富良野スキー場", area: "北海道 · 富良野", note: "北海道内陆的雪场，官网可查雪道和雪况。", point: [43.34, 142.36], site: "https://www.princehotels.co.jp/ski/furano/winter/", beginner: true, rental: true },
+    { id: "zao", name: "藏王温泉滑雪场", ja: "蔵王温泉スキー場", area: "山形 · 藏王温泉", note: "想把滑雪、树冰和温泉放在一起考虑。", point: [38.17, 140.40], site: "https://zao-spa.or.jp/english/ski/", beginner: true, rental: false },
+    { id: "gala", name: "GALA 汤泽滑雪场", ja: "ガーラ湯沢スキー場", area: "新潟 · 越后汤泽", note: "车站连着雪场，适合比较东京出发的一日行程。", point: [36.95, 138.80], site: "https://gala.co.jp/winter/", beginner: true, rental: true },
+    { id: "happo", name: "白马八方尾根滑雪场", ja: "白馬八方尾根スキー場", area: "长野 · 白马", note: "雪道选择多，先按水平看雪道图。", point: [36.70, 137.84], site: "https://www.happo-one.jp/en/", beginner: false, rental: true },
+    { id: "hachikita", name: "八北高原滑雪场", ja: "ハチ北高原スキー場", area: "兵库 · 香美町", note: "关西方向的选择，设有初次滑雪区域。", point: [35.42, 134.54], site: "https://www.hachi-hachikita.co.jp/hachikita/index.html", beginner: true, rental: true },
+    { id: "biwako", name: "琵琶湖谷滑雪场", ja: "びわ湖バレイスキー場", area: "滋贺 · 琵琶湖西侧", note: "想从京都、大阪方向出发，可先看看这里。", point: [35.22, 135.89], site: "https://www.biwako-valley.com/", beginner: true, rental: true }
+  ];
+  let skiResortsMap = null;
+  const skiResortMarkers = new Map();
+  let selectedSkiResort = "gala";
   const ANALYTICS_HOST = "heitun.pages.dev";
   const shareUtils = window.HeituShareUtils;
   let deferredInstallPrompt = null;
@@ -777,6 +818,173 @@
     });
   }
 
+  function refreshSeasonalBadges() {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).map(part => [part.type, part.value]));
+    const today = `${parts.year}-${parts.month}-${parts.day}`;
+    const twoWeeksLater = new Date(Date.UTC(Number(parts.year), Number(parts.month) - 1, Number(parts.day) + 14)).toISOString().slice(0, 10);
+    const monthDay = `${parts.month}-${parts.day}`;
+    // "季" is only a broad calendar-season hint, not a live bloom or resort-opening claim.
+    const seasons = { sakura: ["03-15", "05-05"], leaves: ["10-15", "12-10"], snow: ["12-20", "03-15"] };
+    document.querySelectorAll("[data-seasonal-badge]").forEach(badge => {
+      const topic = badge.dataset.seasonalBadge;
+      let kind = "";
+      if (topic === "fireworks" || topic === "festivals") {
+        const guide = document.querySelector(`[data-seasonal-guide="${topic}"]`);
+        const dateKey = topic === "fireworks" ? "firework" : "festival";
+        const soon = [...guide.querySelectorAll(`[data-${dateKey}-date]`)].some(event => {
+          const start = event.dataset[`${dateKey}Date`];
+          const end = event.dataset[`${dateKey}End`] || start;
+          return end >= today && start <= twoWeeksLater;
+        });
+        if (soon) kind = "soon";
+      } else if (topic === "snow") {
+        if (monthDay >= "10-15" && monthDay < seasons.snow[0]) kind = "soon";
+        else if (monthDay >= seasons.snow[0] || monthDay <= seasons.snow[1]) kind = "season";
+      } else if (seasons[topic] && monthDay >= seasons[topic][0] && monthDay <= seasons[topic][1]) {
+        kind = "season";
+      }
+      badge.hidden = !kind;
+      if (!kind) return;
+      badge.dataset.badgeKind = kind;
+      badge.textContent = kind === "soon" ? "近" : "季";
+      badge.title = topic === "snow" && kind === "soon"
+        ? "滑雪季将近，可以开始查目的地雪场；不代表现在已开放"
+        : kind === "soon"
+          ? "未来14天内有已列出的活动；请再核对举办方公告"
+          : "常见季节提示，不代表当地已见顷或雪场已开放";
+    });
+  }
+
+  function selectThemePark(id, moveMap = false) {
+    const park = THEME_PARKS.find(item => item.id === id);
+    if (!park) return;
+    selectedThemePark = id;
+    document.querySelectorAll("[data-theme-park]").forEach(button => {
+      const active = button.dataset.themePark === id;
+      button.classList.toggle("selected", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    themeParkMarkers.forEach((marker, markerId) => {
+      marker.getElement()?.classList.toggle("selected", markerId === id);
+      marker.setZIndexOffset(markerId === id ? 100 : 0);
+    });
+    if (moveMap && themeParksMap) themeParksMap.flyTo(park.point, 9, { duration: .55 });
+    const google = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(park.ja)}`;
+    const apple = `https://maps.apple.com/?q=${encodeURIComponent(park.ja)}`;
+    document.querySelector("#themeParksDetail").innerHTML = `<div class="theme-parks-detail-top"><div><small>${escapeHtml(park.area)}</small><h2>${escapeHtml(park.name)}</h2></div><button class="theme-parks-transfer" type="button" data-direct-contact data-tool-id="theme-park-transfer-help">问黑豚安排接送 <span aria-hidden="true">›</span></button></div><p>${escapeHtml(park.note)}</p><div class="theme-parks-actions"><a href="${escapeHtml(google)}" target="_blank" rel="noopener">Google 地图 ↗</a><a href="${escapeHtml(apple)}" target="_blank" rel="noopener">Apple 地图 ↗</a><a href="${escapeHtml(park.site)}" target="_blank" rel="noopener">乐园官网 ↗</a></div>`;
+  }
+
+  function ensureThemeParks() {
+    const list = document.querySelector("#themeParksList");
+    if (!list.childElementCount) {
+      list.innerHTML = THEME_PARKS.map((park, index) => `<button type="button" data-theme-park="${park.id}" aria-pressed="false"><span class="theme-parks-number">${String(index + 1).padStart(2, "0")}</span><span><strong>${escapeHtml(park.name)}</strong><small>${escapeHtml(park.area)} · ${escapeHtml(park.note)}</small></span><b aria-hidden="true">›</b></button>`).join("");
+    }
+    if (!themeParksMap && window.L) {
+      themeParksMap = L.map("themeParksMap", { zoomControl: true, scrollWheelZoom: false, maxBounds: [[24, 121], [47, 154]] });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 18 }).addTo(themeParksMap);
+      THEME_PARKS.forEach((park, index) => {
+        const marker = L.marker(park.point, { title: park.name, icon: L.divIcon({ className: "theme-parks-pin", html: `<span>${String(index + 1).padStart(2, "0")}</span>`, iconSize: [23, 23] }) })
+          .addTo(themeParksMap).bindTooltip(park.name, { direction: "top" });
+        marker.on("click", () => selectThemePark(park.id, true));
+        themeParkMarkers.set(park.id, marker);
+      });
+      themeParksMap.fitBounds(THEME_PARKS.map(park => park.point), { padding: [24, 24] });
+    } else if (!window.L) {
+      document.querySelector("#themeParksMap").hidden = true;
+      document.querySelector("#themeParksMapFallback").hidden = false;
+    }
+    selectThemePark(selectedThemePark);
+    if (themeParksMap) requestAnimationFrame(() => themeParksMap.invalidateSize());
+  }
+
+  function selectOutlet(id, moveMap = false) {
+    const outlet = OUTLETS.find(item => item.id === id);
+    if (!outlet) return;
+    selectedOutlet = id;
+    document.querySelectorAll("[data-outlet]").forEach(button => {
+      const active = button.dataset.outlet === id;
+      button.classList.toggle("selected", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    outletMarkers.forEach((marker, markerId) => {
+      marker.getElement()?.classList.toggle("selected", markerId === id);
+      marker.setZIndexOffset(markerId === id ? 100 : 0);
+    });
+    if (moveMap && outletsMap) outletsMap.flyTo(outlet.point, 9, { duration: .55 });
+    const google = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(outlet.ja)}`;
+    const apple = `https://maps.apple.com/?q=${encodeURIComponent(outlet.ja)}`;
+    document.querySelector("#outletsDetail").innerHTML = `<div class="theme-parks-detail-top"><div><small>${escapeHtml(outlet.area)}</small><h2>${escapeHtml(outlet.name)}</h2></div><button class="theme-parks-transfer" type="button" data-direct-contact data-tool-id="outlet-transfer-help">问黑豚安排接送 <span aria-hidden="true">›</span></button></div><p>${escapeHtml(outlet.note)}</p><div class="theme-parks-actions"><a href="${escapeHtml(google)}" target="_blank" rel="noopener">Google 地图 ↗</a><a href="${escapeHtml(apple)}" target="_blank" rel="noopener">Apple 地图 ↗</a><a href="${escapeHtml(outlet.site)}" target="_blank" rel="noopener">商场官网 ↗</a></div>`;
+  }
+
+  function ensureOutlets() {
+    const list = document.querySelector("#outletsList");
+    if (!list.childElementCount) {
+      list.innerHTML = OUTLETS.map((outlet, index) => `<button type="button" data-outlet="${outlet.id}" aria-pressed="false"><span class="theme-parks-number">${String(index + 1).padStart(2, "0")}</span><span><strong>${escapeHtml(outlet.name)}</strong><small><span>${escapeHtml(outlet.area)}</span> · <span>${escapeHtml(outlet.note)}</span></small></span><b aria-hidden="true">›</b></button>`).join("");
+    }
+    if (!outletsMap && window.L) {
+      outletsMap = L.map("outletsMap", { zoomControl: true, scrollWheelZoom: false, maxBounds: [[24, 121], [47, 154]] });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 18 }).addTo(outletsMap);
+      OUTLETS.forEach((outlet, index) => {
+        const marker = L.marker(outlet.point, { title: outlet.name, icon: L.divIcon({ className: "theme-parks-pin outlets-pin", html: `<span>${String(index + 1).padStart(2, "0")}</span>`, iconSize: [23, 23] }) })
+          .addTo(outletsMap).bindTooltip(outlet.name, { direction: "top" });
+        marker.on("click", () => selectOutlet(outlet.id, true));
+        outletMarkers.set(outlet.id, marker);
+      });
+      outletsMap.fitBounds(OUTLETS.map(outlet => outlet.point), { padding: [24, 24] });
+    } else if (!window.L) {
+      document.querySelector("#outletsMap").hidden = true;
+      document.querySelector("#outletsMapFallback").hidden = false;
+    }
+    selectOutlet(selectedOutlet);
+    if (outletsMap) requestAnimationFrame(() => outletsMap.invalidateSize());
+  }
+
+  function selectSkiResort(id, moveMap = false) {
+    const resort = SKI_RESORTS.find(item => item.id === id);
+    if (!resort) return;
+    selectedSkiResort = id;
+    document.querySelectorAll("[data-ski-resort]").forEach(button => {
+      const active = button.dataset.skiResort === id;
+      button.classList.toggle("selected", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    skiResortMarkers.forEach((marker, markerId) => {
+      marker.getElement()?.classList.toggle("selected", markerId === id);
+      marker.setZIndexOffset(markerId === id ? 100 : 0);
+    });
+    if (moveMap && skiResortsMap) skiResortsMap.flyTo(resort.point, 9, { duration: .55 });
+    const google = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(resort.ja)}`;
+    const apple = `https://maps.apple.com/?q=${encodeURIComponent(resort.ja)}`;
+    const tags = [resort.beginner && "有初学者区域", resort.rental && "有装备租借"].filter(Boolean);
+    document.querySelector("#skiResortsDetail").innerHTML = `<div class="theme-parks-detail-top"><div><small>${escapeHtml(resort.area)}</small><h2>${escapeHtml(resort.name)}</h2></div><button class="theme-parks-transfer" type="button" data-direct-contact data-tool-id="ski-resort-transfer-help">问黑豚安排接送 <span aria-hidden="true">›</span></button></div><p>${escapeHtml(resort.note)}</p>${tags.length ? `<div class="ski-resort-tags">${tags.map(tag => `<span>${tag}</span>`).join("")}</div>` : ""}<div class="theme-parks-actions"><a href="${escapeHtml(google)}" target="_blank" rel="noopener">Google 地图 ↗</a><a href="${escapeHtml(apple)}" target="_blank" rel="noopener">Apple 地图 ↗</a><a href="${escapeHtml(resort.site)}" target="_blank" rel="noopener">雪场官网 ↗</a></div>`;
+  }
+
+  function ensureSkiResorts() {
+    const list = document.querySelector("#skiResortsList");
+    if (!list.childElementCount) {
+      list.innerHTML = SKI_RESORTS.map((resort, index) => `<button type="button" data-ski-resort="${resort.id}" aria-pressed="false"><span class="theme-parks-number">${String(index + 1).padStart(2, "0")}</span><span><strong>${escapeHtml(resort.name)}</strong><small>${escapeHtml(resort.area)} · ${escapeHtml(resort.note)}</small></span><b aria-hidden="true">›</b></button>`).join("");
+    }
+    if (!skiResortsMap && window.L) {
+      skiResortsMap = L.map("skiResortsMap", { zoomControl: true, scrollWheelZoom: false, maxBounds: [[24, 121], [47, 154]] });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 18 }).addTo(skiResortsMap);
+      SKI_RESORTS.forEach((resort, index) => {
+        const marker = L.marker(resort.point, { title: resort.name, icon: L.divIcon({ className: "theme-parks-pin ski-resort-pin", html: `<span>${String(index + 1).padStart(2, "0")}</span>`, iconSize: [23, 23] }) })
+          .addTo(skiResortsMap).bindTooltip(resort.name, { direction: "top" });
+        marker.on("click", () => selectSkiResort(resort.id, true));
+        skiResortMarkers.set(resort.id, marker);
+      });
+      skiResortsMap.fitBounds(SKI_RESORTS.map(resort => resort.point), { padding: [24, 24] });
+    } else if (!window.L) {
+      document.querySelector("#skiResortsMap").hidden = true;
+      document.querySelector("#skiResortsMapFallback").hidden = false;
+    }
+    selectSkiResort(selectedSkiResort);
+    if (skiResortsMap) requestAnimationFrame(() => {
+      skiResortsMap.invalidateSize();
+      skiResortsMap.fitBounds(SKI_RESORTS.map(resort => resort.point), { padding: [24, 24] });
+    });
+  }
+
   function go(view, remember = true) {
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
@@ -789,8 +997,8 @@
       backButton.textContent = returnToSeasonal ? "‹ 返回日本正当时" : "‹ 返回玩日本";
     }
     const sourcesFromFavorites = view === "sources" && state.previousView === "favorites";
-    const exploreContext = ["favorites", "food", "shopping"].includes(view) || sourcesFromFavorites;
-    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski"].includes(view);
+    const exploreContext = ["favorites", "food", "shopping", "outlets"].includes(view) || sourcesFromFavorites;
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks"].includes(view);
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = view === "contact"
       ? "我就是你日本的人脉！哈哈哈哈哈"
@@ -802,10 +1010,13 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski"].includes(view));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping", "outlets"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks"].includes(view));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
+    if (view === "seasonal") refreshSeasonalBadges();
+    if (view === "theme-parks") ensureThemeParks();
+    if (view === "outlets") ensureOutlets();
     if (view === "shopping" && !streetCitySelection) {
       const initialCity = ["东京", "大阪", "名古屋", "福冈"].includes(state.city) ? state.city : "东京";
       setStreetCity(initialCity);
@@ -2230,11 +2441,30 @@
       go(goButton.dataset.go);
       return;
     }
+    const themeParkButton = event.target.closest("[data-theme-park]");
+    if (themeParkButton) {
+      selectThemePark(themeParkButton.dataset.themePark, true);
+      document.querySelector("#themeParksDetail").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    const outletButton = event.target.closest("[data-outlet]");
+    if (outletButton) {
+      selectOutlet(outletButton.dataset.outlet, true);
+      document.querySelector("#outletsDetail").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     const skiModeButton = event.target.closest("[data-ski-mode]");
     if (skiModeButton) {
       const mode = skiModeButton.dataset.skiMode;
       document.querySelector("[data-ski-paths]").hidden = true;
       document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = panel.dataset.skiPanel !== mode; });
+      if (mode === "ski") ensureSkiResorts();
+      return;
+    }
+    const skiResortButton = event.target.closest("[data-ski-resort]");
+    if (skiResortButton) {
+      selectSkiResort(skiResortButton.dataset.skiResort, true);
+      document.querySelector("#skiResortsDetail").scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     if (event.target.closest("[data-ski-reset]")) {
@@ -2257,11 +2487,6 @@
         amapDescription: "定位搜索 · 日本地点可能较少，可复制日文词重搜",
         note: "未到日本？先点页面顶部「换个地方」。地图结果不保证按距离排序，雪场和玩雪区的开放情况以官网为准。"
       });
-      return;
-    }
-    const skiCopyButton = event.target.closest("[data-ski-copy]");
-    if (skiCopyButton) {
-      copyText(skiCopyButton.dataset.skiCopy, `已复制「${skiCopyButton.dataset.skiCopy}」`);
       return;
     }
     const backButton = event.target.closest("[data-back]");
@@ -2485,6 +2710,7 @@
   if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
   showContactStep("channels", "profile");
   refreshUpdateBadges();
+  refreshSeasonalBadges();
   updateFavoriteCount();
   renderWaybackPlaces();
   renderSources();

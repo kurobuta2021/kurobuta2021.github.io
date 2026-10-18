@@ -1803,13 +1803,20 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
 .ski-panel > h2 { margin: 6px 0 10px; color: #2d4055; font-size: 1.03rem; }
 .ski-change { margin: 0 0 10px; padding: 3px 0; border: 0; background: transparent; color: #54799b; font: inherit; font-size: .69rem; font-weight: 750; cursor: pointer; }
 .ski-map-search { margin: 0 0 14px; padding: 13px; border: 1px solid #bdd7e9; border-radius: 17px; background: linear-gradient(130deg,#eaf6ff,#fffdfa); }
+.ski-resorts { margin-bottom: 15px; }
+.ski-resorts .theme-parks-list-heading { margin-top: 1px; }
+.ski-resorts .theme-parks-map { height: 245px; }
+.ski-resorts-list { margin-top: 10px; }
+.ski-resorts .theme-parks-detail { border-color: #cedee9; background: #f8fcff; }
+.ski-resorts .theme-parks-actions a { background: #e7f1f8; color: #31597a; }
+.ski-resorts .theme-parks-actions a:first-child { background: #355e80; color: #fff; }
+.ski-resort-tags { display: flex; flex-wrap: wrap; gap: 5px; margin: 5px 0 9px; }
+.ski-resort-tags span { padding: 4px 7px; border-radius: 7px; background: #e9f2fa; color: #356384; font-size: .61rem; font-weight: 800; }
 .ski-map-search strong { color: #284b68; font-size: .85rem; }
 .ski-map-search p { margin: 4px 0 10px; color: #647783; font-size: .65rem; line-height: 1.45; }
 .ski-map-actions { display: flex; flex-wrap: wrap; gap: 7px; }
 .ski-map-actions button { min-height: 34px; padding: 7px 10px; border-radius: 10px; font: inherit; font-size: .67rem; font-weight: 800; cursor: pointer; }
 .ski-map-open { border: 1px solid #3c6d96; background: #3c6d96; color: #fff; }
-.ski-map-copy { border: 1px solid #bfd3e2; background: #fff; color: #426989; }
-.ski-map-copy span { font-weight: 700; }
 .ski-map-actions button:focus-visible { outline: 2px solid #587fa4; outline-offset: 2px; }
 .ski-panel-intro { margin: 0 0 11px; color: #60717d; font-size: .7rem; line-height: 1.5; }
 .snow-play-list { display: grid; gap: 8px; }
@@ -1886,6 +1893,73 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
 .play-services .route-coming-card > p { min-height: 0; font-size: .68rem; line-height: 1.48; }
 .play-services .route-coming-card > button { width: auto; min-height: 34px; margin-top: 10px; padding: 7px 13px; border-radius: 10px; font-size: .68rem; box-shadow: none; }
 .play-services > .tun-coming-note { padding: 4px 3px 0; }
+.play-parks-entry { width: 100%; display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 12px; border: 1px solid #e7d9bf; border-radius: 16px; background: linear-gradient(115deg,#fff9e9,#f9efe1); color: var(--ink); text-align: left; cursor: pointer; }
+.play-parks-entry > span:nth-child(2) { min-width: 0; display: grid; gap: 2px; }
+.play-parks-entry strong { font-size: .91rem; line-height: 1.24; }
+.play-parks-entry small { color: #776b5c; font-size: .64rem; line-height: 1.35; }
+.play-parks-entry > b { color: #a88254; font-size: 1.3rem; font-weight: 500; }
+.play-parks-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: #fff; font-size: 1.35rem; }
+.play-parks-entry:focus-visible { outline: 2px solid #9e734d; outline-offset: 2px; }
+.theme-parks-view { padding-bottom: 28px; }
+.theme-parks-heading { display: grid; grid-template-columns: 45px minmax(0,1fr); align-items: center; gap: 10px; margin: 13px 0 11px; padding: 12px; border: 1px solid #e7d9bf; border-radius: 17px; background: linear-gradient(120deg,#fff9e9,#f9efe1); }
+.theme-parks-heading > span { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 12px; background: #fff; font-size: 1.45rem; }
+.theme-parks-heading .eyebrow { margin: 0; color: #9a6d42; font-size: .53rem; }
+.theme-parks-heading h1 { margin: 1px 0 2px; font-size: 1.27rem; line-height: 1.2; }
+.theme-parks-heading p:last-child { margin: 0; color: #746e64; font-size: .67rem; }
+.theme-parks-map-wrap { position: relative; overflow: hidden; border: 1px solid #e5ded2; border-radius: 17px; background: #e8eee8; }
+.theme-parks-map { height: 252px; z-index: 1; }
+.theme-parks-map .leaflet-tile-pane { z-index: 200; }
+.theme-parks-map .leaflet-overlay-pane { z-index: 400; }
+.theme-parks-map .leaflet-marker-pane { z-index: 600; }
+.theme-parks-map .leaflet-tooltip-pane { z-index: 650; }
+.theme-parks-pin { display: grid; place-items: center; border: 2px solid #fff; border-radius: 50%; background: #b75140; color: #fff; box-shadow: 0 2px 7px rgba(57,38,29,.24); font-size: .55rem; font-weight: 900; line-height: 1; }
+.theme-parks-pin.selected { background: #254d70; transform: scale(1.15); }
+.theme-parks-map-fallback { min-height: 130px; display: grid; place-items: center; margin: 0; padding: 16px; color: #716b62; font-size: .73rem; text-align: center; }
+.theme-parks-map .leaflet-control-attribution { font-size: 9px; }
+.theme-parks-detail { margin-top: 10px; padding: 12px; border: 1px solid #e4d9c5; border-radius: 15px; background: #fffdf8; }
+.theme-parks-detail-top { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: start; gap: 8px; }
+.theme-parks-transfer { min-height: 31px; padding: 6px 9px; border: 1px solid #e6c9b4; border-radius: 9px; background: #fff1e5; color: #975237; font: inherit; font-size: .65rem; font-weight: 850; white-space: nowrap; cursor: pointer; }
+.theme-parks-transfer span { margin-left: 2px; font-size: .9rem; line-height: 0; }
+.theme-parks-transfer:focus-visible { outline: 2px solid #975237; outline-offset: 2px; }
+.theme-parks-detail small { color: #9a6744; font-size: .65rem; font-weight: 850; }
+.theme-parks-detail h2 { margin: 2px 0; font-size: .98rem; }
+.theme-parks-detail p { margin: 2px 0 9px; color: #726b63; font-size: .68rem; line-height: 1.4; }
+.theme-parks-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.theme-parks-actions a { padding: 6px 9px; border-radius: 9px; background: #f7eee1; color: #7d543e; font-size: .65rem; font-weight: 850; text-decoration: none; }
+.theme-parks-actions a:first-child { background: #355e80; color: #fff; }
+.theme-parks-actions a:focus-visible { outline: 2px solid #355e80; outline-offset: 2px; }
+.theme-parks-list-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 16px 2px 7px; }
+.theme-parks-list-heading strong { font-size: .85rem; }
+.theme-parks-list-heading small { color: #817a72; font-size: .62rem; text-align: right; }
+.theme-parks-list { display: grid; gap: 6px; }
+.theme-parks-list button { width: 100%; display: grid; grid-template-columns: 29px minmax(0,1fr) auto; align-items: center; gap: 8px; min-height: 55px; padding: 8px 10px; border: 1px solid #e7e0d7; border-radius: 12px; background: #fffdfa; color: var(--ink); text-align: left; cursor: pointer; }
+.theme-parks-list button.selected { border-color: #c99b75; background: #fff5e8; }
+.theme-parks-list button:focus-visible { outline: 2px solid #9e734d; outline-offset: 2px; }
+.theme-parks-number { color: #ad7654; font-size: .69rem; font-weight: 850; }
+.theme-parks-list button > span:nth-child(2) { min-width: 0; display: grid; gap: 1px; }
+.theme-parks-list strong { font-size: .75rem; }
+.theme-parks-list small { overflow: hidden; color: #77716b; font-size: .63rem; text-overflow: ellipsis; white-space: nowrap; }
+.theme-parks-list b { color: #a8886b; font-size: 1rem; }
+.theme-parks-note { margin: 10px 2px 0; color: #817a72; font-size: .62rem; line-height: 1.5; }
+.tun-outlets-entry { width: 100%; display: grid; grid-template-columns: 48px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 13px; border: 1px solid #d9d4c3; border-radius: 16px; background: linear-gradient(110deg,#f5f8f0,#e7f0e8); color: var(--ink); text-align: left; cursor: pointer; }
+.tun-outlets-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 13px; background: linear-gradient(145deg,#df6b54,#b84b3d); color: #fff; box-shadow: 0 3px 8px rgba(142,65,49,.22); }
+.tun-outlets-icon svg { width: 34px; height: 34px; display: block; }
+.tun-outlets-entry > span:nth-child(2) { min-width: 0; display: grid; gap: 3px; }
+.tun-outlets-entry strong { font-size: .9rem; line-height: 1.2; }
+.tun-outlets-entry small { color: #617268; font-size: .64rem; line-height: 1.35; }
+.tun-outlets-entry > b { color: #56806a; font-size: 1.2rem; font-weight: 500; }
+.tun-outlets-entry:focus-visible { outline: 2px solid #56806a; outline-offset: 2px; }
+.outlets-view { padding-bottom: 28px; }
+.outlets-heading { border-color: #d6e2d3; background: linear-gradient(120deg,#f4f9ee,#e7f2e8); }
+.outlets-heading .eyebrow { color: #4f8064; }
+.outlets-pin { background: #467b63; }
+.outlets-pin.selected { background: #a4533a; }
+.outlets-more { margin-top: 15px; padding: 12px; border: 1px solid #dae5d8; border-radius: 14px; background: #f8fbf7; }
+.outlets-more strong { font-size: .8rem; }
+.outlets-more p { margin: 4px 0 9px; color: #607269; font-size: .67rem; line-height: 1.45; }
+.outlets-more > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.outlets-more a { padding: 7px 9px; border: 1px solid #cbdccc; border-radius: 9px; background: #fff; color: #3b6c53; font-size: .64rem; font-weight: 800; text-decoration: none; }
+.outlets-more a:focus-visible { outline: 2px solid #3b6c53; outline-offset: 2px; }
 .selfdrive-view { padding-bottom: 26px; }
 .selfdrive-heading { display: grid; grid-template-columns: 48px minmax(0,1fr); align-items: center; gap: 11px; margin: 14px 0 12px; padding: 13px 14px; border: 1px solid #d9dfcb; border-radius: 18px; background: linear-gradient(125deg,#f7f9ed,#edf3e5); }
 .selfdrive-heading > span { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 13px; background: #fff; font-size: 1.6rem; }
@@ -1935,12 +2009,16 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
 .seasonal-heading p:last-child { margin: 0; color: #725f69; font-size: .86rem; line-height: 1.5; }
 .seasonal-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
 .seasonal-choice { min-height: 146px; display: flex; flex-direction: column; align-items: flex-start; padding: 17px; border: 1px solid rgba(113,76,79,.12); border-radius: 22px; color: #312c33; text-decoration: none; box-shadow: 0 5px 16px rgba(77,58,57,.05); }
-.seasonal-choice { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+.seasonal-choice { position: relative; width: 100%; font: inherit; text-align: left; cursor: pointer; }
 .seasonal-choice:focus-visible { outline: 3px solid #ad6986; outline-offset: 2px; }
 .seasonal-choice > span { font-size: 1.65rem; line-height: 1; }
 .seasonal-choice strong { margin-top: 9px; font-size: 1.05rem; line-height: 1.1; }
 .seasonal-choice small { margin-top: 5px; color: #685d64; font-size: .7rem; line-height: 1.35; }
 .seasonal-choice b { margin-top: auto; padding-top: 10px; color: #8b4e70; font-size: .68rem; }
+.seasonal-choice > .seasonal-choice-badge { position: absolute; top: 11px; right: 11px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 9px; background: #ad5947; color: #fff; box-shadow: 0 2px 6px rgba(96,49,42,.16); font-size: .72rem; font-weight: 800; line-height: 1; }
+.seasonal-choice > .seasonal-choice-badge[hidden] { display: none; }
+.seasonal-choice > .seasonal-choice-badge[data-badge-kind="season"] { background: #9b6b35; }
+html[lang="en"] .seasonal-choice > .seasonal-choice-badge { width: auto; min-width: 25px; padding: 0 5px; font-size: .56rem; }
 .seasonal-choice-sakura { background: linear-gradient(145deg,#fff9f8,#ffe4ea); }
 .seasonal-choice-leaves { background: linear-gradient(145deg,#fff9ee,#f9dfc4); }
 .seasonal-choice-fireworks { background: linear-gradient(145deg,#f1f3ff,#dae3f8); }
@@ -2018,6 +2096,7 @@ html[lang="en"] .spread-action small { font-size: .48rem; white-space: normal; }
   .seasonal-grid { gap: 8px; }
   .seasonal-choice { position: relative; min-height: 108px; padding: 10px 11px 26px; border-radius: 17px; }
   .seasonal-choice > span { font-size: 1.28rem; }
+  .seasonal-choice > .seasonal-choice-badge { top: 9px; right: 9px; width: 22px; height: 22px; border-radius: 8px; font-size: .65rem; }
   .seasonal-choice strong { margin-top: 5px; font-size: .91rem; }
   .seasonal-choice small { margin-top: 3px; font-size: .63rem; }
   .seasonal-choice b { position: absolute; right: 11px; bottom: 9px; margin: 0; padding: 0; font-size: .62rem; }
