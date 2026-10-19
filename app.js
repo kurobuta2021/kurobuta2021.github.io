@@ -738,17 +738,25 @@
   function showMapChoice(query, label, options = {}) {
     const area = options.ignoreArea ? null : state.searchArea;
     const toiletRanks = label === "附近厕所";
+    const onsenManualSearch = label === "泡个温泉";
+    const luggageSearch = label === "附近行李寄存";
+    const purposeSearch = toiletRanks || luggageSearch;
     document.querySelectorAll("#mapChoiceDialog .map-choice-rank").forEach(badge => { badge.hidden = !toiletRanks; });
     const community = options.community === true ? {
       url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
       name: "トイレマップ｜日本全国厕所地图",
-      description: "还能忍一忍，我选个环境。覆盖日本全国 · 可定位当前位置 · 需要当地网络才能打开哦！"
+      description: "专门找厕所 · 可定位当前位置"
     } : options.community;
-    document.querySelector("#mapChoiceDialog .dialog-heading .eyebrow").textContent = label === "泡个温泉" ? "FIND YOUR ONSEN" : "CHOOSE YOUR MAP";
-    document.querySelector("#mapChoiceTitle").textContent = community || label === "泡个温泉" ? `${label}，怎么找？` : `${label}，用哪个地图？`;
+    const mapChoiceDialog = document.querySelector("#mapChoiceDialog");
+    mapChoiceDialog.classList.toggle("onsen-mode", onsenManualSearch);
+    mapChoiceDialog.classList.toggle("purpose-mode", purposeSearch);
+    mapChoiceDialog.classList.toggle("toilet-mode", toiletRanks);
+    mapChoiceDialog.classList.toggle("luggage-mode", luggageSearch);
+    document.querySelector("#mapChoiceDialog .dialog-heading .eyebrow").textContent = onsenManualSearch ? "FIND YOUR ONSEN" : purposeSearch ? "FIND NEARBY" : "CHOOSE YOUR MAP";
+    document.querySelector("#mapChoiceTitle").textContent = community || onsenManualSearch ? `${label}，怎么找？` : `${label}，用哪个地图？`;
     const mapChoiceIntro = document.querySelector("#mapChoiceIntro");
-    mapChoiceIntro.hidden = label === "泡个温泉" && !options.intro;
+    mapChoiceIntro.hidden = onsenManualSearch && !options.intro;
     mapChoiceIntro.textContent = options.intro || (community
       ? "先用日本全国厕所地图定位附近点位，也可以直接用常用地图搜索。"
       : "已经选好服务了，现在选择你手机里方便使用的地图。");
@@ -774,9 +782,6 @@
         <span>${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.description)}</small>
       </a>
     `).join("");
-    document.querySelector(".map-choice-grid").insertBefore(extraList, label === "泡个温泉"
-      ? document.querySelector("#mapChoiceGoogle")
-      : document.querySelector(".map-choice-amap-group"));
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceGoogle strong").textContent = options.googleName || "Google 地图";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
@@ -793,16 +798,48 @@
     amapCopyLabel.dataset.originalLabel = amapCopyLabel.textContent;
     document.querySelector(".map-choice-amap-tip").textContent = options.amapTip || "若高德跳到中国或没搜到附近：先把地图移到日本，再粘贴上面的日文词搜索。";
     document.querySelector("#mapChoiceAmapKeyword").textContent = options.amapManualQuery || query;
-    const onsenManualSearch = label === "泡个温泉";
     document.querySelector("#mapChoiceOnsenHelp").hidden = !onsenManualSearch;
+    document.querySelectorAll(".map-choice-onsen-section").forEach(section => { section.hidden = !onsenManualSearch; });
     document.querySelector("#mapChoiceAmapCopyHint").hidden = !onsenManualSearch;
     document.querySelector("#mapChoiceOnsenPrivateCopy").hidden = !onsenManualSearch;
     const appleLink = document.querySelector("#mapChoiceApple");
     appleLink.href = mapSearchUrl("apple", query, null, area);
+    const grid = document.querySelector(".map-choice-grid");
+    const googleLink = document.querySelector("#mapChoiceGoogle");
+    const communityLinkInGrid = document.querySelector("#mapChoiceCommunity");
+    const amapGroup = document.querySelector(".map-choice-amap-group");
+    const onsenHelp = document.querySelector("#mapChoiceOnsenHelp");
+    const dayTitle = document.querySelector("#mapChoiceOnsenDayTitle");
+    const privateTitle = document.querySelector("#mapChoiceOnsenPrivateTitle");
+    const otherTitle = document.querySelector("#mapChoiceOnsenOtherTitle");
+    const purposePrimary = document.querySelector("#mapChoicePrimaryTitle");
+    const purposeSecondary = document.querySelector("#mapChoiceSecondaryTitle");
+    const purposeOther = document.querySelector("#mapChoiceOtherTitle");
+    [purposePrimary, purposeSecondary, purposeOther].forEach(section => { section.hidden = !purposeSearch; });
     if (onsenManualSearch) {
-      document.querySelector(".map-choice-grid").append(appleLink);
+      grid.append(dayTitle, googleLink, appleLink, privateTitle, onsenHelp, extraList, otherTitle, amapGroup, communityLinkInGrid, purposePrimary, purposeSecondary, purposeOther);
+    } else if (toiletRanks) {
+      purposePrimary.querySelector("span").textContent = "📍";
+      purposePrimary.querySelector("strong").textContent = "先找附近厕所";
+      purposePrimary.querySelector("small").textContent = "Google 和 Apple 地图，点开看路线";
+      purposeSecondary.querySelector("span").textContent = "🚻";
+      purposeSecondary.querySelector("strong").textContent = "想用专门的厕所地图？";
+      purposeSecondary.querySelector("small").textContent = "再看日本全国厕所地图";
+      purposeOther.querySelector("strong").textContent = "其他找法";
+      purposeOther.querySelector("small").textContent = "高德地图和复制日文词备用";
+      grid.append(purposePrimary, googleLink, appleLink, purposeSecondary, communityLinkInGrid, purposeOther, amapGroup, extraList, dayTitle, privateTitle, onsenHelp, otherTitle);
+    } else if (luggageSearch) {
+      purposePrimary.querySelector("span").textContent = "🧳";
+      purposePrimary.querySelector("strong").textContent = "先查附近寄存点";
+      purposePrimary.querySelector("small").textContent = "找投币柜或人工寄存，先看位置";
+      purposeSecondary.querySelector("span").textContent = "予";
+      purposeSecondary.querySelector("strong").textContent = "担心没位置？";
+      purposeSecondary.querySelector("small").textContent = "看看能否提前预约寄存";
+      purposeOther.querySelector("strong").textContent = "立刻地图搜索附近寄存点";
+      purposeOther.querySelector("small").textContent = "Google、Apple，或高德备用";
+      grid.append(purposePrimary, communityLinkInGrid, purposeSecondary, extraList, purposeOther, googleLink, appleLink, amapGroup, dayTitle, privateTitle, onsenHelp, otherTitle);
     } else {
-      document.querySelector(".map-choice-grid").insertBefore(appleLink, communityLink);
+      grid.append(googleLink, extraList, amapGroup, appleLink, communityLinkInGrid, dayTitle, privateTitle, onsenHelp, otherTitle, purposePrimary, purposeSecondary, purposeOther);
     }
     els.mapChoiceDialog.showModal();
   }
@@ -2254,13 +2291,13 @@
     if (toiletButton) {
       showMapChoice("公衆トイレ", "附近厕所", {
         community: true,
-        intro: "完全憋不住就直接用 Google 或 Apple 地图；还能忍一忍，再用全国厕所地图慢慢选环境。",
+        intro: "赶时间先用常用地图找附近；想多看几个点，再打开专门的厕所地图。",
         amapCurrentLocation: true,
         amapQuery: "トイレ",
         amapManualQuery: "トイレ",
-        googleDescription: "完全憋不住啦！日本地点较完整 · 需要当地网络才能打开哦！",
-        appleDescription: "完全憋不住啦！适合 iPhone",
-        amapDescription: "随缘，我控制得住，慢慢逛过去。中国手机更方便 · 日本厕所数据相对较少",
+        googleDescription: "定位搜附近 · 点开看路线",
+        appleDescription: "iPhone 搜附近 · 点开看路线",
+        amapDescription: "搜附近厕所 · 日本地点可能较少",
         note: "地图点位和开放情况可能变化，请结合距离和现场标识选择。"
       });
       return;
@@ -2269,7 +2306,7 @@
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
       showMapChoice("日帰り温泉", "泡个温泉", {
-        intro: "有纹身，或想两个人一起泡？先找「貸切風呂」。能否接待纹身、是否要预约，出发前看店家说明。",
+        intro: "想当天泡完就走，先找日归温泉；有纹身或想一起泡，再看私汤。",
         googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {
@@ -2294,7 +2331,8 @@
             className: "private-bath"
           }
         ],
-        googleDescription: "日文搜索“日帰り温泉” · 不用住宿，泡完温泉就走 · 定位找附近最方便 · 需要当地网络才能打开哦！",
+        googleDescription: "搜“日帰り温泉” · 定位找附近最方便",
+        appleDescription: "iPhone 找附近日归温泉",
         amapDescription: "搜索“温泉” · 日本地点相对较少",
         note: "是否天然温泉、是否日归可用，以店家说明为准。"
       });
@@ -2308,21 +2346,22 @@
           url: "https://www.coinlocker-navi.com/search/gps/",
           icon: "🧳",
           name: "コインロッカーなび",
-          description: "按当前位置查投币柜和人工寄存 · 日本各地 · 第一推荐"
+          description: "按当前位置查投币柜和人工寄存"
         },
-        intro: "先按定位查附近投币柜和人工寄存；需要提前预约时，可以使用 ecbo cloak。",
+        intro: "先找离你近的寄存点；大件行李或怕没空位，再看看能否预约。",
         extraChoices: [
           {
             url: "https://cloak.ecbo.io/en/locations",
             icon: "予",
             name: "ecbo cloak 预约寄存",
-            description: "咖啡店、便利店等寄存点 · 可查看空位并预约",
+            description: "看寄存点和空位，再决定是否预约",
             className: "reservation"
           }
         ],
-        googleDescription: "日文搜索“コインロッカー” · 定位找附近最方便 · 需要当地网络才能打开哦！",
+        googleDescription: "用日文搜索附近的投币柜",
+        appleDescription: "iPhone 搜附近的投币柜",
         amapQuery: "行李寄存",
-        amapDescription: "搜索“行李寄存” · 日本地点相对较少",
+        amapDescription: "搜行李寄存 · 日本地点可能较少",
         note: "寄存点营业时间、尺寸和空位可能变化；大件行李或想确保有位置时，建议提前预约。"
       });
       return;
