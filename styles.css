@@ -541,11 +541,11 @@ main { min-height: calc(100dvh - 66px); }
 .shopping-experience-card button { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 9px 11px; border: 0; border-radius: 10px; background: #765d91; color: #fff; font: inherit; font-size: .68rem; font-weight: 850; cursor: pointer; }
 .shopping-hub-note { margin: 13px 2px 0; color: var(--muted); font-size: .65rem; line-height: 1.6; }
 .food-hub-view { padding-bottom: 25px; }
-.food-hub-heading { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 13px; margin: 16px 0 22px; padding: 18px; border: 1px solid #e8d1b5; border-radius: 23px; background: linear-gradient(135deg,#fff7e7,#f3e3cd); }
+.food-hub-heading { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 13px; margin: 16px 0 12px; padding: 18px; border: 1px solid #e8d1b5; border-radius: 23px; background: linear-gradient(135deg,#fff7e7,#f3e3cd); }
 .food-hub-heading > span { width: 62px; height: 62px; display: grid; place-items: center; border-radius: 18px; background: rgba(255,255,255,.82); font-size: 1.9rem; }
 .food-hub-heading h1 { margin: 3px 0 4px; font-size: 1.53rem; }
 .food-hub-heading p:last-child { margin: 0; color: #6d6459; font-size: .7rem; line-height: 1.45; }
-.food-wheel-entry { width: 100%; display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; margin: 10px 0 17px; padding: 11px 13px; border: 1px solid #e6c8b4; border-radius: 17px; background: linear-gradient(105deg,#fff3e2,#fff8ef 58%,#fae7e6); color: #533a32; text-align: left; box-shadow: 0 7px 17px rgba(123,72,43,.07); cursor: pointer; }
+.food-wheel-entry { width: 100%; display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; margin: 0 0 14px; padding: 11px 13px; border: 1px solid #e6c8b4; border-radius: 17px; background: linear-gradient(105deg,#fff3e2,#fff8ef 58%,#fae7e6); color: #533a32; text-align: left; box-shadow: 0 7px 17px rgba(123,72,43,.07); cursor: pointer; }
 .food-wheel-entry-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: conic-gradient(#d17a6d 0 45deg,#f1bb73 45deg 90deg,#86b5a4 90deg 135deg,#e5a5a0 135deg 180deg,#d17a6d 180deg 225deg,#f1bb73 225deg 270deg,#86b5a4 270deg 315deg,#e5a5a0 315deg); color: #fff; font-size: 1.25rem; box-shadow: inset 0 0 0 3px #fff8f0; }
 .food-wheel-entry > span:nth-child(2) { min-width: 0; display: grid; gap: 2px; }
 .food-wheel-entry strong { font-size: .83rem; }
@@ -1495,8 +1495,15 @@ a.contact-channel:active { transform: scale(.985); }
   .more-tools { margin-top: 16px; }
   .more-tools-heading { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin: 0 3px 8px; }
   .more-tools-heading h2 { margin: 0; font-size: 1.45rem; line-height: 1; font-weight: 950; letter-spacing: -.05em; }
-  .more-tools-heading span { max-width: 58%; color: #777069; font-size: .59rem; line-height: 1.35; text-align: right; }
+  .more-tools-heading > span { max-width: 58%; color: #777069; font-size: .59rem; line-height: 1.35; text-align: right; }
+  .more-tools-toggle { flex: none; min-height: 30px; display: flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1px solid #d9d2c8; border-radius: 999px; background: #fffaf3; color: #524a43; font-size: .66rem; font-weight: 850; cursor: pointer; }
+  .more-tools-toggle span { color: inherit; font-size: .8rem; line-height: 1; transition: transform .2s ease; }
+  .more-tools-toggle[aria-expanded="true"] span { transform: rotate(180deg); }
+  .more-tools-toggle:focus-visible { outline: 2px solid #755a42; outline-offset: 2px; }
   .more-tools-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; }
+  .more-tools-extra { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 7px; }
+  .more-tools-extra[hidden] { display: none; }
+  .more-tools-extra .mini-tool { grid-column: auto; }
   .mini-tool {
     position: relative;
     min-width: 0;
@@ -1517,9 +1524,13 @@ a.contact-channel:active { transform: scale(.985); }
   }
   .anime-mini { background: linear-gradient(145deg,#e8f7ff,#ccecfb); }
   .japanese-mini { background: linear-gradient(145deg,#f4ecff,#e4d8f7); }
+  .outlets-mini { background: linear-gradient(145deg,#f3f9ed,#dbeedb); }
+  .outlets-mini .mini-tool-icon { background: linear-gradient(145deg,#df6b54,#b84b3d); font-size: 1.45rem; }
   .wayback-mini { background: linear-gradient(140deg,#e5f6f6,#cce9ed); }
   .laundry-mini { background: linear-gradient(145deg,#e9fbf8,#d0f0eb); }
   .fishing-mini { background: linear-gradient(145deg,#e8f7ff,#ccecfb); }
+  .food-mini { background: linear-gradient(145deg,#fff3df,#ffe0bf); }
+  .food-mini .mini-tool-icon { background: linear-gradient(145deg,#f5a35b,#df6f43); font-size: 1.4rem; }
   .parking-mini { background: linear-gradient(145deg,#edf5ff,#d7e8fa); }
   .bus-mini { grid-column: 1 / -1; min-height: 88px; grid-template-columns: 54px minmax(0,1fr); padding: 10px 25px 10px 11px; background: radial-gradient(circle at 92% 12%,rgba(255,255,255,.72),transparent 68px),linear-gradient(135deg,#fff0c8,#ffd6ad); border-color: rgba(181,91,43,.12); }
   .bus-mini .mini-tool-icon { width: 50px; height: 50px; background: linear-gradient(145deg,#f08b4f,#c94b38); font-size: 1.35rem; }

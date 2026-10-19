@@ -190,10 +190,10 @@
     "↗ 分享位置": "↗ Share place", "分享位置": "Share place", "朋友分享了一个位置": "A friend shared a place", "只显示这个分享位置，不会读取或分享对方保存的其他地点。": "Only this shared place is shown. No other saved places are read or shared.", "继续使用其他工具": "Continue to other tools",
     "日文地址暂时获取不到，请按坐标导航": "Japanese address is unavailable. Navigate using the coordinates.", "删除这个记住的地点": "Delete this saved place",
     "豚一下，以后用": "Save it for later", "收藏想去的地点 · 已收藏": "Save places you want to visit · Saved",
-    "更多功能": "More tools", "更多实用地图探索": "Explore more useful maps", "还有更多实用工具，助你轻松玩转日本！": "More practical tools for an easier trip around Japan!",
-    "给日本人看": "Show to a local", "一键显示或复制日文": "Show or copy Japanese", "洗衣房": "Laundromat", "找附近的自助洗衣房": "Find a nearby laundromat", "附近洗衣房": "Nearby laundromats",
+    "更多": "More", "更多功能": "More tools", "更多实用地图探索": "Explore more useful maps", "还有更多实用工具，助你轻松玩转日本！": "More practical tools for an easier trip around Japan!",
+    "给日本人看": "Show to a local", "一键显示或复制日文": "Show or copy Japanese", "看地图找好逛的奥莱": "Find outlet malls on the map", "洗衣房": "Laundromat", "找附近的自助洗衣房": "Find a nearby laundromat", "附近洗衣房": "Nearby laundromats",
     "更多实用地图": "More useful maps", "网友共享情报": "Community-shared info",
-    "渔具店": "Fishing tackle", "找附近的渔具店": "Find a nearby tackle shop",
+    "渔具店": "Fishing tackle", "找附近的渔具店": "Find a nearby tackle shop", "今天吃啥": "What to eat today", "附近美食 · 翻牌子": "Nearby food · Spin to choose",
     "停车场": "Parking", "自驾游 · 找附近收费停车场": "Road trip · Find nearby paid parking", "附近收费停车场": "Nearby paid parking",
     "附近收费停车场，用哪个地图？": "Which map for nearby paid parking?",
     "自驾游找临时收费车位。先在地图查看附近停车场，再选具体地点导航过去。": "Find short-stay paid parking for your road trip. Check nearby lots on a map, then choose one for directions.",
@@ -425,7 +425,7 @@
     "约个当地体验": "Book a local experience", "北海道小樽吹个自己的玻璃杯、札幌冰上钓鱼；大阪做寿司和章鱼小丸子、京都穿和服、东京湾海钓半日。约好时间，可自行前往。": "Blow your own glass in Otaru, try ice fishing near Sapporo, make sushi and takoyaki in Osaka, wear a kimono in Kyoto, or spend half a day sea fishing in Tokyo Bay. Once booked, you can go on your own.", "所在当地城市有哪些体验活动？费用和能不能中文或英文接待，先找黑豚问清楚": "What experiences are available in the city you're visiting? Ask Heitun about prices and whether they can host you in Chinese or English.",
     "东京街头卡丁车": "Tokyo street go-karting", "开着卡丁车逛东京？需要日本认可的国际驾驶许可，或符合条件的地区驾照及日文译本；订前请在官网核对。": "See Tokyo by street go-kart? You need a driving permit recognized in Japan, or an eligible regional license with an official Japanese translation. Check the operator's requirements before booking.", "打开店家中文网站": "Open the operator's Chinese site",
     "吃的先能找，逛的我们接着整理。": "Find food now; shopping guides are coming next.", "美食现在能找店，购物分类接着整理。": "Find food now; shopping guides are coming next.", "下一步一起整理": "Planning next", "附近逛什么": "Where to shop nearby", "服饰、杂货、百货的入口先留好了": "Fashion, variety stores and department stores are next", "‹ 返回逛日本": "‹ Back to Explore Japan", "购物分类的位置先留好，店铺入口还没有上线。": "The shopping section is ready; store links are not live yet.", "接下来一起决定怎么分类": "Let's decide the categories together", "服饰、杂货和百货怎么排，等我们选好再放可用的地图入口。": "We'll add working map links after choosing how to group fashion, variety stores and department stores.", "先用工具箱找附近药妆、便利店和超市": "Use the toolbox for nearby drugstores, convenience stores and supermarkets",
-    "选想吃的，再用常用地图找附近的店。": "Choose a dish, then find a nearby place using your preferred map.", "有家特别想吃的店，怕到了才发现没位？": "Worried the restaurant you want to try may be full?", "预约、改期或日语电话，可以找黑豚提前帮你联系餐厅。": "For bookings, changes or a call in Japanese, ask Heitun to contact the restaurant ahead of time.", "找黑豚问问": "Ask Heitun", "先选一类": "Pick a category", "地图结果不保证有对应菜品，去之前看看菜单和营业时间。": "Map results may not serve the dish. Check the menu and hours before visiting.",
+    "选想吃的，再用常用地图找附近的店。": "Choose a dish, then find a nearby place using your preferred map.", "有家特别想吃的店，怕到了才发现没位？": "Worried the restaurant you want to try may be full?", "预约、改期或日语电话，可以找黑豚提前帮你联系餐厅。": "For bookings, changes or a call in Japanese, ask Heitun to contact the restaurant ahead of time.", "找黑豚问问": "Ask Heitun", "找黑豚推荐预约": "Ask Heitun to recommend or book", "我命由我不由天，再来！": "My choice—spin again!", "先选一类": "Pick a category", "地图结果不保证有对应菜品，去之前看看菜单和营业时间。": "Map results may not serve the dish. Check the menu and hours before visiting.",
     "回转寿司": "Conveyor-belt sushi", "附近门店・连锁品牌": "Nearby branches · Chains", "拉面": "Ramen", "豚骨・味噌・沾面": "Tonkotsu · Miso · Tsukemen", "烧肉": "Yakiniku", "和牛・烤肉自助": "Wagyu · All-you-can-eat", "居酒屋": "Izakaya", "烧鸟・海鲜现烤": "Yakitori · Grilled seafood",
     "牛丼御三家": "Three gyudon chains", "日式牛肉盖饭・快捷实惠": "Japanese beef bowls · Quick & good value", "想吃哪家牛丼？": "Which beef-bowl chain?", "先选品牌，再用常用地图找附近门店。松屋的牛肉盖饭通常叫「牛めし」。": "Pick a chain, then find a nearby branch on your preferred map. Matsuya usually calls its beef bowl 牛めし.", "牛丼 · 先看看附近有什么": "牛丼 · See what's nearby", "吉野家 · 搜索附近门店": "Yoshinoya · Find nearby branches", "食其家 · ": "Sukiya · ", "すき家 · 搜索附近门店": "Sukiya · Find nearby branches", "松屋 · 牛めし与定食": "Matsuya · Beef bowls & set meals", "价格、菜单和营业时间会因门店而异，请以门店信息为准。": "Prices, menus and hours vary by branch; check the store listing.",
     "米饭・定食": "Rice & set meals", "海鲜丼・鳗鱼饭・定食": "Seafood bowl · Eel · Set meals", "日式火锅": "Japanese hot pot", "涮涮锅・寿喜锅": "Shabu-shabu · Sukiyaki", "日式咖喱": "Japanese curry", "咖喱饭・汤咖喱": "Curry rice · Soup curry", "天妇罗": "Tempura", "天丼・天妇罗定食": "Tendon · Set meals", "荞麦面・乌冬": "Soba · Udon", "冷热都能找": "Hot or cold", "炸猪排・炸牛排": "Pork or beef cutlet", "先选肉类，再找店": "Choose the meat first", "甜品・茶": "Sweets & tea", "和果子・抹茶甜品": "Wagashi · Matcha sweets", "各地店铺数量不同；地图搜索可以使用，不代表附近一定有对应店铺。": "Availability varies by area. A working map search does not mean a restaurant is nearby.",
@@ -517,6 +517,7 @@
     let translated = englishMap[core];
     if (!translated) {
       translated = core
+        .replace(/^翻到「(.+)」！附近没有？我命由我不由天，再来！$/, "Landed on “$1”! Nothing nearby? My choice—spin again!")
         .replace(/^已收藏 (\d+)$/, "Saved $1")
         .replace(/^找到 (\d+) 个 · 显示最近 (\d+) 个$/, "Found $1 · Showing nearest $2")
         .replace(/^正在查找周围 ([\d.]+) 公里的厕所…$/, "Searching for toilets within $1 km…")

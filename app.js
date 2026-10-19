@@ -419,10 +419,10 @@
     foodWheelSpin.disabled = true;
     foodWheelTimer = window.setTimeout(() => {
       foodWheelSelected = picked;
-      foodWheelResult.textContent = `翻到「${foodWheelItems[picked].label}」！附近没有？换一家，再来一次。`;
+      foodWheelResult.textContent = `翻到「${foodWheelItems[picked].label}」！附近没有？我命由我不由天，再来！`;
       foodWheelFind.hidden = false;
       foodWheelSpin.disabled = false;
-      foodWheelSpin.textContent = "换一家，再来一次";
+      foodWheelSpin.textContent = "我命由我不由天，再来！";
       foodWheelTimer = null;
     }, duration + 80);
   }
@@ -1921,6 +1921,13 @@
   }
 
   document.addEventListener("click", event => {
+    const moreToolsToggle = event.target.closest("[data-more-tools-toggle]");
+    if (moreToolsToggle) {
+      const extra = document.querySelector("#moreToolsExtra");
+      extra.hidden = !extra.hidden;
+      moreToolsToggle.setAttribute("aria-expanded", String(!extra.hidden));
+      return;
+    }
     markEntryUpdateSeen(event.target.closest("button[data-update-key], button[data-tool-id]"));
     const trackedTool = event.target.closest("[data-tool-id]");
     if (trackedTool) recordOncePerSession("tool_click", trackedTool.dataset.toolId);
