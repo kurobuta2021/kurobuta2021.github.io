@@ -68,6 +68,50 @@
   let themeParksMap = null;
   const themeParkMarkers = new Map();
   let selectedThemePark = "fujiq";
+  // Representative destinations only. Official links and opening conditions can change.
+  const DISCOVERY_PLACES = {
+    aquariums: [
+      { id: "sunshine", city: "东京", name: "阳光水族馆", ja: "サンシャイン水族館", area: "东京 · 池袋", note: "在 Sunshine City 里，适合安排半天。", point: [35.7287, 139.7194], site: "https://sunshinecity.jp/en/aquarium/" },
+      { id: "sumida", city: "东京", name: "墨田水族馆", ja: "すみだ水族館", area: "东京 · 晴空塔城", note: "和晴空塔安排在同一天比较顺路。", point: [35.7102, 139.8108], site: "https://www.sumida-aquarium.com/" },
+      { id: "ueno", city: "东京", name: "上野动物园", ja: "上野動物園", area: "东京 · 上野", note: "上野公园内的动物园，先查开放日。", point: [35.7167, 139.7714], site: "https://www.tokyo-zoo.net/en/ueno/" },
+      { id: "kaiyukan", city: "大阪", name: "大阪海游馆", ja: "海遊館", area: "大阪 · 天保山", note: "靠近大阪港，先到官网查时段和门票。", point: [34.6545, 135.4297], site: "https://www.kaiyukan.com/" },
+      { id: "tennoji-zoo", city: "大阪", name: "天王寺动物园", ja: "天王寺動物園", area: "大阪 · 天王寺", note: "和新世界、天王寺一带可以顺路安排。", point: [34.6518, 135.5094], site: "https://www.tennojizoo.jp/en/" },
+      { id: "kyoto-aqua", city: "京都", name: "京都水族馆", ja: "京都水族館", area: "京都 · 梅小路", note: "靠近京都站，雨天也可先看室内展区。", point: [34.9882, 135.7432], site: "https://www.kyoto-aquarium.com/" },
+      { id: "nagoya-aqua", city: "名古屋", name: "名古屋港水族馆", ja: "名古屋港水族館", area: "爱知 · 名古屋港", note: "名古屋港一带的大型水族馆。", point: [35.0904, 136.8794], site: "https://www.nagoyaaqua.jp/english/" },
+      { id: "higashiyama", city: "名古屋", name: "东山动植物园", ja: "東山動植物園", area: "名古屋 · 东山", note: "动物园与植物园一起逛，留意闭园日。", point: [35.1565, 136.9796], site: "https://www.higashiyama.city.nagoya.jp/english/" },
+      { id: "kobe-suma", city: "神户", name: "神户须磨海洋世界", ja: "神戸須磨シーワールド", area: "神户 · 须磨", note: "可看海洋生物与演出，先核对场次。", point: [34.643, 135.133], site: "https://www.kobesuma-seaworld.jp/en/" },
+      { id: "asahiyama", city: "旭川", name: "旭山动物园", ja: "旭山動物園", area: "北海道 · 旭川", note: "去旭川时可以看看，开放日按季节确认。", point: [43.7687, 142.4794], site: "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/" },
+      { id: "marine-world", city: "福冈", name: "海之中道海洋世界", ja: "マリンワールド海の中道", area: "福冈 · 海之中道", note: "在海之中道一带，先核对交通与表演时间。", point: [33.6655, 130.364], site: "https://marine-world.jp/for-foreigners/en/" },
+      { id: "churaumi", city: "冲绳", name: "冲绳美丽海水族馆", ja: "沖縄美ら海水族館", area: "冲绳 · 本部町", note: "在冲绳本岛北部，先核对交通和开放时间。", point: [26.6944, 127.8779], site: "https://churaumi.okinawa/en/" }
+    ],
+    snowplay: [
+      { id: "takino", city: "北海道", name: "滝野雪世界", ja: "滝野スノーワールド", area: "北海道 · 札幌", note: "有雪圈滑道和雪鞋散步；先查今季开放区域。", point: [42.9168, 141.3888], site: "https://takinopark.com/activity/" },
+      { id: "rusutsu-play", city: "北海道", name: "留寿都儿童玩雪区", ja: "ルスツリゾート サムライキッズパーク", area: "北海道 · 留寿都", note: "雪橇、雪圈等亲子玩雪项目；年龄规则看当季官网。", point: [42.86, 140.88], site: "https://rusutsu.com/kids-park/" },
+      { id: "appi-play", city: "东北", name: "安比高原玩雪区", ja: "安比高原 そりエリア 雪だるまの村", area: "岩手 · 八幡平", note: "雪橇和堆雪人；项目会随积雪条件调整。", point: [39.9944, 140.9642], site: "https://www.appi.co.jp/experience/white-season/" },
+      { id: "gala-play", city: "关东周边", name: "GALA 汤泽玩雪区", ja: "ガーラ湯沢 ゆきあそびパーク", area: "新潟 · 越后汤泽", note: "有专门的雪橇区域；东京出发可先比较交通。", point: [36.95, 138.80], site: "https://gala.co.jp/en/winter/activities/" },
+      { id: "fujiten-play", city: "关东周边", name: "富士天儿童玩雪区", ja: "ふじてん ちびっこ愛ランド", area: "山梨 · 富士山附近", note: "雪橇坡和玩雪区；新雪季是否开放需看公告。", point: [35.442, 138.688], site: "https://www.fujiten.net/en/slopeguide/childrenisland/" },
+      { id: "biwako-play", city: "关西周边", name: "琵琶湖谷雪地乐园", ja: "びわ湖バレイ スノーランド", area: "滋贺 · 琵琶湖西侧", note: "可坐缆车到山顶玩雪橇、堆雪人。", point: [35.22, 135.89], site: "https://www.biwako-valley.com/winter-season-activity/" }
+    ],
+    night: [
+      { id: "shibuya-sky", city: "东京", name: "SHIBUYA SKY", ja: "SHIBUYA SKY", area: "东京 · 涩谷", note: "城市夜景；屋顶区域会受天气影响。", point: [35.6584, 139.7021], site: "https://www.shibuya-scramble-square.com/sky/" },
+      { id: "skytree", city: "东京", name: "东京晴空塔", ja: "東京スカイツリー", area: "东京 · 押上", note: "高空看东京；先查门票和当天能见度。", point: [35.7101, 139.8107], site: "https://www.tokyo-skytree.jp/" },
+      { id: "tokyo-tower", city: "东京", name: "东京塔", ja: "東京タワー", area: "东京 · 芝公园", note: "经典东京夜景，可先看展望台门票。", point: [35.6586, 139.7454], site: "https://ticket.tokyotower.co.jp/en/" },
+      { id: "cosmo-clock", city: "横滨", name: "横滨宇宙时钟摩天轮", ja: "コスモクロック21", area: "横滨 · 港未来", note: "坐摩天轮看港未来灯光，留意晚间运营时间。", point: [35.4553, 139.6368], site: "https://cosmoworld.jp/cosmoclock21/?lang=en" },
+      { id: "umeda-sky", city: "大阪", name: "梅田蓝天大厦·空中庭园", ja: "梅田スカイビル 空中庭園展望台", area: "大阪 · 梅田", note: "适合大阪市区夜间顺路去看看。", point: [34.7052, 135.4896], site: "https://www.skybldg.co.jp/" },
+      { id: "abenoharukas", city: "大阪", name: "阿倍野 HARUKAS 300", ja: "あべのハルカス ハルカス300", area: "大阪 · 天王寺", note: "高层室内观景，也可顺路逛天王寺。", point: [34.6468, 135.5133], site: "https://www.abenoharukas-300.jp/en/observatory/" },
+      { id: "kyoto-tower", city: "京都", name: "京都塔展望室", ja: "ニデック京都タワー", area: "京都 · 京都站前", note: "靠近京都站，先确认当天营业时间。", point: [34.9875, 135.7594], site: "https://www.kyoto-tower.jp/en/enjoy/" },
+      { id: "midland", city: "名古屋", name: "Midland Square 空中回廊", ja: "ミッドランドスクエア スカイプロムナード", area: "名古屋 · 名古屋站", note: "市中心高空观景，天气可能影响户外区域。", point: [35.1709, 136.8849], site: "https://www.midland-square.com/sky-promenade/en/" },
+      { id: "kobe-port", city: "神户", name: "神户港塔", ja: "神戸ポートタワー", area: "神户 · 美利坚公园", note: "可看港口与城市灯光，屋顶开放受天气影响。", point: [34.6827, 135.1867], site: "https://www.kobe-port-tower.com/en/" },
+      { id: "hakodate", city: "函馆", name: "函馆山夜景", ja: "函館山ロープウェイ", area: "北海道 · 函馆", note: "上山前先看缆车运行和天气。", point: [41.7607, 140.7041], site: "https://334.co.jp/en/" },
+      { id: "moiwa", city: "札幌", name: "藻岩山夜景", ja: "札幌もいわ山ロープウェイ", area: "北海道 · 札幌", note: "可从札幌市区出发，先查缆车运行。", point: [43.0223, 141.3211], site: "https://mt-moiwa.jp/" },
+      { id: "fukuoka-tower", city: "福冈", name: "福冈塔", ja: "福岡タワー", area: "福冈 · 百道滨", note: "在海边看城市夜景，留意最后入场时间。", point: [33.5932, 130.3514], site: "https://www.fukuokatower.co.jp/" },
+      { id: "inasayama", city: "长崎", name: "稻佐山展望台", ja: "稲佐山展望台", area: "长崎 · 稻佐山", note: "看港口夜景，上山前确认缆车运行。", point: [32.7522, 129.8466], site: "https://inasayama.info/" }
+    ]
+  };
+  const discoveryMaps = new Map();
+  const discoveryMarkers = new Map();
+  const selectedDiscovery = { aquariums: "sunshine", night: "shibuya-sky", snowplay: "takino" };
+  const selectedDiscoveryCity = { aquariums: "", night: "", snowplay: "" };
   const OUTLETS = [
     { id: "sapporo", name: "三井奥特莱斯·札幌北广岛", ja: "三井アウトレットパーク 札幌北広島", area: "北海道 · 札幌周边", note: "室内购物，北海道下雪天也能慢慢逛。", point: [42.97, 141.47], site: "https://mitsui-shopping-park.com/mop/sapporo/cn/" },
     { id: "sendai", name: "三井奥特莱斯·仙台港", ja: "三井アウトレットパーク 仙台港", area: "宫城 · 仙台", note: "仙台港一带，适合东北行程顺路逛。", point: [38.27, 140.98], site: "https://mitsui-shopping-park.com/mop/sendai/cn/" },
@@ -736,7 +780,7 @@
   }
 
   function showMapChoice(query, label, options = {}) {
-    const area = options.ignoreArea ? null : state.searchArea;
+    const area = options.ignoreArea ? null : options.areaOverride || state.searchArea;
     const toiletRanks = label === "附近厕所";
     const onsenManualSearch = label === "泡个温泉";
     const luggageSearch = label === "附近行李寄存";
@@ -934,6 +978,82 @@
     if (themeParksMap) requestAnimationFrame(() => themeParksMap.invalidateSize());
   }
 
+  function selectDiscovery(kind, id, moveMap = false) {
+    const place = DISCOVERY_PLACES[kind]?.find(item => item.id === id);
+    if (!place) return;
+    selectedDiscovery[kind] = id;
+    document.querySelectorAll(`[data-discovery-kind="${kind}"]`).forEach(button => {
+      const active = button.dataset.discoveryId === id;
+      button.classList.toggle("selected", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    const markers = discoveryMarkers.get(kind);
+    markers?.forEach((marker, markerId) => {
+      marker.getElement()?.classList.toggle("selected", markerId === id);
+      marker.setZIndexOffset(markerId === id ? 100 : 0);
+    });
+    const map = discoveryMaps.get(kind);
+    if (moveMap && map) map.flyTo(place.point, 9, { duration: .55 });
+    const google = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.ja)}`;
+    const apple = `https://maps.apple.com/?q=${encodeURIComponent(place.ja)}`;
+    const detail = document.querySelector(`#${kind}Detail`);
+    const siteLabel = kind === "night" ? "景点官网 ↗" : kind === "snowplay" ? "场地官网 ↗" : "场馆官网 ↗";
+    detail.innerHTML = `<div class="theme-parks-detail-top"><div><small>${escapeHtml(place.area)}</small><h2>${escapeHtml(place.name)}</h2></div><button class="theme-parks-transfer" type="button" data-direct-contact data-tool-id="${kind}-transfer-help">问黑豚安排接送 <span aria-hidden="true">›</span></button></div><p>${escapeHtml(place.note)}</p><div class="theme-parks-actions"><a href="${escapeHtml(google)}" target="_blank" rel="noopener">Google 地图 ↗</a><a href="${escapeHtml(apple)}" target="_blank" rel="noopener">Apple 地图 ↗</a><a href="${escapeHtml(place.site)}" target="_blank" rel="noopener">${siteLabel}</a></div>`;
+  }
+
+  function filterDiscovery(kind, city = "") {
+    selectedDiscoveryCity[kind] = city;
+    const places = DISCOVERY_PLACES[kind].filter(place => !city || place.city === city);
+    const list = document.querySelector(`#${kind}List`);
+    list.innerHTML = places.map(place => {
+      const index = DISCOVERY_PLACES[kind].indexOf(place) + 1;
+      return `<button type="button" data-discovery-kind="${kind}" data-discovery-id="${place.id}" aria-pressed="false"><span class="theme-parks-number">${String(index).padStart(2, "0")}</span><span><strong>${escapeHtml(place.name)}</strong><small><span>${escapeHtml(place.area)}</span> · <span>${escapeHtml(place.note)}</span></small></span><b aria-hidden="true">›</b></button>`;
+    }).join("");
+    const map = discoveryMaps.get(kind);
+    if (map) {
+      const visible = new Set(places.map(place => place.id));
+      discoveryMarkers.get(kind).forEach((marker, id) => {
+        if (visible.has(id) && !map.hasLayer(marker)) marker.addTo(map);
+        if (!visible.has(id) && map.hasLayer(marker)) map.removeLayer(marker);
+      });
+      map.fitBounds(places.map(place => place.point), { padding: [28, 28], maxZoom: 12 });
+    }
+    const selected = places.find(place => place.id === selectedDiscovery[kind]) || places[0];
+    if (selected) selectDiscovery(kind, selected.id);
+  }
+
+  function ensureDiscovery(kind) {
+    const places = DISCOVERY_PLACES[kind];
+    if (!places) return;
+    const citySelect = document.querySelector(`#${kind}City`);
+    if (!citySelect.dataset.ready) {
+      const cities = [...new Set(places.map(place => place.city))];
+      citySelect.insertAdjacentHTML("beforeend", cities.map(city => `<option value="${escapeHtml(city)}">${escapeHtml(city)}</option>`).join(""));
+      citySelect.value = selectedDiscoveryCity[kind];
+      citySelect.addEventListener("change", event => filterDiscovery(kind, event.target.value));
+      citySelect.dataset.ready = "true";
+    }
+    let map = discoveryMaps.get(kind);
+    if (!map && window.L) {
+      map = L.map(`${kind}Map`, { zoomControl: true, scrollWheelZoom: false, maxBounds: [[24, 121], [47, 154]] });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "© OpenStreetMap contributors", maxZoom: 18 }).addTo(map);
+      const markers = new Map();
+      places.forEach((place, index) => {
+        const marker = L.marker(place.point, { title: place.name, icon: L.divIcon({ className: "theme-parks-pin", html: `<span>${String(index + 1).padStart(2, "0")}</span>`, iconSize: [23, 23] }) })
+          .addTo(map).bindTooltip(place.name, { direction: "top" });
+        marker.on("click", () => selectDiscovery(kind, place.id, true));
+        markers.set(place.id, marker);
+      });
+      discoveryMaps.set(kind, map);
+      discoveryMarkers.set(kind, markers);
+    } else if (!window.L) {
+      document.querySelector(`#${kind}Map`).hidden = true;
+      document.querySelector(`#${kind}MapFallback`).hidden = false;
+    }
+    filterDiscovery(kind, selectedDiscoveryCity[kind]);
+    if (map) requestAnimationFrame(() => map.invalidateSize());
+  }
+
   function selectOutlet(id, moveMap = false) {
     const outlet = OUTLETS.find(item => item.id === id);
     if (!outlet) return;
@@ -1033,9 +1153,21 @@
       backButton.dataset.go = returnToSeasonal ? "seasonal" : "play";
       backButton.textContent = returnToSeasonal ? "‹ 返回日本正当时" : "‹ 返回玩日本";
     }
+    const outletsFromRain = view === "outlets" && state.previousView === "rainy-day";
+    if (view === "aquariums") {
+      const backButton = document.querySelector(".view[data-view='aquariums'] .back-button");
+      const fromRain = state.previousView === "rainy-day";
+      backButton.dataset.go = fromRain ? "rainy-day" : "play";
+      backButton.textContent = fromRain ? "‹ 返回雨天备选" : "‹ 返回玩日本";
+    }
+    if (view === "outlets") {
+      const backButton = document.querySelector(".outlets-view .back-button");
+      backButton.dataset.go = outletsFromRain ? "rainy-day" : "favorites";
+      backButton.textContent = outletsFromRain ? "‹ 返回雨天备选" : "‹ 返回逛吃日本";
+    }
     const sourcesFromFavorites = view === "sources" && state.previousView === "favorites";
-    const exploreContext = ["favorites", "food", "shopping", "outlets"].includes(view) || sourcesFromFavorites;
-    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks"].includes(view);
+    const exploreContext = ["favorites", "food", "shopping"].includes(view) || (view === "outlets" && !outletsFromRain) || sourcesFromFavorites;
+    const playContext = ["play", "seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks", "aquariums", "night", "rainy-day"].includes(view) || outletsFromRain;
     document.querySelector(".brand").classList.toggle("brand--explore", exploreContext);
     document.querySelector("#brandTagline").textContent = view === "contact"
       ? "我就是你日本的人脉！哈哈哈哈哈"
@@ -1047,12 +1179,13 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping", "outlets"].includes(view) || sourcesFromFavorites)) || (target === "play" && ["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks"].includes(view));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || (view === "outlets" && !outletsFromRain) || sourcesFromFavorites)) || (target === "play" && (["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks", "aquariums", "night", "rainy-day"].includes(view) || outletsFromRain));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
     if (view === "seasonal") refreshSeasonalBadges();
     if (view === "theme-parks") ensureThemeParks();
+    if (view === "aquariums" || view === "night") ensureDiscovery(view);
     if (view === "outlets") ensureOutlets();
     if (view === "shopping" && !streetCitySelection) {
       const initialCity = ["东京", "大阪", "名古屋", "福冈"].includes(state.city) ? state.city : "东京";
@@ -2490,6 +2623,41 @@
       document.querySelector("#themeParksDetail").scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
+    const discoveryButton = event.target.closest("[data-discovery-id]");
+    if (discoveryButton) {
+      const kind = discoveryButton.dataset.discoveryKind;
+      selectDiscovery(kind, discoveryButton.dataset.discoveryId, true);
+      document.querySelector(`#${kind}Detail`).scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    const discoveryMapButton = event.target.closest("[data-discovery-map]");
+    if (discoveryMapButton) {
+      const searches = {
+        aquarium: { query: "水族館", label: "更多水族馆", kind: "aquariums" },
+        zoo: { query: "動物園", label: "更多动物园", kind: "aquariums" },
+        night: { query: "夜景スポット", label: "更多夜景地", kind: "night" }
+      };
+      const search = searches[discoveryMapButton.dataset.discoveryMap];
+      if (!search) return;
+      const typedCity = discoveryMapButton.closest(".discovery-more")?.querySelector("input[type=search]")?.value.trim();
+      const selectedCity = typedCity || selectedDiscoveryCity[search.kind];
+      const isNightSearch = search.kind === "night";
+      showMapChoice(search.query, search.label, {
+        areaOverride: selectedCity ? { kind: "text", label: selectedCity } : null,
+        intro: isNightSearch
+          ? "用日文词在地图搜索更多夜景地点；第三方地图结果并非本站核实名单。"
+          : "用日文词在地图搜索更多地点；这是第三方地图结果，不是本站核实过的场馆名单。",
+        amapCurrentLocation: true,
+        amapManualQuery: search.query,
+        googleDescription: "按所选城市或当前位置搜索 · 日本地点较完整",
+        appleDescription: "按所选城市或当前位置搜索 · 适合 iPhone",
+        amapDescription: "日本地点可能较少，可复制日文词重搜",
+        note: isNightSearch
+          ? "可在页面输入其他日本城市重新搜索。开放时间、天气影响与是否需要预约，请以景点官网为准。"
+          : "可在页面输入其他日本城市重新搜索。开放时间、票价与是否需要预约，请以场馆官网为准。"
+      });
+      return;
+    }
     const outletButton = event.target.closest("[data-outlet]");
     if (outletButton) {
       selectOutlet(outletButton.dataset.outlet, true);
@@ -2502,6 +2670,7 @@
       document.querySelector("[data-ski-paths]").hidden = true;
       document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = panel.dataset.skiPanel !== mode; });
       if (mode === "ski") ensureSkiResorts();
+      if (mode === "snow") ensureDiscovery("snowplay");
       return;
     }
     const skiResortButton = event.target.closest("[data-ski-resort]");
@@ -2517,9 +2686,16 @@
     }
     const skiMapButton = event.target.closest("[data-ski-map]");
     if (skiMapButton) {
-      const isSnowPlay = skiMapButton.dataset.skiMap === "snow";
-      const query = isSnowPlay ? "雪遊び場" : "スキー場";
-      showMapChoice(query, isSnowPlay ? "附近玩雪地" : "附近滑雪场", {
+      const snowSearches = {
+        snow: ["雪遊び場", "附近玩雪地"],
+        sled: ["そり遊び場", "附近雪橇场"],
+        family: ["キッズパーク 雪遊び", "附近亲子玩雪区"],
+        activity: ["スノーアクティビティ", "附近雪上活动"]
+      };
+      const snowSearch = snowSearches[skiMapButton.dataset.skiMap];
+      const isSnowPlay = Boolean(snowSearch);
+      const [query, title] = snowSearch || ["スキー場", "附近滑雪场"];
+      showMapChoice(query, title, {
         intro: isSnowPlay
           ? "用日文找附近的玩雪区；地图结果可能混有普通公园，请确认场地是否开放玩雪。"
           : "用日文找附近雪场；点开具体雪场后，再核对当天开放和装备租借。",
