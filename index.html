@@ -11,7 +11,7 @@
     <meta name="google-site-verification" content="yg7AnJtviCG_LtiI20t5CPaJop0m4OcRhL7n3JyypXA" />
     <title>黑豚的日本旅行工具箱｜随便O</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261018-maps-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261019-leaves-forecast-link-preview" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -163,11 +163,11 @@
 
           <article class="seasonal-guide" data-seasonal-guide="leaves" hidden>
             <p class="seasonal-guide-kicker">🍁 红叶先在北边，慢慢往南走</p>
-            <p class="seasonal-guide-lead">先用这张图挑地区，再查最新情况。同一座城市，<strong>山上和市区可能差好几周</strong>。</p>
+            <p class="seasonal-guide-lead">先去原站看 2026 年预测；下面这张是多年平均参考。同一座城市，<strong>山上和市区可能差好几周</strong>。</p>
+            <a class="seasonal-guide-link seasonal-guide-link-current" href="https://livejapan.com/zh-cn/article-a0002628/" target="_blank" rel="noopener"><strong>查看 2026 红叶预测图</strong><small>LIVE JAPAN · 简体中文｜到原站看预测及赏枫地点</small><b>↗</b></a>
             <div class="seasonal-reference-map"><img src="./assets/leaves-reference-map.svg" alt="日本地图标出札幌、青森、仙台、金泽、东京、大阪、广岛、福冈和鹿儿岛的常年红叶最佳观赏参考日期" /></div>
             <div class="seasonal-extra-dates seasonal-extra-dates-leaves" aria-label="其他城市常年红叶最佳观赏日期"><span>钏路 <b>10/16</b></span><span>秋田 <b>11/12</b></span><span>新潟 <b>11/15</b></span><span>长野 <b>11/12</b></span><span>名古屋 <b>11/28</b></span><span>高知 <b>12/2</b></span></div>
             <p class="seasonal-source-note">图上是日本观光局列出的多年平均日期，不是 2026 年实时预测；高海拔地区通常更早。</p>
-            <a class="seasonal-guide-link" href="https://livejapan.com/zh-cn/article-a0002628/" target="_blank" rel="noopener"><strong>看中文赏枫地图和地点</strong><small>简体中文｜全国预测时间、地图和赏枫地点</small><b>↗</b></a>
             <a class="seasonal-guide-link seasonal-guide-link-secondary" href="https://www.japan.travel/tw/tw/shindo/nature/kouyou/spots/" target="_blank" rel="noopener"><strong>再看看观光局推荐的红叶景点</strong><small>日本观光局・繁体中文｜按地区挑地点</small><b>↗</b></a>
           </article>
 
@@ -473,11 +473,14 @@
         </section>
 
         <section class="view tun-preview-view" data-view="favorites" aria-labelledby="favoritesTitle">
-          <div class="page-heading tun-preview-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">HEITUN PICKS</p><h1 id="favoritesTitle">逛吃日本</h1><p>附近吃什么、逛什么，选好再打开地图；优先参考评分高、评价多的店。</p><button class="tun-preview-contact" type="button" data-direct-contact data-tool-id="explore-help">找黑豚问问 <span aria-hidden="true">›</span></button></div></div>
+          <div class="page-heading tun-preview-heading"><img class="heading-mascot" src="./heitu-jun.png" alt="" /><div><p class="eyebrow">HEITUN PICKS</p><h1 id="favoritesTitle">逛吃日本</h1><p>附近吃什么、逛什么，选好再打开地图；优先参考评分高、评价多的店。</p><button class="tun-preview-contact" type="button" data-direct-contact data-tool-id="explore-help">找黑豚推荐安排 <span aria-hidden="true">›</span></button></div></div>
 
           <section class="tun-coming" aria-labelledby="tunComingTitle">
             <div class="tun-coming-copy"><span>边用边整理</span><h2 id="tunComingTitle">先找附近好用的</h2><p>吃饭、逛店、动漫场景打卡，从这里挑个入口。</p></div>
-            <button class="tun-outlets-entry" type="button" data-go="outlets" data-tool-id="outlets-map"><span class="tun-outlets-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 19h26l-2.2 20H13.2L11 19Z" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/><path d="M18 20v-5a6 6 0 0 1 12 0v5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><circle cx="21" cy="27" r="1.8" fill="currentColor"/><circle cx="28" cy="33" r="1.8" fill="currentColor"/><path d="m20 34 10-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span><strong>日本各地奥特莱斯</strong><small>看地图挑一家，直接打开导航和官网。</small></span><b aria-hidden="true">›</b></button>
+            <button class="tun-outlets-entry" type="button" data-go="outlets" data-tool-id="outlets-map">
+              <span class="tun-outlets-entry-top"><span class="tun-outlets-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M11 19h26l-2.2 20H13.2L11 19Z" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/><path d="M18 20v-5a6 6 0 0 1 12 0v5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><circle cx="21" cy="27" r="1.8" fill="currentColor"/><circle cx="28" cy="33" r="1.8" fill="currentColor"/><path d="m20 34 10-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span class="tun-outlets-copy"><strong>日本各地奥特莱斯</strong><small>看地图挑一家，直接打开导航和官网。</small></span><b aria-hidden="true">›</b></span>
+              <span class="tun-outlets-strip" aria-hidden="true"><span class="tun-outlets-track"><span>札幌北广岛</span><span>木更津</span><span>酒酒井</span><span>御殿场</span><span>长岛</span><span>大阪临空</span><span>福冈旁·鸟栖</span><span>札幌北广岛</span><span>木更津</span><span>酒酒井</span><span>御殿场</span><span>长岛</span><span>大阪临空</span><span>福冈旁·鸟栖</span></span></span>
+            </button>
             <button class="tun-food-hub" type="button" data-go="food" data-tool-id="food-hub">
               <span class="tun-food-hub-top"><span class="tun-food-hub-icon" aria-hidden="true">🍱</span><span class="tun-food-hub-copy"><small>现在能用 · 打开地图找附近</small><strong>附近吃什么</strong><span>寿司、拉面、烧肉、咖喱、日式火锅……</span></span><b aria-hidden="true">›</b></span>
               <span class="tun-food-hub-strip" aria-hidden="true"><span class="tun-food-hub-track"><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 牛丼御三家</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span><span>🍣 回转寿司</span><span>🍜 拉面</span><span>🥩 烧肉</span><span>🍚 牛丼御三家</span><span>🍲 日式火锅</span><span>🍛 咖喱</span><span>🍡 甜品</span></span></span>
@@ -514,8 +517,9 @@
         </section>
 
         <section class="view play-view" data-view="play" aria-labelledby="playTitle">
-          <section class="play-channels" aria-label="黑豚的频道">
-            <div class="play-channels-heading"><strong>先来黑豚的频道看看</strong><small>点图标打开主页</small></div>
+          <div class="play-intro">
+            <div class="play-intro-top"><img src="./heitu-jun.png" alt="" /><div class="play-heading"><div><p class="eyebrow">PLAY JAPAN</p><h1 id="playTitle">玩日本</h1><p>想看热闹、自己去玩，或找黑豚帮忙安排？</p></div></div></div>
+            <p class="play-intro-channel-title"><strong>先认识黑豚</strong><span>看看我的视频和频道，里面有日本各地美食、温泉、玩法攻略等！</span></p>
             <div class="play-channels-grid">
               <a href="https://xhslink.cn/o/3B7XHnCExTc" target="_blank" rel="noopener" data-contact-channel="xiaohongshu" aria-label="打开黑豚的小红书主页"><span class="social-glyph xhs-glyph" aria-hidden="true">小红书</span><small>小红书</small></a>
               <a href="https://v.douyin.com/WFgDVbd3zCY/" target="_blank" rel="noopener" data-contact-channel="douyin" aria-label="打开黑豚的抖音主页"><span class="social-glyph douyin-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><small>抖音</small></a>
@@ -523,56 +527,56 @@
               <a href="https://www.youtube.com/channel/UCGlXMPErm-R7XjWYTFBuyUw" target="_blank" rel="noopener" data-contact-channel="youtube" aria-label="打开黑豚的YouTube频道"><span class="social-glyph youtube-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="5" y="11" width="38" height="26" rx="9" fill="currentColor"/><path d="m21 18 12 6-12 6V18z" fill="#e62117"/></svg></span><small>YouTube</small></a>
               <a href="https://lite.tiktok.com/t/ZS9Apswbd7cT2-gO2YE/" target="_blank" rel="noopener" data-contact-channel="tiktok" aria-label="打开黑豚的TikTok主页"><span class="social-glyph tiktok-glyph" aria-hidden="true"><svg viewBox="0 0 48 48"><path class="note-shadow" d="M28 8v20.4a8 8 0 1 1-6-7.7V8h6z"/><path class="note-main" d="M30 8c.8 5.6 3.9 8.6 10 9v6c-4.1-.2-7.6-1.5-10-4v10.2a8.2 8.2 0 1 1-6-7.9V8h6z"/></svg></span><small>TikTok</small></a>
             </div>
-          </section>
-          <div class="play-heading"><span class="play-heading-art" aria-hidden="true">🌸 <i>🎆</i></span><div><p class="eyebrow">PLAY JAPAN</p><h1 id="playTitle">玩日本</h1><p>想看一场热闹，住一晚温泉，或者走一条不一样的路？从这里挑个想法。</p></div></div>
+          </div>
           <button class="play-seasonal-entry" type="button" data-go="seasonal" data-tool-id="seasonal">
             <span class="play-seasonal-copy"><small>最新实时情报</small><strong>日本正当时</strong><span>樱花、红叶、花火、当地活动和雪景</span><b>点开看看最近有什么好玩 <span aria-hidden="true">→</span></b></span><span class="play-seasonal-art" aria-hidden="true">🌸<span>🎆</span>🍁</span>
           </button>
-          <div class="play-services-heading"><h2>说说你想怎么玩</h2><p>有喜欢的，点进去看看；需要安排就直接找我聊。</p></div>
-          <div class="play-services">
-            <button class="play-ski-entry" type="button" data-go="ski" data-tool-id="ski-guide"><span class="play-ski-icon" aria-hidden="true">⛷️</span><span class="play-ski-copy"><strong>滑雪、玩雪去哪儿？</strong><small>想认真滑，还是只想玩玩雪？先选一个。</small><b>点开选玩法 <span aria-hidden="true">→</span></b></span></button>
-            <button class="play-parks-entry" type="button" data-go="theme-parks" data-tool-id="theme-parks"><span class="play-parks-icon" aria-hidden="true">🎡</span><span><strong>日本主题游乐场去哪儿？</strong><small>除了迪士尼和环球影城，再看看这些乐园在哪里。</small></span><b aria-hidden="true">›</b></button>
-            <div class="tun-onsen-stay-hub">
-              <button class="tun-onsen-stay-main" type="button" data-go="onsen-stays" data-tool-id="onsen-stays">
-                <span class="tun-onsen-stay-icon" aria-hidden="true">♨</span>
-                <span class="tun-onsen-stay-copy"><strong>住一晚温泉</strong><small>时间紧，空出两天住一晚温泉，海景，山景，雪景，情侣私汤，带家人去日本乡下边走边玩，体验一趟温泉游。</small></span>
-                <span class="tun-onsen-stay-arrow" aria-hidden="true">›</span>
-              </button>
-              <button class="tun-onsen-stay-contact" type="button" data-direct-contact data-tool-id="onsen-stay-direct-contact">找黑豚问问 <span aria-hidden="true">→</span></button>
-            </div>
-            <button class="tun-food-consult-hub" type="button" data-direct-contact data-tool-id="food-consult-hub">
-              <span class="tun-food-consult-icon" aria-hidden="true">🍽️</span>
-              <span class="tun-food-consult-copy"><strong>约一顿想吃的</strong><small>想吃黑豚视频里那家？或者不知道怎么选，想让我推荐一家？怕没位、不会打日语电话，都可以来找我聊聊，看看能不能帮你约。</small><span>找黑豚问问 <span aria-hidden="true">→</span></span></span>
-            </button>
-            <button class="tun-food-consult-hub tun-local-experience-hub" type="button" data-direct-contact data-tool-id="local-experience-hub">
-              <span class="tun-food-consult-icon" aria-hidden="true">🎣</span>
-              <span class="tun-food-consult-copy"><strong>约个当地体验</strong><small>北海道小樽吹个自己的玻璃杯、札幌冰上钓鱼；大阪做寿司和章鱼小丸子、京都穿和服、东京湾海钓半日。约好时间，可自行前往。</small><small>所在当地城市有哪些体验活动？费用和能不能中文或英文接待，先找黑豚问清楚</small><span>找黑豚问问 <span aria-hidden="true">→</span></span>
-            </button>
-            <button class="play-selfdrive-entry" type="button" data-go="selfdrive" data-tool-id="selfdrive-hub"><span class="play-selfdrive-icon" aria-hidden="true">🚙</span><span><strong>租辆车，自己玩</strong><small>想自己开去乡下、海边或雪景地？先看看在日本能不能开，再挑车。</small></span><b aria-hidden="true">›</b></button>
-            <a class="tun-food-consult-hub tun-streetkart-hub" href="https://streetkart.com/mo/" target="_blank" rel="noopener" data-tool-id="tokyo-streetkart">
-              <span class="tun-food-consult-icon" aria-hidden="true">🏎️</span>
-              <span class="tun-food-consult-copy"><strong>东京街头卡丁车</strong><small>开着卡丁车逛东京？需要日本认可的国际驾驶许可，或符合条件的地区驾照及日文译本；订前请在官网核对。</small><span>打开店家中文网站 <span aria-hidden="true">↗</span></span></span>
-            </a>
-            <button class="play-airport-help" type="button" data-direct-contact data-tool-id="play-airport-help"><span aria-hidden="true">✈️</span><span><strong>找黑豚安排机场接送</strong><small>行李多，老人小孩照顾，转车麻烦，还不如包个车接送酒店更省心省钱。</small></span><b aria-hidden="true">›</b></button>
-            <div class="tun-coming-grid">
-              <article class="tun-coming-card route-coming-card">
-                <div class="tun-card-top"><span class="tun-card-icon">🚐</span><em>与当地车队共同设计中</em></div>
-                <h3>黑豚设计小众一日/两日游线路</h3>
-                <p>时间有限！直达精髓！日本各地红叶、雪景、樱花，动漫，牧场，温泉等。挑几条个性化小众一日游线路体验。包车不赶景点，根据人数、时间和兴趣，安排更适合你的玩法。</p>
-                <button type="button" data-direct-contact data-tool-id="custom-route-consult">提前咨询安排路线</button>
-              </article>
-            </div>
-            <button class="tun-food-consult-hub tun-cruise-hub" type="button" data-go="cruise" data-tool-id="cruise-hub">
-              <span class="tun-food-consult-icon" aria-hidden="true">🚢</span>
-              <span class="tun-food-consult-copy"><strong>邮轮靠岸一日游安排</strong><small>邮轮只停一天，想逛港口附近，还是包车去远一点？告诉我靠岸港口、上下船时间和想去的地方，一起安排当天怎么玩。</small><span>点开选个玩法 <span aria-hidden="true">→</span></span></span>
-            </button>
-            <p class="tun-coming-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
+          <div class="play-featured-links" aria-label="滑雪与主题乐园">
+            <button class="play-directory-link" type="button" data-go="ski" data-tool-id="ski-guide"><i aria-hidden="true">⛷️</i><span><strong>滑雪、玩雪去哪儿？</strong><small>找雪场、查雪况</small></span><b aria-hidden="true">›</b></button>
+            <button class="play-directory-link" type="button" data-go="theme-parks" data-tool-id="theme-parks"><i aria-hidden="true">🎡</i><span><strong>日本主题游乐园去哪儿？</strong><small>环球影城 迪士尼 等等</small></span><b aria-hidden="true">›</b></button>
           </div>
+          <section class="play-directory" aria-labelledby="playHelpTitle">
+            <div class="play-directory-heading"><div><h2 id="playHelpTitle">交给黑豚安排</h2></div><small>点开查看详情，再做决定。</small></div>
+            <div class="play-directory-list">
+              <details class="play-directory-item">
+                <summary><i aria-hidden="true">✈️</i><span><strong>机场接送机预订</strong><small>东京、大阪、北海道、福冈等日本多地均可</small></span><b aria-hidden="true">⌄</b></summary>
+                <div class="play-directory-detail"><p>行李多，老人小孩照顾，转车麻烦，还不如包个车接送酒店更省心省钱。</p><button type="button" data-direct-contact data-contact-topic="机场接送" data-tool-id="play-airport-help">找黑豚安排机场接送 →</button></div>
+              </details>
+              <details class="play-directory-item play-directory-featured">
+                <summary><i aria-hidden="true">🚐</i><span><strong>黑豚设计小众一日/两日游线路 <em class="play-featured-badge">夯</em></strong><small>时间紧，挤出一两天，按你的兴趣安排</small></span><b aria-hidden="true">⌄</b></summary>
+                <div class="play-directory-detail"><p>时间不多？直达精髓！挤出一天或两天，去看看红叶、雪景、牧场、乡下温泉这些不一样的日本。其余时间自己玩；包车的这一两天，你想看什么、想体验什么，就按你的兴趣来安排，不用跟着固定路线赶景点，整体预算也更好控制。</p><button type="button" data-direct-contact data-contact-topic="小众一日或两日游线路" data-tool-id="custom-route-consult">提前咨询安排路线 →</button></div>
+              </details>
+              <details class="play-directory-item">
+                <summary><i aria-hidden="true">♨️</i><span><strong>住一晚温泉酒店</strong><small>海景、山景、雪景或情侣私汤</small></span><b aria-hidden="true">⌄</b></summary>
+                <div class="play-directory-detail"><p>时间紧，空出两天住一晚温泉，海景，山景，雪景，情侣私汤，带家人去日本乡下边走边玩，体验一趟温泉游。</p><div class="play-directory-actions"><button type="button" data-go="onsen-stays" data-tool-id="onsen-stays">先看温泉玩法 →</button><button type="button" data-direct-contact data-tool-id="onsen-stay-direct-contact">找黑豚帮我挑温泉酒店 →</button></div></div>
+              </details>
+              <details class="play-directory-item">
+                <summary><i aria-hidden="true">🍽️</i><span><strong>约一顿美食</strong><small>推荐餐厅、订位或帮忙打日语电话</small></span><b aria-hidden="true">⌄</b></summary>
+                <div class="play-directory-detail"><p>想吃黑豚视频里那家？或者不知道怎么选，想让我推荐一家性价比味道好的？怕没位、不会打日语电话，都可以来找我帮你约。</p><button type="button" data-direct-contact data-contact-topic="餐厅推荐或订位" data-tool-id="food-consult-hub">找黑豚帮忙预约 →</button></div>
+              </details>
+              <details class="play-directory-item"><summary><i aria-hidden="true">🚢</i><span><strong>邮轮靠岸，玩上一天</strong><small>港口、时间和路线一起想</small></span><b aria-hidden="true">⌄</b></summary><div class="play-directory-detail"><p>告诉我邮轮停靠的港口城市、上下船时间和想去的地方，一起安排当天怎么玩。</p><button type="button" data-direct-contact data-tool-id="cruise-hub">找黑豚安排一天 →</button></div></details>
+              <details class="play-directory-more">
+                <summary>查看全部服务 <span>还有当地体验</span><b aria-hidden="true">⌄</b></summary>
+                <div class="play-directory-more-content">
+                  <details class="play-directory-item"><summary><i aria-hidden="true">🎣</i><span><strong>约个当地体验</strong><small>手作、和服、钓鱼，约好可自行前往</small></span><b aria-hidden="true">⌄</b></summary><div class="play-directory-detail"><p>北海道小樽吹个自己的玻璃杯、札幌冰上钓鱼；大阪做寿司和章鱼小丸子、京都穿和服、东京湾海钓半日。约好时间，可自行前往。</p><p>所在当地城市有哪些体验活动？费用和能不能中文或英文接待，先找黑豚问清楚</p><button type="button" data-direct-contact data-contact-topic="当地体验" data-tool-id="local-experience-hub">找黑豚问问 →</button></div></details>
+                </div>
+              </details>
+            </div>
+            <p class="play-directory-note">具体能否帮办，需要先了解地点、时间和事情内容。</p>
+          </section>
+          <section class="play-directory play-directory-self" aria-labelledby="playSelfTitle">
+            <div class="play-directory-heading"><div><span>自己看看、自己决定</span><h2 id="playSelfTitle">自己查、自己订</h2></div><small>链接和地图直达</small></div>
+            <div class="play-directory-list">
+              <button class="play-directory-link" type="button" data-go="selfdrive" data-tool-id="selfdrive-hub"><i aria-hidden="true">🚙</i><span><strong>租辆车，自己玩</strong><small>想自己开去乡下、海边或雪景地？先看看在日本能不能开，再挑车。</small></span><b aria-hidden="true">›</b></button>
+              <a class="play-directory-link" href="https://streetkart.com/mo/" target="_blank" rel="noopener" data-tool-id="tokyo-streetkart"><i aria-hidden="true">🏎️</i><span><strong>东京街头卡丁车</strong><small>需符合日本认可的驾驶许可；订前请在店家中文网站核对。</small></span><b aria-hidden="true">↗</b></a>
+            </div>
+            <p class="play-directory-note">开放时间、价格及预约条件，以店家官网为准。</p>
+          </section>
         </section>
 
         <section class="view theme-parks-view" data-view="theme-parks" aria-labelledby="themeParksTitle">
           <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
-          <div class="theme-parks-heading"><span aria-hidden="true">🎡</span><div><p class="eyebrow">THEME PARKS</p><h1 id="themeParksTitle">日本主题游乐场去哪儿？</h1><p>点地图看位置，或直接点下面的名字。</p></div></div>
+          <div class="theme-parks-heading"><span aria-hidden="true">🎡</span><div><p class="eyebrow">THEME PARKS</p><h1 id="themeParksTitle">日本主题游乐园去哪儿？</h1><p>点地图看位置，或直接点下面的名字。</p></div></div>
           <div class="theme-parks-map-wrap">
             <div id="themeParksMap" class="theme-parks-map" aria-label="日本代表性游乐园位置地图"></div>
             <p id="themeParksMapFallback" class="theme-parks-map-fallback" hidden>地图暂时加载不了；下面的乐园名单仍可直接使用。</p>
@@ -589,19 +593,20 @@
           <div class="ski-paths" data-ski-paths>
             <button class="ski-path ski-path-primary" type="button" data-ski-mode="ski"><span aria-hidden="true">⛷️</span><strong>附近滑雪场</strong><small>找附近雪场，再查积雪、天气和现场画面</small><b aria-hidden="true">进去看看 →</b></button>
             <button class="ski-path" type="button" data-ski-mode="snow"><span aria-hidden="true">🛷</span><strong>附近玩雪地</strong><small>不想滑雪也能玩，拍照、雪橇、雪圈都算</small><b aria-hidden="true">进去看看 →</b></button>
-            <div class="ski-transfer-help"><strong>雪场接送</strong><button type="button" data-direct-contact data-tool-id="ski-transfer-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
+            <div class="ski-transfer-help"><strong>雪场接送</strong><button type="button" data-direct-contact data-tool-id="ski-transfer-help">找黑豚安排接送 <span aria-hidden="true">›</span></button></div>
           </div>
           <div class="ski-panel" data-ski-panel="ski" hidden>
             <button class="ski-change" type="button" data-ski-reset>‹ 换一种玩法</button>
             <section class="ski-resorts" aria-label="日本代表性滑雪场地图">
               <div class="theme-parks-list-heading"><strong>先在地图上挑雪场</strong><small>代表地点 · 不用先选城市</small></div>
+              <p class="ski-map-scope-note">地图仅展示日本各地部分热门、代表性滑雪场。想找更多雪场，请点下方「按城市找雪场」。</p>
               <div class="theme-parks-map-wrap"><div id="skiResortsMap" class="theme-parks-map" aria-label="日本代表性滑雪场分布地图"></div><p id="skiResortsMapFallback" class="theme-parks-map-fallback" hidden>地图暂时加载不了；下面的雪场名单仍可使用。</p></div>
               <article id="skiResortsDetail" class="theme-parks-detail" aria-live="polite"></article>
               <div id="skiResortsList" class="theme-parks-list ski-resorts-list"></div>
-              <p class="theme-parks-note">这里只挑了部分代表性雪场，不是全国完整名单。点位供看大致位置；初学者区域、装备租借和开放情况请以雪场官网当季公告为准。</p>
+              <p class="theme-parks-note">地图点位供看大致位置；初学者区域、装备租借和开放情况请以雪场官网当季公告为准。</p>
             </section>
             <div class="ski-map-search"><div><strong>搜一下当前附近的滑雪场？</strong><p>打开地图后核对搜索位置；没到日本可先点顶部「换个地方」。</p></div><div class="ski-map-actions"><button class="ski-map-open" type="button" data-ski-map="ski" data-tool-id="ski-nearby-map">选地图打开 <span aria-hidden="true">↗</span></button></div></div>
-            <div class="ski-live"><strong>找更多雪场，查当天雪况</strong><p>按城市找完整名单，再确认积雪、开放情况和镜头。第三方信息会变化，不是本站实时播报。</p><a href="https://japan-skiguide.com/cn/" target="_blank" rel="noopener" data-tool-id="ski-jsg-directory">按城市找雪场 <small>点击对应的雪场，查看开场日期、雪况、天气、滑道参数、价格等。</small><b aria-hidden="true">↗</b></a><a href="https://www.snowy.fun/zh-Hant-HK/weather/snow/japan" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-weather">全国各个滑雪场 当前积雪厚度及天气查询 <small>SNOWY · 繁体中文</small><b aria-hidden="true">↗</b></a><a href="https://steep.jp/zh-tw/%E5%8D%B3%E6%99%82%E6%94%9D%E5%BD%B1%E6%A9%9F/" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-camera">当前看雪场直播 <small>STEEP · 繁体中文；不保证全天直播</small><b aria-hidden="true">↗</b></a></div>
+            <div class="ski-live"><strong>找更多雪场，查当天雪况</strong><p>按城市找更多雪场，再确认积雪、开放情况和镜头。第三方信息会变化，不是本站实时播报。</p><a href="https://japan-skiguide.com/cn/" target="_blank" rel="noopener" data-tool-id="ski-jsg-directory">按城市找雪场 <small>点击对应的雪场，查看开场日期、雪况、天气、滑道参数、价格等。</small><b aria-hidden="true">↗</b></a><a href="https://www.snowy.fun/zh-Hant-HK/weather/snow/japan" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-weather">全国各个滑雪场 当前积雪厚度及天气查询 <small>SNOWY · 繁体中文</small><b aria-hidden="true">↗</b></a><a href="https://steep.jp/zh-tw/%E5%8D%B3%E6%99%82%E6%94%9D%E5%BD%B1%E6%A9%9F/" target="_blank" rel="noopener" data-tool-id="ski-surfsnow-camera">当前看雪场直播 <small>STEEP · 繁体中文；不保证全天直播</small><b aria-hidden="true">↗</b></a></div>
           </div>
           <div class="ski-panel" data-ski-panel="snow" hidden>
             <button class="ski-change" type="button" data-ski-reset>‹ 换一种玩法</button>
@@ -626,7 +631,7 @@
 
         <section class="view onsen-stays-view cruise-view" data-view="cruise" aria-labelledby="cruiseTitle">
           <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
-          <div class="onsen-stays-heading cruise-heading"><span aria-hidden="true">🚢</span><div><p class="eyebrow">CRUISE DAY</p><h1 id="cruiseTitle">邮轮靠岸一日游安排</h1><p>只停一天，挑个舒服的玩法。</p></div></div>
+          <div class="onsen-stays-heading cruise-heading"><span aria-hidden="true">🚢</span><div><p class="eyebrow">CRUISE DAY</p><h1 id="cruiseTitle">邮轮靠岸，玩上一天</h1><p>只停一天，挑个舒服的玩法。</p></div></div>
           <div class="onsen-stays-choices">
             <fieldset><legend>想怎么玩？</legend><div class="onsen-stays-options cruise-options">
               <label><input type="radio" name="cruisePlan" value="轻松逛港口附近" /><span>轻松逛港口附近</span></label>
@@ -634,13 +639,13 @@
               <label><input type="radio" name="cruisePlan" value="还没想好" /><span>还没想好</span></label>
             </div></fieldset>
           </div>
-          <p class="onsen-stays-hint cruise-hint">先确认实际能下船和必须返船的时间，别只按公布的停靠时间安排。靠岸港口、时间和想去的地方，联系时告诉我；能不能安排，先聊清楚。</p>
+          <p class="onsen-stays-hint cruise-hint">告诉我邮轮停靠的港口城市、上下船时间和想去的地方，一起安排当天怎么玩。上下船时间请以实际能下船和必须返船的时间为准。</p>
           <button class="onsen-stays-contact cruise-contact" type="button" data-cruise-contact data-tool-id="cruise-consult">找黑豚问问 <span aria-hidden="true">→</span></button>
         </section>
 
         <section class="view onsen-stays-view" data-view="onsen-stays" aria-labelledby="onsenStaysTitle">
           <button class="back-button" type="button" data-go="play">‹ 返回玩日本</button>
-          <div class="onsen-stays-heading"><span aria-hidden="true">♨</span><div><p class="eyebrow">STAY AT AN ONSEN</p><h1 id="onsenStaysTitle">住一晚温泉</h1><p>说说你想怎么住，我帮你挑温泉酒店。</p></div></div>
+          <div class="onsen-stays-heading"><span aria-hidden="true">♨</span><div><p class="eyebrow">STAY AT AN ONSEN</p><h1 id="onsenStaysTitle">住一晚温泉酒店</h1><p>说说你想怎么住，我帮你挑温泉酒店。</p></div></div>
           <div class="onsen-stays-choices">
             <fieldset><legend>想看什么景？</legend><div class="onsen-stays-options">
               <label><input type="radio" name="onsenStayView" value="海景" /><span>🌊 海景</span></label>
@@ -660,8 +665,8 @@
               <label><input type="radio" name="onsenStayBath" value="都可以" /><span>都可以</span></label>
             </div></fieldset>
           </div>
-          <p class="onsen-stays-hint">选项只在你手机上，我看不到哦。想好了点「找黑豚问问」，再点「复制需求」发给我；日期、地点、预算可以慢慢聊。</p>
-          <button class="onsen-stays-contact" type="button" data-onsen-contact data-tool-id="onsen-stay-consult">找黑豚问问 <span aria-hidden="true">→</span></button>
+          <p class="onsen-stays-hint">这些选项只帮你理清想法，不会自动发给我。记住你的需求，联系时告诉我日期、地点和预算，我来帮你安排。</p>
+          <button class="onsen-stays-contact" type="button" data-onsen-contact data-tool-id="onsen-stay-consult">找黑豚帮我挑温泉酒店 <span aria-hidden="true">→</span></button>
         </section>
 
         <section class="view shopping-hub-view" data-view="shopping" aria-labelledby="shoppingHubTitle">
@@ -824,7 +829,7 @@
           </section>
 
           <section class="contact-step" data-contact-step="channels" aria-labelledby="contactDirectTitle" hidden>
-            <div class="contact-direct-heading"><h1 id="contactDirectTitle">有事就找我聊聊</h1><p>先看看黑豚的频道，想说什么直接联系我。</p></div>
+            <div class="contact-direct-heading"><h1 id="contactDirectTitle">不只拍日本，也帮你玩日本。</h1><p>视频里看到想去的地方，或者行程有事需要帮忙，直接找我聊。</p></div>
             <section class="contact-socials" aria-label="黑豚的社交平台">
               <div class="contact-socials-heading"><strong>也可以来黑豚的频道看看</strong><small>点图标打开主页</small></div>
               <div class="contact-socials-grid">
@@ -1123,7 +1128,7 @@
         <div class="dialog-heading"><div><p class="eyebrow">CHOOSE YOUR MAP</p><h2 id="mapChoiceTitle">用哪个地图打开？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
         <p id="mapChoiceIntro" class="map-choice-intro">已经选好服务了，现在选择你手机里方便使用的地图。</p>
         <p id="mapChoiceArea" class="map-choice-area" hidden></p>
-        <div id="mapChoiceOnsenHelp" class="map-choice-onsen-help" hidden><span>不会日语，想预约某家店的私汤？</span><button type="button" data-direct-contact data-tool-id="onsen-booking-help">找黑豚问问 <span aria-hidden="true">›</span></button></div>
+        <div id="mapChoiceOnsenHelp" class="map-choice-onsen-help" hidden><span>不会日语，想预约某家店的私汤？</span><button type="button" data-direct-contact data-tool-id="onsen-booking-help">找黑豚帮忙预约 <span aria-hidden="true">›</span></button></div>
         <div class="map-choice-grid">
           <a id="mapChoiceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>日本地点较完整 · 需要当地网络才能打开哦！</small><b class="map-choice-rank" hidden>第一推荐</b></a>
           <a id="mapChoiceApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>适合 iPhone</small><b class="map-choice-rank" hidden>第一推荐</b></a>
@@ -1209,8 +1214,8 @@
     </dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261018-maps-release"></script>
+    <script src="./i18n.js?v=20261019-contact-headline-preview"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261018-maps-release"></script>
+    <script src="./app.js?v=20261019-onsen-copy-preview"></script>
   </body>
 </html>

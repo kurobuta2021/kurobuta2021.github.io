@@ -1935,16 +1935,7 @@
       return;
     }
     if (event.target.closest("[data-onsen-contact]")) {
-      const picks = ["onsenStayView", "onsenStayWith", "onsenStayBath"]
-        .map(name => document.querySelector(`input[name="${name}"]:checked`)?.value)
-        .filter(Boolean);
-      const selected = picks.length ? picks.join(" · ") : "还没选好，想请你推荐";
-      const message = `你好，黑豚君，我想找温泉酒店住一晚。\n想法：${selected}\n日期、地点、预算：我再告诉你。`;
       go("contact");
-      const inquirySummary = document.querySelector("#inquirySummary");
-      document.querySelector("#inquirySummaryText").textContent = `温泉酒店 · ${selected}`;
-      inquirySummary.dataset.copyText = message;
-      inquirySummary.hidden = false;
       return;
     }
     if (event.target.closest("[data-cruise-contact]")) {
@@ -1971,8 +1962,14 @@
       const openDialog = directContact.closest("dialog[open]");
       if (openDialog) openDialog.close();
       go("contact");
-      document.querySelector("#inquirySummary").hidden = true;
       showContactStep("channels", "profile");
+      const inquirySummary = document.querySelector("#inquirySummary");
+      const topic = directContact.dataset.contactTopic;
+      if (topic) {
+        document.querySelector("#inquirySummaryText").textContent = topic;
+        inquirySummary.dataset.copyText = `你好，黑豚！我想咨询${topic}。\n城市或地点：\n日期：\n人数：\n其他想法：`;
+      }
+      inquirySummary.hidden = !topic;
       return;
     }
     const streetCityTab = event.target.closest("[data-street-city-tab]");
