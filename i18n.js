@@ -158,7 +158,7 @@
     "说说你想怎么玩": "How would you like to explore?", "有喜欢的，点进去看看；需要安排就直接找我聊。": "Open what interests you, or message me if you need help arranging it.",
     "需要人帮忙": "Need a hand?", "找黑豚安排": "Ask Heitun to arrange it", "先选你想办的事，再把地点、日期和人数告诉我。": "Choose what you need, then tell me the place, date and group size.",
     "想自己挑选": "Explore on your own", "自己查、自己订": "Browse and book yourself", "查地点和玩法，开放时间与预约条件以店家官网为准。": "Explore places and activities; check opening hours and booking rules on the official site.",
-    "想看热闹、自己去玩，或找黑豚帮忙安排？": "Find events, explore on your own, or ask Heitun for help?", "先认识黑豚": "Meet Heitun", "看看我的视频和频道": "See my videos and channels", "看看我的视频和频道，里面有日本各地美食、温泉、玩法攻略等！": "See my videos and channels for food, hot springs and travel ideas from around Japan!",
+    "想看热闹、自己去玩，或找黑豚帮忙安排？": "Find events, explore on your own, or ask Heitun for help?", "先认识黑豚": "Meet Heitun", "看看我的视频和频道": "See my videos and channels", "看看我的视频和频道，里面有日本各地美食、温泉、玩法攻略等！": "See my videos and channels for food, hot springs and travel ideas from around Japan!", "看看他亲自体验过的日本美食和玩法": "See the food and experiences Heitun has tried firsthand in Japan", "先认识黑豚｜看看他亲自体验过的日本美食和玩法": "Meet Heitun | Food and experiences he has tried firsthand in Japan", "先认识黑豚的博主身份｜看看他亲自体验过的日本美食和玩法": "Meet Heitun as a travel creator | See the food and experiences he has tried firsthand in Japan", "点击对应平台标识，跳转黑豚的频道视频攻略。": "Tap a platform icon to visit Heitun's channel for video travel guides.",
     "有人帮你安排": "Get help planning", "找黑豚": "Ask Heitun", "找黑豚推荐安排": "Ask Heitun for suggestions and help", "交给黑豚安排": "Let Heitun arrange it", "找黑豚安排接送": "Ask Heitun to arrange a transfer", "找雪场、查雪况": "Find resorts and snow reports", "环球影城 迪士尼 等等": "Universal Studios · Disney · more", "点开看详情，再决定要不要联系": "Open for details before contacting me", "点开查看详情，再做决定。": "Open the details, then decide.",
     "机场接送": "Airport transfers", "机场接送机预订": "Book an airport transfer", "东京、大阪、北海道、福冈等日本多地均可": "Tokyo, Osaka, Hokkaido, Fukuoka and other areas across Japan", "行李多、带老人小孩，少折腾转车": "Luggage or family? Skip difficult transfers", "海景、山景、雪景或情侣私汤": "Sea views, mountain views, snow or private baths",
     "夯": "Featured", "时间紧，挤出一两天，按你的兴趣安排": "Short on time? Set aside a day or two, planned around your interests", "时间不多？直达精髓！挤出一天或两天，去看看红叶、雪景、牧场、乡下温泉这些不一样的日本。其余时间自己玩；包车的这一两天，你想看什么、想体验什么，就按你的兴趣来安排，不用跟着固定路线赶景点，整体预算也更好控制。": "Short on time? Set aside one or two days for autumn leaves, snow scenery, farms or countryside hot springs. Explore independently on other days. For your private-car days, tell us what you want to see and do so the route follows your interests instead of a rushed fixed itinerary, while keeping the overall budget easier to manage.",
@@ -536,6 +536,38 @@
     "我想找个和服店租和服": "I want to find a shop where I can rent a kimono", "我想迪士尼早晚接送一下": "I want a ride to Disney in the morning and back in the evening", "我想去北海道玩儿一圈": "I want to travel around Hokkaido", "我想去九州各地泡温泉": "I want to visit hot springs around Kyushu", "我想冲绳帮我约一下浮潜": "I want help booking snorkeling in Okinawa", "我想去一趟蜡笔小新的老家": "I want to visit Crayon Shin-chan's hometown"
   };
 
+  Object.assign(englishMap, {
+    "JT 调查、用户投稿及餐厅资料结合；首次使用可能需要确认已满20岁并允许定位。可能需要当地网络才能打开哦！": "Combines JT research, user submissions and restaurant data. First use may require age and location confirmation. You may need a local network to open it.",
+    "覆盖咖啡店、商场和公共吸烟区等详细信息，直接进入网页版地图。可能需要当地网络才能打开哦！": "Detailed listings for cafés, malls and public smoking areas. Opens the web map directly. You may need a local network to open it.",
+    "打开直接显示地图，支持简体中文、当前位置、作品搜索和路线整理。可能需要当地网络才能打开哦！": "Opens directly to a map with Simplified Chinese, current location, title search and route planning. You may need a local network to open it.",
+    "点位更多，可查看场景、登场话数、路线与打卡；网页功能较多，以日文为主。可能需要当地网络才能打开哦！": "More locations with scene, episode, route and check-in details. Mostly Japanese. You may need a local network to open it.",
+    "地图只展示部分代表地点，不是全国完整名单。输入城市用地图继续搜，或到两家运营方的中文目录按地区找。": "The map shows selected examples, not a complete list. Enter a city to search maps, or browse the two operators' Chinese directories by region.",
+    "要搜索的日本城市": "Japanese city to search",
+    "输入城市，如广岛": "Enter a city, e.g. Hiroshima",
+    "地图搜更多奥莱 ↗": "Find more outlets on a map ↗",
+    "想逛更多古着、买手店？": "Want more vintage and select shops?",
+    "可输入其他日本城市；不输入就用上面选中的城市，交给地图继续找。": "Enter another Japanese city, or leave it blank to search the city selected above.",
+    "输入城市，如京都": "Enter a city, e.g. Kyoto",
+    "搜古着店 ↗": "Find vintage shops ↗",
+    "搜买手店 ↗": "Find select shops ↗",
+    "提前查别的城市的温泉？": "Looking for onsen in another city?",
+    "备用地图": "Backup map",
+    "高德地图和日文词搜索": "Amap and Japanese search terms",
+    "输入日本城市，再选日归温泉或私汤；不输入就参考顶部选的位置。": "Enter a Japanese city, then choose day-use onsen or private baths. Leave it blank to use the location above.",
+    "输入城市，如箱根": "Enter a city, e.g. Hakone",
+    "搜日归温泉 ↗": "Find day-use onsen ↗",
+    "搜私汤 ↗": "Find private baths ↗",
+    "更多奥莱": "More outlets",
+    "更多古着店": "More vintage shops",
+    "更多买手店": "More select shops",
+    "其他城市的日归温泉": "Day-use onsen in other cities",
+    "其他城市的私汤": "Private baths in other cities",
+    "按城市和日文词交给地图搜索；结果不是本站核实的完整名单。": "Search maps by city and Japanese term. Results are not a complete, verified list from this site.",
+    "按城市和日文词搜索 · 需要当地网络": "Search by city and Japanese term · Local network access needed",
+    "按城市和日文词搜索 · 适合 iPhone": "Search by city and Japanese term · Good for iPhone",
+    "地图可能显示周边城市的结果；具体地点、营业时间和预约条件请点进门店或官网核对。": "Maps may include nearby cities. Check each venue or official site for location, hours and booking rules."
+  });
+
   const originals = new WeakMap();
   const originalAttributes = new WeakMap();
   const requestedLanguage = new URLSearchParams(location.search).get("lang");
@@ -554,6 +586,13 @@
     const core = match ? match[2] : text;
     const trailing = match ? match[3] : "";
     let translated = englishMap[core];
+    if (!translated) {
+      const networkHint = core.match(/^(.*?)(?: · |。)(可能需要当地网络(?:才能打开哦！)?|需要当地网络(?:才能打开哦！)?)(。?)$/);
+      if (networkHint) {
+        const base = englishMap[networkHint[1]] || englishMap[`${networkHint[1]}。`];
+        if (base) translated = `${base} · ${networkHint[2].startsWith("可能") ? "May need local network access" : "Local network access needed"}`;
+      }
+    }
     if (!translated) {
       translated = core
         .replace(/^翻到「(.+)」！附近没有？我命由我不由天，再来！$/, "Landed on “$1”! Nothing nearby? My choice—spin again!")

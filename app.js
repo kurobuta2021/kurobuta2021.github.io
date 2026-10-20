@@ -192,14 +192,14 @@
         {
           name: "CLUB JT 吸烟点地图",
           trust: "第一推荐",
-          description: "JT 调查、用户投稿及餐厅资料结合；首次使用可能需要确认已满20岁并允许定位。需要当地网络才能打开哦！",
+          description: "JT 调查、用户投稿及餐厅资料结合；首次使用可能需要确认已满20岁并允许定位。可能需要当地网络才能打开哦！",
           badges: ["排在第一", "直达地图", "日本全国"],
           url: "https://www.clubjt.jp/map"
         },
         {
           name: "吸烟区信息共享地图君",
           trust: "第二推荐",
-          description: "覆盖咖啡店、商场和公共吸烟区等详细信息，直接进入网页版地图。需要当地网络才能打开哦！",
+          description: "覆盖咖啡店、商场和公共吸烟区等详细信息，直接进入网页版地图。可能需要当地网络才能打开哦！",
           badges: ["详细补充", "无需登录", "网友共享"],
           url: "https://share-map.net/smoking-area/"
         }
@@ -222,7 +222,7 @@
         {
           name: "圣地地图 Screen Pilgrimage",
           trust: "第二推荐",
-          description: "打开直接显示地图，支持简体中文、当前位置、作品搜索和路线整理。需要当地网络才能打开哦！",
+          description: "打开直接显示地图，支持简体中文、当前位置、作品搜索和路线整理。可能需要当地网络才能打开哦！",
           badges: ["简体中文", "可定位", "约8970个地点"],
           action: "直接打开原站地图 ↗",
           url: "https://screenpilgrimage.com/"
@@ -230,7 +230,7 @@
         {
           name: "OTABiS 动漫圣地巡礼地图",
           trust: "第三推荐",
-          description: "点位更多，可查看场景、登场话数、路线与打卡；网页功能较多，以日文为主。需要当地网络才能打开哦！",
+          description: "点位更多，可查看场景、登场话数、路线与打卡；网页功能较多，以日文为主。可能需要当地网络才能打开哦！",
           badges: ["约14000个地点", "登场话数", "附近自动推荐"],
           action: "直接打开原站地图 ↗",
           url: "https://app.otabis.jp/"
@@ -839,10 +839,11 @@
       url: "https://www.toilet-map-jp.com/ja/map",
       icon: "🚻",
       name: "トイレマップ｜日本全国厕所地图",
-      description: "专门找厕所 · 可定位当前位置"
+      description: "专门找厕所 · 可定位当前位置 · 可能需要当地网络"
     } : options.community;
     const mapChoiceDialog = document.querySelector("#mapChoiceDialog");
     mapChoiceDialog.classList.toggle("onsen-mode", onsenManualSearch);
+    document.querySelector("#onsenCitySearch").hidden = !onsenManualSearch;
     mapChoiceDialog.classList.toggle("purpose-mode", purposeSearch);
     mapChoiceDialog.classList.toggle("toilet-mode", toiletRanks);
     mapChoiceDialog.classList.toggle("luggage-mode", luggageSearch);
@@ -2232,7 +2233,7 @@
       showMapChoice(streetArea.dataset.streetQuery, streetArea.dataset.streetLabel, {
         ignoreArea: !otherCity,
         intro: otherCity ? "先用地图看看你选的地点附近有哪些店；点进具体门店再确认位置和营业时间。" : "先打开地图到这片街区，再挑感兴趣的店慢慢逛。这里不是固定的一家店。",
-        googleDescription: "按日文地名找街区 · 建议优先",
+        googleDescription: "按日文地名找街区 · 建议优先 · 需要当地网络",
         appleDescription: "按日文地名找街区 · 适合 iPhone",
         amapDescription: "按日文地名找街区 · 若位置不对请手动搜索",
         note: "街区店铺会变化；地图定位和营业时间请以具体门店页面为准。"
@@ -2500,7 +2501,7 @@
         amapCurrentLocation: true,
         amapQuery: "トイレ",
         amapManualQuery: "トイレ",
-        googleDescription: "定位搜附近 · 点开看路线",
+        googleDescription: "定位搜附近 · 点开看路线 · 需要当地网络",
         appleDescription: "iPhone 搜附近 · 点开看路线",
         amapDescription: "搜附近厕所 · 日本地点可能较少",
         note: "地图点位和开放情况可能变化，请结合距离和现场标识选择。"
@@ -2518,25 +2519,25 @@
             url: "https://yuasobi.com/",
             icon: "湯",
             name: "YUASOBI · 日归貸切風呂",
-            description: "专找当天往返的家族风吕／私汤，可按地区或当前位置找。",
+            description: "专找当天往返的家族风吕／私汤，可按地区或当前位置找。可能需要当地网络。",
             className: "private-bath"
           },
           {
             url: "https://onsen.mobi/map/kashikiri",
             icon: "図",
             name: "全国日归温泉地图 · 貸切風呂",
-            description: "在地图上找附近可日归的貸切風呂。",
+            description: "在地图上找附近可日归的貸切風呂。可能需要当地网络。",
             className: "private-bath"
           },
           {
             url: mapSearchUrl("google", "貸切温泉", null, state.searchArea),
             icon: "私",
             name: "Google 地图找附近私汤",
-            description: "搜「貸切温泉」，进店前确认预约与纹身规则。",
+            description: "搜「貸切温泉」，进店前确认预约与纹身规则。需要当地网络。",
             className: "private-bath"
           }
         ],
-        googleDescription: "搜“日帰り温泉” · 定位找附近最方便",
+        googleDescription: "搜“日帰り温泉” · 定位找附近最方便 · 需要当地网络",
         appleDescription: "iPhone 找附近日归温泉",
         amapDescription: "搜索“温泉” · 日本地点相对较少",
         note: "是否天然温泉、是否日归可用，以店家说明为准。"
@@ -2551,7 +2552,7 @@
           url: "https://www.coinlocker-navi.com/search/gps/",
           icon: "🧳",
           name: "コインロッカーなび",
-          description: "按当前位置查投币柜和人工寄存"
+          description: "按当前位置查投币柜和人工寄存 · 可能需要当地网络"
         },
         intro: "先找离你近的寄存点；大件行李或怕没空位，再看看能否预约。",
         extraChoices: [
@@ -2559,11 +2560,11 @@
             url: "https://cloak.ecbo.io/en/locations",
             icon: "予",
             name: "ecbo cloak 预约寄存",
-            description: "看寄存点和空位，再决定是否预约",
+            description: "看寄存点和空位，再决定是否预约 · 可能需要当地网络",
             className: "reservation"
           }
         ],
-        googleDescription: "用日文搜索附近的投币柜",
+        googleDescription: "用日文搜索附近的投币柜 · 需要当地网络",
         appleDescription: "iPhone 搜附近的投币柜",
         amapQuery: "行李寄存",
         amapDescription: "搜行李寄存 · 日本地点可能较少",
@@ -2703,6 +2704,33 @@
       document.querySelector(`#${kind}Detail`).scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
+    const cityMapButton = event.target.closest("[data-city-map]");
+    if (cityMapButton) {
+      const searches = {
+        outlets: ["アウトレットモール", "更多奥莱"],
+        vintage: ["古着屋", "更多古着店"],
+        select: ["セレクトショップ", "更多买手店"],
+        "onsen-day": ["日帰り温泉", "其他城市的日归温泉"],
+        "onsen-private": ["貸切風呂", "其他城市的私汤"]
+      };
+      const search = searches[cityMapButton.dataset.cityMap];
+      if (!search) return;
+      const typedCity = cityMapButton.closest(".city-map-more")?.querySelector("input[type=search]")?.value.trim();
+      const streetCity = ["vintage", "select"].includes(cityMapButton.dataset.cityMap) && streetCitySelection && streetCitySelection !== "其他" ? streetCitySelection : "";
+      const city = typedCity || streetCity;
+      if (els.mapChoiceDialog.open) els.mapChoiceDialog.close();
+      showMapChoice(search[0], search[1], {
+        areaOverride: city ? { kind: "text", label: city } : null,
+        intro: "按城市和日文词交给地图搜索；结果不是本站核实的完整名单。",
+        amapCurrentLocation: true,
+        amapManualQuery: search[0],
+        googleDescription: "按城市和日文词搜索 · 需要当地网络",
+        appleDescription: "按城市和日文词搜索 · 适合 iPhone",
+        amapDescription: "日本地点可能较少，可复制日文词重搜",
+        note: "地图可能显示周边城市的结果；具体地点、营业时间和预约条件请点进门店或官网核对。"
+      });
+      return;
+    }
     const discoveryMapButton = event.target.closest("[data-discovery-map]");
     if (discoveryMapButton) {
       const searches = {
@@ -2722,7 +2750,7 @@
           : "用日文词在地图搜索更多地点；这是第三方地图结果，不是本站核实过的场馆名单。",
         amapCurrentLocation: true,
         amapManualQuery: search.query,
-        googleDescription: "按所选城市或当前位置搜索 · 日本地点较完整",
+        googleDescription: "按所选城市或当前位置搜索 · 日本地点较完整 · 需要当地网络",
         appleDescription: "按所选城市或当前位置搜索 · 适合 iPhone",
         amapDescription: "日本地点可能较少，可复制日文词重搜",
         note: isNightSearch
@@ -2774,7 +2802,7 @@
           : "用日文找附近雪场；点开具体雪场后，再核对当天开放和装备租借。",
         amapCurrentLocation: true,
         amapManualQuery: query,
-        googleDescription: "打开后核对搜索位置 · 日本地点较完整",
+        googleDescription: "打开后核对搜索位置 · 日本地点较完整 · 需要当地网络",
         appleDescription: "打开后核对搜索位置 · 适合 iPhone",
         amapDescription: "定位搜索 · 日本地点可能较少，可复制日文词重搜",
         note: "未到日本？先点页面顶部「换个地方」。地图结果不保证按距离排序，雪场和玩雪区的开放情况以官网为准。"
@@ -2998,6 +3026,9 @@
   });
 
   updateSearchArea(state.searchArea);
+
+  // Keep the creator's channels adjacent to the services they introduce.
+  document.querySelector(".play-directory")?.before(document.querySelector(".play-channel-card"));
 
   if (els.contactForm.elements.city) els.contactForm.elements.city.value = state.city;
   showContactStep("channels", "profile");
