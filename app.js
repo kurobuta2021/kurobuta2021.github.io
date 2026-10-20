@@ -404,8 +404,6 @@
     sourceEmoji: document.querySelector("#sourceEmoji"),
     sourceSummary: document.querySelector("#sourceSummary"),
     sourceNote: document.querySelector("#sourceNote"),
-    sourceHow: document.querySelector("#sourceHow"),
-    sourceAssistant: document.querySelector("#sourceAssistant"),
     sourceJapanese: document.querySelector("#sourceJapanese"),
     destinationInput: document.querySelector("#destinationInput"),
     detectedCard: document.querySelector("#detectedCard"),
@@ -1236,7 +1234,7 @@
     document.querySelectorAll(".view").forEach(section => section.classList.toggle("active", section.dataset.view === view));
     document.querySelectorAll(".bottom-nav [data-go]").forEach(button => {
       const target = button.dataset.go;
-      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || (view === "outlets" && !outletsFromRain) || sourcesFromFavorites)) || (target === "play" && (["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks", "aquariums", "night", "rainy-day"].includes(view) || outletsFromRain));
+      const active = target === view || (target === "home" && (["toilet-map", "navigator", "japanese", "wayback", "arrival", "weather"].includes(view) || (view === "sources" && !sourcesFromFavorites))) || (target === "favorites" && (["food", "shopping"].includes(view) || (view === "outlets" && !outletsFromRain) || sourcesFromFavorites)) || (target === "play" && (["seasonal", "seasonal-detail", "onsen-stays", "cruise", "selfdrive", "ski", "theme-parks", "aquariums", "night", "rainy-day"].includes(view) || outletsFromRain));
       button.classList.toggle("active", active);
     });
     if (view === "favorites") renderFavorites();
@@ -1433,8 +1431,6 @@
     els.sourceNote.hidden = !group.note;
     els.sourceNote.textContent = group.note || "";
     const showHelper = state.category !== "freebus" && state.category !== "anime";
-    els.sourceHow.hidden = !showHelper;
-    els.sourceAssistant.hidden = !showHelper;
     els.sourceJapanese.hidden = !showHelper;
     els.sourceList.innerHTML = state.category === "freebus" ? renderBusRoutes(group.items) : group.items.map(item => `
       <article class="source-card">
@@ -1660,22 +1656,8 @@
   }
 
   async function shareSite() {
-    const url = publicSiteUrl();
-    const data = {
-      title: "随便O｜日本旅行工具箱",
-      text: "来日本把这个存一下｜厕所、吸烟点、行李寄存、路痴救星等旅行小工具",
-      url
-    };
-    if (navigator.share) {
-      try {
-        await navigator.share(data);
-        toast("已打开分享菜单");
-        return;
-      } catch (error) {
-        if (error && error.name === "AbortError") return;
-      }
-    }
-    await copyText(url, "分享链接已复制");
+    const copied = await copyText("https://heitun.pages.dev/", "已复制网址");
+    if (!copied) toast("复制失败，请手动复制网址");
   }
 
   function saveEnvironment() {

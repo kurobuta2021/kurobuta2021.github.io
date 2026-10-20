@@ -11,7 +11,7 @@
     <meta name="google-site-verification" content="yg7AnJtviCG_LtiI20t5CPaJop0m4OcRhL7n3JyypXA" />
     <title>黑豚的日本旅行工具箱｜随便O</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261020-city-channel-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261021-home-tools-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -60,9 +60,9 @@
                 <img class="tool-illustration" src="./assets/card-toilet.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
-              <button class="tool-card smoking-card" type="button" data-category="smoking" data-tool-id="smoking">
-                <span class="tool-copy"><strong>来一根</strong><small>合规吸烟区<br />吸烟有害健康。</small></span>
-                <img class="tool-illustration" src="./assets/card-smoking.png" alt="" decoding="async" />
+              <button class="tool-card food-feature-card" type="button" data-go="food" data-tool-id="food-home-primary">
+                <span class="tool-copy"><strong>附近吃什么</strong><small>附近美食 · 翻牌子</small></span>
+                <span class="food-card-art" aria-hidden="true">🍜</span>
                 <b>›</b>
               </button>
               <button class="tool-card convenience-card" type="button" data-supply-choice data-tool-id="convenience">
@@ -75,9 +75,9 @@
                 <img class="tool-illustration" src="./assets/card-onsen.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
-              <button class="tool-card luggage-card" type="button" data-luggage-choice data-tool-id="luggage">
-                <span class="tool-copy"><strong>行李寄存</strong><small>附近寄存行李<br />轻松逛街</small></span>
-                <img class="tool-illustration" src="./assets/card-luggage.png" alt="" decoding="async" />
+              <button class="tool-card smoking-card" type="button" data-category="smoking" data-tool-id="smoking">
+                <span class="tool-copy"><strong>来一根</strong><small>合规吸烟区<br />吸烟有害健康。</small></span>
+                <img class="tool-illustration" src="./assets/card-smoking.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
               <button class="tool-card arrival-feature-card" type="button" data-go="arrival" data-tool-id="arrival">
@@ -105,15 +105,17 @@
           </button>
 
           <section class="more-tools" aria-labelledby="moreToolsTitle">
-            <div class="more-tools-heading"><h2 id="moreToolsTitle">更多实用地图探索</h2><button class="more-tools-toggle" type="button" data-more-tools-toggle aria-expanded="false" aria-controls="moreToolsExtra">更多 <span aria-hidden="true">⌄</span></button></div>
+            <div class="more-tools-heading"><h2 id="moreToolsTitle">更多实用工具</h2><div class="more-tools-controls"><button class="more-tools-toggle" type="button" id="customizeTools">调整顺序</button><button class="more-tools-toggle" type="button" data-more-tools-toggle aria-expanded="false" aria-controls="moreToolsExtra">更多 <span aria-hidden="true">⌄</span></button></div></div>
             <div class="more-tools-grid">
               <button class="mini-tool anime-mini" type="button" data-category="anime" data-tool-id="anime"><img src="./assets/card-anime.png" alt="" loading="lazy" decoding="async" /><span><strong>动漫原景地</strong><small>找找附近出现过的动画场景</small></span><b>›</b></button>
               <button class="mini-tool outlets-mini" type="button" data-go="outlets" data-tool-id="outlets-map"><i class="mini-tool-icon" aria-hidden="true">🛍</i><span><strong>日本各地奥特莱斯</strong><small>看地图找好逛的奥莱</small></span><b>›</b></button>
               <button class="mini-tool laundry-mini" type="button" data-map-query="コインランドリー" data-map-label="附近洗衣房" data-tool-id="laundry"><img src="./assets/card-laundry.png" alt="" loading="lazy" decoding="async" /><span><strong>洗衣房</strong><small>找附近的自助洗衣房</small></span><b>›</b></button>
               <button class="mini-tool wayback-mini" type="button" data-go="wayback" data-tool-id="wayback"><img src="./assets/card-lost.png" alt="" loading="lazy" decoding="async" /><span><strong>路痴救星</strong><small>记住地点，导航返回</small></span><b>›</b></button>
-              <button class="mini-tool map-mini food-mini" type="button" data-go="food" data-tool-id="food-home-mini"><i class="mini-tool-icon" aria-hidden="true">🍱</i><span><strong>今天吃啥</strong><small>附近美食 · 翻牌子</small></span><b>›</b></button>
-              <button class="mini-tool map-mini parking-mini" type="button" data-parking-choice data-tool-id="parking"><i class="mini-tool-icon">P</i><span><strong>停车场</strong><small>自驾游 · 找附近收费停车场</small></span><b>›</b></button>
+              <a class="mini-tool sea-stations-mini" href="https://seaside-station.com/map/" target="_blank" rel="noopener" data-tool-id="sea-view-stations-home"><i class="mini-tool-icon" aria-hidden="true">🚉</i><span><strong>日本看海的浪漫车站</strong><small>全国海景车站地图 · 日文原站</small></span><b aria-hidden="true">↗</b></a>
+              <button class="mini-tool luggage-mini" type="button" data-luggage-choice data-tool-id="luggage-home-mini"><img src="./assets/card-luggage.png" alt="" loading="lazy" decoding="async" /><span><strong>行李寄存</strong><small>附近寄存行李</small></span><b>›</b></button>
               <div class="more-tools-extra" id="moreToolsExtra" hidden>
+                <button class="mini-tool weather-mini" type="button" data-go="weather" data-tool-id="weather"><i class="mini-tool-icon" aria-hidden="true">☀️</i><span><strong>查日本天气</strong><small>选城市或当前位置 · 看详细预报</small></span><b>›</b></button>
+                <button class="mini-tool map-mini parking-mini" type="button" data-parking-choice data-tool-id="parking"><i class="mini-tool-icon">P</i><span><strong>停车场</strong><small>自驾游 · 找附近收费停车场</small></span><b>›</b></button>
                 <button class="mini-tool japanese-mini" type="button" data-go="japanese" data-tool-id="japanese-help"><img src="./assets/card-japanese-help.png" alt="" loading="lazy" decoding="async" /><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
                 <button class="mini-tool map-mini fishing-mini" type="button" data-fishing-choice data-tool-id="fishing"><i class="mini-tool-icon">竿</i><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
               </div>
@@ -122,7 +124,7 @@
             <p class="more-tools-note">地图地点来自第三方服务，请以现场为准。</p>
           </section>
           <div class="spread-actions" aria-label="保存和分享随便O">
-            <button class="spread-action share-site" type="button" data-share-site><span>↗</span><strong>分享给朋友</strong><small>发给要来日本的朋友</small><b>›</b></button>
+            <button class="spread-action share-site" type="button" data-share-site><span>↗</span><strong>分享给朋友</strong><small>复制网址</small><b>›</b></button>
             <button class="spread-action save-site" type="button" data-save-site><span>★</span><strong>添加到手机桌面</strong><small>以后像 App 一样，一点就打开。</small><b>›</b></button>
           </div>
 
@@ -132,6 +134,15 @@
           </button>
 
           <p class="coverage-note">本站负责中文整理和操作辅助；地点信息与实际服务由跳转后的第三方网站提供。</p>
+        </section>
+
+        <section class="view weather-view" data-view="weather" aria-labelledby="weatherTitle">
+          <button class="back-button" type="button" data-go="home">‹ 返回工具箱</button>
+          <div class="weather-hero"><span aria-hidden="true">🌤️</span><div><p class="eyebrow">JAPAN WEATHER</p><h1 id="weatherTitle">日本天气预报</h1><p>选一座城市，或定位到你现在的位置，直接看天气变化。</p></div></div>
+          <div class="weather-search"><label for="weatherCity">想查哪里？</label><div class="weather-search-row"><select id="weatherCity"><option value="">选城市</option><option value="tokyo">东京</option><option value="osaka">大阪</option><option value="kyoto">京都</option><option value="sapporo">札幌</option><option value="hakodate">函馆</option><option value="nagoya">名古屋</option><option value="yokohama">横滨</option><option value="kobe">神户</option><option value="nara">奈良</option><option value="kanazawa">金泽</option><option value="nagano">长野</option><option value="sendai">仙台</option><option value="hiroshima">广岛</option><option value="fukuoka">福冈</option><option value="nagasaki">长崎</option><option value="naha">冲绳·那霸</option></select><button id="weatherLocate" type="button">📍 当前的位置</button></div><small>点“当前位置”才会请求定位；查询时会向天气服务发送约 1 公里精度的位置。</small></div>
+          <div id="weatherStatus" class="weather-status" role="status" aria-live="polite">选择城市后就能看到未来几天的预报。</div>
+          <div id="weatherResult" class="weather-result" hidden><div class="weather-now"><div><small id="weatherPlace"></small><strong id="weatherTemp"></strong><span id="weatherSummary"></span></div><span id="weatherIcon" aria-hidden="true"></span></div><div class="weather-facts"><span id="weatherFeels"></span><span id="weatherRain"></span><span id="weatherWind"></span><span id="weatherHumidity"></span></div><h2>接下来 24 小时</h2><div id="weatherHourly" class="weather-hourly"></div><h2>未来几天</h2><div id="weatherDaily" class="weather-daily"></div><small id="weatherUpdated" class="weather-updated"></small></div>
+          <p class="weather-source">天气是预报，不是实时实测；山区、海边和雪场可能与市中心不同。数据来自 <a href="https://docs.api.met.no/doc/License.html" target="_blank" rel="noopener">MET Norway（CC BY 4.0）</a>，本站翻译并整理展示。遇到台风、大雨等情况，请再查<a href="https://www.data.jma.go.jp/multi/warn/index.html?lang=cn_zs" target="_blank" rel="noopener">日本气象厅警报</a>。</p>
         </section>
 
         <section class="view seasonal-view" data-view="seasonal" aria-labelledby="seasonalTitle">
@@ -293,11 +304,6 @@
           <div id="sourceSummary" class="source-summary" hidden></div>
           <div id="sourceList" class="source-list"></div>
           <p id="sourceNote" class="source-note" hidden></p>
-          <div id="sourceHow" class="how-card">
-            <span>1</span><p><strong>在第三方服务里找到地点</strong><small>打开定位，点进你感兴趣的地点详情。</small></p>
-            <span>2</span><p><strong>复制地址或分享链接</strong><small>回来交给黑豚君，补上中文导航和收藏。</small></p>
-          </div>
-          <button id="sourceAssistant" class="assistant-cta" type="button" data-go="navigator"><span>🐽</span><span><strong>黑豚君导航助手</strong><small>粘贴地点，打开 Google／高德／Apple</small></span><b>›</b></button>
           <button id="sourceJapanese" class="japanese-shortcut" type="button" data-go="japanese">🇯🇵 直接给日本人看</button>
         </section>
 
@@ -544,8 +550,9 @@
             <button class="play-directory-link" type="button" data-go="theme-parks" data-tool-id="theme-parks"><i aria-hidden="true">🎡</i><span><strong>日本主题游乐园去哪儿？</strong><small>环球影城 迪士尼 等等</small></span><b aria-hidden="true">›</b></button>
             <button class="play-directory-link" type="button" data-go="aquariums" data-tool-id="aquariums-guide"><i aria-hidden="true">🐬</i><span><strong>水族馆、动物园</strong><small>按城市挑，地图找位置</small></span><b aria-hidden="true">›</b></button>
             <button class="play-directory-link" type="button" data-go="night" data-tool-id="night-view-guide"><i aria-hidden="true">🌃</i><span><strong>今晚去看夜景</strong><small>按城市挑观景台和夜景地</small></span><b aria-hidden="true">›</b></button>
+            <a class="play-directory-link sea-stations-link" href="https://seaside-station.com/map/" target="_blank" rel="noopener" data-tool-id="sea-view-stations"><i aria-hidden="true">🚉</i><span><strong>日本看海的浪漫车站</strong><small>全国地图 · 日文原站</small></span><b aria-hidden="true">↗</b></a>
+            <button class="play-directory-link rain-directory-link" type="button" data-go="rainy-day" data-tool-id="rainy-day-guide"><i aria-hidden="true">☔</i><span><strong>下雨了去哪儿？</strong><small>室内备选</small></span><b aria-hidden="true">›</b></button>
           </div>
-          <button class="play-rain-entry" type="button" data-go="rainy-day" data-tool-id="rainy-day-guide"><i aria-hidden="true">☔</i><strong>下雨了去哪儿？</strong><small>室内备选</small><b aria-hidden="true">›</b></button>
           <section class="play-directory" aria-labelledby="playHelpTitle">
             <div class="play-directory-heading"><div><h2 id="playHelpTitle">交给黑豚安排</h2></div><small>点开查看详情，再做决定。</small></div>
             <div class="play-directory-list">
@@ -1284,10 +1291,13 @@
         <button class="dialog-primary" value="default">继续使用其他工具</button>
       </form>
     </dialog>
+    <dialog id="toolsOrderDialog" class="app-dialog tools-order-dialog" aria-labelledby="toolsOrderTitle"><div class="dialog-heading"><div><p class="eyebrow">MY SHORTCUTS</p><h2 id="toolsOrderTitle">调整首页常用工具</h2></div><button id="toolsOrderClose" type="button" aria-label="关闭">×</button></div><p>点“放前面”即可替换首页最后一项；只保存在你这台设备。</p><div id="toolsOrderList" class="tools-order-list"></div><button id="toolsOrderReset" class="tools-order-reset" type="button">恢复默认顺序</button></dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261020-city-channel-release"></script>
+    <script src="./i18n.js?v=20261021-home-tools-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261020-city-channel-release"></script>
+    <script src="./app.js?v=20261021-home-tools-release"></script>
+    <script src="./weather.js?v=20261021-home-tools-release"></script>
+    <script src="./tools-order.js?v=20261021-home-tools-release"></script>
   </body>
 </html>

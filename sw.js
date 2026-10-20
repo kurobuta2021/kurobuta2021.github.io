@@ -1,6 +1,6 @@
-const CACHE_NAME = "heitu-toolbox-v56";
+const CACHE_NAME = "heitu-toolbox-v57";
 const APP_SHELL = [
-  "./", "./index.html", "./styles.css", "./i18n.js", "./share-utils.js", "./app.js",
+  "./", "./index.html", "./styles.css", "./i18n.js", "./share-utils.js", "./app.js", "./weather.js", "./tools-order.js",
   "./heitu-jun.png", "./heitu-contact.png", "./wechat-group-qr.jpg",
   "./line-contact-qr.jpg", "./whatsapp-contact-qr.jpg",
   "./assets/hero-banner.png", "./assets/card-toilet.png", "./assets/card-smoking.png",
@@ -34,6 +34,7 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET" || new URL(event.request.url).origin !== self.location.origin) return;
+  if (new URL(event.request.url).pathname === "/api/weather") return;
   event.respondWith(fetch(event.request).then(response => {
     const copy = response.clone();
     caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));

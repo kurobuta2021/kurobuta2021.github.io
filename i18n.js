@@ -350,9 +350,7 @@
     "这台设备不支持定位，请直接打开官方路线查看上车点。": "Location is unavailable. Open the official route to check boarding stops.", "没有取得位置。请开启浏览器定位权限后重试。": "Location was unavailable. Enable browser location and try again.",
     "⌖ 重新定位附近上车点": "⌖ Refresh nearest stops", "⌖ 再试一次": "⌖ Try again", "去这里 ›": "Go here ›",
     "选择手机里方便使用的地图，确认步行路线后再出发。": "Choose a map app and confirm the walking route before leaving.", "站点可能临时调整，到达后请核对现场站牌和官网信息。": "Stops may change temporarily. Check the sign and official site when you arrive.",
-    "在第三方服务里找到地点": "Find a place in a third-party service", "打开定位，点进你感兴趣的地点详情。": "Enable location and open the place details.",
-    "复制地址或分享链接": "Copy the address or share link", "回来交给黑豚君，补上中文导航和收藏。": "Bring it back to Heitun for navigation and saving.",
-    "黑豚君导航助手": "Heitun navigation helper", "粘贴地点，打开 Google／高德／Apple": "Paste a place and open Google, Amap or Apple",
+    "黑豚君导航助手": "Heitun navigation helper",
     "直接给日本人看": "Show directly to a local", "🇯🇵 直接给日本人看": "🇯🇵 Show to a local",
     "粘贴地点名称、日文地址、坐标或分享链接。": "Paste a place name, Japanese address, coordinates or share link.",
     "目的地": "Destination", "例：渋谷駅前喫煙所\n或粘贴第三方网站分享链接": "Example: 渋谷駅前喫煙所\nor paste a share link",
@@ -418,7 +416,7 @@
     "可以直接安装到手机": "Install it on your phone", "点击下面的“添加到主屏幕”，以后像 App 一样从桌面打开。": "Tap Add to Home Screen below and open it from your home screen like an app.",
     "添加到 Android 主屏幕": "Add to the Android Home Screen", "点浏览器右上角菜单，选择“添加到主屏幕”或“安装应用”。不同浏览器文字可能略有不同。": "Open the browser menu and choose Add to Home Screen or Install app. The wording may vary by browser.",
     "收藏这个网站": "Bookmark this website", "电脑可按 Ctrl+D（Mac 按 ⌘D）加入书签；也可以复制网址发到手机。": "Press Ctrl+D (⌘D on Mac) to bookmark it, or copy the URL to your phone.",
-    "添加到主屏幕": "Add to Home Screen", "复制网址": "Copy URL", "网址已复制": "URL copied", "分享链接已复制": "Share link copied", "位置分享链接已复制": "Place share link copied", "已打开位置分享菜单": "Place share menu opened", "这个位置暂时无法分享": "This place cannot be shared right now", "已添加到主屏幕": "Added to Home Screen",
+    "添加到主屏幕": "Add to Home Screen", "复制网址": "Copy URL", "已复制网址": "URL copied", "复制失败，请手动复制网址": "Could not copy. Please copy the URL manually.", "网址已复制": "URL copied", "分享链接已复制": "Share link copied", "位置分享链接已复制": "Place share link copied", "已打开位置分享菜单": "Place share menu opened", "这个位置暂时无法分享": "This place cannot be shared right now", "已添加到主屏幕": "Added to Home Screen",
     "这台设备不支持定位，暂时不能记住位置": "Location is not supported on this device", "取得的位置格式不正确，请重新定位": "The location format is invalid. Please try again.",
     "你没有允许定位，打开浏览器位置权限后再试": "Location permission was denied. Enable it in your browser and try again.", "定位失败，请到室外或网络稳定后再试": "Location failed. Try again outdoors or with a stable connection.",
     "请先点“记住这儿”取得当前位置": "Tap “Save here” to get your current location first.", "最多保存 10 个，请先删除一个旧地点": "You can save up to 10 places. Delete an old one first.",
@@ -568,6 +566,26 @@
     "地图可能显示周边城市的结果；具体地点、营业时间和预约条件请点进门店或官网核对。": "Maps may include nearby cities. Check each venue or official site for location, hours and booking rules."
   });
 
+  Object.assign(englishMap, {
+    "更多实用工具": "More useful tools", "调整顺序": "Customize", "查日本天气": "Japan weather",
+    "日本看海的车站": "Sea-view stations in Japan", "日本看海的浪漫车站": "Japan’s scenic sea-view stations", "全国海景车站地图 · 日文原站": "Nationwide station map · Japanese site", "全国地图 · 日文原站": "Nationwide map · Japanese site",
+    "奈良": "Nara", "金泽": "Kanazawa", "长野": "Nagano", "仙台": "Sendai", "广岛": "Hiroshima", "冲绳·那霸": "Okinawa · Naha", "当前位置": "Current location", "。": ".",
+    "选城市或当前位置 · 看详细预报": "Choose a city or your location · Detailed forecast",
+    "日本天气预报": "Japan weather forecast", "选一座城市，或定位到你现在的位置，直接看天气变化。": "Choose a city or use your location to see the forecast here.",
+    "想查哪里？": "Where to check?", "选城市": "Choose a city", "📍 当前的位置": "📍 Current location",
+    "点“当前位置”才会请求定位；查询时会向天气服务发送约 1 公里精度的位置。": "Location is requested only when tapped. Approximate coordinates are sent to the forecast service.",
+    "选择城市后就能看到未来几天的预报。": "Choose a city to see the coming days.",
+    "接下来 24 小时": "Next 24 hours", "未来几天": "Coming days", "多云": "Cloudy", "晴间多云": "Partly cloudy", "晴朗": "Sunny", "下雨": "Rain", "下雪": "Snow", "雷雨": "Thunderstorms", "有雾": "Fog", "天气变化": "Variable weather",
+    "天气是预报，不是实时实测；山区、海边和雪场可能与市中心不同。数据来自 ": "Forecast, not live observations. Mountains, coasts and ski areas can differ from city centers. Data from ",
+    "，本站翻译并整理展示。遇到台风、大雨等情况，请再查": ", translated and organized by this site. For typhoons or heavy rain, also check ", "日本气象厅警报": "JMA weather warnings",
+    "调整首页常用工具": "Customize home shortcuts", "点“放前面”即可替换首页最后一项；只保存在你这台设备。": "Move an item to the front six by replacing the last one. Saved on this device only.",
+    "往前移": "Move up", "放前面": "Show in front", "已置顶": "First", "在更多里": "Under More", "恢复默认顺序": "Restore default order",
+    "当前位置不在日本范围内，请选城市查询。": "Current location is outside Japan. Choose a city.",
+    "此浏览器不支持定位，请选城市查询。": "This browser cannot locate you. Choose a city.",
+    "没有取得定位，请允许定位，或直接选城市查询。": "Location unavailable. Allow access or choose a city.",
+    "正在获取你的位置…": "Getting your location…", "暂时取不到天气，请稍后重试；遇到恶劣天气请以日本气象厅警报为准。": "Forecast unavailable. Retry later, and check JMA warnings for severe weather."
+  });
+
   const originals = new WeakMap();
   const originalAttributes = new WeakMap();
   const requestedLanguage = new URLSearchParams(location.search).get("lang");
@@ -595,6 +613,17 @@
     }
     if (!translated) {
       translated = core
+        .replace(/东京/g, "Tokyo").replace(/大阪/g, "Osaka").replace(/京都/g, "Kyoto").replace(/札幌/g, "Sapporo").replace(/函馆/g, "Hakodate").replace(/名古屋/g, "Nagoya").replace(/横滨/g, "Yokohama").replace(/神户/g, "Kobe").replace(/奈良/g, "Nara").replace(/金泽/g, "Kanazawa").replace(/长野/g, "Nagano").replace(/仙台/g, "Sendai").replace(/广岛/g, "Hiroshima").replace(/福冈/g, "Fukuoka").replace(/长崎/g, "Nagasaki").replace(/冲绳·那霸/g, "Okinawa · Naha").replace(/当前位置/g, "Current location")
+        .replace(/^正在查询(.+)的天气预报…$/, "Loading forecast for $1…")
+        .replace(/^(.+) · (\d\d:\d\d) 预报$/, "$1 · $2 forecast")
+        .replace(/^气温 (.+)°C$/, "Temperature $1°C")
+        .replace(/^接下来 1 小时降水 (.+) mm$/, "Rain next hour $1 mm")
+        .replace(/^风速 (.+) m\/s$/, "Wind $1 m/s")
+        .replace(/^湿度 (.+)%$/, "Humidity $1%")
+        .replace(/^数据更新时间：(.+)（日本时间）$/, "Updated: $1 (Japan time)")
+        .replace(/^首页第 (\d+) 个$/, "Home #$1")
+        .replace(/周一/g, " Mon").replace(/周二/g, " Tue").replace(/周三/g, " Wed").replace(/周四/g, " Thu").replace(/周五/g, " Fri").replace(/周六/g, " Sat").replace(/周日/g, " Sun")
+        .replace(/晴间多云/g, "Partly cloudy").replace(/多云/g, "Cloudy").replace(/晴朗/g, "Sunny").replace(/下雨/g, "Rain").replace(/下雪/g, "Snow").replace(/雷雨/g, "Thunderstorms").replace(/有雾/g, "Fog")
         .replace(/^翻到「(.+)」！附近没有？我命由我不由天，再来！$/, "Landed on “$1”! Nothing nearby? My choice—spin again!")
         .replace(/^已收藏 (\d+)$/, "Saved $1")
         .replace(/^找到 (\d+) 个 · 显示最近 (\d+) 个$/, "Found $1 · Showing nearest $2")
