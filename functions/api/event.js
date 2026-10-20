@@ -6,7 +6,13 @@ const EVENTS = new Set([
   "tool_click",
   "contact_path",
   "contact_form_complete",
-  "contact_channel_click"
+  "contact_channel_click",
+  "source_session",
+  "lead_intent",
+  "lead_action",
+  "contact_from_view",
+  "contact_from_tool",
+  "contact_from_cta"
 ]);
 
 function tokyoDay() {
