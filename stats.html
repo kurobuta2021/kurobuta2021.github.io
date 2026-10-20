@@ -19,7 +19,7 @@
 
     <div id="dashboard" hidden>
       <header class="topbar panel">
-        <div><span class="eyebrow">HEITUN · PRIVATE DASHBOARD</span><h1>黑豚网站数据</h1><p>先看客人从哪里来，再看他们对什么感兴趣、有没有走到联系。</p></div>
+        <div><span class="eyebrow">HEITUN · PRIVATE DASHBOARD</span><h1>黑豚网站数据</h1><p>先看客人在哪些地区、最常点什么，再看有没有走到联系。</p></div>
         <div class="controls"><label for="days">时间范围</label><select id="days"><option value="1" selected>今日</option><option value="7">近 7 天</option><option value="30">近 30 天</option><option value="90">近 90 天</option></select><button id="refresh" type="button">刷新</button></div>
       </header>
 
@@ -35,22 +35,15 @@
         <article class="metric accent-dark"><span>联系动作</span><strong id="leadActions">—</strong><small>复制微信、打开二维码等</small><em id="actionsDelta" class="delta" hidden></em></article>
       </section>
 
-      <section class="panel source-panel">
-        <div class="section-heading"><div><span class="eyebrow">01 · ACQUISITION</span><h2>客人从哪里来</h2><p>给留言中的网址加平台标记，才能看到各链接的进入情况。统一网址无法归因；被转发的带标记链接也可能继续保留原标签。</p></div><strong id="knownSourceRate" class="section-stat">—</strong></div>
-        <div class="table-wrap"><table><thead><tr><th>链接标记</th><th>访问会话</th><th>进入咨询</th><th>联系动作</th><th>联系动作率</th></tr></thead><tbody id="sources"></tbody></table></div>
-        <p class="footnote">来源表示网址上的标签，不保证客人真的来自该平台；这组数据从新版上线后累计。联系动作不是实际加好友或成交。</p>
-        <div class="source-links"><strong>以后发留言，可复制平台专属网址</strong><div><button type="button" data-copy-source="xhs">小红书链接</button><button type="button" data-copy-source="douyin">抖音链接</button><button type="button" data-copy-source="bilibili">B 站链接</button><button type="button" data-copy-source="wechat">视频号链接</button></div><small id="copyStatus">视频画面仍可放原网址；这部分来源无法精确归因。</small></div>
-      </section>
-
       <div class="split-grid geography">
-        <section class="panel"><div class="section-heading"><div><span class="eyebrow">02 · GEOGRAPHY</span><h2>客源国家与地区</h2></div></div><div class="table-wrap"><table><thead><tr><th>国家／地区</th><th>访问会话</th><th>占比</th></tr></thead><tbody id="countries"></tbody></table></div><p class="footnote">根据 IP 估算位置，不代表游客国籍；这里只保存每日汇总次数。</p></section>
-        <section class="panel"><div class="section-heading"><div><span class="eyebrow">03 · CHINA REGIONS</span><h2>中国大陆省份</h2></div></div><div class="table-wrap"><table><thead><tr><th>省级地区</th><th>访问会话</th><th>大陆占比</th></tr></thead><tbody id="chinaRegions"></tbody></table></div><p class="footnote">手机网络、公司网络和 VPN 可能使定位不准；不保存 IP 地址。</p></section>
+        <section class="panel"><div class="section-heading"><div><span class="eyebrow">01 · GEOGRAPHY</span><h2>客源国家与地区</h2></div></div><div class="table-wrap"><table><thead><tr><th>国家／地区</th><th>访问会话</th><th>占比</th></tr></thead><tbody id="countries"></tbody></table></div><p class="footnote">根据 IP 估算位置，不代表游客国籍；这里只保存每日汇总次数。</p></section>
+        <section class="panel"><div class="section-heading"><div><span class="eyebrow">02 · CHINA REGIONS</span><h2>中国大陆省份</h2></div></div><div class="table-wrap"><table><thead><tr><th>省级地区</th><th>访问会话</th><th>大陆占比</th></tr></thead><tbody id="chinaRegions"></tbody></table></div><p class="footnote">手机网络、公司网络和 VPN 可能使定位不准；不保存 IP 地址。</p></section>
       </div>
 
-      <section class="panel"><div class="section-heading"><div><span class="eyebrow">04 · DISCOVERY</span><h2>客人最常点什么</h2><p>保留原来的曝光、点击、点击率和较昨日对比；同时补上“点击占比”，看流量集中在哪些功能。新项目有数据后也会自动出现。</p></div></div><div class="table-wrap"><table class="tool-table"><thead><tr><th>功能入口</th><th>曝光</th><th>点击</th><th>点击占比</th><th id="toolCompareHeader" hidden>较昨日点击</th><th>点击率</th><th class="trend-heading" aria-label="点击率图示"></th></tr></thead><tbody id="tools"></tbody></table></div><p class="footnote">点击占比＝该功能点击 ÷ 全部功能点击；点击率＝该功能点击 ÷ 该功能曝光。两者都不是咨询或成交率。同一标签页每个功能的点击与曝光各记一次。</p></section>
+      <section class="panel compact-tools"><div class="section-heading"><div><span class="eyebrow">03 · DISCOVERY</span><h2>客人最常点什么</h2><p>按点击次数排序，先看最常用的功能。</p></div></div><div class="table-wrap"><table class="tool-table"><thead><tr><th>功能入口</th><th>点击</th><th>点击占比</th></tr></thead><tbody id="tools"></tbody></table></div><button id="toggleTools" class="table-toggle" type="button" hidden aria-expanded="false"></button><p class="footnote">功能名下方依次是曝光、点击率；今日还会显示较昨日全天的点击变化。点击占比＝该功能点击 ÷ 全部功能点击。点击和曝光在同一标签页内各记一次，不代表咨询或成交。</p></section>
 
       <section class="panel">
-        <div class="section-heading"><div><span class="eyebrow">05 · BEFORE CONTACT</span><h2>联系前，客人看了哪里</h2><p>仅在客人首次操作微信、LINE、WhatsApp 或邮箱时，记下当时的页面、最近点击的功能和进入咨询的按钮。</p></div></div>
+        <div class="section-heading"><div><span class="eyebrow">04 · BEFORE CONTACT</span><h2>联系前，客人看了哪里</h2><p>仅在客人首次操作微信、LINE、WhatsApp 或邮箱时，记下当时的页面、最近点击的功能和进入咨询的按钮。</p></div></div>
         <div class="contact-context-grid">
           <div><h3>来自哪个页面</h3><div class="table-wrap"><table><thead><tr><th>页面</th><th>次数</th></tr></thead><tbody id="contactFromViews"></tbody></table></div></div>
           <div><h3>此前最近点了什么</h3><div class="table-wrap"><table><thead><tr><th>功能／项目</th><th>次数</th></tr></thead><tbody id="contactFromTools"></tbody></table></div></div>
@@ -60,15 +53,23 @@
       </section>
 
       <section class="panel journey-panel">
-        <div class="section-heading"><div><span class="eyebrow">06 · CONTACT JOURNEY</span><h2>从访问到联系</h2><p>只用新版埋点在同一时间范围内的汇总数据估算；它不是逐人追踪的真实漏斗。</p></div></div>
+        <div class="section-heading"><div><span class="eyebrow">05 · CONTACT JOURNEY</span><h2>从访问到联系</h2><p>只用新版埋点在同一时间范围内的汇总数据估算；它不是逐人追踪的真实漏斗。</p></div></div>
         <div class="journey"><div><span>① 进入网站</span><strong id="funnelVisits">—</strong></div><b aria-hidden="true">→</b><div><span>② 点咨询入口</span><strong id="funnelIntents">—</strong><small id="intentRate">—</small></div><b aria-hidden="true">→</b><div><span>③ 操作联系方式</span><strong id="funnelActions">—</strong><small id="actionRate">—</small></div><b aria-hidden="true">→</b><div class="offline"><span>④ 真的加上／成交</span><strong>站外记录</strong></div></div>
         <p class="footnote">网页无法知道客人是否真的添加微信、拿到报价或付款。想算获客成本和收入，这一步需要在接单记录里补来源与成交状态。</p>
       </section>
 
       <div class="split-grid">
-        <section class="panel"><div class="section-heading"><div><span class="eyebrow">07 · SERVICES</span><h2>哪些服务有人想问</h2><p>按咨询按钮的触达会话排序；同一标签页重复点同一个按钮只记一次。</p></div></div><div class="table-wrap"><table><thead><tr><th>服务入口</th><th>点击会话</th></tr></thead><tbody id="services"></tbody></table></div></section>
-        <section class="panel"><div class="section-heading"><div><span class="eyebrow">08 · CONTACT METHODS</span><h2>客人怎么联系</h2><p>这里是按钮操作次数，不等于独立客人数。</p></div></div><div class="table-wrap"><table><thead><tr><th>联系方式</th><th>操作次数</th></tr></thead><tbody id="channels"></tbody></table></div></section>
+        <section class="panel"><div class="section-heading"><div><span class="eyebrow">06 · SERVICES</span><h2>哪些服务有人想问</h2><p>按咨询按钮的触达会话排序；同一标签页重复点同一个按钮只记一次。</p></div></div><div class="table-wrap"><table><thead><tr><th>服务入口</th><th>点击会话</th></tr></thead><tbody id="services"></tbody></table></div></section>
+        <section class="panel"><div class="section-heading"><div><span class="eyebrow">07 · CONTACT METHODS</span><h2>客人怎么联系</h2><p>这里是按钮操作次数，不等于独立客人数。</p></div></div><div class="table-wrap"><table><thead><tr><th>联系方式</th><th>操作次数</th></tr></thead><tbody id="channels"></tbody></table></div></section>
       </div>
+
+      <details class="panel source-panel source-disclosure">
+        <summary>客人从哪里来 <small>暂不重点看，点此展开</small></summary>
+        <div class="section-heading"><div><p>只有使用带平台标记的网址，才能估算各链接的进入情况。统一网址无法归因；被转发的带标记链接也可能保留原标签。</p></div><strong id="knownSourceRate" class="section-stat">—</strong></div>
+        <div class="table-wrap"><table><thead><tr><th>链接标记</th><th>访问会话</th><th>进入咨询</th><th>联系动作</th><th>联系动作率</th></tr></thead><tbody id="sources"></tbody></table></div>
+        <p class="footnote">来源表示网址上的标签，不保证客人真的来自该平台；这组数据从新版上线后累计。联系动作不是实际加好友或成交。</p>
+        <div class="source-links"><strong>以后发留言，可复制平台专属网址</strong><div><button type="button" data-copy-source="xhs">小红书链接</button><button type="button" data-copy-source="douyin">抖音链接</button><button type="button" data-copy-source="bilibili">B 站链接</button><button type="button" data-copy-source="wechat">视频号链接</button></div><small id="copyStatus">视频画面仍可放原网址；这部分来源无法精确归因。</small></div>
+      </details>
 
       <footer class="dashboard-footer"><p>想看更细的访问来源、设备与加载表现，可打开 <a href="https://dash.cloudflare.com/4adf8a79fc3df76bee97f9279aec0cb8/web-analytics/overview?siteTag~in=6b851b44c9f34c1998eeebea27bb830a" target="_blank" rel="noopener">Cloudflare Web Analytics ↗</a>；Google 搜索词在 Search Console 看。两边的“访问”口径不同，不要直接相减。</p><small id="updatedAt"></small></footer>
     </div>

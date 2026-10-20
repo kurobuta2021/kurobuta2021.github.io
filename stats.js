@@ -55,7 +55,7 @@
       [["xhs", 27, 7, 4], ["douyin", 18, 4, 2], ["bilibili", 6, 1, 1], ["wechat", 3, 1, 0], ["unknown", sessions - 54, 5, 2]].forEach(([source, visits, intents, actions]) => {
         put(day, "source_session", source, visits); put(day, "lead_intent", source, intents); put(day, "lead_action", source, actions);
       });
-      [["custom-route-consult", 12], ["play-airport-help", 9], ["onsen-stay-direct-contact", 7], ["food-reservation-help", 6], ["ski-transfer-help", 3], ["outlets-map", 22], ["theme-parks", 18], ["ski-guide", 15], ["food-hub", 14], ["toilet", 11]].forEach(([tool, clicks]) => {
+      [["custom-route-consult", 12], ["play-airport-help", 9], ["onsen-stay-direct-contact", 7], ["food-reservation-help", 6], ["ski-transfer-help", 3], ["outlets-map", 22], ["theme-parks", 18], ["ski-guide", 15], ["food-hub", 14], ["toilet", 11], ["cruise-consult", 2], ["local-experience-hub", 2], ["selfdrive-consult", 1]].forEach(([tool, clicks]) => {
         put(day, "tool_click", tool, clicks); put(day, "tool_impression", tool, clicks * 4);
       });
       [["wechat-copy", 7], ["wechat-qr", 4], ["line-open", 2], ["email-write", 1]].forEach(([tool, n]) => put(day, "contact_channel_click", tool, n));
@@ -69,6 +69,7 @@
   };
   let allRows = [];
   let labelMap = new Map();
+  let toolsExpanded = false;
   async function loadLabels() {
     try {
       const response = await fetch("./index.html", { cache: "no-store" });
@@ -144,26 +145,25 @@
     const tools = $("tools"); tools.replaceChildren();
     const impressions = sumByTool(rows, "tool_impression");
     const toolList = [...new Set([...clicks.keys(), ...impressions.keys()])].map(tool => [tool, clicks.get(tool) || 0, impressions.get(tool) || 0]).sort((a, b) => b[1] - a[1] || b[2] - a[2]);
-    $("toolCompareHeader").hidden = !isToday;
-    if (!toolList.length) empty(tools, isToday ? 7 : 6, "目前没有入口点击数据。");
-    toolList.forEach(([tool, total, seen]) => {
+    const toggleTools = $("toggleTools");
+    toggleTools.hidden = toolList.length <= 12;
+    toggleTools.textContent = toolsExpanded ? "收起功能列表" : `查看全部 ${toolList.length} 项功能`;
+    toggleTools.setAttribute("aria-expanded", String(toolsExpanded));
+    if (!toolList.length) empty(tools, 3, "目前没有入口点击数据。");
+    toolList.forEach(([tool, total, seen], index) => {
       const tr = document.createElement("tr");
-      cell(tr, serviceNames[tool] || labelMap.get(tool) || tool.replace(/-/g, " "));
-      cell(tr, seen.toLocaleString(), "number").dataset.label = "曝光";
-      cell(tr, total.toLocaleString(), "number").dataset.label = "点击";
-      cell(tr, precisePct(total, toolClicks), "number").dataset.label = "点击占比";
+      tr.hidden = index >= 12 && !toolsExpanded;
+      const name = cell(tr, serviceNames[tool] || labelMap.get(tool) || tool.replace(/-/g, " "), "tool-name");
+      const meta = document.createElement("small");
+      meta.className = "tool-meta";
+      meta.textContent = `曝光 ${seen.toLocaleString()} · 点击率 ${precisePct(total, seen)}`;
       if (isToday) {
         const difference = total - count(all, "tool_click", tool, yesterday);
-        cell(tr, `${difference > 0 ? "+" : ""}${difference}`, `number change ${difference > 0 ? "up" : difference < 0 ? "down" : "flat"}`).dataset.label = "较昨日";
+        meta.textContent += ` · 较昨日 ${difference > 0 ? "+" : ""}${difference}`;
       }
-      cell(tr, precisePct(total, seen), "number").dataset.label = "点击率";
-      const graph = cell(tr, "", "trend-cell");
-      const bar = document.createElement("span");
-      bar.className = "bar";
-      const fill = document.createElement("i");
-      fill.style.width = `${seen ? Math.min(100, total / seen * 100) : 0}%`;
-      bar.appendChild(fill);
-      graph.appendChild(bar);
+      name.appendChild(meta);
+      cell(tr, total.toLocaleString(), "number");
+      cell(tr, precisePct(total, toolClicks), "number");
       tools.appendChild(tr);
     });
     const contactContext = (tbodyId, event) => {
@@ -213,6 +213,12 @@
   $("key").addEventListener("keydown", event => { if (event.key === "Enter") refresh(); });
   $("refresh").addEventListener("click", refresh);
   $("days").addEventListener("change", refresh);
+  $("toggleTools").addEventListener("click", () => {
+    toolsExpanded = !toolsExpanded;
+    [...$("tools").children].forEach((row, index) => { row.hidden = index >= 12 && !toolsExpanded; });
+    $("toggleTools").textContent = toolsExpanded ? "收起功能列表" : `查看全部 ${$("tools").children.length} 项功能`;
+    $("toggleTools").setAttribute("aria-expanded", String(toolsExpanded));
+  });
   document.querySelectorAll("[data-copy-source]").forEach(button => button.addEventListener("click", async () => {
     const url = `https://heitun.pages.dev/?src=${button.dataset.copySource}`;
     try { await navigator.clipboard.writeText(url); $("copyStatus").textContent = `已复制：${url}`; }
