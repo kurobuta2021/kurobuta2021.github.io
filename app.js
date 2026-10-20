@@ -142,6 +142,24 @@
   const skiResortMarkers = new Map();
   let selectedSkiResort = "gala";
   const ANALYTICS_HOST = "heitun.pages.dev";
+  const ANALYTICS_SOURCES = {
+    xhs: "xhs", xiaohongshu: "xhs", rednote: "xhs",
+    douyin: "douyin", dy: "douyin", bilibili: "bilibili", bili: "bilibili",
+    wechat: "wechat", shipinhao: "wechat", youtube: "youtube", yt: "youtube",
+    tiktok: "tiktok", google: "google"
+  };
+  function analyticsSource() {
+    try {
+      const params = new URLSearchParams(location.search);
+      const supplied = (params.get("src") || params.get("utm_source") || "").trim().toLowerCase();
+      const source = ANALYTICS_SOURCES[supplied] || (/^partner-[a-z0-9-]{1,24}$/.test(supplied) ? supplied : "");
+      if (source) sessionStorage.setItem("heitu-analytics-source", source);
+      return source || sessionStorage.getItem("heitu-analytics-source") || "unknown";
+    } catch (_) {
+      return "unknown";
+    }
+  }
+  const ANALYTICS_SOURCE = analyticsSource();
   const shareUtils = window.HeituShareUtils;
   let deferredInstallPrompt = null;
   const CONTACT_QR = {
@@ -518,15 +536,34 @@
     recordMetric(event, tool);
   }
 
+  let lastContentTool = null;
+  let contactOriginView = "home";
+  let contactPreviousTool = "unknown";
+  let contactEntryTool = "nav-contact";
+  let contactContextRecorded = false;
+  function recordContactContext() {
+    if (contactContextRecorded) return;
+    try {
+      if (sessionStorage.getItem("heitu-metric:contact-context")) return;
+      sessionStorage.setItem("heitu-metric:contact-context", "1");
+    } catch (_) { /* Still count once in this page when storage is unavailable. */ }
+    contactContextRecorded = true;
+    recordMetric("contact_from_view", contactOriginView);
+    recordMetric("contact_from_tool", contactPreviousTool);
+    recordMetric("contact_from_cta", contactEntryTool);
+  }
+
   function startToolAnalytics() {
     recordMetric("page_view");
     recordOncePerSession("session_start");
+    recordOncePerSession("source_session", ANALYTICS_SOURCE);
 
     const tools = document.querySelectorAll("[data-tool-id]");
     if (!("IntersectionObserver" in window)) {
       tools.forEach(tool => recordOncePerSession("tool_impression", tool.dataset.toolId));
       return;
     }
+    const observed = new WeakSet();
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting || entry.intersectionRatio < .5) return;
@@ -535,7 +572,19 @@
         observer.unobserve(entry.target);
       });
     }, { threshold: [.5] });
-    tools.forEach(tool => observer.observe(tool));
+    const watch = root => {
+      if (root.nodeType !== 1) return;
+      const candidates = root.matches("[data-tool-id]") ? [root] : [];
+      root.querySelectorAll("[data-tool-id]").forEach(tool => candidates.push(tool));
+      candidates.forEach(tool => {
+        if (observed.has(tool)) return;
+        observed.add(tool);
+        observer.observe(tool);
+      });
+    };
+    watch(document.body);
+    new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(watch)))
+      .observe(document.body, { childList: true, subtree: true });
   }
 
   window.addEventListener("beforeinstallprompt", event => {
@@ -1143,6 +1192,13 @@
   }
 
   function go(view, remember = true) {
+    if (view === "contact" && state.view !== "contact") {
+      contactOriginView = state.view || "home";
+      contactPreviousTool = lastContentTool?.view === state.view && Date.now() - lastContentTool.at < 600000
+        ? lastContentTool.id : "unknown";
+    } else if (state.view === "contact" && view !== "contact") {
+      contactEntryTool = "nav-contact";
+    }
     if (remember && state.view !== view) state.previousView = state.view;
     state.view = view;
     if (view === "ski") {
@@ -2101,8 +2157,24 @@
     markEntryUpdateSeen(event.target.closest("button[data-update-key], button[data-tool-id]"));
     const trackedTool = event.target.closest("[data-tool-id]");
     if (trackedTool) recordOncePerSession("tool_click", trackedTool.dataset.toolId);
+    const serviceSummary = event.target.closest(".play-directory-item > summary");
+    const serviceTool = serviceSummary?.parentElement.querySelector("[data-direct-contact][data-tool-id]");
+    if (serviceTool) lastContentTool = { id: serviceTool.dataset.toolId, view: state.view, at: Date.now() };
+    else if (trackedTool && state.view !== "contact" && !trackedTool.matches("[data-direct-contact], [data-onsen-contact], [data-cruise-contact], [data-selfdrive-contact], [data-go='contact']")) {
+      lastContentTool = { id: trackedTool.dataset.toolId, view: state.view, at: Date.now() };
+    }
+    const contactEntry = event.target.closest("[data-direct-contact], [data-onsen-contact], [data-cruise-contact], [data-selfdrive-contact]");
+    if (contactEntry) contactEntryTool = contactEntry.dataset.toolId || "direct-cta";
     const contactChannel = event.target.closest("[data-contact-channel]");
     if (contactChannel) recordMetric("contact_channel_click", contactChannel.dataset.contactChannel);
+    if (event.target.closest("[data-direct-contact], [data-onsen-contact], [data-cruise-contact], [data-selfdrive-contact], [data-contact-path]")) {
+      recordOncePerSession("lead_intent", ANALYTICS_SOURCE);
+    }
+    if (contactChannel && /^(wechat-copy|wechat-qr|line-open|line-qr|whatsapp-copy|whatsapp-qr|email-write|email-copy)$/.test(contactChannel.dataset.contactChannel)) {
+      recordOncePerSession("lead_intent", ANALYTICS_SOURCE);
+      recordOncePerSession("lead_action", ANALYTICS_SOURCE);
+      recordContactContext();
+    }
     const contactIntro = event.target.closest("[data-contact-intro]");
     if (contactIntro) {
       const inquirySummary = document.querySelector("#inquirySummary");
@@ -2614,6 +2686,7 @@
     }
     const goButton = event.target.closest("[data-go]");
     if (goButton) {
+      if (goButton.dataset.go === "contact") contactEntryTool = goButton.dataset.toolId || "nav-contact";
       go(goButton.dataset.go);
       return;
     }
