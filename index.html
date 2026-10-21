@@ -11,7 +11,7 @@
     <meta name="google-site-verification" content="yg7AnJtviCG_LtiI20t5CPaJop0m4OcRhL7n3JyypXA" />
     <title>黑豚的日本旅行工具箱｜随便O</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynWPqKjMZqD5LxMZQ4QWECJ8D+Hc=" crossorigin="" />
-    <link rel="stylesheet" href="./styles.css?v=20261021-home-tools-release" />
+    <link rel="stylesheet" href="./styles.css?v=20261021-tools-release" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./home-icon-20261002-192.png" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23221f1d'/%3E%3Cellipse cx='32' cy='35' rx='18' ry='13' fill='%23f39a91'/%3E%3Cellipse cx='25' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3Cellipse cx='39' cy='35' rx='3' ry='5' fill='%235e2925'/%3E%3C/svg%3E" />
@@ -62,7 +62,7 @@
               </button>
               <button class="tool-card food-feature-card" type="button" data-go="food" data-tool-id="food-home-primary">
                 <span class="tool-copy"><strong>附近吃什么</strong><small>附近美食 · 翻牌子</small></span>
-                <span class="food-card-art" aria-hidden="true">🍜</span>
+                <img class="tool-illustration food-illustration" src="./assets/card-food-heitu-20261021.png" alt="" decoding="async" />
                 <b>›</b>
               </button>
               <button class="tool-card convenience-card" type="button" data-supply-choice data-tool-id="convenience">
@@ -114,7 +114,13 @@
               <a class="mini-tool sea-stations-mini" href="https://seaside-station.com/map/" target="_blank" rel="noopener" data-tool-id="sea-view-stations-home"><i class="mini-tool-icon" aria-hidden="true">🚉</i><span><strong>日本看海的浪漫车站</strong><small>全国海景车站地图 · 日文原站</small></span><b aria-hidden="true">↗</b></a>
               <button class="mini-tool luggage-mini" type="button" data-luggage-choice data-tool-id="luggage-home-mini"><img src="./assets/card-luggage.png" alt="" loading="lazy" decoding="async" /><span><strong>行李寄存</strong><small>附近寄存行李</small></span><b>›</b></button>
               <div class="more-tools-extra" id="moreToolsExtra" hidden>
-                <button class="mini-tool weather-mini" type="button" data-go="weather" data-tool-id="weather"><i class="mini-tool-icon" aria-hidden="true">☀️</i><span><strong>查日本天气</strong><small>选城市或当前位置 · 看详细预报</small></span><b>›</b></button>
+                <button class="mini-tool map-mini theme-parks-mini" type="button" data-go="theme-parks" data-tool-id="theme-parks-home-mini"><i class="mini-tool-icon" aria-hidden="true">🎡</i><span><strong>日本主题游乐园去哪儿？</strong><small>环球影城 迪士尼 等等</small></span><b>›</b></button>
+                <button class="mini-tool map-mini aquariums-mini" type="button" data-go="aquariums" data-tool-id="aquariums-home-mini"><i class="mini-tool-icon" aria-hidden="true">🐬</i><span><strong>水族馆、动物园</strong><small>按城市挑，地图找位置</small></span><b>›</b></button>
+                <button class="mini-tool map-mini night-mini" type="button" data-go="night" data-tool-id="night-home-mini"><i class="mini-tool-icon" aria-hidden="true">🌃</i><span><strong>今晚去看夜景</strong><small>按城市挑观景台和夜景地</small></span><b>›</b></button>
+                <button class="mini-tool map-mini ski-mini" type="button" data-go="ski" data-ski-entry="ski" data-tool-id="ski-home-mini"><i class="mini-tool-icon" aria-hidden="true">⛷️</i><span><strong>附近滑雪场</strong><small>找雪场、查雪况</small></span><b>›</b></button>
+                <button class="mini-tool map-mini fireworks-mini" type="button" data-seasonal-open="fireworks" data-tool-id="fireworks-home-mini"><i class="mini-tool-icon" aria-hidden="true">🎆</i><span><strong>花火大会</strong><small>查近期场次、按地区找更多</small></span><b>›</b></button>
+                <button class="mini-tool map-mini atm-mini" type="button" data-atm-choice data-tool-id="atm-home-mini"><i class="mini-tool-icon" aria-hidden="true">🏧</i><span><strong>附近 ATM／取日元</strong><small>找取现点 · 核对银行卡和费用</small></span><b>›</b></button>
+                <button class="mini-tool hotline-mini" type="button" data-hotline-open data-tool-id="visitor-hotline-home-mini"><i class="mini-tool-icon" aria-hidden="true">☎</i><span><strong>日本旅行求助热线</strong><small>官方中文咨询 · 24 小时</small></span><b>›</b></button>
                 <button class="mini-tool map-mini parking-mini" type="button" data-parking-choice data-tool-id="parking"><i class="mini-tool-icon">P</i><span><strong>停车场</strong><small>自驾游 · 找附近收费停车场</small></span><b>›</b></button>
                 <button class="mini-tool japanese-mini" type="button" data-go="japanese" data-tool-id="japanese-help"><img src="./assets/card-japanese-help.png" alt="" loading="lazy" decoding="async" /><span><strong>给日本人看</strong><small>一键显示或复制日文</small></span><b>›</b></button>
                 <button class="mini-tool map-mini fishing-mini" type="button" data-fishing-choice data-tool-id="fishing"><i class="mini-tool-icon">竿</i><span><strong>渔具店</strong><small>找附近的渔具店</small></span><b>›</b></button>
@@ -824,7 +830,6 @@
         <section class="view food-hub-view" data-view="food" aria-labelledby="foodHubTitle">
           <button class="back-button" type="button" data-go="favorites">‹ 返回逛吃日本</button>
           <div class="food-hub-heading"><span aria-hidden="true">🍱</span><div><p class="eyebrow">EAT NEAR YOU</p><h1 id="foodHubTitle">附近吃什么</h1><p>选个想吃的，打开常用地图看看附近的店、评价和路线，挑中再导航过去。</p></div></div>
-          <button class="food-wheel-entry" type="button" data-food-wheel-open data-tool-id="food-wheel"><span class="food-wheel-entry-icon" aria-hidden="true">✦</span><span><strong>不知道吃啥？翻牌子</strong><small>同行人意见不统一的时候，翻牌子交给天意。</small></span><b>去翻牌 ›</b></button>
           <aside class="food-reservation-card" aria-label="餐厅预约协助">
             <div><strong>不知道当地有什么特色？又怕到了餐厅没位？</strong><p>想找推荐、预约或改期，或需要打日语电话，都可以提前找黑豚帮你联系餐厅。</p></div>
             <button type="button" data-direct-contact data-tool-id="food-reservation-help">找黑豚推荐预约 <span aria-hidden="true">›</span></button>
@@ -835,6 +840,7 @@
             <button type="button" class="food-hub-item" data-ramen-open data-tool-id="ramen-nearby"><span>🍜</span><strong>拉面</strong><small>豚骨・味噌・沾面</small><b>›</b></button>
             <button type="button" class="food-hub-item" data-wagyu-open data-tool-id="wagyu-nearby"><span>🥩</span><strong>烧肉</strong><small>和牛・烤肉自助</small><b>›</b></button>
             <button type="button" class="food-hub-item" data-izakaya-open data-tool-id="izakaya-nearby"><span>🏮</span><strong>居酒屋</strong><small>烧鸟・海鲜现烤</small><b>›</b></button>
+            <button class="food-wheel-entry" type="button" data-food-wheel-open data-tool-id="food-wheel"><span class="food-wheel-entry-icon" aria-hidden="true">✦</span><span><strong>不知道吃啥？翻牌子</strong><small>同行人意见不统一的时候，翻牌子交给天意。</small></span><b>去翻牌 ›</b></button>
             <button type="button" class="food-hub-item" data-rice-open data-tool-id="rice-nearby"><span>🍚</span><strong>米饭・定食</strong><small>蛋包饭・海鲜丼・鳗鱼饭</small><b>›</b></button>
             <button type="button" class="food-hub-item" data-gyudon-open data-tool-id="gyudon-nearby"><span>🥢</span><strong>牛丼御三家</strong><small>日式牛肉盖饭・快捷实惠</small><b>›</b></button>
             <button type="button" class="food-hub-item" data-hotpot-open data-tool-id="hotpot-nearby"><span>🍲</span><strong>日式火锅</strong><small>涮涮锅・寿喜锅</small><b>›</b></button>
@@ -919,11 +925,16 @@
             <div id="contactMethods" class="contact-methods">
               <section class="recommended-contact contact-method" aria-label="微信联系方式">
                 <div class="recommended-label">推荐</div>
-                <div class="wechat-main-row"><span class="channel-icon wechat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M23 9C13 9 6 15 6 23c0 4 2 7.5 5 10l-1.5 6 6.6-3.1c2.1.7 4.4 1.1 6.9 1.1 9.4 0 17-6.3 17-14S32.4 9 23 9Z" fill="currentColor"/><circle cx="17" cy="22" r="2.1" fill="#19ad59"/><circle cx="28" cy="22" r="2.1" fill="#19ad59"/></svg></span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">查看二维码</button></span></div>
+                <div class="wechat-main-row"><span class="channel-icon wechat-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M23 9C13 9 6 15 6 23c0 4 2 7.5 5 10l-1.5 6 6.6-3.1c2.1.7 4.4 1.1 6.9 1.1 9.4 0 17-6.3 17-14S32.4 9 23 9Z" fill="currentColor"/><circle cx="17" cy="22" r="2.1" fill="#19ad59"/><circle cx="28" cy="22" r="2.1" fill="#19ad59"/></svg></span><span><strong>微信快速直接聊</strong><small>微信号：zhangpeng816</small></span><span class="channel-actions wechat-actions"><button class="primary-action" type="button" data-copy-wechat data-contact-channel="wechat-copy">复制微信号</button><button type="button" data-contact-qr="wechat" data-contact-channel="wechat-qr">日本自由行交流群</button></span></div>
               </section>
-              <div class="contact-channel messaging-channel line-channel contact-method"><span class="channel-icon line-icon" aria-hidden="true">LINE</span><span><strong>LINE 咨询</strong><small>LINE ID：648627464</small></span><span class="channel-actions"><a href="https://line.me/ti/p/~648627464" target="_blank" rel="noopener" data-contact-channel="line-open">打开 LINE</a><button type="button" data-contact-qr="line" data-contact-channel="line-qr">查看二维码</button></span></div>
-              <div class="contact-channel messaging-channel whatsapp-channel contact-method"><span class="channel-icon whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 7a17 17 0 0 0-14.5 26L7 41l8.3-2.3A17 17 0 1 0 24 7Z" fill="none" stroke="currentColor" stroke-width="3.4"/><path d="M18 16c-.8-.5-2.6.6-2.8 2.8-.3 5 6 12 11.5 13.4 2.7.7 5.2-1 5.2-2.7 0-.6-4.8-2.8-5.3-2.4l-1.7 2c-2.9-1.1-5-3.2-6.3-6.2l1.7-1.5c.5-.5-1.6-5.1-2.3-5.4Z" fill="currentColor"/></svg></span><span><strong>WhatsApp 咨询</strong><small>用户名：@kurobutajapan</small></span><span class="channel-actions"><button class="primary-action" type="button" data-copy-whatsapp data-contact-channel="whatsapp-copy">复制用户名</button><button type="button" data-contact-qr="whatsapp" data-contact-channel="whatsapp-qr">查看二维码</button></span></div>
-              <div class="contact-channel email-channel email-contact-standalone contact-method"><span class="channel-icon email-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="23" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="m10 17 14 11 14-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
+              <details class="contact-more-methods">
+                <summary>其他联系方式 <small>LINE · WhatsApp · 邮箱</small><span aria-hidden="true">⌄</span></summary>
+                <div class="contact-more-grid">
+                  <div class="contact-channel messaging-channel line-channel contact-method"><span class="channel-icon line-icon" aria-hidden="true">LINE</span><span><strong>LINE 咨询</strong><small>LINE ID：648627464</small></span><span class="channel-actions"><a href="https://line.me/ti/p/~648627464" target="_blank" rel="noopener" data-contact-channel="line-open">打开 LINE</a><button type="button" data-contact-qr="line" data-contact-channel="line-qr">查看二维码</button></span></div>
+                  <div class="contact-channel messaging-channel whatsapp-channel contact-method"><span class="channel-icon whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 7a17 17 0 0 0-14.5 26L7 41l8.3-2.3A17 17 0 1 0 24 7Z" fill="none" stroke="currentColor" stroke-width="3.4"/><path d="M18 16c-.8-.5-2.6.6-2.8 2.8-.3 5 6 12 11.5 13.4 2.7.7 5.2-1 5.2-2.7 0-.6-4.8-2.8-5.3-2.4l-1.7 2c-2.9-1.1-5-3.2-6.3-6.2l1.7-1.5c.5-.5-1.6-5.1-2.3-5.4Z" fill="currentColor"/></svg></span><span><strong>WhatsApp 咨询</strong><small>用户名：@kurobutajapan</small></span><span class="channel-actions"><button class="primary-action" type="button" data-copy-whatsapp data-contact-channel="whatsapp-copy">复制用户名</button><button type="button" data-contact-qr="whatsapp" data-contact-channel="whatsapp-qr">查看二维码</button></span></div>
+                  <div class="contact-channel email-channel email-contact-standalone contact-method"><span class="channel-icon email-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="8" y="13" width="32" height="23" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="m10 17 14 11 14-11" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><strong>邮箱 / Email</strong><small>kurobuta2021@gmail.com</small></span><span class="channel-actions"><a href="mailto:kurobuta2021@gmail.com" data-contact-channel="email-write">写邮件</a><button type="button" data-copy-email data-contact-channel="email-copy">复制</button></span></div>
+                </div>
+              </details>
             </div>
             <div class="channels-hero">
               <img src="./heitu-jun.png" alt="" />
@@ -965,8 +976,11 @@
     <dialog id="contactQrDialog" class="app-dialog contact-qr-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">SCAN TO CONNECT</p><h2 id="contactQrTitle">联系方式二维码</h2></div><button value="cancel" aria-label="关闭">×</button></div>
-        <div class="contact-qr-frame"><img id="contactQrImage" src="./wechat-group-qr.jpg" alt="联系方式二维码" /></div>
+        <div class="contact-qr-frame"><img id="contactQrImage" alt="联系方式二维码" /></div>
+        <p id="contactQrAvailability" class="contact-qr-availability" hidden>群二维码待更新，稍后可从这里扫码加入。</p>
         <p id="contactQrHint" class="contact-qr-hint">请使用对应应用扫码。</p>
+        <p id="contactQrExpiry" class="contact-qr-expiry" hidden></p>
+        <button id="contactQrWechatCopy" class="contact-qr-copy" type="button" data-copy-wechat data-contact-channel="wechat-copy-from-group" hidden>复制微信号，直接咨询黑豚</button>
         <button class="dialog-primary" value="default">知道了</button>
       </form>
     </dialog>
@@ -1195,6 +1209,15 @@
       <button id="clearCustomArea" class="custom-area-clear" type="button">恢复当前位置</button>
       <p class="custom-area-caveat">地图结果由各平台排序，不保证严格按选定点由近到远。地图资料 © OpenStreetMap contributors。</p>
     </dialog>
+    <dialog id="visitorHotlineDialog" class="app-dialog visitor-hotline-dialog" aria-labelledby="visitorHotlineTitle">
+      <form method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">JAPAN VISITOR HOTLINE</p><h2 id="visitorHotlineTitle">日本旅行求助热线</h2></div><button value="cancel" aria-label="关闭">×</button></div>
+        <p class="visitor-hotline-intro">日本国家旅游局（JNTO）的游客热线，24 小时提供中文、英文和韩文咨询；旅行信息、事故或突发状况都可以问。</p>
+        <a class="visitor-hotline-call" href="tel:05038162787" data-tool-id="visitor-hotline-call">拨打 050-3816-2787 <span aria-hidden="true">↗</span></a>
+        <p class="visitor-hotline-caveat">如需立即报警请拨 110；火警或急救请拨 119。此咨询热线不能替代紧急报警或急救电话。</p>
+        <a class="visitor-hotline-source" href="https://www.japan.travel/en/plan/hotline/" target="_blank" rel="noopener" data-tool-id="visitor-hotline-official">查看日本观光局官方说明 ↗</a>
+      </form>
+    </dialog>
     <dialog id="mapChoiceDialog" class="app-dialog map-choice-dialog">
       <form method="dialog">
         <div class="dialog-heading"><div><p class="eyebrow">CHOOSE YOUR MAP</p><h2 id="mapChoiceTitle">用哪个地图打开？</h2></div><button value="cancel" aria-label="关闭">×</button></div>
@@ -1207,13 +1230,16 @@
           <div id="mapChoiceOtherTitle" class="map-choice-purpose-section map-choice-purpose-section--other" hidden><span aria-hidden="true">＋</span><div><strong></strong><small></small></div></div>
           <div id="mapChoiceOnsenDayTitle" class="map-choice-onsen-section" hidden><span aria-hidden="true">♨</span><div><strong>当天泡完就走</strong><small>先找附近的日归温泉</small></div></div>
           <a id="mapChoiceGoogle" class="map-choice google" target="_blank" rel="noopener"><span>G</span><strong>Google 地图</strong><small>日本地点较完整 · 需要当地网络才能打开哦！</small><b class="map-choice-rank" hidden>第一推荐</b></a>
+          <button id="mapChoiceOnsenDayMore" class="map-choice-onsen-more" type="button" aria-expanded="false" aria-controls="mapChoiceApple" hidden>更多日归地图选择 <b aria-hidden="true">⌄</b></button>
           <a id="mapChoiceApple" class="map-choice apple" target="_blank" rel="noopener"><span></span><strong>Apple 地图</strong><small>适合 iPhone</small><b class="map-choice-rank" hidden>第一推荐</b></a>
           <a id="mapChoiceCommunity" class="map-choice community" href="https://www.toilet-map-jp.com/ja/map" target="_blank" rel="noopener" hidden><span>🚻</span><strong>トイレマップ｜日本全国厕所地图</strong><small>覆盖日本全国 · 可定位当前位置</small><b class="map-choice-rank" hidden>第二推荐</b></a>
           <div id="mapChoiceOnsenPrivateTitle" class="map-choice-onsen-section" hidden><span aria-hidden="true">私</span><div><strong>有纹身，或想一起泡？</strong><small>找私汤／家族风吕，预约前确认规则</small></div></div>
+          <div id="mapChoiceOnsenPrivatePrimary" class="map-choice-onsen-primary" hidden></div>
+          <button id="mapChoiceOnsenPrivateMore" class="map-choice-onsen-more map-choice-onsen-more--private" type="button" aria-expanded="false" aria-controls="mapChoiceOnsenHelp mapChoiceExtraList" hidden>更多私汤选择 <b aria-hidden="true">⌄</b></button>
           <div id="mapChoiceOnsenHelp" class="map-choice-onsen-help" hidden><span>不会日语，想预约某家店的私汤？</span><button type="button" data-direct-contact data-tool-id="onsen-booking-help">找黑豚帮忙预约 <span aria-hidden="true">›</span></button></div>
           <div id="mapChoiceExtraList" class="map-choice-extra-list" hidden></div>
-          <div id="mapChoiceOnsenOtherTitle" class="map-choice-onsen-section map-choice-onsen-section--other" hidden><span aria-hidden="true">＋</span><div><strong>备用地图</strong><small>高德地图和日文词搜索</small></div></div>
-          <div class="map-choice-amap-group">
+          <button id="mapChoiceOnsenOtherTitle" class="map-choice-onsen-section map-choice-onsen-section--other map-choice-onsen-toggle" type="button" aria-expanded="false" aria-controls="mapChoiceAmapGroup" hidden><span aria-hidden="true">＋</span><div><strong>备用地图</strong><small>高德地图和日文词搜索</small></div><b aria-hidden="true">⌄</b></button>
+          <div id="mapChoiceAmapGroup" class="map-choice-amap-group">
             <a id="mapChoiceAmap" class="map-choice amap" target="_blank" rel="noopener"><span>高</span><strong>高德地图 · 直接跳转</strong><small>中国手机更方便 · 日本厕所数据相对较少</small><b class="map-choice-rank" hidden>第三推荐</b></a>
             <button id="mapChoiceAmapCopy" class="map-choice-amap-copy" type="button"><span class="map-choice-amap-copy-text"><strong id="mapChoiceAmapCopyLabel" aria-live="polite">复制日文词，手动搜索</strong><small id="mapChoiceAmapCopyHint" hidden>日归温泉 · 当天往返，不用住宿</small></span><span id="mapChoiceAmapKeyword" class="map-choice-amap-keyword" lang="ja">トイレ</span></button>
             <button id="mapChoiceOnsenPrivateCopy" class="map-choice-amap-copy map-choice-onsen-private-copy" type="button" data-keyword="貸切温泉" hidden><span class="map-choice-amap-copy-text"><strong id="mapChoiceOnsenPrivateCopyLabel" aria-live="polite">复制私汤日文词</strong><small>私汤 · 独立使用，纹身规则请确认</small></span><span class="map-choice-amap-keyword" lang="ja">貸切温泉</span></button>
@@ -1294,10 +1320,10 @@
     <dialog id="toolsOrderDialog" class="app-dialog tools-order-dialog" aria-labelledby="toolsOrderTitle"><div class="dialog-heading"><div><p class="eyebrow">MY SHORTCUTS</p><h2 id="toolsOrderTitle">调整首页常用工具</h2></div><button id="toolsOrderClose" type="button" aria-label="关闭">×</button></div><p>点“放前面”即可替换首页最后一项；只保存在你这台设备。</p><div id="toolsOrderList" class="tools-order-list"></div><button id="toolsOrderReset" class="tools-order-reset" type="button">恢复默认顺序</button></dialog>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="./i18n.js?v=20261021-home-tools-release"></script>
+    <script src="./i18n.js?v=20261021-tools-release"></script>
     <script src="./share-utils.js?v=20261001-help-stats-2"></script>
-    <script src="./app.js?v=20261021-home-tools-release"></script>
+    <script src="./app.js?v=20261021-tools-release"></script>
     <script src="./weather.js?v=20261021-home-tools-release"></script>
-    <script src="./tools-order.js?v=20261021-home-tools-release"></script>
+    <script src="./tools-order.js?v=20261021-tools-release"></script>
   </body>
 </html>

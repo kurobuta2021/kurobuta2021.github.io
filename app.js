@@ -164,10 +164,11 @@
   let deferredInstallPrompt = null;
   const CONTACT_QR = {
     wechat: {
-      title: "微信群二维码",
-      src: "./wechat-group-qr.jpg",
-      alt: "微信群二维码",
-      hint: "使用微信扫码进群；二维码失效时，请复制微信号联系。"
+      title: "日本自由行交流群",
+      src: "./wechat-travel-group-qr-20261021.jpg",
+      alt: "日本自由行交流群二维码",
+      hint: "游客可以交流吃住行经验、互相答疑；黑豚会分享更新，不一定随时能回复。需要旅行相关咨询可以直接加我。如果群二维码到期或失效了，也请告诉我一声。",
+      expiry: "图片显示：此群二维码在 10 月 28 日前有效。"
     },
     line: {
       title: "LINE 联系二维码",
@@ -503,10 +504,18 @@
     const title = document.querySelector("#contactQrTitle");
     const image = document.querySelector("#contactQrImage");
     const hint = document.querySelector("#contactQrHint");
+    const availability = document.querySelector("#contactQrAvailability");
+    const expiry = document.querySelector("#contactQrExpiry");
     title.textContent = qr.title;
-    image.src = qr.src;
+    if (qr.src) image.src = qr.src;
+    else image.removeAttribute("src");
     image.alt = qr.alt;
+    image.parentElement.hidden = !qr.src;
+    availability.hidden = !!qr.src;
     hint.textContent = qr.hint;
+    expiry.hidden = !qr.expiry;
+    expiry.textContent = qr.expiry || "";
+    document.querySelector("#contactQrWechatCopy").hidden = kind !== "wechat";
     els.contactQrDialog.showModal();
   }
 
@@ -874,6 +883,12 @@
         <span>${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.description)}</small>
       </a>
     `).join("");
+    const privatePrimary = document.querySelector("#mapChoiceOnsenPrivatePrimary");
+    privatePrimary.replaceChildren();
+    privatePrimary.hidden = !onsenManualSearch;
+    if (onsenManualSearch && extraList.firstElementChild) {
+      privatePrimary.append(extraList.firstElementChild);
+    }
     document.querySelector("#mapChoiceGoogle small").textContent = options.googleDescription || "日本地点较完整 · 建议优先 · 需要当地网络才能打开哦！";
     document.querySelector("#mapChoiceGoogle strong").textContent = options.googleName || "Google 地图";
     document.querySelector("#mapChoiceAmap small").textContent = options.amapDescription || "中国手机更方便 · 日本地点可能较少";
@@ -902,15 +917,27 @@
     const amapGroup = document.querySelector(".map-choice-amap-group");
     const onsenHelp = document.querySelector("#mapChoiceOnsenHelp");
     const dayTitle = document.querySelector("#mapChoiceOnsenDayTitle");
+    const dayMore = document.querySelector("#mapChoiceOnsenDayMore");
     const privateTitle = document.querySelector("#mapChoiceOnsenPrivateTitle");
+    const privateMore = document.querySelector("#mapChoiceOnsenPrivateMore");
     const otherTitle = document.querySelector("#mapChoiceOnsenOtherTitle");
+    dayMore.hidden = !onsenManualSearch;
+    privateMore.hidden = !onsenManualSearch;
+    appleLink.hidden = onsenManualSearch;
     const purposePrimary = document.querySelector("#mapChoicePrimaryTitle");
     const purposeSecondary = document.querySelector("#mapChoiceSecondaryTitle");
     const purposeOther = document.querySelector("#mapChoiceOtherTitle");
     [purposePrimary, purposeSecondary, purposeOther].forEach(section => { section.hidden = !purposeSearch; });
     if (onsenManualSearch) {
-      grid.append(dayTitle, googleLink, appleLink, privateTitle, onsenHelp, extraList, otherTitle, amapGroup, communityLinkInGrid, purposePrimary, purposeSecondary, purposeOther);
+      grid.append(dayTitle, googleLink, dayMore, appleLink, privateTitle, privatePrimary, privateMore, onsenHelp, extraList, otherTitle, amapGroup, communityLinkInGrid, purposePrimary, purposeSecondary, purposeOther);
+      dayMore.setAttribute("aria-expanded", "false");
+      privateMore.setAttribute("aria-expanded", "false");
+      otherTitle.setAttribute("aria-expanded", "false");
+      onsenHelp.hidden = true;
+      extraList.hidden = true;
+      amapGroup.hidden = true;
     } else if (toiletRanks) {
+      amapGroup.hidden = false;
       purposePrimary.querySelector("span").textContent = "📍";
       purposePrimary.querySelector("strong").textContent = "先找附近厕所";
       purposePrimary.querySelector("small").textContent = "Google 和 Apple 地图，点开看路线";
@@ -919,8 +946,9 @@
       purposeSecondary.querySelector("small").textContent = "再看日本全国厕所地图";
       purposeOther.querySelector("strong").textContent = "其他找法";
       purposeOther.querySelector("small").textContent = "高德地图和复制日文词备用";
-      grid.append(purposePrimary, googleLink, appleLink, purposeSecondary, communityLinkInGrid, purposeOther, amapGroup, extraList, dayTitle, privateTitle, onsenHelp, otherTitle);
+      grid.append(purposePrimary, googleLink, appleLink, purposeSecondary, communityLinkInGrid, purposeOther, amapGroup, extraList, dayTitle, dayMore, privateTitle, privatePrimary, privateMore, onsenHelp, otherTitle);
     } else if (luggageSearch) {
+      amapGroup.hidden = false;
       purposePrimary.querySelector("span").textContent = "🧳";
       purposePrimary.querySelector("strong").textContent = "先查附近寄存点";
       purposePrimary.querySelector("small").textContent = "找投币柜或人工寄存，先看位置";
@@ -929,12 +957,38 @@
       purposeSecondary.querySelector("small").textContent = "看看能否提前预约寄存";
       purposeOther.querySelector("strong").textContent = "立刻地图搜索附近寄存点";
       purposeOther.querySelector("small").textContent = "Google、Apple，或高德备用";
-      grid.append(purposePrimary, communityLinkInGrid, purposeSecondary, extraList, purposeOther, googleLink, appleLink, amapGroup, dayTitle, privateTitle, onsenHelp, otherTitle);
+      grid.append(purposePrimary, communityLinkInGrid, purposeSecondary, extraList, purposeOther, googleLink, appleLink, amapGroup, dayTitle, dayMore, privateTitle, privatePrimary, privateMore, onsenHelp, otherTitle);
     } else {
-      grid.append(googleLink, extraList, amapGroup, appleLink, communityLinkInGrid, dayTitle, privateTitle, onsenHelp, otherTitle, purposePrimary, purposeSecondary, purposeOther);
+      amapGroup.hidden = false;
+      grid.append(googleLink, extraList, amapGroup, appleLink, communityLinkInGrid, dayTitle, dayMore, privateTitle, privatePrimary, privateMore, onsenHelp, otherTitle, purposePrimary, purposeSecondary, purposeOther);
     }
     els.mapChoiceDialog.showModal();
   }
+
+  document.querySelectorAll(".map-choice-onsen-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      if (!els.mapChoiceDialog.classList.contains("onsen-mode")) return;
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      button.setAttribute("aria-expanded", String(expanded));
+      document.querySelector("#mapChoiceAmapGroup").hidden = !expanded;
+    });
+  });
+
+  document.querySelector("#mapChoiceOnsenDayMore").addEventListener("click", event => {
+    const button = event.currentTarget;
+    const expanded = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(expanded));
+    document.querySelector("#mapChoiceApple").hidden = !expanded;
+  });
+
+  document.querySelector("#mapChoiceOnsenPrivateMore").addEventListener("click", event => {
+    const button = event.currentTarget;
+    const expanded = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(expanded));
+    document.querySelector("#mapChoiceOnsenHelp").hidden = !expanded;
+    const extraList = document.querySelector("#mapChoiceExtraList");
+    extraList.hidden = !expanded || extraList.children.length === 0;
+  });
 
   let streetCitySelection = null;
   function setStreetCity(city) {
@@ -1203,17 +1257,33 @@
     if (view === "ski") {
       document.querySelector("[data-ski-paths]").hidden = false;
       document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = true; });
+      document.querySelector("#skiTitle").textContent = "搜索附近的什么？";
+      document.querySelector(".ski-heading p:last-child").textContent = "滑雪场、玩雪地，先选一个；再看看附近和当天雪况。";
       const returnToSeasonal = state.previousView === "seasonal";
+      const returnToHome = state.previousView === "home";
       const backButton = document.querySelector(".ski-view .back-button");
-      backButton.dataset.go = returnToSeasonal ? "seasonal" : "play";
-      backButton.textContent = returnToSeasonal ? "‹ 返回日本正当时" : "‹ 返回玩日本";
+      backButton.dataset.go = returnToSeasonal ? "seasonal" : returnToHome ? "home" : "play";
+      backButton.textContent = returnToSeasonal ? "‹ 返回日本正当时" : returnToHome ? "‹ 返回工具箱" : "‹ 返回玩日本";
+    }
+    if (view === "seasonal-detail") {
+      const backButton = document.querySelector(".seasonal-detail-view .back-button");
+      const returnToHome = state.previousView === "home";
+      backButton.dataset.go = returnToHome ? "home" : "seasonal";
+      backButton.textContent = returnToHome ? "‹ 返回工具箱" : "‹ 返回日本正当时";
+    }
+    if (view === "theme-parks" || view === "night") {
+      const backButton = document.querySelector(`.view[data-view='${view}'] .back-button`);
+      const returnToHome = state.previousView === "home";
+      backButton.dataset.go = returnToHome ? "home" : "play";
+      backButton.textContent = returnToHome ? "‹ 返回工具箱" : "‹ 返回玩日本";
     }
     const outletsFromRain = view === "outlets" && state.previousView === "rainy-day";
     if (view === "aquariums") {
       const backButton = document.querySelector(".view[data-view='aquariums'] .back-button");
       const fromRain = state.previousView === "rainy-day";
-      backButton.dataset.go = fromRain ? "rainy-day" : "play";
-      backButton.textContent = fromRain ? "‹ 返回雨天备选" : "‹ 返回玩日本";
+      const fromHome = state.previousView === "home";
+      backButton.dataset.go = fromRain ? "rainy-day" : fromHome ? "home" : "play";
+      backButton.textContent = fromRain ? "‹ 返回雨天备选" : fromHome ? "‹ 返回工具箱" : "‹ 返回玩日本";
     }
     if (view === "outlets") {
       const backButton = document.querySelector(".outlets-view .back-button");
@@ -1261,6 +1331,16 @@
       showContactStep("channels", "profile");
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function openSkiMode(mode) {
+    document.querySelector("[data-ski-paths]").hidden = true;
+    document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = panel.dataset.skiPanel !== mode; });
+    const choice = document.querySelector(`[data-ski-mode='${mode}']`);
+    document.querySelector("#skiTitle").textContent = choice.querySelector("strong").textContent;
+    document.querySelector(".ski-heading p:last-child").textContent = choice.querySelector("small").textContent;
+    if (mode === "ski") ensureSkiResorts();
+    if (mode === "snow") ensureDiscovery("snowplay");
   }
 
   function openCategory(category) {
@@ -2494,7 +2574,7 @@
     const onsenButton = event.target.closest("[data-onsen-choice]");
     if (onsenButton) {
       showMapChoice("日帰り温泉", "泡个温泉", {
-        intro: "想当天泡完就走，先找日归温泉；有纹身或想一起泡，再看私汤。",
+        intro: "想当天泡完就走，先找日归温泉；有纹身或想一起泡，再看私汤。建议使用当地网络搜索。",
         googleName: "日归温泉 · Google 地图",
         extraChoices: [
           {
@@ -2603,6 +2683,30 @@
       return;
     }
 
+    if (event.target.closest("[data-hotline-open]")) {
+      document.querySelector("#visitorHotlineDialog").showModal();
+      return;
+    }
+    if (event.target.closest("[data-atm-choice]")) {
+      showMapChoice("セブン銀行 ATM", "附近 ATM／取日元", {
+        intro: "7-11 ATM 支持银联；其他 ATM 请先认准机器上的银联标识。",
+        googleName: "搜索附近 7-11 ATM",
+        googleDescription: "Seven Bank ATM · 需要当地网络",
+        appleDescription: "搜索附近 7-11 ATM · 适合 iPhone",
+        amapDescription: "日本 ATM 点位可能不全；可复制日文词重搜",
+        amapManualQuery: "セブン銀行 ATM",
+        extraChoices: [
+          {
+            url: mapSearchUrl("google", "銀聯 ATM", null, state.searchArea),
+            icon: "🏧",
+            name: "搜索其他 ATM",
+            description: "罗森、全家和邮储等也有支持银联的 ATM；认准机器标识。需要当地网络。"
+          }
+        ],
+        note: "地图结果不等于银联认证。有银联标识也可能因卡种、发卡行或机器限制无法取款；手续费、汇率和限额以实际显示为准。"
+      });
+      return;
+    }
     if (event.target.closest("[data-parking-choice]")) {
       showMapChoice("コインパーキング", "附近收费停车场", {
         intro: "自驾游找临时收费车位。先在地图查看附近停车场，再选具体地点导航过去。",
@@ -2671,6 +2775,7 @@
     if (goButton) {
       if (goButton.dataset.go === "contact") contactEntryTool = goButton.dataset.toolId || "nav-contact";
       go(goButton.dataset.go);
+      if (goButton.dataset.skiEntry) openSkiMode(goButton.dataset.skiEntry);
       return;
     }
     const themeParkButton = event.target.closest("[data-theme-park]");
@@ -2749,11 +2854,7 @@
     }
     const skiModeButton = event.target.closest("[data-ski-mode]");
     if (skiModeButton) {
-      const mode = skiModeButton.dataset.skiMode;
-      document.querySelector("[data-ski-paths]").hidden = true;
-      document.querySelectorAll("[data-ski-panel]").forEach(panel => { panel.hidden = panel.dataset.skiPanel !== mode; });
-      if (mode === "ski") ensureSkiResorts();
-      if (mode === "snow") ensureDiscovery("snowplay");
+      openSkiMode(skiModeButton.dataset.skiMode);
       return;
     }
     const skiResortButton = event.target.closest("[data-ski-resort]");
@@ -2913,7 +3014,10 @@
   }));
   document.querySelector("[data-contact-back]").addEventListener("click", () => go(state.previousView && state.previousView !== "contact" ? state.previousView : "home", false));
   document.querySelector("#copyInquiry").addEventListener("click", () => copyText(document.querySelector("#inquirySummary").dataset.copyText || buildInquiry(), "咨询内容已复制，可粘贴到微信"));
-  document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => copyText("zhangpeng816", "微信号已复制：zhangpeng816")));
+  document.querySelectorAll("[data-copy-wechat]").forEach(button => button.addEventListener("click", () => {
+    if (els.contactQrDialog.open) els.contactQrDialog.close();
+    copyText("zhangpeng816", "微信号已复制：zhangpeng816");
+  }));
   document.querySelectorAll("[data-copy-whatsapp]").forEach(button => button.addEventListener("click", () => copyText("@kurobutajapan", "WhatsApp 用户名已复制：@kurobutajapan")));
   document.querySelectorAll("[data-contact-qr]").forEach(button => button.addEventListener("click", () => openContactQr(button.dataset.contactQr)));
   const arrivalMenuButtons = [...document.querySelectorAll("[data-arrival-open]")];

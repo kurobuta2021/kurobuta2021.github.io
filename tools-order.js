@@ -7,13 +7,17 @@
   const list = document.getElementById("toolsOrderList");
   const cards = Array.from(grid.querySelectorAll(".mini-tool:not(.bus-mini)"));
   const lookup = new Map(cards.map(card => [card.dataset.toolId, card]));
-  const defaults = ["anime", "outlets-map", "laundry", "wayback", "sea-view-stations-home", "luggage-home-mini"];
+  const defaults = ["anime", "outlets-map", "ski-home-mini", "atm-home-mini", "sea-view-stations-home", "luggage-home-mini"];
   let front = defaults.slice();
   try {
     const saved = JSON.parse(localStorage.getItem(key) || "null");
-    if (Array.isArray(saved) && saved.length === 6 && new Set(saved).size === 6 && saved.every(id => lookup.has(id) || id === "food-home-mini")) {
-      front = saved.map(id => id === "parking" ? "sea-view-stations-home" : id === "food-home-mini" ? "luggage-home-mini" : id);
-      if (["anime|outlets-map|laundry|wayback|luggage-home-mini|sea-view-stations-home", "anime|outlets-map|laundry|wayback|sea-view-stations-home|weather"].includes(front.join("|"))) front = defaults.slice();
+    if (Array.isArray(saved) && saved.length === 6 && new Set(saved).size === 6 && saved.every(id => lookup.has(id) || id === "food-home-mini" || id === "weather")) {
+      front = saved.map(id => id === "parking" ? "sea-view-stations-home" : id === "food-home-mini" ? "luggage-home-mini" : id === "weather" ? "atm-home-mini" : id);
+      if ([
+        "anime|outlets-map|laundry|wayback|sea-view-stations-home|luggage-home-mini",
+        "anime|outlets-map|laundry|wayback|luggage-home-mini|sea-view-stations-home",
+        "anime|outlets-map|laundry|wayback|sea-view-stations-home|atm-home-mini"
+      ].includes(front.join("|"))) front = defaults.slice();
       if (new Set(front).size !== 6) front = defaults.slice();
     }
   } catch { /* Continue with defaults when local storage is unavailable. */ }
